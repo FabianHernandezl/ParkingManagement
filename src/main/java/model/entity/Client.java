@@ -5,7 +5,7 @@ public class Client {
     private String id;
     private String name;
     private String phone;
-    private boolean preferential;
+    private boolean preferential; //los boolean van con is like: isPreferential
 
     public Client() {
     }
