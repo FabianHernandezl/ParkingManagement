@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
  */
 public class ClientData {
 
-    private static final String FILE_PATH = "src/data/clients.json";
+    private static final String FILE_PATH = "src/main/resources/clients.json";
     private ArrayList<Client> clients;
     private final Gson gson;
 
