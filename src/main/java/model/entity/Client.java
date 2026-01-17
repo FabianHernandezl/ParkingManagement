@@ -1,20 +1,25 @@
 package model.entity;
 
+/**
+ *
+ * @author Jimena
+ */
+
 public class Client {
 
     private String id;
     private String name;
     private String phone;
-    private boolean preferential; //los boolean van con is like: isPreferential
+    private boolean isPreferential;
 
     public Client() {
     }
 
-    public Client(String id, String name, String phone, boolean preferential) {
+    public Client(String id, String name, String phone, boolean isPreferential) {
         this.id = id;
         this.name = name;
         this.phone = phone;
-        this.preferential = preferential;
+        this.isPreferential = isPreferential;
     }
 
     public String getId() {
@@ -41,22 +46,20 @@ public class Client {
         this.phone = phone;
     }
 
-    public boolean isPreferential() {
-        return preferential;
+    public boolean isIsPreferential() {
+        return isPreferential;
     }
 
-    public void setPreferential(boolean preferential) {
-        this.preferential = preferential;
+    public void setIsPreferential(boolean isPreferential) {
+        this.isPreferential = isPreferential;
     }
 
     @Override
     public String toString() {
-        return "Client: " +
-                "id:'" + id + '\'' +
-                ", name:'" + name + '\'' +
-                ", phone:'" + phone + '\'' +
-                ", preferential:" + preferential +
-                '}';
+        return "ID: " + id
+                + " | Name: " + name
+                + " | Phone: " + phone
+                + " | Preferential: " + (isPreferential ? "Yes" : "No");
     }
-}
 
+}
