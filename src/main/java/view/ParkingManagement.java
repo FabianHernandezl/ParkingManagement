@@ -2,16 +2,18 @@ package view;
 
 import Controller.ClientController;
 import controller.TicketController;
-//import controller.VehicleController;
+import controller.VehicleController;
 import javax.swing.JOptionPane;
 import model.entity.Client;
 import model.entity.Ticket;
+import model.entity.Vehicle;
+import model.entity.VehicleType;
 
 public class ParkingManagement {
 
     // Controllers
     static ClientController clientController = new ClientController();
-    //static VehicleController vehicleController = new VehicleController();
+    static VehicleController vehicleController = new VehicleController();
     static TicketController ticketController = new TicketController();
 
     public static void main(String[] args) {
@@ -32,7 +34,8 @@ public class ParkingManagement {
                         + "1. Registrar cliente\n"
                         + "2. Mostrar clientes\n"
                         + "3. Consultar cliente por ID\n"
-                        + "4. Ingresar vehículo (generar tiquete)"
+                        + "4. Registrar vehículo\n"
+                        + "5. Ingresar vehículo (generar tiquete)"
                 ));
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Debe ingresar un número válido");
@@ -52,14 +55,17 @@ public class ParkingManagement {
                 case 3 ->
                     consultClient();
 
-                // case 4 ->
-                //registerVehicleAndGenerateTicket();
+                case 4 ->
+                    insertVehicle();
+
+                case 5 ->
+                    registerVehicleAndGenerateTicket();
             }
         }
     }
 
     // ===================== CLIENTES =====================
-    private static void insertClient() {
+    private static Client insertClient() {
 
         String id = JOptionPane.showInputDialog("Ingrese el ID del cliente");
         String name = JOptionPane.showInputDialog("Ingrese el nombre del cliente");
@@ -74,6 +80,8 @@ public class ParkingManagement {
 
         String result = clientController.registerClient(id, name, phone, preferential);
         JOptionPane.showMessageDialog(null, result);
+
+        return clientController.findClientById(id);
     }
 
     private static void showAllClients() {
@@ -104,8 +112,36 @@ public class ParkingManagement {
         }
     }
 
-    // ===================== VEHÍCULOS + TIQUETE =====================
-    /* private static void registerVehicleAndGenerateTicket() {
+    // ===================== VEHÍCULOS =====================
+    private static void insertVehicle() {
+
+        String plate = JOptionPane.showInputDialog("Ingrese la placa del vehículo");
+        String brand = JOptionPane.showInputDialog("Ingrese la marca del vehículo");
+        String model = JOptionPane.showInputDialog("Ingrese el modelo del vehículo");
+        String color = JOptionPane.showInputDialog("Ingrese el color del vehículo");
+
+        Client client = insertClient();
+
+        if (client == null) {
+            JOptionPane.showMessageDialog(null, "No se pudo crear el cliente");
+            return;
+        }
+
+        VehicleType vehicleType = selectVehicleType();
+
+        if (vehicleType == null) {
+            JOptionPane.showMessageDialog(null, "No se pudo registrar el vehículo");
+            return;
+        }
+
+        Vehicle vehicle = new Vehicle(plate, color, brand, model, client, vehicleType);
+        String result = vehicleController.insertVehicle(vehicle);
+
+        JOptionPane.showMessageDialog(null, result);
+    }
+
+    // ===================== TIQUETE =====================
+    private static void registerVehicleAndGenerateTicket() {
 
         String plate = JOptionPane.showInputDialog("Ingrese la placa del vehículo");
 
@@ -116,7 +152,6 @@ public class ParkingManagement {
             return;
         }
 
-        // El controller asigna el espacio y devuelve el ID
         int spaceId = vehicleController.registerVehicleInParking(vehicle);
 
         if (spaceId == 0) {
@@ -126,5 +161,39 @@ public class ParkingManagement {
 
         Ticket ticket = ticketController.generateEntryTicket(vehicle, spaceId);
         JOptionPane.showMessageDialog(null, ticket.toString());
-    }*/
+    }
+
+    // ===================== TIPO DE VEHÍCULO =====================
+    private static VehicleType selectVehicleType() {
+
+        int option = Integer.parseInt(JOptionPane.showInputDialog(
+                "Seleccione el tipo de vehículo:\n"
+                + "1. Carro\n"
+                + "2. Moto\n"
+                + "3. Camión"
+        ));
+
+        VehicleType type = new VehicleType();
+
+        switch (option) {
+            case 1 -> {
+                type.setId(1);
+                type.setDescription("Carro");
+            }
+            case 2 -> {
+                type.setId(2);
+                type.setDescription("Moto");
+            }
+            case 3 -> {
+                type.setId(3);
+                type.setDescription("Camión");
+            }
+            default -> {
+                JOptionPane.showMessageDialog(null, "Opción inválida");
+                return null;
+            }
+        }
+
+        return type;
+    }
 }

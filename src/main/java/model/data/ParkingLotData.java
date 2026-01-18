@@ -2,32 +2,39 @@ package model.data;
 
 import java.util.ArrayList;
 import model.entity.ParkingLot;
+import model.entity.Space;
+import model.entity.Vehicle;
 
-/**
- *
- * @author fabian
- */
 public class ParkingLotData {
 
-    //Descomentar una vez que estén las clases que faltan
-    /*
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
 
-        ArrayList<Vehicle> vehiclesInParkingLot = parkingLot.getVehicles();
-        Space[] spaces = parkingLot.getSpaces();
-        int spaceId = 0;
+        // Validaciones básicas
+        if (parkingLot == null || vehicle == null) {
+            return 0;
+        }
 
-        boolean hasDisability = vehicle.getCustomer().isDisabilityPresented();
+        Space[] spaces = parkingLot.getSpaces();
+
+        // 🚨 ESTE ERA EL PROBLEMA
+        if (spaces == null || spaces.length == 0) {
+            System.out.println("El parqueo no tiene espacios inicializados");
+            return 0;
+        }
+
+        ArrayList<Vehicle> vehiclesInParkingLot = parkingLot.getVehicles();
+
+        if (vehiclesInParkingLot == null) {
+            vehiclesInParkingLot = new ArrayList<>();
+            parkingLot.setVehicles(vehiclesInParkingLot);
+        }
+
+        boolean hasDisability = vehicle.getClient().isIsPreferential();
         int vehicleTypeId = vehicle.getVehicleType().getId();
 
         for (Space space : spaces) {
 
-            if (space.isSpaceTaken()) {
-
-                
-                //Salta el resto del ciclo actual
-                /Pasa inmediatamente a la siguiente iteración
-                 
+            if (space == null || space.isSpaceTaken()) {
                 continue;
             }
 
@@ -43,14 +50,14 @@ public class ParkingLotData {
                 continue;
             }
 
-            // Registrar vehículo
+            // ✅ Registrar vehículo
             vehiclesInParkingLot.add(vehicle);
             space.setSpaceTaken(true);
-            spaceId = space.getId();
-            break;
+
+            return space.getId(); // ← retorno inmediato
         }
 
-        return spaceId;
+        // No se encontró espacio
+        return 0;
     }
-     */
 }

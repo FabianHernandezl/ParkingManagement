@@ -1,4 +1,3 @@
-
 package model.entity;
 
 import java.util.ArrayList;
@@ -8,20 +7,23 @@ import java.util.ArrayList;
  * @author cami
  */
 public class ParkingLot {
+
     private int id;
     private String name;
     private int numberOfSpaces;
-    
-   // private ArrayList<Vehicle> vehicles;
-   // private Space[] spaces;
+
+    private ArrayList<Vehicle> vehicles;
+    private Space[] spaces;
 
     public ParkingLot() {
     }
 
-    public ParkingLot(int id, String name, int numberOfSpaces) {
+    public ParkingLot(int id, String name, int numberOfSpaces, ArrayList<Vehicle> vehicles, Space[] spaces) {
         this.id = id;
         this.name = name;
         this.numberOfSpaces = numberOfSpaces;
+        this.vehicles = vehicles;
+        this.spaces = spaces;
     }
 
     public int getId() {
@@ -47,6 +49,21 @@ public class ParkingLot {
     public void setNumberOfSpaces(int numberOfSpaces) {
         this.numberOfSpaces = numberOfSpaces;
     }
-    
-    
+
+    public ArrayList<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(ArrayList<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public Space[] getSpaces() {
+        return spaces;
+    }
+
+    public void setSpaces(Space[] spaces) {
+        this.spaces = spaces;
+    }
+
 }

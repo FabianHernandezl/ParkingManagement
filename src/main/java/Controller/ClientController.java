@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import java.util.ArrayList;
@@ -32,16 +28,15 @@ public class ClientController {
         return added ? "Client registered successfully" : "Client already exists";
 
     }
-    
-    public ArrayList<Client> getAllClients(){
-        
+
+    public ArrayList<Client> getAllClients() {
+
         return clientData.getAllClients();
     }
-    
-    public Client findClientById(String id){
-        
+
+    public Client findClientById(String id) {
+
         return clientData.findClientById(id);
     }
-    
 
 }
