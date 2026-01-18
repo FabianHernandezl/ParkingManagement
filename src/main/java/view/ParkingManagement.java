@@ -1,39 +1,45 @@
 package view;
 
 import Controller.ClientController;
+import controller.TicketController;
+//import controller.VehicleController;
 import javax.swing.JOptionPane;
-import model.data.ClientData;
 import model.entity.Client;
+import model.entity.Ticket;
 
-/**
- *
- * @author fabia
- */
 public class ParkingManagement {
 
+    // Controllers
     static ClientController clientController = new ClientController();
+    //static VehicleController vehicleController = new VehicleController();
+    static TicketController ticketController = new TicketController();
 
     public static void main(String[] args) {
-        showClientMenu();
+        showMainMenu();
     }
 
-    public static void showClientMenu() {
+    // ===================== MENÚ PRINCIPAL =====================
+    public static void showMainMenu() {
 
-        int option = 1;
+        int option = -1;
 
         while (option != 0) {
 
-            option = Integer.parseInt(JOptionPane.showInputDialog(
-                    "CLIENT MANAGEMENT\n\n"
-                    + "0. Salir\n"
-                    + "1. Registrar cliente\n"
-                    + "2. Mostrar clientes\n"
-                    + "3. Consultar cliente por ID"
-            )
-            );
+            try {
+                option = Integer.parseInt(JOptionPane.showInputDialog(
+                        "PARKING MANAGEMENT\n\n"
+                        + "0. Salir\n"
+                        + "1. Registrar cliente\n"
+                        + "2. Mostrar clientes\n"
+                        + "3. Consultar cliente por ID\n"
+                        + "4. Ingresar vehículo (generar tiquete)"
+                ));
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un número válido");
+                option = -1;
+            }
 
             switch (option) {
-
                 case 0 ->
                     JOptionPane.showMessageDialog(null, "¡Hasta pronto!");
 
@@ -46,27 +52,28 @@ public class ParkingManagement {
                 case 3 ->
                     consultClient();
 
-                default -> {
-
-                }
+                // case 4 ->
+                //registerVehicleAndGenerateTicket();
             }
-
         }
     }
 
+    // ===================== CLIENTES =====================
     private static void insertClient() {
 
-        String ID = JOptionPane.showInputDialog("Ingrese el id del cliente");
-        String name = JOptionPane.showInputDialog("Ingres el nombre del cliente");
-        String phone = JOptionPane.showInputDialog("Ingrese el numero de telefono del cliente");
-        boolean preferential = JOptionPane.showConfirmDialog(null,
-                "El cliente es preferencial",
+        String id = JOptionPane.showInputDialog("Ingrese el ID del cliente");
+        String name = JOptionPane.showInputDialog("Ingrese el nombre del cliente");
+        String phone = JOptionPane.showInputDialog("Ingrese el número de teléfono");
+
+        boolean preferential = JOptionPane.showConfirmDialog(
+                null,
+                "¿El cliente es preferencial?",
                 "Preferencial",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+                JOptionPane.YES_NO_OPTION
+        ) == JOptionPane.YES_OPTION;
 
-        String result = clientController.registerClient(ID, name, phone, preferential);
+        String result = clientController.registerClient(id, name, phone, preferential);
         JOptionPane.showMessageDialog(null, result);
-
     }
 
     private static void showAllClients() {
@@ -76,20 +83,18 @@ public class ParkingManagement {
             return;
         }
 
-        String clientsInfo = "Lista de clientes\n\n";
+        String info = "LISTA DE CLIENTES\n\n";
 
         for (Client c : clientController.getAllClients()) {
-            clientsInfo += c + "\n";
+            info += c + "\n";
         }
 
-        JOptionPane.showMessageDialog(null, clientsInfo);
-
+        JOptionPane.showMessageDialog(null, info);
     }
 
     private static void consultClient() {
 
-        String id = JOptionPane.showInputDialog("Ingrese el id del cliente:");
-
+        String id = JOptionPane.showInputDialog("Ingrese el ID del cliente");
         Client client = clientController.findClientById(id);
 
         if (client == null) {
@@ -99,4 +104,27 @@ public class ParkingManagement {
         }
     }
 
+    // ===================== VEHÍCULOS + TIQUETE =====================
+    /* private static void registerVehicleAndGenerateTicket() {
+
+        String plate = JOptionPane.showInputDialog("Ingrese la placa del vehículo");
+
+        Vehicle vehicle = vehicleController.findVehicleByPlate(plate);
+
+        if (vehicle == null) {
+            JOptionPane.showMessageDialog(null, "Vehículo no encontrado");
+            return;
+        }
+
+        // El controller asigna el espacio y devuelve el ID
+        int spaceId = vehicleController.registerVehicleInParking(vehicle);
+
+        if (spaceId == 0) {
+            JOptionPane.showMessageDialog(null, "No hay espacios disponibles");
+            return;
+        }
+
+        Ticket ticket = ticketController.generateEntryTicket(vehicle, spaceId);
+        JOptionPane.showMessageDialog(null, ticket.toString());
+    }*/
 }
