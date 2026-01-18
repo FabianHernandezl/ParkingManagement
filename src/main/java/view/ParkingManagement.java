@@ -120,13 +120,6 @@ public class ParkingManagement {
         String model = JOptionPane.showInputDialog("Ingrese el modelo del vehículo");
         String color = JOptionPane.showInputDialog("Ingrese el color del vehículo");
 
-        Client client = insertClient();
-
-        if (client == null) {
-            JOptionPane.showMessageDialog(null, "No se pudo crear el cliente");
-            return;
-        }
-
         VehicleType vehicleType = selectVehicleType();
 
         if (vehicleType == null) {
@@ -134,9 +127,39 @@ public class ParkingManagement {
             return;
         }
 
-        Vehicle vehicle = new Vehicle(plate, color, brand, model, client, vehicleType);
-        String result = vehicleController.insertVehicle(vehicle);
+        Vehicle vehicle = new Vehicle();
+        vehicle.setPlate(plate);
+        vehicle.setBrand(brand);
+        vehicle.setModel(model);
+        vehicle.setColor(color);
+        vehicle.setVehicleType(vehicleType);
 
+        boolean addMoreClients = true;
+
+        while (addMoreClients) {
+
+            Client client = insertClient();
+
+            if (client != null) {
+                vehicle.addClient(client);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo crear el cliente");
+            }
+
+            addMoreClients = JOptionPane.showConfirmDialog(
+                    null,
+                    "¿Desea agregar otro cliente a este vehículo?",
+                    "Clientes",
+                    JOptionPane.YES_NO_OPTION
+            ) == JOptionPane.YES_OPTION;
+        }
+
+        if (vehicle.getClients().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El vehículo debe tener al menos un cliente");
+            return;
+        }
+
+        String result = vehicleController.insertVehicle(vehicle);
         JOptionPane.showMessageDialog(null, result);
     }
 

@@ -1,5 +1,7 @@
 package model.entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author fabian
@@ -10,11 +12,11 @@ public class Vehicle {
     private String color;
     private String brand;
     private String model;
-    private Client client;
+    private ArrayList<Client> clients;
     private VehicleType vehicleType;
 
     public Vehicle() {
-
+        this.clients = new ArrayList<>();
     }
 
     public Vehicle(String plate, String color, String brand, String model, Client client, VehicleType vehicleType) {
@@ -22,16 +24,34 @@ public class Vehicle {
         this.color = color;
         this.brand = brand;
         this.model = model;
-        this.client = client;
         this.vehicleType = vehicleType;
+        this.clients = new ArrayList<>();
+        this.clients.add(client);
     }
 
+    // ===================== GETTERS =====================
     public String getPlate() {
         return plate;
     }
 
+    public ArrayList<Client> getClients() {
+        return clients;
+    }
+
+    public VehicleType getVehicleType() {
+        return vehicleType;
+    }
+
     public void setPlate(String plate) {
         this.plate = plate;
+    }
+
+    public void setClients(ArrayList<Client> clients) {
+        this.clients = clients;
+    }
+
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public String getColor() {
@@ -58,25 +78,36 @@ public class Vehicle {
         this.model = model;
     }
 
-    public Client getClient() {
-        return client;
+    public void addClient(Client client) {
+        if (client != null && !clients.contains(client)) {
+            clients.add(client);
+        }
     }
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public VehicleType getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(VehicleType vehicleType) {
-        this.vehicleType = vehicleType;
+    public boolean hasPreferentialClient() {
+        for (Client c : clients) {
+            if (c.isIsPreferential()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public String toString() {
-        return "Vehicle{" + "plate=" + plate + ", color=" + color + ", brand=" + brand + ", model=" + model + ", customer=" + client + ", vehicleType=" + vehicleType + '}';
-    }
 
+        String infoClients = "";
+
+        for (Client c : clients) {
+            infoClients += "- " + c.getName() + "\n";
+        }
+
+        return "========== VEHÍCULO ==========\n"
+                + "Placa: " + plate + "\n"
+                + "Marca: " + brand + "\n"
+                + "Modelo: " + model + "\n"
+                + "Tipo: " + vehicleType.getDescription() + "\n"
+                + "Clientes:\n" + infoClients
+                + "==============================";
+    }
 }

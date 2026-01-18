@@ -16,17 +16,26 @@ public class VehicleController {
 
     public String insertVehicle(Vehicle vehicle) {
 
-        String result = "";
+        String result = "Vehículo insertado con éxito";
+        boolean clientHasVehicle = false;
 
-        // Regla de negocio:
-        // Un cliente no puede tener más de un vehículo registrado
-        if (vehicleData.findVehicle(vehicle.getClient()) == null) {
+        if (vehicle != null && vehicle.getClients() != null) {
 
-            vehicleData.insertVehicle(vehicle);
-            result = "Vehículo insertado con éxito";
+            for (Client c : vehicle.getClients()) {
+                if (vehicleData.findVehicle(c) != null) {
+                    clientHasVehicle = true;
+                    break;
+                }
+            }
+
+            if (!clientHasVehicle) {
+                vehicleData.insertVehicle(vehicle);
+            } else {
+                result = "No se insertó el vehículo, uno de los clientes ya tiene un vehículo registrado";
+            }
 
         } else {
-            result = "No se insertó el vehículo, el cliente ya tiene un vehículo registrado";
+            result = "Vehículo inválido";
         }
 
         return result;

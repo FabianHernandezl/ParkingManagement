@@ -40,14 +40,22 @@ public class VehicleData {
 
         Vehicle foundVehicle = null;
 
-        for (Vehicle vehicle : vehicleDB) {
-            if (vehicle.getClient() != null
-                    && vehicle.getClient().getId().equals(client.getId())) {
-                foundVehicle = vehicle;
-                break;
+        if (client != null) {
+            for (Vehicle vehicle : vehicleDB) {
+                for (Client c : vehicle.getClients()) {
+                    if (c.getId().equals(client.getId())) {
+                        foundVehicle = vehicle;
+                        break;
+                    }
+                }
+
+                if (foundVehicle != null) {
+                    break;
+                }
             }
         }
 
         return foundVehicle;
     }
+
 }

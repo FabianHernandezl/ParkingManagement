@@ -29,7 +29,7 @@ public class ParkingLotData {
             parkingLot.setVehicles(vehiclesInParkingLot);
         }
 
-        boolean hasDisability = vehicle.getClient().isIsPreferential();
+        boolean hasDisability = vehicle.hasPreferentialClient();
         int vehicleTypeId = vehicle.getVehicleType().getId();
 
         for (Space space : spaces) {
