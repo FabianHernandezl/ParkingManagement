@@ -1,0 +1,22 @@
+[
+  {
+    "plate": "KKK777",
+    "color": "MORADO",
+    "brand": "HYUNDAI",
+    "model": "ACCER",
+    "clients": [
+      {
+        "id": "36373772",
+        "name": "JDKJCK",
+        "phone": "73867373",
+        "isPreferential": false
+      }
+    ],
+    "vehicleType": {
+      "id": 2,
+      "description": "Moto",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
+  }
+]

@@ -18,12 +18,18 @@ public class VehicleData {
     // Simulación de la base de datos
     private ArrayList<Vehicle> vehicleDB;
 
-    private final String FILE_PATH = "src/main/resources/vehicles.json";
+    private static final String FILE_PATH = "data/vehicles.json";
     private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
 
     public VehicleData() {
+
+        File folder = new File("data");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
         vehicleDB = loadFromFile();
     }
 
