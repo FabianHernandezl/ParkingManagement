@@ -96,18 +96,29 @@ public class Vehicle {
     @Override
     public String toString() {
 
-        String infoClients = "";
+        StringBuilder infoClients = new StringBuilder();
 
-        for (Client c : clients) {
-            infoClients += "- " + c.getName() + "\n";
+        if (clients != null && !clients.isEmpty()) {
+            for (Client c : clients) {
+                if (c != null) {
+                    infoClients.append("- ")
+                            .append(c.getName() != null ? c.getName() : "Sin nombre")
+                            .append("\n");
+                }
+            }
+        } else {
+            infoClients.append("No hay clientes asociados\n");
         }
 
         return "========== VEHÍCULO ==========\n"
-                + "Placa: " + plate + "\n"
-                + "Marca: " + brand + "\n"
-                + "Modelo: " + model + "\n"
-                + "Tipo: " + vehicleType.getDescription() + "\n"
-                + "Clientes:\n" + infoClients
+                + "Placa: " + (plate != null ? plate : "No definida") + "\n"
+                + "Marca: " + (brand != null ? brand : "No definida") + "\n"
+                + "Modelo: " + (model != null ? model : "No definido") + "\n"
+                + "Color: " + (color != null ? color : "No definido") + "\n"
+                + "Tipo: " + (vehicleType != null ? vehicleType.getDescription() : "No definido") + "\n"
+                + "Clientes:\n"
+                + infoClients
                 + "==============================";
     }
+
 }

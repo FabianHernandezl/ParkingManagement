@@ -1,0 +1,42 @@
+[
+  {
+    "plate": "752DHE",
+    "color": "BLANCO",
+    "brand": "NISSAN",
+    "model": "FUSO",
+    "clients": [
+      {
+        "id": "76845499",
+        "name": "ROGER",
+        "phone": "23547512",
+        "isPreferential": true
+      }
+    ],
+    "vehicleType": {
+      "id": 3,
+      "description": "Camión",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
+  },
+  {
+    "plate": "JHG689",
+    "color": "VERDE",
+    "brand": "TOYOTA",
+    "model": "YARIS",
+    "clients": [
+      {
+        "id": "37522556",
+        "name": "BRUNO",
+        "phone": "28733553",
+        "isPreferential": true
+      }
+    ],
+    "vehicleType": {
+      "id": 1,
+      "description": "Carro",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
+  }
+]

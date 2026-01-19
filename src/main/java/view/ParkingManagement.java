@@ -35,7 +35,10 @@ public class ParkingManagement {
                         + "2. Mostrar clientes\n"
                         + "3. Consultar cliente por ID\n"
                         + "4. Registrar vehículo\n"
-                        + "5. Ingresar vehículo (generar tiquete)"
+                        + "5. Ingresar vehículo (generar tiquete)\n"
+                        + "6. Mostrar vehículos\n"
+                        + "7. Actualizar vehículo\n"
+                        + "8. Eliminar vehículo\n"
                 ));
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Debe ingresar un número válido");
@@ -60,6 +63,16 @@ public class ParkingManagement {
 
                 case 5 ->
                     registerVehicleAndGenerateTicket();
+
+                case 6 ->
+                    showAllVehicles();
+
+                case 7 ->
+                    updateVehicle();
+
+                case 8 ->
+                    deleteVehicle();
+
             }
         }
     }
@@ -160,6 +173,73 @@ public class ParkingManagement {
         }
 
         String result = vehicleController.insertVehicle(vehicle);
+        JOptionPane.showMessageDialog(null, result);
+    }
+
+    private static void showAllVehicles() {
+
+        if (vehicleController.getAllVehicles().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay vehículos registrados");
+            return;
+        }
+
+        String info = "LISTA DE VEHÍCULOS\n\n";
+
+        for (Vehicle v : vehicleController.getAllVehicles()) {
+            info += v + "\n";
+        }
+
+        JOptionPane.showMessageDialog(null, info);
+    }
+
+    private static void updateVehicle() {
+
+        String plate = JOptionPane.showInputDialog("Ingrese la placa del vehículo a actualizar");
+        Vehicle existing = vehicleController.findVehicleByPlate(plate);
+
+        if (existing == null) {
+            JOptionPane.showMessageDialog(null, "Vehículo no encontrado");
+            return;
+        }
+
+        String brand = JOptionPane.showInputDialog("Nueva marca", existing.getBrand());
+        String model = JOptionPane.showInputDialog("Nuevo modelo", existing.getModel());
+        String color = JOptionPane.showInputDialog("Nuevo color", existing.getColor());
+
+        VehicleType type = selectVehicleType();
+        if (type == null) {
+            JOptionPane.showMessageDialog(null, "Tipo de vehículo inválido");
+            return;
+        }
+
+        Vehicle updated = new Vehicle();
+        updated.setPlate(plate);
+        updated.setBrand(brand);
+        updated.setModel(model);
+        updated.setColor(color);
+        updated.setVehicleType(type);
+        updated.setClients(existing.getClients());
+
+        String result = vehicleController.updateVehicle(updated);
+        JOptionPane.showMessageDialog(null, result);
+    }
+
+    private static void deleteVehicle() {
+
+        String plate = JOptionPane.showInputDialog("Ingrese la placa del vehículo a eliminar");
+
+        int confirm = JOptionPane.showConfirmDialog(
+                null,
+                "¿Está seguro de eliminar el vehículo?",
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        String result = vehicleController.deleteVehicle(plate);
         JOptionPane.showMessageDialog(null, result);
     }
 

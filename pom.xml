@@ -18,7 +18,6 @@
         <exec.mainClass>com.ucr.parkingmanagement.ParkingManagement</exec.mainClass>
     </properties>
 
-    <!-- 👇 AQUÍ va Gson -->
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>

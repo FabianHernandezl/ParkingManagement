@@ -29,7 +29,7 @@ public class VehicleController {
             }
 
             if (!clientHasVehicle) {
-                vehicleData.insertVehicle(vehicle);
+                result = vehicleData.insertVehicle(vehicle);
             } else {
                 result = "No se insertó el vehículo, uno de los clientes ya tiene un vehículo registrado";
             }
@@ -49,23 +49,42 @@ public class VehicleController {
         return vehicleData.findVehicle(client);
     }
 
-    // ===================== NUEVOS MÉTODOS =====================
     public Vehicle findVehicleByPlate(String plate) {
-
-        Vehicle foundVehicle = null;
-
-        for (Vehicle v : vehicleData.getAllVehicles()) {
-            if (v.getPlate().equalsIgnoreCase(plate)) {
-                foundVehicle = v;
-                break;
-            }
-        }
-
-        return foundVehicle;
+        return vehicleData.findVehicleByPlate(plate);
     }
 
     public int registerVehicleInParking(Vehicle vehicle) {
-
         return parkingLotData.registerVehicleInParkingLot(vehicle, parkingLot);
     }
+
+    public String updateVehicle(Vehicle vehicle) {
+
+        String result = "No se pudo actualizar el vehículo";
+
+        if (vehicle != null) {
+            boolean updated = vehicleData.updateVehicle(vehicle);
+
+            if (updated) {
+                result = "Vehículo actualizado correctamente";
+            }
+        }
+
+        return result;
+    }
+
+    public String deleteVehicle(String plate) {
+
+        String result = "No se pudo eliminar el vehículo";
+
+        if (plate != null) {
+            boolean deleted = vehicleData.deleteVehicle(plate);
+
+            if (deleted) {
+                result = "Vehículo eliminado correctamente";
+            }
+        }
+
+        return result;
+    }
+
 }
