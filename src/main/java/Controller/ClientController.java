@@ -19,13 +19,13 @@ public class ClientController {
     public String registerClient(String id, String name, String phone, boolean isPreferential) {
 
         if (id == null || id.isEmpty() || name == null || name.isEmpty()) {
-            return "Invalid data, please try again";
+            return "Información invalida, por favor intente de nueva";
         }
 
         Client client = new Client(id, name, phone, isPreferential);
         boolean added = clientData.addClient(client);
 
-        return added ? "Client registered successfully" : "Client already exists";
+        return added ? "Cliente registrado con exito" : "Cliente ya existe";
 
     }
 
@@ -38,5 +38,7 @@ public class ClientController {
 
         return clientData.findClientById(id);
     }
+    
+
 
 }

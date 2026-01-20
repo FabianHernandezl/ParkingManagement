@@ -299,4 +299,40 @@ public class ParkingManagement {
 
         return type;
     }
+
+    private static Client selectOrCreateClient() {
+
+        String id = JOptionPane.showInputDialog("Ingrese el Id del cliente");
+
+        Client existing = clientController.findClientById(id);
+
+        if (existing != null) {
+            JOptionPane.showMessageDialog(null, "Cliente encontrado: \n" + existing);
+            return existing;
+        }
+
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                "Cliente no registrado.\n¿Desea crearlo?",
+                "Nuevo cliente",
+                JOptionPane.YES_NO_OPTION);
+
+        if (option != JOptionPane.YES_OPTION) {
+            return null;
+        }
+
+        String name = JOptionPane.showInputDialog("Ingrese el nombre del cliente");
+        String phone = JOptionPane.showInputDialog("Ingrese el teléfono del cliente");
+
+        boolean preferential = JOptionPane.showConfirmDialog(
+                null,
+                "¿El cliente es preferencial?",
+                "Preferencial",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+
+        clientController.registerClient(id, name, phone, preferential);
+
+        return clientController.findClientById(id);
+
+    }
 }
