@@ -33,12 +33,12 @@ public class ParkingLotView {
             choice = Integer.parseInt(JOptionPane.showInputDialog(
                     "-----------Menú Parqueos------------\n"
                     + "Seleccione una opción: \n"
+                    + " 0) Regresar\n"        
                     + " 1) Añadir parqueo\n"
                     + " 2) Mostrar todos los parqueos\n"
                     + " 3) Buscar un parqueo\n"
                     + " 4) Actualizar parqueo\n"
-                    + " 5) Borrar parqueo\n"
-                    + " 0) Regresar\n"
+                    + " 5) Borrar parqueo\n"                  
             ));
         
             switch (choice) {
@@ -146,9 +146,7 @@ public class ParkingLotView {
         }
 
         String info = "Lista de Parqueos\n\n";
-            JOptionPane.showMessageDialog(null, "No Registered Parking Lots ");
-            
-        
+   
         for (ParkingLot c : parkingLotController.getAllParkingLots()) {
             info += c + "\n";
         }
