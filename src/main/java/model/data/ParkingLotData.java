@@ -1,6 +1,7 @@
 package model.data;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,14 +16,15 @@ import model.entity.Vehicle;
 
 public class ParkingLotData {
 
-    private static final String FILE_PATH = "src/main/resources/parkinglots.json";
+    private static final String FILE_PATH = "data/parkinglots.json";
     private ArrayList<ParkingLot> parkingLots;
     static int parkingLotId = 0;
 
-    private final Gson gson;
+private final Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .create();
 
     public ParkingLotData() {
-        gson = new Gson();
         parkingLots = loadParkingLots();
 
     }

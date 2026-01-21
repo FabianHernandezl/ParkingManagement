@@ -38,5 +38,25 @@
       "numberOfTires": 0,
       "fee": 0.0
     }
+  },
+  {
+    "plate": "13513",
+    "color": "jhg",
+    "brand": "kgjh",
+    "model": "ujgj",
+    "clients": [
+      {
+        "id": "23212",
+        "name": "jgfhg",
+        "phone": "656153",
+        "isPreferential": true
+      }
+    ],
+    "vehicleType": {
+      "id": 3,
+      "description": "Camión",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
   }
 ]
