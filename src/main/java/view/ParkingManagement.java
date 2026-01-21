@@ -129,6 +129,43 @@ public class ParkingManagement {
         }
     }
 
+    private static Client selectOrCreateClient() {
+
+        String id = JOptionPane.showInputDialog("Ingrese el ID del cliente");
+
+        Client existing = clientController.findClientById(id);
+
+        if (existing != null) {
+            JOptionPane.showMessageDialog(null, "Cliente encontrado:\n" + existing);
+            return existing;
+        }
+
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                "Cliente no registrado.\n¿Desea crearlo?",
+                "Nuevo cliente",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (option != JOptionPane.YES_OPTION) {
+            return null;
+        }
+
+        String name = JOptionPane.showInputDialog("Ingrese el nombre del cliente");
+        String phone = JOptionPane.showInputDialog("Ingrese el teléfono");
+
+        boolean preferential = JOptionPane.showConfirmDialog(
+                null,
+                "¿El cliente es preferencial?",
+                "Preferencial",
+                JOptionPane.YES_NO_OPTION
+        ) == JOptionPane.YES_OPTION;
+
+        clientController.registerClient(id, name, phone, preferential);
+
+        return clientController.findClientById(id);
+    }
+
     // ===================== VEHÍCULOS =====================
     private static void insertVehicle() {
 
@@ -155,7 +192,7 @@ public class ParkingManagement {
 
         while (addMoreClients) {
 
-            Client client = insertClient();
+            Client client = selectOrCreateClient();
 
             if (client != null) {
                 vehicle.addClient(client);
@@ -303,13 +340,12 @@ public class ParkingManagement {
 
         return type;
     }
-     // ===================== PARKING LOT =====================
+    // ===================== PARKING LOT =====================
+
     public static void showParkingLotsMenu() {
 
         ParkingLotView menu = new ParkingLotView();
         menu.showParkingLotsMenu();
     }
-
- 
 
 }

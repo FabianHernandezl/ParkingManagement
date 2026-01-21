@@ -7,7 +7,9 @@ package model.data;
 import java.util.ArrayList;
 import model.entity.Client;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
@@ -20,12 +22,18 @@ public class ClientData {
 
     private static final String FILE_PATH = "src/main/resources/clients.json";
     private ArrayList<Client> clients;
-    private final Gson gson;
+    private final Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .create();
 
     public ClientData() {
-        gson = new Gson();
-         clients = loadClients();
 
+        File folder = new File("data");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
+        clients = loadClients();
     }
 
     /*
@@ -91,19 +99,18 @@ public class ClientData {
         }
 
     }
-    
+
     /*
     Saves clients to JSON file
-    */
-
+     */
     private void saveClients() {
-      
-      try(FileWriter writer = new FileWriter(FILE_PATH)) {
-          gson.toJson(clients , writer);
-      }catch(Exception e){
-          System.out.println("Error saving clients: " + e.getMessage());
-      }
-        
+
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+            gson.toJson(clients, writer);
+        } catch (Exception e) {
+            System.out.println("Error saving clients: " + e.getMessage());
+        }
+
     }
 
 }
