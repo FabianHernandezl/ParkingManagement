@@ -305,9 +305,11 @@ public class ParkingManagement {
     }
      // ===================== PARKING LOT =====================
     public static void showParkingLotsMenu() {
+
         ParkingLotView menu = new ParkingLotView();
         menu.showParkingLotsMenu();
     }
 
-    
+ 
+
 }

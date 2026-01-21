@@ -17,14 +17,18 @@ import model.entity.VehicleType;
  *
  * @author Camila
  */
+
 public class ParkingLotView {
 
     static ParkingLotController parkingLotController = new ParkingLotController();
 
+
     static void showParkingLotsMenu() {
+
 
         int choice = 1;
         while (choice != 0) {
+
 
             choice = Integer.parseInt(JOptionPane.showInputDialog(
                     "-----------Menú Parqueos------------\n"
@@ -36,9 +40,10 @@ public class ParkingLotView {
                     + " 5) Borrar parqueo\n"
                     + " 0) Regresar\n"
             ));
+        
             switch (choice) {
                 case 0 -> {
-                    JOptionPane.showMessageDialog(null, "Saliendo de administrador de Parqueos...");
+                    JOptionPane.showMessageDialog(null, "Saliendo del administrador de Parqueos...");
                 }
                 case 1 -> {
                     insertParkingLot();
@@ -63,7 +68,9 @@ public class ParkingLotView {
 
     }
 
+
     private static void insertParkingLot() {
+
         String name = JOptionPane.showInputDialog("Ingrese el nombre del parqueo");
         int numberOfSpaces = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de espacios que tiene el parqueo"));
         int numberOfSpacesWithDisabiltyAdaptation = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de espacios designados para personas con discapacidad"));
@@ -109,7 +116,8 @@ public class ParkingLotView {
         return spaces;
     }
 
-    private static VehicleType configureVehicleTypeOfSpaces(int position, boolean disabilityPresented) {
+     private static VehicleType configureVehicleTypeOfSpaces(int position, boolean disabilityPresented) {
+
         String[] types = {"Tipos de vehículo", "1)moto", "2)liviano", "3)pesado", "4)bicicleta", "5)otro"};
         byte[] tires = {0, 2, 4, 8, 12, -1};
 
@@ -138,7 +146,9 @@ public class ParkingLotView {
         }
 
         String info = "Lista de Parqueos\n\n";
-
+            JOptionPane.showMessageDialog(null, "No Registered Parking Lots ");
+            
+        
         for (ParkingLot c : parkingLotController.getAllParkingLots()) {
             info += c + "\n";
         }
@@ -147,6 +157,7 @@ public class ParkingLotView {
     }
 
     private static void consultParkingLot() {
+
 
         int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del parqueo:"));
         ParkingLot parkingLot = parkingLotController.findParkingLotById(id);
@@ -157,6 +168,7 @@ public class ParkingLotView {
             JOptionPane.showMessageDialog(null, parkingLot.toString());
         }
     }
+
 
     /*
      private int id;
@@ -191,5 +203,6 @@ public class ParkingLotView {
 
         JOptionPane.showMessageDialog(null,
                 parkingLotController.removeParkingLot(parkingLotToRemove));
+
     }
 }
