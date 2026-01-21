@@ -7,6 +7,27 @@ import model.entity.Vehicle;
 
 public class ParkingLotData {
 
+    public ArrayList<ParkingLot> parkingLots;
+    static int parkingLotId = 0;
+
+    public ParkingLotData() {
+        parkingLots = new ArrayList<>();
+    }
+
+    //create parkinglot
+    public ParkingLot registerParkingLot(String name, Space spaces[]) {
+
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLotId++;
+        parkingLot.setId(parkingLotId);
+        parkingLot.setName(name);
+        parkingLot.setSpaces(spaces);
+        parkingLots.add(parkingLot);
+
+        return parkingLot;
+
+    }
+
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
 
         // Validaciones básicas
@@ -50,7 +71,7 @@ public class ParkingLotData {
                 continue;
             }
 
-            // ✅ Registrar vehículo
+            // Registrar vehículo
             vehiclesInParkingLot.add(vehicle);
             space.setSpaceTaken(true);
 
@@ -60,4 +81,65 @@ public class ParkingLotData {
         // No se encontró espacio
         return 0;
     }
+    public ParkingLot findParkingLotById(int id) {
+
+        ParkingLot parkingLotToBeReturned = null;
+
+        for (ParkingLot parkingLot : parkingLots) {
+
+            if (parkingLot.getId() == id) {
+
+                parkingLotToBeReturned = parkingLot;
+                break;
+            }
+        }
+        return parkingLotToBeReturned;
+    }
+      
+    public ArrayList<ParkingLot> getAllParkingLots(){
+        return parkingLots;
+    }
+    public void removeVehicleFromParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
+
+        ArrayList<Vehicle> vehiclesInParkingLot = parkingLot.getVehicles();
+        Space spaces[] = parkingLot.getSpaces();
+        //recorre la lista de vehículos para ver en qué posición
+        //debemos retirar al vehículo actual
+        for (int i = 0; i < vehiclesInParkingLot.size(); i++) {
+
+            if (vehiclesInParkingLot.get(i) == vehicle) {
+
+                vehiclesInParkingLot.remove(vehicle);
+                spaces[i].setSpaceTaken(false);
+                break;
+            }
+
+        }
+        //*************actualizamos los espacios liberados
+        //y los vehículos registrados en el parqueo
+
+        parkingLot.setSpaces(spaces);
+        parkingLot.setVehicles(vehiclesInParkingLot);
+
+    }
+    //update parkinglot
+      public ParkingLot updateParkingLot(int id, ParkingLot newParkingLot){
+         ParkingLot parkingLotToReturn = null;
+         ParkingLot originalParkingLot = findParkingLotById(id);
+         
+        if(originalParkingLot != null){//el id parking  existe?
+            parkingLotToReturn.setId(newParkingLot.getId());
+            parkingLotToReturn.setName(newParkingLot.getName());
+            parkingLotToReturn.setNumberOfSpaces(newParkingLot.getNumberOfSpaces());
+            parkingLotToReturn.setSpaces(newParkingLot.getSpaces());
+            parkingLotToReturn.setVehicles(newParkingLot.getVehicles());
+        }
+        return parkingLotToReturn;
+     }
+      //remove parkinglot
+       public void removeParkingLot(ParkingLot parkingLot){
+        parkingLots.remove(parkingLot);
+    }
+     
+      
 }
