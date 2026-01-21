@@ -17,10 +17,10 @@ import model.entity.Space;
 public class ParkingLotController {
 
     private ParkingLotData parkingLotData = new ParkingLotData();
-
-    public ParkingLot registerParkingLot(String name, Space spaces[]) {
-
-        return parkingLotData.registerParkingLot(name, spaces);
+//public ParkingLot registerParkingLot(String name, Space spaces[]) 
+    public ParkingLot registerParkingLot(ParkingLot parkingLot) {
+        
+        return parkingLotData.addParkingLot(parkingLot); //addParkingLot(name, spaces);
     }
 
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
@@ -47,10 +47,10 @@ public class ParkingLotController {
     public String updateParkingLot(int id, ParkingLot newParkingLot) {
         String result = "";
         if (parkingLotData.findParkingLotById(id) != null) { //rev this creo que es !=
-            parkingLotData.updateParkingLot(id, newParkingLot);
-            result = "Parking lot successfully updated";
+            parkingLotData.updateParkingLot(newParkingLot);
+            result = "El parqueo fue actualizado correctamente";
         } else {
-            result = "The parking lot was not updated because it does not exist in the database.";
+            result = "El parqueo no se actualizó porque no se encontró en la base de datos.";
         }
         return result;
     }
@@ -58,10 +58,10 @@ public class ParkingLotController {
     public String removeParkingLot(ParkingLot parkingLot) { //será mejor hacerlo por id? 
         String result = "";
         if (parkingLotData.findParkingLotById(parkingLot.getId()) != null) { 
-            parkingLotData.removeParkingLot(parkingLot);
-            result = "Parking successfully removed!";
+            parkingLotData.deleteParkingLot(parkingLot);
+            result = "El parqueo se eliminó ";
         } else {
-            result = "The parking lot was not deleted because it does not exist in the database.";
+            result = "El parqueo no se eliminó porque no se encontró en la base de datos.";
         }
         return result;
     }

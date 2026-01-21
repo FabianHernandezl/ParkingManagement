@@ -66,4 +66,13 @@ public class ParkingLot {
         this.spaces = spaces;
     }
 
+    @Override
+    public String toString() {
+        return " ID: " + id
+                + " | Nombre: " + name
+                + " | Número de espacios: " + numberOfSpaces
+                + " | Vehiculos: " + vehicles
+                + " | Espacios: " + spaces;
+    }
+
 }

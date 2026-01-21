@@ -21,20 +21,62 @@ public class ParkingLotView {
 
     static ParkingLotController parkingLotController = new ParkingLotController();
 
-  
-    
-    
-   private static void insertParkingLot() {
+    static void showParkingLotsMenu() {
+
+        int choice = 1;
+        while (choice != 0) {
+
+            choice = Integer.parseInt(JOptionPane.showInputDialog(
+                    "-----------Menú Parqueos------------\n"
+                    + "Seleccione una opción: \n"
+                    + " 1) Añadir parqueo\n"
+                    + " 2) Mostrar todos los parqueos\n"
+                    + " 3) Buscar un parqueo\n"
+                    + " 4) Actualizar parqueo\n"
+                    + " 5) Borrar parqueo\n"
+                    + " 0) Regresar\n"
+            ));
+            switch (choice) {
+                case 0 -> {
+                    JOptionPane.showMessageDialog(null, "Saliendo de administrador de Parqueos...");
+                }
+                case 1 -> {
+                    insertParkingLot();
+                }
+                case 2 -> {
+                    showAllParkingLots();
+                }
+                case 3 -> {
+                    consultParkingLot();
+                }
+                case 4 -> {
+                    updateParkingLot();
+                }
+                case 5 -> {
+                    removeParkingLot();
+                }
+                default -> {
+
+                }
+            }//switch
+        }//while     
+
+    }
+
+    private static void insertParkingLot() {
         String name = JOptionPane.showInputDialog("Ingrese el nombre del parqueo");
         int numberOfSpaces = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de espacios que tiene el parqueo"));
         int numberOfSpacesWithDisabiltyAdaptation = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de espacios designados para personas con discapacidad"));
 
         Space[] spaces = new Space[numberOfSpaces];
         spaces = configureSpaces(spaces, numberOfSpacesWithDisabiltyAdaptation);
-
-        ParkingLot parkingLot = parkingLotController.registerParkingLot(name, spaces);
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.setName(name);
         parkingLot.setNumberOfSpaces(numberOfSpaces);
         parkingLot.setVehicles(new ArrayList<Vehicle>());
+
+        parkingLotController.registerParkingLot(parkingLot);
+
     }
 
     private static Space[] configureSpaces(Space[] spaces, int numberOfSpacesWithDisabilityAdaptation) {
@@ -66,8 +108,8 @@ public class ParkingLotView {
 
         return spaces;
     }
-    
-     private static VehicleType configureVehicleTypeOfSpaces(int position, boolean disabilityPresented) {
+
+    private static VehicleType configureVehicleTypeOfSpaces(int position, boolean disabilityPresented) {
         String[] types = {"Tipos de vehículo", "1)moto", "2)liviano", "3)pesado", "4)bicicleta", "5)otro"};
         byte[] tires = {0, 2, 4, 8, 12, -1};
 
@@ -91,11 +133,11 @@ public class ParkingLotView {
     private static void showAllParkingLots() {
 
         if (parkingLotController.getAllParkingLots().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No Registered Parking Lots ");
+            JOptionPane.showMessageDialog(null, "No hay parqueos registrados. ");
             return;
         }
 
-        String info = "PARKING LIST\n\n";
+        String info = "Lista de Parqueos\n\n";
 
         for (ParkingLot c : parkingLotController.getAllParkingLots()) {
             info += c + "\n";
@@ -106,11 +148,11 @@ public class ParkingLotView {
 
     private static void consultParkingLot() {
 
-        int id = Integer.parseInt(JOptionPane.showInputDialog("Enter the parking lot ID"));
+        int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del parqueo:"));
         ParkingLot parkingLot = parkingLotController.findParkingLotById(id);
 
         if (parkingLot == null) {
-            JOptionPane.showMessageDialog(null, "Parkingl not found");
+            JOptionPane.showMessageDialog(null, "No se encontró el parqueo");
         } else {
             JOptionPane.showMessageDialog(null, parkingLot.toString());
         }
@@ -122,26 +164,29 @@ public class ParkingLotView {
     private int numberOfSpaces;
     private ArrayList<Vehicle> vehicles;
     private Space[] spaces; */
-    
     private static void updateParkingLot() {
         int originalId = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del parqueo que desea actualizar: "));
-        
-        String newId = JOptionPane.showInputDialog("Ingrese el nuevo número de id del parqueo: ");
+
+       // String newId = JOptionPane.showInputDialog("Ingrese el nuevo número de id del parqueo: ");
         String name = JOptionPane.showInputDialog("Ingrese el nuevo nombre del parqueo: ");
         int numberOfSpaces = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo número de espacios: "));
+        int numberOfSpacesWithDisabiltyAdaptation = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número de espacios designados para personas con discapacidad"));    
         
-        String vehicles = JOptionPane.showInputDialog("Ingrese los vehiculos: ");
-        String spaces = JOptionPane.showInputDialog("Ingrese los nuevos espacios: ");
+        Space[] spaces = new Space[numberOfSpaces];
+        spaces = configureSpaces(spaces, numberOfSpacesWithDisabiltyAdaptation);
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.setName(name);
+        parkingLot.setNumberOfSpaces(numberOfSpaces);
+        parkingLot.setVehicles(new ArrayList<Vehicle>());
         
-        ParkingLot parkingLotUpdated = new ParkingLot(newId, name, numberOfSpaces,vehicles,spaces);
-
+        
         JOptionPane.showMessageDialog(null,
-                parkingLotController.updateParkingLot(originalId, parkingLotUpdated));
+                parkingLotController.updateParkingLot(originalId, parkingLot));
     }
 
     private static void removeParkingLot() {
-        String id = JOptionPane.showInputDialog("Ingrese el número de cédula del cliente que desea eliminar: ");
-     
+        String id = JOptionPane.showInputDialog("Ingrese el ID del parqueo que desea eliminar: ");
+
         ParkingLot parkingLotToRemove = new ParkingLot(); //ask si se puede hacer con el id
 
         JOptionPane.showMessageDialog(null,

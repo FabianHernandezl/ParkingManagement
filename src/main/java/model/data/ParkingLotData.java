@@ -1,32 +1,108 @@
 package model.data;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import model.entity.Client;
 import model.entity.ParkingLot;
 import model.entity.Space;
 import model.entity.Vehicle;
 
 public class ParkingLotData {
 
-    public ArrayList<ParkingLot> parkingLots;
+    private static final String FILE_PATH = "src/main/resources/parkinglots.json";
+    private ArrayList<ParkingLot> parkingLots;
     static int parkingLotId = 0;
 
+    private final Gson gson;
+
     public ParkingLotData() {
-        parkingLots = new ArrayList<>();
+        gson = new Gson();
+        parkingLots = loadParkingLots();
+
     }
 
-    //create parkinglot
-    public ParkingLot registerParkingLot(String name, Space spaces[]) {
+    /*
+    Loads clients from JSON file
+     */
+    private ArrayList<ParkingLot> loadParkingLots() {
 
-        ParkingLot parkingLot = new ParkingLot();
-        parkingLotId++;
-        parkingLot.setId(parkingLotId);
-        parkingLot.setName(name);
-        parkingLot.setSpaces(spaces);
+        try (FileReader reader = new FileReader(FILE_PATH)) {
+
+            Type listType = new TypeToken<ArrayList<ParkingLot>>() {
+            }.getType();
+            ArrayList<ParkingLot> loadedParkingLots = gson.fromJson(reader, listType);
+
+            return (loadedParkingLots != null) ? loadedParkingLots : new ArrayList<>();
+
+        } catch (Exception e) {
+
+            return new ArrayList<>();
+        }
+    }
+
+    /*
+    Add new parkingLot
+     */
+    public ParkingLot addParkingLot(ParkingLot parkingLot) {
+
+        ParkingLot parkingLotToReturn = new ParkingLot();
+
+        if (parkingLot == null || findParkingLotById(parkingLot.getId()) != null) {
+
+            parkingLotToReturn = parkingLot;
+
+        }
+
         parkingLots.add(parkingLot);
+        saveParkingLots();
 
-        return parkingLot;
+        return parkingLotToReturn;
+    }
+
+    /*
+    Returns all registered parkingLot
+     */
+    public ArrayList<ParkingLot> getAllParkingLots() {
+        return parkingLots;
+    }
+
+    /*
+    Finds a parkingLots by id
+     */
+    public ParkingLot findParkingLotById(int id) {
+
+        for (ParkingLot parkingLot : parkingLots) {
+
+            if (parkingLot.getId()==(id)){
+
+                return parkingLot;
+
+            }
+
+        }
+
+        return null;
+    }
+
+    /*
+    Saves clients to JSON file
+     */
+    private void saveParkingLots() {
+
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+            gson.toJson(parkingLots, writer);
+        } catch (Exception e) {
+            System.out.println("Error saving parking lots: " + e.getMessage());
+        }
 
     }
+
 
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
 
@@ -81,24 +157,9 @@ public class ParkingLotData {
         // No se encontró espacio
         return 0;
     }
-    public ParkingLot findParkingLotById(int id) {
 
-        ParkingLot parkingLotToBeReturned = null;
 
-        for (ParkingLot parkingLot : parkingLots) {
 
-            if (parkingLot.getId() == id) {
-
-                parkingLotToBeReturned = parkingLot;
-                break;
-            }
-        }
-        return parkingLotToBeReturned;
-    }
-      
-    public ArrayList<ParkingLot> getAllParkingLots(){
-        return parkingLots;
-    }
     public void removeVehicleFromParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
 
         ArrayList<Vehicle> vehiclesInParkingLot = parkingLot.getVehicles();
@@ -122,24 +183,60 @@ public class ParkingLotData {
         parkingLot.setVehicles(vehiclesInParkingLot);
 
     }
-    //update parkinglot
-      public ParkingLot updateParkingLot(int id, ParkingLot newParkingLot){
-         ParkingLot parkingLotToReturn = null;
-         ParkingLot originalParkingLot = findParkingLotById(id);
-         
-        if(originalParkingLot != null){//el id parking  existe?
-            parkingLotToReturn.setId(newParkingLot.getId());
-            parkingLotToReturn.setName(newParkingLot.getName());
-            parkingLotToReturn.setNumberOfSpaces(newParkingLot.getNumberOfSpaces());
-            parkingLotToReturn.setSpaces(newParkingLot.getSpaces());
-            parkingLotToReturn.setVehicles(newParkingLot.getVehicles());
+    
+    
+     public boolean updateParkingLot(ParkingLot updatedParkingLot) {
+
+        boolean updated = false;
+
+        if (updatedParkingLot != null && updatedParkingLot.getId()!= 0) {
+
+            ParkingLot existing = findParkingLotById(updatedParkingLot.getId());
+
+            if (existing != null) {
+
+                if (updatedParkingLot.getName()!= null) {
+                    existing.setName(updatedParkingLot.getName());
+                }
+
+                if (updatedParkingLot.getNumberOfSpaces()!= 0) {
+                    existing.setNumberOfSpaces(updatedParkingLot.getNumberOfSpaces());
+                }
+
+                if (updatedParkingLot.getSpaces()!= null) {
+                    existing.setSpaces(updatedParkingLot.getSpaces());
+                }
+
+                if (updatedParkingLot.getVehicles()!= null) {
+                    existing.setVehicles(updatedParkingLot.getVehicles());
+                }
+
+                updated = true;
+                saveParkingLots();
+            }
         }
-        return parkingLotToReturn;
-     }
-      //remove parkinglot
-       public void removeParkingLot(ParkingLot parkingLot){
-        parkingLots.remove(parkingLot);
+
+        return updated;
     }
-     
-      
+
+    public boolean deleteParkingLot(ParkingLot parkingLot) {
+
+        boolean deleted = false;
+
+        if (parkingLot.getId() != 0) {
+
+            ParkingLot parkingLotToDelete = findParkingLotById(parkingLot.getId());
+
+            if (parkingLot != null) {
+                parkingLots.remove(parkingLotToDelete);
+                deleted = true;
+                saveParkingLots();
+            }
+        }
+
+        return deleted;
+    }
+
+   
+
 }
