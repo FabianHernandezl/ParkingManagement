@@ -19,13 +19,13 @@ import javax.swing.WindowConstants;
  */
 public class MainMenu extends JFrame {
 
-    private JDesktopPane desktop;
+    private HomeDesktop desktop;
 
     public MainMenu() {
 
         super("Parking Management System");
 
-        desktop = new JDesktopPane();
+        desktop = new HomeDesktop(); // 👈 AQUÍ SE LLAMA
         this.add(desktop);
 
         this.setSize(1000, 700);
