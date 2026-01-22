@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.ArrayList;
+import javax.xml.crypto.Data;
 import model.data.ClientData;
 import model.entity.Client;
 
@@ -38,7 +39,17 @@ public class ClientController {
 
         return clientData.findClientById(id);
     }
-    
 
+    public String updateClient(String id, String name, String phone, boolean preferential) {
+
+        Client client = new Client(id, name, phone, preferential);
+
+        return clientData.update(client) ? "Cliente actualizado con exito" : "Cliente no encontrado";
+    }
+
+    public String deleteClient(String id) {
+
+        return clientData.delete(id) ? "Cliente eliminado correctamente" : "Cliente no encontrado";
+    }
 
 }

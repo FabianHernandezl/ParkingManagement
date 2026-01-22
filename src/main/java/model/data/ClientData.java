@@ -36,9 +36,6 @@ public class ClientData {
         clients = loadClients();
     }
 
-    /*
-    Add new clients
-     */
     public boolean addClient(Client client) {
 
         boolean result = true;
@@ -55,16 +52,10 @@ public class ClientData {
         return result;
     }
 
-    /*
-    Returns all registered clients
-     */
     public ArrayList<Client> getAllClients() {
         return clients;
     }
 
-    /*
-    Finds a client by id
-     */
     public Client findClientById(String id) {
 
         for (Client client : clients) {
@@ -80,9 +71,40 @@ public class ClientData {
         return null;
     }
 
-    /*
-    Loads clients from JSON file
-     */
+    public boolean update(Client clientUpdate) {
+
+        boolean result = false;
+
+        for (int i = 0; i < clients.size(); i++) {
+
+            if (clients.get(i).getId().equals(clientUpdate.getId())) {
+
+                clients.set(i, clientUpdate);
+                saveClients();
+                result = true;
+            }
+
+        }
+
+        return result;
+    }
+
+    public boolean delete(String id) {
+
+        boolean result = true;
+
+        Client client = findClientById(id);
+
+        if (client == null) {
+            result = false;
+        }
+
+        clients.remove(client);
+        saveClients();
+        
+        return result;
+    }
+
     private ArrayList<Client> loadClients() {
 
         try (FileReader reader = new FileReader(FILE_PATH)) {
@@ -100,9 +122,6 @@ public class ClientData {
 
     }
 
-    /*
-    Saves clients to JSON file
-     */
     private void saveClients() {
 
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
