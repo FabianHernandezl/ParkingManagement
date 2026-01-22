@@ -5,6 +5,7 @@
 package view;
 
 import Controller.ClientController;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import model.entity.Client;
 
@@ -12,9 +13,18 @@ import model.entity.Client;
  *
  * @author Jimena
  */
-public class ClientView {
+public class ClientViewInternal extends JInternalFrame{
 
     private final ClientController clientController = new ClientController();
+
+    public ClientViewInternal() {
+        super("Gestión de Clientes", true, true, true, true);
+        setSize(700, 400);
+        setLocation(20, 20);
+
+        ClientViewInternal panel = new ClientViewInternal(); 
+        this.add(panel.getContentPane());
+    }
 
     public void showClientMenu() {
 

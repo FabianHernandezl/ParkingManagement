@@ -6,6 +6,7 @@ package view;
 
 import controller.TicketController;
 import controller.VehicleController;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import model.entity.Ticket;
 import model.entity.Vehicle;
@@ -14,10 +15,19 @@ import model.entity.Vehicle;
  *
  * @author jimen
  */
-public class TicketView {
+public class TicketViewInternal extends JInternalFrame {
 
     private final VehicleController vehicleController = new VehicleController();
     private final TicketController ticketController = new TicketController();
+
+    public TicketViewInternal() {
+        super("Gestión de Clientes", true, true, true, true);
+        setSize(700, 400);
+        setLocation(20, 20);
+
+        ClientViewInternal panel = new ClientViewInternal();
+        this.add(panel.getContentPane());
+    }
 
     // ===================== TIQUETE =====================
     public void registerVehicleAndGenerateTicket() {

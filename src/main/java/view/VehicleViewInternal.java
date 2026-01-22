@@ -5,20 +5,31 @@
 package view;
 
 import controller.VehicleController;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import model.entity.Client;
 import model.entity.Vehicle;
 import model.entity.VehicleType;
 
-
 /**
  *
  * @author Jimena
  */
-public class VehicleView {
+public class VehicleViewInternal extends JInternalFrame {
+
+    public VehicleViewInternal() {
+        super("Gestión de Clientes", true, true, true, true);
+        setSize(700, 400);
+        setLocation(20, 20);
+
+        ClientViewInternal panel = new ClientViewInternal();
+        this.add(panel.getContentPane());
+    }
 
     private final VehicleController vehicleController = new VehicleController();
-    private final ClientView clientView = new ClientView();
+    private final ClientViewInternal clientView = new ClientViewInternal();
+
+    
 
     public void showVehicleMenu() {
 
