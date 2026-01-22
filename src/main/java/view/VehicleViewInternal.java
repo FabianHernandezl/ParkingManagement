@@ -29,8 +29,6 @@ public class VehicleViewInternal extends JInternalFrame {
     private final VehicleController vehicleController = new VehicleController();
     private final ClientViewInternal clientView = new ClientViewInternal();
 
-    
-
     public void showVehicleMenu() {
 
         int option = -1;
@@ -79,7 +77,8 @@ public class VehicleViewInternal extends JInternalFrame {
 
         while (addMore) {
 
-            Client client = clientView.selectOrCreateClient();
+            ClientViewInternal clientView = new ClientViewInternal();
+            Client client = clientView.selectOrCreateClient(this.getDesktopPane());
 
             if (client != null) {
                 vehicle.addClient(client);
