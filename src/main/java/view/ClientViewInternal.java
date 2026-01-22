@@ -8,21 +8,15 @@ import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.entities.Client;
 
-/**
- *
- * @author Jimena
- */
 public class ClientViewInternal extends JInternalFrame {
 
     private final ClientController clientController = new ClientController();
-
     private JTextField txtId;
     private JTextField txtPhone;
     private JTextField txtName;
@@ -33,12 +27,11 @@ public class ClientViewInternal extends JInternalFrame {
     public ClientViewInternal() {
         super("Gestion de Clientes", true, true, true, true);
 
-        setSize(600, 450);
-        setLayout(null);  // Layout absoluto
+        setSize(700, 500);
+        setLayout(null);
         setVisible(true);
 
-        // Etiquetas y campos de texto
-        JLabel lblId = new JLabel("ID");
+        JLabel lblId = new JLabel("ID:");
         lblId.setBounds(30, 20, 80, 25);
         add(lblId);
 
@@ -46,7 +39,7 @@ public class ClientViewInternal extends JInternalFrame {
         txtId.setBounds(120, 20, 150, 25);
         add(txtId);
 
-        JLabel lblName = new JLabel("Nombre");
+        JLabel lblName = new JLabel("Nombre:");
         lblName.setBounds(30, 60, 80, 25);
         add(lblName);
 
@@ -54,7 +47,7 @@ public class ClientViewInternal extends JInternalFrame {
         txtName.setBounds(120, 60, 150, 25);
         add(txtName);
 
-        JLabel lblPhone = new JLabel("Teléfono");
+        JLabel lblPhone = new JLabel("Teléfono:");
         lblPhone.setBounds(30, 100, 80, 25);
         add(lblPhone);
 
@@ -62,34 +55,60 @@ public class ClientViewInternal extends JInternalFrame {
         txtPhone.setBounds(120, 100, 150, 25);
         add(txtPhone);
 
-        // Checkbox Preferencial
         chkPreferential = new JCheckBox("Preferencial");
         chkPreferential.setBounds(30, 140, 150, 30);
         add(chkPreferential);
 
-        // Botones
-        JButton btnSave = new JButton("Guardar");
-        btnSave.setBounds(30, 190, 110, 30);
+        JButton btnSave = new JButton("Guardar Nuevo");
+        btnSave.setBounds(30, 190, 140, 30);
         add(btnSave);
 
+        JButton btnClear = new JButton("Limpiar");
+        btnClear.setBounds(180, 190, 90, 30);
+        add(btnClear);
+
+        JButton btnUpdate = new JButton("Actualizar");
+        btnUpdate.setBounds(30, 230, 140, 30);
+        btnUpdate.setEnabled(false); // Inicialmente deshabilitado
+        add(btnUpdate);
+
         JButton btnDelete = new JButton("Eliminar");
-        btnDelete.setBounds(150, 190, 110, 30);
+        btnDelete.setBounds(180, 230, 90, 30);
+        btnDelete.setEnabled(false); // Inicialmente deshabilitado
         add(btnDelete);
 
-        // Tabla
-        model = new DefaultTableModel(new String[]{"ID", "Nombre", "Teléfono", "Preferencial"}, 0);
+        model = new DefaultTableModel(new String[]{"ID", "Nombre", "Teléfono", "Preferencial"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
         table = new JTable(model);
+
+        table.getColumnModel().getColumn(0).setPreferredWidth(80);  // ID
+        table.getColumnModel().getColumn(1).setPreferredWidth(150); // Nombre
+        table.getColumnModel().getColumn(2).setPreferredWidth(100); // Teléfono
+        table.getColumnModel().getColumn(3).setPreferredWidth(80);  // Preferencial
+
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(300, 20, 260, 350);
+        scrollPane.setBounds(300, 20, 370, 400);
         add(scrollPane);
 
-        // Cargar datos iniciales
         loadTable();
 
-        // Listeners
         btnSave.addActionListener((ActionEvent e) -> saveClient());
+        btnUpdate.addActionListener((ActionEvent e) -> updateClient());
         btnDelete.addActionListener((ActionEvent e) -> deleteClient());
-        table.getSelectionModel().addListSelectionListener(e -> fillForm());
+        btnClear.addActionListener((ActionEvent e) -> clearForm());
+
+        table.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                fillFormFromTable();
+                btnUpdate.setEnabled(true);
+                btnDelete.setEnabled(true);
+            }
+        });
     }
 
     private void loadTable() {
@@ -105,47 +124,88 @@ public class ClientViewInternal extends JInternalFrame {
     }
 
     private void saveClient() {
-        String id = txtId.getText();
-        String name = txtName.getText();
-        String phone = txtPhone.getText();
+        String id = txtId.getText().trim();
+        String name = txtName.getText().trim();
+        String phone = txtPhone.getText().trim();
         boolean pref = chkPreferential.isSelected();
 
         if (id.isEmpty() || name.isEmpty() || phone.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Todos los campos son obligatorios (ID, Nombre, Teléfono)",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (clientController.findClientById(id) == null) {
-            JOptionPane.showMessageDialog(this, clientController.registerClient(id, name, phone, pref));
-        } else {
-            JOptionPane.showMessageDialog(this, clientController.updateClient(id, name, phone, pref));
-        }
+        String result = clientController.registerClient(id, name, phone, pref);
+        JOptionPane.showMessageDialog(this, result);
 
         loadTable();
         clearForm();
     }
 
-    private void deleteClient() {
-        int row = table.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un cliente para eliminar", "Error", JOptionPane.WARNING_MESSAGE);
+    private void updateClient() {
+        String id = txtId.getText().trim();
+        String name = txtName.getText().trim();
+        String phone = txtPhone.getText().trim();
+        boolean pref = chkPreferential.isSelected();
+
+        if (id.isEmpty() || name.isEmpty() || phone.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Todos los campos son obligatorios para actualizar",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String id = model.getValueAt(row, 0).toString();
+        Client existingClient = clientController.findClientById(id);
+        if (existingClient == null) {
+            JOptionPane.showMessageDialog(this,
+                    "No existe un cliente con el ID: " + id + "\nUse el botón 'Guardar Nuevo' para crear uno.",
+                    "Cliente No Encontrado",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         int confirm = JOptionPane.showConfirmDialog(this,
-                "¿Está seguro de eliminar este cliente?",
-                "Confirmar eliminación",
+                "¿Está seguro de actualizar los datos del cliente?\nID: " + id,
+                "Confirmar Actualización",
                 JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, clientController.deleteClient(id));
+            String result = clientController.updateClient(id, name, phone, pref);
+            JOptionPane.showMessageDialog(this, result);
             loadTable();
             clearForm();
         }
     }
 
-    private void fillForm() {
+    private void deleteClient() {
+        String id = txtId.getText().trim();
+
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Seleccione un cliente de la tabla primero",
+                    "Error",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Está seguro de eliminar al cliente?\nID: " + id,
+                "Confirmar Eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            String result = clientController.deleteClient(id);
+            JOptionPane.showMessageDialog(this, result);
+            loadTable();
+            clearForm();
+        }
+    }
+
+    private void fillFormFromTable() {
         int row = table.getSelectedRow();
         if (row == -1) {
             return;
@@ -155,14 +215,11 @@ public class ClientViewInternal extends JInternalFrame {
         txtName.setText(model.getValueAt(row, 1).toString());
         txtPhone.setText(model.getValueAt(row, 2).toString());
 
-        // Manejar el valor booleano de la columna 3
         Object prefValue = model.getValueAt(row, 3);
-        if (prefValue != null) {
-            if (prefValue instanceof Boolean) {
-                chkPreferential.setSelected((Boolean) prefValue);
-            } else if (prefValue instanceof String) {
-                chkPreferential.setSelected(Boolean.parseBoolean((String) prefValue));
-            }
+        if (prefValue instanceof Boolean) {
+            chkPreferential.setSelected((Boolean) prefValue);
+        } else if (prefValue instanceof String) {
+            chkPreferential.setSelected(Boolean.parseBoolean((String) prefValue));
         }
     }
 
@@ -171,56 +228,76 @@ public class ClientViewInternal extends JInternalFrame {
         txtName.setText("");
         txtPhone.setText("");
         chkPreferential.setSelected(false);
+
+        table.clearSelection();
+
+        for (java.awt.Component comp : getContentPane().getComponents()) {
+            if (comp instanceof JButton) {
+                JButton btn = (JButton) comp;
+                if (btn.getText().equals("Actualizar") || btn.getText().equals("Eliminar")) {
+                    btn.setEnabled(false);
+                }
+            }
+        }
+
+        txtId.requestFocus();
     }
 
     public Client selectOrCreateClient(JDesktopPane desktop) {
         String id = JOptionPane.showInputDialog(
-                null,
-                "Ingrese el ID del cliente",
-                "Cliente",
+                this,
+                "Ingrese el ID del cliente:",
+                "Buscar Cliente",
                 JOptionPane.QUESTION_MESSAGE
         );
 
-        if (id == null || id.isEmpty()) {
+        if (id == null || id.trim().isEmpty()) {
             return null;
         }
 
-        Client existing = clientController.findClientById(id);
+        Client client = clientController.findClientById(id.trim());
 
-        if (existing != null) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Cliente encontrado:\n\n" + existing
-            );
-            return existing;
-        }
+        if (client != null) {
+            // Si existe, mostrarlo en el formulario
+            txtId.setText(client.getId());
+            txtName.setText(client.getName());
+            txtPhone.setText(client.getPhone());
+            chkPreferential.setSelected(client.isIsPreferential());
 
-        int option = JOptionPane.showConfirmDialog(
-                null,
-                "El cliente no existe.\n¿Desea crearlo?",
-                "Cliente",
-                JOptionPane.YES_NO_OPTION
-        );
+            JOptionPane.showMessageDialog(this,
+                    "Cliente encontrado:\n\n"
+                    + "ID: " + client.getId() + "\n"
+                    + "Nombre: " + client.getName() + "\n"
+                    + "Teléfono: " + client.getPhone() + "\n"
+                    + "Preferencial: " + (client.isIsPreferential() ? "Sí" : "No"),
+                    "Cliente Encontrado",
+                    JOptionPane.INFORMATION_MESSAGE);
 
-        if (option != JOptionPane.YES_OPTION) {
+            for (java.awt.Component comp : getContentPane().getComponents()) {
+                if (comp instanceof JButton) {
+                    JButton btn = (JButton) comp;
+                    if (btn.getText().equals("Actualizar") || btn.getText().equals("Eliminar")) {
+                        btn.setEnabled(true);
+                    }
+                }
+            }
+
+            return client;
+        } else {
+            int option = JOptionPane.showConfirmDialog(this,
+                    "No existe un cliente con ID: " + id + "\n¿Desea crearlo ahora?",
+                    "Cliente No Encontrado",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (option == JOptionPane.YES_OPTION) {
+                txtId.setText(id);
+                txtName.requestFocus();
+                JOptionPane.showMessageDialog(this,
+                        "Complete los datos del cliente y presione 'Guardar Nuevo'",
+                        "Crear Nuevo Cliente",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
             return null;
         }
-
-        // Centrar y mostrar la ventana
-        ClientViewInternal view = new ClientViewInternal();
-        desktop.add(view);
-        view.setLocation(
-                (desktop.getWidth() - view.getWidth()) / 2,
-                (desktop.getHeight() - view.getHeight()) / 2
-        );
-        view.toFront();
-        view.setVisible(true);
-
-        JOptionPane.showMessageDialog(
-                null,
-                "Cree el cliente y luego vuelva a seleccionarlo."
-        );
-
-        return null;
     }
 }
