@@ -5,7 +5,7 @@
 package model.data;
 
 import java.util.ArrayList;
-import model.entity.Client;
+import model.entities.Client;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

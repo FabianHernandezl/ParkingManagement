@@ -3,9 +3,9 @@ package controller;
 import java.util.ArrayList;
 import model.data.ParkingLotData;
 import model.data.VehicleData;
-import model.entity.Vehicle;
-import model.entity.Client;
-import model.entity.ParkingLot;
+import model.entities.Vehicle;
+import model.entities.Client;
+import model.entities.ParkingLot;
 
 public class VehicleController {
 

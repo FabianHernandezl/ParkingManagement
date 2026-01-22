@@ -8,8 +8,8 @@ import controller.TicketController;
 import controller.VehicleController;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import model.entity.Ticket;
-import model.entity.Vehicle;
+import model.entities.Ticket;
+import model.entities.Vehicle;
 
 /**
  *

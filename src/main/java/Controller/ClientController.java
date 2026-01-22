@@ -3,7 +3,7 @@ package Controller;
 import java.util.ArrayList;
 import javax.xml.crypto.Data;
 import model.data.ClientData;
-import model.entity.Client;
+import model.entities.Client;
 
 /**
  *

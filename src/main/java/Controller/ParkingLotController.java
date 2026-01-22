@@ -6,9 +6,9 @@ package Controller;
 
 import java.util.ArrayList;
 import model.data.ParkingLotData;
-import model.entity.ParkingLot;
-import model.entity.Vehicle;
-import model.entity.Space;
+import model.entities.ParkingLot;
+import model.entities.Vehicle;
+import model.entities.Space;
 
 /**
  *

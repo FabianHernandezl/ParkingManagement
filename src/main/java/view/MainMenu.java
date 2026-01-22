@@ -52,7 +52,7 @@ public class MainMenu extends JFrame {
         manageClients.addActionListener((ActionEvent e) -> {
             openInternalFrame(new ClientViewInternal());
         });
-
+        // ---------- Vehículos ----------
         JMenu vehicleMenu = new JMenu("Vehículos");
         menuBar.add(vehicleMenu);
 
@@ -63,6 +63,8 @@ public class MainMenu extends JFrame {
             openInternalFrame(new VehicleViewInternal());
         });
 
+        
+        //-------------------Tiquete----------
         JMenu ticketMenu = new JMenu("Tiquetes");
         menuBar.add(ticketMenu);
 

@@ -1,5 +1,5 @@
 
-package model.entity;
+package model.entities;
 
 /**
  *

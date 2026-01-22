@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import model.entity.Client;
-import model.entity.ParkingLot;
-import model.entity.Space;
-import model.entity.Vehicle;
+import model.entities.Client;
+import model.entities.ParkingLot;
+import model.entities.Space;
+import model.entities.Vehicle;
 
 public class ParkingLotData {
 

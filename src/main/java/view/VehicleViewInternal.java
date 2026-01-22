@@ -7,9 +7,9 @@ package view;
 import controller.VehicleController;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import model.entity.Client;
-import model.entity.Vehicle;
-import model.entity.VehicleType;
+import model.entities.Client;
+import model.entities.Vehicle;
+import model.entities.VehicleType;
 
 /**
  *

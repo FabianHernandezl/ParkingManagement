@@ -6,8 +6,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import model.entity.Client;
-import model.entity.Vehicle;
+import model.entities.Client;
+import model.entities.Vehicle;
 
 /**
  *

@@ -9,10 +9,10 @@ import static java.lang.Boolean.parseBoolean;
 import java.util.ArrayList;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import model.entity.ParkingLot;
-import model.entity.Space;
-import model.entity.Vehicle;
-import model.entity.VehicleType;
+import model.entities.ParkingLot;
+import model.entities.Space;
+import model.entities.Vehicle;
+import model.entities.VehicleType;
 
 /**
  *

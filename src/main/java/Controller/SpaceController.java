@@ -6,7 +6,7 @@ package Controller;
 
 import java.util.ArrayList;
 import model.data.SpaceData;
-import model.entity.Space;
+import model.entities.Space;
 
 /**
  *

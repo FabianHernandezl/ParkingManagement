@@ -4,10 +4,10 @@ import Controller.ClientController;
 import controller.TicketController;
 import controller.VehicleController;
 import javax.swing.JOptionPane;
-import model.entity.Client;
-import model.entity.Ticket;
-import model.entity.Vehicle;
-import model.entity.VehicleType;
+import model.entities.Client;
+import model.entities.Ticket;
+import model.entities.Vehicle;
+import model.entities.VehicleType;
 
 public class ParkingManagement {
 

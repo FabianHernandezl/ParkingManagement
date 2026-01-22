@@ -1,8 +1,7 @@
 package controller;
 
-import model.entity.Ticket;
-
-import model.entity.Vehicle;
+import model.entities.Ticket;
+import model.entities.Vehicle;
 
 public class TicketController {
 

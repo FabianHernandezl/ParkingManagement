@@ -7,7 +7,7 @@ package view;
 import Controller.ClientController;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import model.entity.Client;
+import model.entities.Client;
 
 /**
  *
