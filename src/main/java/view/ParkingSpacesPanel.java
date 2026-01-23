@@ -23,7 +23,7 @@ public class ParkingSpacesPanel extends JPanel {
         this.infoPanel = infoPanel;
 
         ImageIcon icon = new ImageIcon(
-                "C:\\Users\\jimen\\OneDrive\\Escritorio\\UCR\\Desarrollo 2\\proyecto\\ParkingManagement\\src\\main\\resources\\car.jpg"
+                getClass().getResource("/car.jpg")
         );
         carImage = icon.getImage();
 
@@ -98,8 +98,7 @@ public class ParkingSpacesPanel extends JPanel {
 
                     animatingSpace = space;
                     animateCarEntry(x);
-                } 
-                else {
+                } else {
                     animateCarExit(space, x);
                 }
                 return;
