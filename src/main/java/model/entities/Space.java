@@ -1,4 +1,3 @@
-
 package model.entities;
 
 /**
@@ -12,6 +11,9 @@ public class Space {
     private boolean spaceTaken;
     private VehicleType vehicleType;
 
+    private Client client;
+    private Vehicle vehicle;
+
     public Space(int id, boolean disabilityAdaptation, boolean spaceTaken, VehicleType vehicleType) {
         this.id = id;
         this.disabilityAdaptation = disabilityAdaptation;
@@ -20,7 +22,7 @@ public class Space {
     }
 
     public Space() {
-   
+
     }
 
     /**
@@ -78,8 +80,22 @@ public class Space {
     public void setVehicleType(VehicleType vehicleType) {
         this.vehicleType = vehicleType;
     }
-    
-    
-    
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    
 }

@@ -63,7 +63,6 @@ public class MainMenu extends JFrame {
             openInternalFrame(new VehicleViewInternal());
         });
 
-        
         //-------------------Tiquete----------
         JMenu ticketMenu = new JMenu("Tiquetes");
         menuBar.add(ticketMenu);
@@ -86,6 +85,14 @@ public class MainMenu extends JFrame {
         });
 
         menuBar.updateUI();
+
+        JMenuItem parkingSpacesItem = new JMenuItem("Ver Espacios");
+        parkingMenu.add(parkingSpacesItem);
+
+        parkingSpacesItem.addActionListener(e -> {
+            desktop.add(new ParkingSpacesInternal());
+        });
+
     }
 
     private void openInternalFrame(JInternalFrame frame) {
