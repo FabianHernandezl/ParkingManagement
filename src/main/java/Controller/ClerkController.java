@@ -54,4 +54,10 @@ public class ClerkController implements UserOperations {
     public ArrayList<User> sortUsers(String identification, User[] allUsers) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    //for login
+    public Clerk findClerkByUsername(String username) {
+       return clerkData.findClerkByUsername(username);
+    }
+    
 }

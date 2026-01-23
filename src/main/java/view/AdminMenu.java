@@ -5,7 +5,6 @@
 package view;
 
 import java.awt.event.ActionEvent;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
@@ -15,17 +14,17 @@ import javax.swing.WindowConstants;
 
 /**
  *
- * @author jimen
+ * @author FAMILIA
  */
-public class MainMenu extends JFrame {
+public class AdminMenu extends JFrame {
 
     private HomeDesktop desktop;
 
-    public MainMenu() {
+    public AdminMenu() {
 
-        super("Parking Management System");
+        super("Menú Administrador de Parqueos");
 
-        desktop = new HomeDesktop(); // 👈 AQUÍ SE LLAMA
+        desktop = new HomeDesktop(); // Call the HomeDesktop
         this.add(desktop);
 
         this.setSize(1000, 700);
@@ -42,6 +41,7 @@ public class MainMenu extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         this.setJMenuBar(menuBar);
 
+        ///------------FUNCIONES OPERADOR ------------
         // ---------- CLIENTES ----------
         JMenu clientMenu = new JMenu("Clientes");
         menuBar.add(clientMenu);
@@ -67,13 +67,15 @@ public class MainMenu extends JFrame {
         JMenu ticketMenu = new JMenu("Tiquetes");
         menuBar.add(ticketMenu);
 
-        JMenuItem entryTicket = new JMenuItem("Ingreso de vehículo");
+        JMenuItem entryTicket = new JMenuItem("Gestionar tiquetes");
         ticketMenu.add(entryTicket);
 
         entryTicket.addActionListener(e -> {
             openInternalFrame(new TicketViewInternal());
         });
-
+ 
+        ///------------FIN FUNCIONES OPERADOR ------------
+        //---------Parqueos--------
         JMenu parkingMenu = new JMenu("Parqueos");
         menuBar.add(parkingMenu);
 
@@ -86,18 +88,72 @@ public class MainMenu extends JFrame {
 
         menuBar.updateUI();
 
+        // ---------- SPACES ----------
+        JMenu spacesMenu = new JMenu("Espacios");
+        menuBar.add(spacesMenu);
+
+        JMenuItem manageSpaces = new JMenuItem("Gestionar Espacios");
+        spacesMenu.add(manageSpaces);
+
         JMenuItem parkingSpacesItem = new JMenuItem("Ver Espacios");
-        parkingMenu.add(parkingSpacesItem);
+        spacesMenu.add(parkingSpacesItem);
 
         parkingSpacesItem.addActionListener(e -> {
             desktop.add(new ParkingSpacesInternal());
         });
+        manageSpaces.addActionListener((ActionEvent e) -> {
+            openInternalFrame(new ParkingSpacesInternal());
+        });
+        // ---------- OPERARIOS - users ----------
+        JMenu clerksMenu = new JMenu("Operarios");
+        menuBar.add(clerksMenu);
 
+        JMenuItem manageClerks = new JMenuItem("Gestionar Operarios");
+        clerksMenu.add(manageClerks);
+
+        manageVehicles.addActionListener(e -> {
+            openInternalFrame(new VehicleViewInternal()); //TO DO crud de clerks
+        });
+
+        //--------------TARIFAS ----------
+        JMenu feeMenu = new JMenu("Tarifas");
+        menuBar.add(feeMenu);
+
+        JMenuItem fees = new JMenuItem("Gestionar Tarifas");
+        feeMenu.add(fees);
+
+        fees.addActionListener(e -> {
+            openInternalFrame(new TicketViewInternal());//TO DO crud de Tarifas
+        });
+
+        //--------------REPORTS ---------- TO DO 
+        JMenu reportsMenu = new JMenu("Reportes");
+        menuBar.add(reportsMenu);
+
+        JMenuItem report1 = new JMenuItem("Generar Reporte 1");
+        reportsMenu.add(report1);
+
+        report1.addActionListener(e -> {
+            openInternalFrame(new TicketViewInternal());
+        });
+
+        JMenuItem report2 = new JMenuItem("Generar Reporte 2");
+        reportsMenu.add(report2);
+        report2.addActionListener(e -> {
+            openInternalFrame(new TicketViewInternal());
+        });
+
+        JMenuItem report3 = new JMenuItem("Generar Reporte 3");
+        reportsMenu.add(report3);
+        report3.addActionListener(e -> {
+            openInternalFrame(new TicketViewInternal());
+        });
+
+        //FALTA SING OUT
     }
 
     private void openInternalFrame(JInternalFrame frame) {
         desktop.add(frame);
         frame.setVisible(true);
     }
-
 }
