@@ -7,6 +7,7 @@ package view;
 import Controller.AdministratorController;
 import Controller.ClerkController;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,8 +34,6 @@ import model.entities.User;
  */
 public class LoginWindow extends JFrame implements ActionListener {
 
-    private HomeDesktop desktop;//background desktop
-
     private JTextField txtUsername;
     private JPasswordField txtPassword;
     private JButton btnSignIn;
@@ -48,7 +48,8 @@ public class LoginWindow extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //cerrar todo el programa 
         setLocationRelativeTo(null);
         setVisible(true);
-
+        setResizable(false);
+         
         clerkController = new ClerkController(); //buena practica en POO
         administratorController = new AdministratorController();
 
@@ -60,7 +61,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
 
         //  Título
-        JLabel lblTitle = new JLabel("Bienvenido/a", SwingConstants.CENTER);
+        JLabel lblTitle = new JLabel("Bienvenido/a al Sistema de Parqueos de InnovaSoft", SwingConstants.CENTER);
         lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
         lblTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
@@ -72,6 +73,8 @@ public class LoginWindow extends JFrame implements ActionListener {
         JPanel usernamePanel = new JPanel(new BorderLayout(10, 0));
         JLabel lblUsername = new JLabel("Nombre de usuario:");
         txtUsername = new JTextField(15);
+        
+        
         usernamePanel.add(lblUsername, BorderLayout.WEST);
         usernamePanel.add(txtUsername, BorderLayout.CENTER);
 
@@ -79,6 +82,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         JPanel passwordPanel = new JPanel(new BorderLayout(10, 0));
         JLabel lblPassword = new JLabel("Contraseña:");
         txtPassword = new JPasswordField(15);
+        txtPassword.setSize(100, 100);
         passwordPanel.add(lblPassword, BorderLayout.WEST);
         passwordPanel.add(txtPassword, BorderLayout.CENTER);
 
@@ -99,7 +103,6 @@ public class LoginWindow extends JFrame implements ActionListener {
 
         add(mainPanel);
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -131,38 +134,50 @@ public class LoginWindow extends JFrame implements ActionListener {
                     );
                 } else {
 
-                    if (administratorController.findAdminByUsername(username) != null) {
-                        new AdminMenu(); //call main page Admin
+                    boolean autenticado = false;
+
+                    // Verificar como administrador
+                    Administrator admin = administratorController.findAdminByUsername(username);
+                    if (admin != null && verificarPassword(admin.getPassword(), password)) {
+                        new AdminMenu();
                         setVisible(false);
-                        
-                    } else {
+                        autenticado = true;
+                    }
+
+                    // Verificar como clerk
+                    if (!autenticado) {
+                        Clerk clerk = clerkController.findClerkByUsername(username);
+                        if (clerk != null && verificarPassword(clerk.getPassword(), password)) {
+                            new ClerkMenu();
+                            setVisible(false);
+                            autenticado = true;
+                        }
+                    }
+
+                    // Si no se autenticó en ninguno
+                    if (!autenticado) {
                         JOptionPane.showMessageDialog(
                                 this,
-                                "El administrador no existe.",
+                                "Credenciales inválidas", // Mensaje genérico por seguridad
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE
                         );
-                        
-                        
-                        if(clerkController.findClerkByUsername(username) != null) {
-                            new ClerkMenu(); //call main page Clerk
-                            setVisible(false);
-                        } else {
-                            JOptionPane.showMessageDialog(
-                                    this,
-                                    "El operador no existe.",
-                                    "Error",
-                                    JOptionPane.ERROR_MESSAGE
-                            );
-
-                        }
                     }
-                       
-                    
-                    
+
                 }
             }
         }
 
+    }
+
+    // En tu clase de login (adaptar según tu estructura)
+    private boolean verificarPassword(String passwordAlmacenado, String passwordIngresado) {
+        // Verificar que no sean nulos
+        if (passwordAlmacenado == null || passwordIngresado == null) {
+            return false;
+        }
+
+        // Si estás usando texto plano (NO RECOMENDADO)
+        return passwordAlmacenado.equals(passwordIngresado);
     }
 }

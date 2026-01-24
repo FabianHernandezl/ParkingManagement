@@ -10,5 +10,11 @@
     "name": "Ana Brenes",
     "phone": "88889999",
     "isPreferential": false
+  },
+  {
+    "id": "119360128",
+    "name": "Mariana Blanco",
+    "phone": "86621670",
+    "isPreferential": true
   }
 ]

@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -31,7 +32,8 @@ public class AdminMenu extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setResizable(false);
+        this.setResizable(true);
+        
 
         createMenuBar();
     }
@@ -149,7 +151,14 @@ public class AdminMenu extends JFrame {
             openInternalFrame(new TicketViewInternal());
         });
 
-        //FALTA SING OUT
+        //--------------Sign Out---------- TO DO
+        JMenu comebackMenu = new JMenu("Salir");
+        menuBar.add(comebackMenu);
+
+        comebackMenu.addActionListener(e -> {
+            new LoginWindow();
+            
+        });
     }
 
     private void openInternalFrame(JInternalFrame frame) {

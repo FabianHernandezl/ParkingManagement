@@ -32,7 +32,7 @@ public class ClerkMenu extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setResizable(false);
+        this.setResizable(true);
 
         createMenuBar();
     }
@@ -74,24 +74,15 @@ public class ClerkMenu extends JFrame {
             openInternalFrame(new TicketViewInternal());
         });
 
-      /*  //---------Parqueos--------
-        JMenu parkingMenu = new JMenu("Parqueos");
-        menuBar.add(parkingMenu);
+        //--------------Sign Out---------- TO DO
+        JMenu comebackMenu = new JMenu("Salir");
+        menuBar.add(comebackMenu);
 
-        JMenuItem manageParkingLots = new JMenuItem("Gestionar parqueos");
-        parkingMenu.add(manageParkingLots);
-
-        manageParkingLots.addActionListener(e -> {
-            openInternalFrame(new ParkingLotViewInternal());
+        comebackMenu.addActionListener(e -> {
+            new LoginWindow();
+            
         });
-        
-        JMenuItem parkingSpacesItem = new JMenuItem("Ver Espacios");
-        parkingMenu.add(parkingSpacesItem);
-
-        parkingSpacesItem.addActionListener(e -> {
-            desktop.add(new ParkingSpacesInternal());
-        });
-*/
+     
         menuBar.updateUI();
 
         

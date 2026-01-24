@@ -57,7 +57,7 @@ public class ClerksView extends JInternalFrame {
         add(lblId);
         
         txtId = new JTextField();
-        txtId.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
+        txtId.setBounds(120, 100, 150, 25);
         txtId.setEditable(false); // No editable porque se genera automáticamente
         txtId.setBackground(new Color(240, 240, 240));
         add(txtId);
@@ -70,7 +70,7 @@ public class ClerksView extends JInternalFrame {
         add(lblEmployeeCode);
         
         txtEmployeeCode = new JTextField();
-        txtEmployeeCode.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
+        txtEmployeeCode.setBounds(120, 100, 150, 25);
         txtEmployeeCode.setEditable(false); // No editable porque se genera automáticamente
         txtEmployeeCode.setBackground(new Color(240, 240, 240));
         add(txtEmployeeCode);
