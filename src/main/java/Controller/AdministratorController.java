@@ -45,8 +45,8 @@ public class AdministratorController implements UserOperations {
     }
 
       //for login
-    public Administrator findClerkByUsername(String username) {
-       return administratorData.findClerkByUsername(username);
+    public Administrator findAdminByUsername(String username) {
+       return administratorData.findAdminByUsername(username);
     }
    
     public ArrayList<User> sortUsers(Clerk[] allUsers) {

@@ -20,7 +20,7 @@ public class ParkingLotData {
     private ArrayList<ParkingLot> parkingLots;
     static int parkingLotId = 0;
 
-private final Gson gson = new GsonBuilder()
+    private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
 
@@ -81,7 +81,7 @@ private final Gson gson = new GsonBuilder()
 
         for (ParkingLot parkingLot : parkingLots) {
 
-            if (parkingLot.getId()==(id)){
+            if (parkingLot.getId() == (id)) {
 
                 return parkingLot;
 
@@ -91,7 +91,15 @@ private final Gson gson = new GsonBuilder()
 
         return null;
     }
-
+    
+public ParkingLot findParkingLotByName(String name) {
+        for (ParkingLot parkingLot : parkingLots) {
+            if (parkingLot.getName().equalsIgnoreCase(name)) {
+                return parkingLot;
+            }
+        }
+        return null;
+    }
     /*
     Saves clients to JSON file
      */
@@ -105,6 +113,15 @@ private final Gson gson = new GsonBuilder()
 
     }
 
+    public int findLastIdNumberOfParkingLot() {
+        int maxId = 0;
+        for (ParkingLot parkingLot : parkingLots) {
+            if (parkingLot.getId() > maxId) {
+                maxId = parkingLot.getId();
+            }
+        }
+        return maxId;
+    }
 
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
 
@@ -160,8 +177,6 @@ private final Gson gson = new GsonBuilder()
         return 0;
     }
 
-
-
     public void removeVehicleFromParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
 
         ArrayList<Vehicle> vehiclesInParkingLot = parkingLot.getVehicles();
@@ -185,31 +200,30 @@ private final Gson gson = new GsonBuilder()
         parkingLot.setVehicles(vehiclesInParkingLot);
 
     }
-    
-    
-     public boolean updateParkingLot(ParkingLot updatedParkingLot) {
+
+    public boolean updateParkingLot(ParkingLot updatedParkingLot) {
 
         boolean updated = false;
 
-        if (updatedParkingLot != null && updatedParkingLot.getId()!= 0) {
+        if (updatedParkingLot != null && updatedParkingLot.getId() != 0) {
 
             ParkingLot existing = findParkingLotById(updatedParkingLot.getId());
 
             if (existing != null) {
 
-                if (updatedParkingLot.getName()!= null) {
+                if (updatedParkingLot.getName() != null) {
                     existing.setName(updatedParkingLot.getName());
                 }
 
-                if (updatedParkingLot.getNumberOfSpaces()!= 0) {
+                if (updatedParkingLot.getNumberOfSpaces() != 0) {
                     existing.setNumberOfSpaces(updatedParkingLot.getNumberOfSpaces());
                 }
 
-                if (updatedParkingLot.getSpaces()!= null) {
+                if (updatedParkingLot.getSpaces() != null) {
                     existing.setSpaces(updatedParkingLot.getSpaces());
                 }
 
-                if (updatedParkingLot.getVehicles()!= null) {
+                if (updatedParkingLot.getVehicles() != null) {
                     existing.setVehicles(updatedParkingLot.getVehicles());
                 }
 
@@ -238,7 +252,5 @@ private final Gson gson = new GsonBuilder()
 
         return deleted;
     }
-
-   
 
 }

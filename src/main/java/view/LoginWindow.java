@@ -100,10 +100,6 @@ public class LoginWindow extends JFrame implements ActionListener {
         add(mainPanel);
     }
 
-    /*
-    public static void main(String[] args) {
-        new LoginWindow().setVisible(true);
-    }*/
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -135,30 +131,35 @@ public class LoginWindow extends JFrame implements ActionListener {
                     );
                 } else {
 
-                    if (administratorController.findClerkByUsername(username) != null) {
+                    if (administratorController.findAdminByUsername(username) != null) {
                         new AdminMenu(); //call main page Admin
-
+                        setVisible(false);
+                        
                     } else {
                         JOptionPane.showMessageDialog(
                                 this,
-                                "El operador no existe.",
+                                "El administrador no existe.",
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE
                         );
-
-                        if (administratorController.findClerkByUsername(username) != null) {
+                        
+                        
+                        if(clerkController.findClerkByUsername(username) != null) {
                             new ClerkMenu(); //call main page Clerk
+                            setVisible(false);
                         } else {
                             JOptionPane.showMessageDialog(
                                     this,
-                                    "El administrador no existe.",
+                                    "El operador no existe.",
                                     "Error",
                                     JOptionPane.ERROR_MESSAGE
                             );
 
                         }
                     }
-
+                       
+                    
+                    
                 }
             }
         }

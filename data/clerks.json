@@ -1,0 +1,20 @@
+[
+  {
+    "employeeCode": 1001,
+    "shedule": "Mañana",
+    "age": 20,
+    "id": "CLK0001",
+    "name": "Camila Montoya",
+    "username": "op_camila",
+    "password": "123asd"
+  },
+  {
+    "employeeCode": 1002,
+    "shedule": "Tarde",
+    "age": 21,
+    "id": "CLK0002",
+    "name": "Jimena Calvo",
+    "username": "op_jime",
+    "password": "456qwe"
+  }
+]

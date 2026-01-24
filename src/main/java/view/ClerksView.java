@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
+import model.data.ClerkData;
 import model.data.ParkingLotData;
 import model.entities.Clerk;
 import model.entities.ParkingLot;
@@ -36,7 +37,7 @@ public class ClerksView extends JInternalFrame {
         super("Gestión de Operarios de Parqueos", true, true, true, true);
         
         // Inicializar ClerkData
-        clerkData = new ClerkData("Clerks");
+        clerkData = new ClerkData();
         
         setSize(800, 600);
         setLayout(null);
@@ -311,9 +312,9 @@ public class ClerksView extends JInternalFrame {
             Clerk clerk = createClerkFromForm();
             
             // Guardar en ClerkData
-            boolean success = clerkData.addClerk(clerk);
+            Clerk clerkToInsert = clerkData.addClerk(clerk);
             
-            if (success) {
+            if (clerkToInsert != null) {
                 JOptionPane.showMessageDialog(this, 
                     "Operario registrado exitosamente\n" +
                     "ID: " + clerk.getId() + "\n" +
@@ -439,7 +440,7 @@ public class ClerksView extends JInternalFrame {
             JOptionPane.WARNING_MESSAGE);
         
         if (confirm == JOptionPane.YES_OPTION) {
-            boolean success = clerkData.deleteClerk(id);
+            boolean success = clerkData.removeClerk(id);
             
             if (success) {
                 JOptionPane.showMessageDialog(this, 
@@ -577,107 +578,5 @@ public class ClerksView extends JInternalFrame {
         txtName.requestFocus();
     }
     
-    /**
-     * Clase ClerkData para manejar datos persistentes
-     * Similar a CustomerData en el ejemplo proporcionado
-     */
-    public class ClerkData {
-        private ArrayList<Clerk> clerks;
-        private final String fileName;
-        
-        public ClerkData(String fileName) {
-            this.fileName = fileName;
-            this.clerks = new ArrayList<>();
-            loadClerks();
-        }
-        
-        private void loadClerks() {
-            // Implementar carga desde archivo JSON/XML/Base de datos
-            // Similar a CustomerData
-        }
-        
-        public int findLastIdNumberOfClerk() {
-            int maxId = 0;
-            for (Clerk clerk : clerks) {
-                String id = clerk.getId();
-                if (id.startsWith("CLK")) {
-                    try {
-                        int idNum = Integer.parseInt(id.substring(3));
-                        if (idNum > maxId) {
-                            maxId = idNum;
-                        }
-                    } catch (NumberFormatException e) {
-                        // Ignorar IDs con formato incorrecto
-                    }
-                }
-            }
-            return maxId;
-        }
-        
-        public int findLastEmployeeCode() {
-            int maxCode = 1000; // Código inicial
-            for (Clerk clerk : clerks) {
-                if (clerk.getEmployeeCode() > maxCode) {
-                    maxCode = clerk.getEmployeeCode();
-                }
-            }
-            return maxCode;
-        }
-        
-        public boolean addClerk(Clerk clerk) {
-            if (findClerkById(clerk.getId()) == null) {
-                clerks.add(clerk);
-                saveClerks();
-                return true;
-            }
-            return false;
-        }
-        
-        public boolean updateClerk(Clerk updatedClerk) {
-            for (int i = 0; i < clerks.size(); i++) {
-                if (clerks.get(i).getId().equals(updatedClerk.getId())) {
-                    clerks.set(i, updatedClerk);
-                    saveClerks();
-                    return true;
-                }
-            }
-            return false;
-        }
-        
-        public boolean deleteClerk(String id) {
-            Clerk clerk = findClerkById(id);
-            if (clerk != null) {
-                clerks.remove(clerk);
-                saveClerks();
-                return true;
-            }
-            return false;
-        }
-        
-        public Clerk findClerkById(String id) {
-            for (Clerk clerk : clerks) {
-                if (clerk.getId().equals(id)) {
-                    return clerk;
-                }
-            }
-            return null;
-        }
-        
-        public Clerk findClerkByUsername(String username) {
-            for (Clerk clerk : clerks) {
-                if (clerk.getUsername().equals(username)) {
-                    return clerk;
-                }
-            }
-            return null;
-        }
-        
-        public ArrayList<Clerk> getAllClerks() {
-            return new ArrayList<>(clerks);
-        }
-        
-        private void saveClerks() {
-            // Implementar guardado a archivo JSON/XML/Base de datos
-        }
-    }
+    
 }

@@ -79,15 +79,17 @@ public class AdministratorData {
     }
     
       /*
-    Finds a clerk by username (método adicional útil)
+    Finds a admin by username 
      */
-    public Administrator findClerkByUsername(String username) {
+    public Administrator findAdminByUsername(String username) {
+        Administrator adminToReturn = new Administrator();
+        
         for (Administrator admin : administrators) {
             if (admin.getUsername().equals(username)) {
-                return admin;
+                adminToReturn = admin;
             }
         }
-        return null;
+        return adminToReturn;
     }
 
 }

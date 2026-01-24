@@ -19,10 +19,10 @@ import model.entities.ParkingLot;
  * @author FAMILIA
  */
 public class ClerkData {
+
     private static final String FILE_PATH = "data/clerks.json";
     private ArrayList<Clerk> clerks = new ArrayList<>();
 
-    
     private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
@@ -31,7 +31,8 @@ public class ClerkData {
         clerks = loadClerks();
 
     }
-       /*
+
+    /*
     Loads Clerks from JSON file
      */
     private ArrayList<Clerk> loadClerks() {
@@ -49,29 +50,29 @@ public class ClerkData {
             return new ArrayList<>();
         }
     }
- 
-   /*
+
+    /*
     Add new clerk
      */
     public Clerk addClerk(Clerk clerk) {
         Clerk clerkToReturn = null;
-        
+
         if (clerk != null && findClerkById(clerk.getId()) == null) {
             clerks.add(clerk);
             saveClerks();
             clerkToReturn = clerk;
         }
-        
+
         return clerkToReturn;
     }
-    
+
     /*
     Returns all registered clerks
      */
     public ArrayList<Clerk> getAllClerks() {
         return new ArrayList<>(clerks); // Retorna copia para evitar modificación externa
     }
-    
+
     /*
     Finds a clerk by id
      */
@@ -83,7 +84,7 @@ public class ClerkData {
         }
         return null;
     }
-    
+
     /*
     Finds a clerk by username (método  útil para login)
      */
@@ -95,7 +96,7 @@ public class ClerkData {
         }
         return null;
     }
-    
+
     /*
     Updates an existing clerk
      */
@@ -109,7 +110,7 @@ public class ClerkData {
         }
         return false;
     }
-    
+
     /*
     Removes a clerk by id
      */
@@ -122,7 +123,7 @@ public class ClerkData {
         }
         return false;
     }
-    
+
     /*
     Authenticates a clerk (método adicional útil)
      */
@@ -133,7 +134,7 @@ public class ClerkData {
         }
         return null;
     }
-    
+
     /*
     Saves clerks to JSON file
      */
@@ -145,12 +146,39 @@ public class ClerkData {
         }
     }
 
-    
+    public int findLastIdNumberOfClerk() {
+        int maxId = 0;
+        for (Clerk clerk : clerks) {
+            String id = clerk.getId();
+            if (id.startsWith("CLK")) {
+                try {
+                    int idNum = Integer.parseInt(id.substring(3));
+                    if (idNum > maxId) {
+                        maxId = idNum;
+                    }
+                } catch (NumberFormatException e) {
+                    // Ignorar IDs con formato incorrecto
+                }
+            }
+        }
+        return maxId;
+    }
+
+    public int findLastEmployeeCode() {
+        int maxCode = 1000; // Código inicial
+        for (Clerk clerk : clerks) {
+            if (clerk.getEmployeeCode() > maxCode) {
+                maxCode = clerk.getEmployeeCode();
+            }
+        }
+        return maxCode;
+    }
+
     /*
     Get number of registered clerks
      */
     public int getClerkCount() {
         return clerks.size();
     }
-   
+
 }
