@@ -111,8 +111,8 @@ public class AdminMenu extends JFrame {
         JMenuItem manageClerks = new JMenuItem("Gestionar Operarios");
         clerksMenu.add(manageClerks);
 
-        manageVehicles.addActionListener(e -> {
-            openInternalFrame(new VehicleViewInternal()); //TO DO crud de clerks
+        manageClerks.addActionListener(e -> {
+            openInternalFrame(new ClerksView()); //crud de clerks
         });
 
         //--------------TARIFAS ----------

@@ -39,7 +39,7 @@ public class AdministratorData {
         ParkingLot parkingLot = new ParkingLot();
 
         administrators.add(new Administrator(1001, parkingLot, "ID-FAB", "Fabián", "admin_fabian", "fabian123"));
-        administrators.add(new Administrator(1002, parkingLot, "ID-ZAY", "Zaylin", "admin_zaylin", "zaylin456"));
+        administrators.add(new Administrator(1002, parkingLot, "ID-ZAY", "Zaylin", "admin_zailyn", "zailyn456"));
         administrators.add(new Administrator(1003, parkingLot, "ID-JIM", "Jimena", "admin_jimena", "jimena789"));
         administrators.add(new Administrator(1004, parkingLot, "ID-CAM", "Camila", "admin_camila", "camila012"));
 
