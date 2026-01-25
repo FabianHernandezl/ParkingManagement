@@ -1,200 +1,282 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view;
 
 import controller.VehicleController;
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import model.entities.Client;
 import model.entities.Vehicle;
 import model.entities.VehicleType;
 
-/**
- *
- * @author Jimena
- */
 public class VehicleViewInternal extends JInternalFrame {
 
-    public VehicleViewInternal() {
-        super("Gestión de Clientes", true, true, true, true);
-        setSize(700, 400);
-        setLocation(20, 20);
-
-        ClientViewInternal panel = new ClientViewInternal();
-        this.add(panel.getContentPane());
-    }
-
     private final VehicleController vehicleController = new VehicleController();
-    private final ClientViewInternal clientView = new ClientViewInternal();
 
-    public void showVehicleMenu() {
+    private JTextField txtPlate;
+    private JTextField txtBrand;
+    private JTextField txtModel;
+    private JTextField txtColor;
+    private JComboBox<String> cmbType;
 
-        int option = -1;
+    private JTable table;
+    private DefaultTableModel model;
 
-        while (option != 0) {
+    private Client selectedClient; // solo para creación
 
-            option = Integer.parseInt(JOptionPane.showInputDialog(
-                    "VEHÍCULOS\n\n"
-                    + "0. Volver\n"
-                    + "1. Registrar vehículo\n"
-                    + "2. Mostrar vehículos\n"
-                    + "3. Actualizar vehículo\n"
-                    + "4. Eliminar vehículo"
-            ));
+    public VehicleViewInternal() {
+        super("Gestión de Vehículos", true, true, true, true);
 
-            switch (option) {
-                case 1 ->
-                    insertVehicle();
-                case 2 ->
-                    showAllVehicles();
-                case 3 ->
-                    updateVehicle();
-                case 4 ->
-                    deleteVehicle();
+        setSize(820, 500);
+        setLayout(null);
+        setVisible(true);
+
+        // ===== FORM =====
+        JLabel lblPlate = new JLabel("Placa:");
+        lblPlate.setBounds(30, 20, 80, 25);
+        add(lblPlate);
+
+        txtPlate = new JTextField();
+        txtPlate.setBounds(120, 20, 160, 25);
+        add(txtPlate);
+
+        JLabel lblBrand = new JLabel("Marca:");
+        lblBrand.setBounds(30, 60, 80, 25);
+        add(lblBrand);
+
+        txtBrand = new JTextField();
+        txtBrand.setBounds(120, 60, 160, 25);
+        add(txtBrand);
+
+        JLabel lblModel = new JLabel("Modelo:");
+        lblModel.setBounds(30, 100, 80, 25);
+        add(lblModel);
+
+        txtModel = new JTextField();
+        txtModel.setBounds(120, 100, 160, 25);
+        add(txtModel);
+
+        JLabel lblColor = new JLabel("Color:");
+        lblColor.setBounds(30, 140, 80, 25);
+        add(lblColor);
+
+        txtColor = new JTextField();
+        txtColor.setBounds(120, 140, 160, 25);
+        add(txtColor);
+
+        JLabel lblType = new JLabel("Tipo:");
+        lblType.setBounds(30, 180, 80, 25);
+        add(lblType);
+
+        cmbType = new JComboBox<>(new String[]{"Carro", "Moto", "Camión"});
+        cmbType.setBounds(120, 180, 160, 25);
+        add(cmbType);
+
+        JButton btnSelectClient = new JButton("Asignar Cliente");
+        btnSelectClient.setBounds(30, 220, 250, 30);
+        add(btnSelectClient);
+
+        JButton btnSave = new JButton("Guardar");
+        btnSave.setBounds(30, 270, 115, 30);
+        add(btnSave);
+
+        JButton btnClear = new JButton("Limpiar");
+        btnClear.setBounds(165, 270, 115, 30);
+        add(btnClear);
+
+        JButton btnUpdate = new JButton("Actualizar");
+        btnUpdate.setBounds(30, 310, 115, 30);
+        btnUpdate.setEnabled(false);
+        add(btnUpdate);
+
+        JButton btnDelete = new JButton("Eliminar");
+        btnDelete.setBounds(165, 310, 115, 30);
+        btnDelete.setEnabled(false);
+        add(btnDelete);
+
+        // ===== TABLE =====
+        model = new DefaultTableModel(
+                new String[]{"Placa", "Marca", "Modelo", "Color", "Tipo"}, 0) {
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
             }
-        }
+        };
+
+        table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(320, 20, 470, 400);
+        add(scrollPane);
+
+        loadTable();
+
+        // ===== EVENTS =====
+        btnSelectClient.addActionListener((ActionEvent e) -> selectClient());
+        btnSave.addActionListener(e -> saveVehicle());
+        btnUpdate.addActionListener(e -> updateVehicle());
+        btnDelete.addActionListener(e -> deleteVehicle());
+        btnClear.addActionListener(e -> clearForm());
+
+        table.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                fillFormFromTable();
+                btnUpdate.setEnabled(true);
+                btnDelete.setEnabled(true);
+                txtPlate.setEnabled(false); // placa NO se edita
+            }
+        });
     }
 
-    private void insertVehicle() {
-
-        Vehicle vehicle = new Vehicle();
-
-        vehicle.setPlate(JOptionPane.showInputDialog("Placa"));
-        vehicle.setBrand(JOptionPane.showInputDialog("Marca"));
-        vehicle.setModel(JOptionPane.showInputDialog("Modelo"));
-        vehicle.setColor(JOptionPane.showInputDialog("Color"));
-
-        VehicleType type = selectVehicleType();
-        if (type == null) {
-            return;
-        }
-
-        vehicle.setVehicleType(type);
-
-        boolean addMore = true;
-
-        while (addMore) {
-
-            ClientViewInternal clientView = new ClientViewInternal();
-            Client client = clientView.selectOrCreateClient(this.getDesktopPane());
-
-            if (client != null) {
-                vehicle.addClient(client);
-            }
-
-            addMore = JOptionPane.showConfirmDialog(
-                    null, "¿Agregar otro cliente?",
-                    "Clientes", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
-        }
-
-        if (vehicle.getClients().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Debe tener al menos un cliente");
-            return;
-        }
-
-        JOptionPane.showMessageDialog(null,
-                vehicleController.insertVehicle(vehicle));
-    }
-
-    private void showAllVehicles() {
-
-        if (vehicleController.getAllVehicles().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No hay vehículos");
-            return;
-        }
-
-        String info = "VEHÍCULOS\n\n";
+    // ================= LOGIC =================
+    private void loadTable() {
+        model.setRowCount(0);
         for (Vehicle v : vehicleController.getAllVehicles()) {
-            info += v + "\n";
+            model.addRow(new Object[]{
+                v.getPlate(),
+                v.getBrand(),
+                v.getModel(),
+                v.getColor(),
+                v.getVehicleType() != null ? v.getVehicleType().getDescription() : ""
+            });
+        }
+    }
+
+    private void saveVehicle() {
+        if (!validateForm(true)) {
+            return;
         }
 
-        JOptionPane.showMessageDialog(null, info);
+        Vehicle v = buildVehicle();
+        String result = vehicleController.insertVehicle(v);
+
+        JOptionPane.showMessageDialog(this, result);
+        loadTable();
+        clearForm();
     }
 
     private void updateVehicle() {
-
-        String plate = JOptionPane.showInputDialog("Ingrese la placa del vehículo a actualizar");
-        Vehicle existing = vehicleController.findVehicleByPlate(plate);
-
-        if (existing == null) {
-            JOptionPane.showMessageDialog(null, "Vehículo no encontrado");
+        if (!validateForm(false)) {
             return;
         }
 
-        String brand = JOptionPane.showInputDialog("Nueva marca", existing.getBrand());
-        String model = JOptionPane.showInputDialog("Nuevo modelo", existing.getModel());
-        String color = JOptionPane.showInputDialog("Nuevo color", existing.getColor());
+        Vehicle v = new Vehicle();
+        v.setPlate(txtPlate.getText().trim());
+        v.setBrand(txtBrand.getText().trim());
+        v.setModel(txtModel.getText().trim());
+        v.setColor(txtColor.getText().trim());
+        v.setVehicleType(buildVehicleType());
 
-        VehicleType type = selectVehicleType();
-        if (type == null) {
-            JOptionPane.showMessageDialog(null, "Tipo de vehículo inválido");
-            return;
-        }
+        String result = vehicleController.updateVehicle(v);
+        JOptionPane.showMessageDialog(this, result);
 
-        Vehicle updated = new Vehicle();
-        updated.setPlate(plate);
-        updated.setBrand(brand);
-        updated.setModel(model);
-        updated.setColor(color);
-        updated.setVehicleType(type);
-        updated.setClients(existing.getClients());
-
-        String result = vehicleController.updateVehicle(updated);
-        JOptionPane.showMessageDialog(null, result);
+        loadTable();
+        clearForm();
     }
 
     private void deleteVehicle() {
-
-        String plate = JOptionPane.showInputDialog("Ingrese la placa del vehículo a eliminar");
+        String plate = txtPlate.getText().trim();
 
         int confirm = JOptionPane.showConfirmDialog(
-                null,
-                "¿Está seguro de eliminar el vehículo?",
-                "Confirmar",
+                this,
+                "¿Eliminar vehículo con placa: " + plate + "?",
+                "Confirmar eliminación",
                 JOptionPane.YES_NO_OPTION
         );
 
-        if (confirm != JOptionPane.YES_OPTION) {
+        if (confirm == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    vehicleController.deleteVehicle(plate)
+            );
+            loadTable();
+            clearForm();
+        }
+    }
+
+    private void fillFormFromTable() {
+        int row = table.getSelectedRow();
+        if (row == -1) {
             return;
         }
 
-        String result = vehicleController.deleteVehicle(plate);
-        JOptionPane.showMessageDialog(null, result);
+        txtPlate.setText(model.getValueAt(row, 0).toString());
+        txtBrand.setText(model.getValueAt(row, 1).toString());
+        txtModel.setText(model.getValueAt(row, 2).toString());
+        txtColor.setText(model.getValueAt(row, 3).toString());
+        cmbType.setSelectedItem(model.getValueAt(row, 4).toString());
     }
 
-    private static VehicleType selectVehicleType() {
+    private void clearForm() {
+        txtPlate.setText("");
+        txtBrand.setText("");
+        txtModel.setText("");
+        txtColor.setText("");
+        cmbType.setSelectedIndex(0);
+        selectedClient = null;
 
-        int option = Integer.parseInt(JOptionPane.showInputDialog(
-                "Seleccione el tipo de vehículo:\n"
-                + "1. Carro\n"
-                + "2. Moto\n"
-                + "3. Camión"
-        ));
+        txtPlate.setEnabled(true);
+        table.clearSelection();
+    }
 
-        VehicleType type = new VehicleType();
+    private void selectClient() {
 
-        switch (option) {
-            case 1 -> {
-                type.setId(1);
-                type.setDescription("Carro");
-            }
-            case 2 -> {
-                type.setId(2);
-                type.setDescription("Moto");
-            }
-            case 3 -> {
-                type.setId(3);
-                type.setDescription("Camión");
-            }
-            default -> {
-                JOptionPane.showMessageDialog(null, "Opción inválida");
-                return null;
-            }
+        ClientViewInternal cv = new ClientViewInternal();
+
+        // NO mostrar la ventana de una vez
+        // solo se mostrará si el cliente no existe
+        getDesktopPane().add(cv);
+
+        Client c = cv.selectOrCreateClient(getDesktopPane());
+
+        // Si el cliente no existía, esperar a que se cree
+        if (c == null) {
+            c = cv.getCreatedClient();
         }
 
-        return type;
+        if (c != null) {
+            selectedClient = c;
+            JOptionPane.showMessageDialog(this,
+                    "Cliente asignado: " + c.getName());
+        }
     }
 
+    private boolean validateForm(boolean creating) {
+        if (txtPlate.getText().trim().isEmpty()
+                || txtBrand.getText().trim().isEmpty()
+                || txtModel.getText().trim().isEmpty()
+                || txtColor.getText().trim().isEmpty()) {
+
+            JOptionPane.showMessageDialog(this,
+                    "Todos los campos son obligatorios",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (creating && selectedClient == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Debe asignar al menos un cliente al vehículo",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
+    private Vehicle buildVehicle() {
+        Vehicle v = new Vehicle();
+        v.setPlate(txtPlate.getText().trim());
+        v.setBrand(txtBrand.getText().trim());
+        v.setModel(txtModel.getText().trim());
+        v.setColor(txtColor.getText().trim());
+        v.setVehicleType(buildVehicleType());
+        v.addClient(selectedClient);
+        return v;
+    }
+
+    private VehicleType buildVehicleType() {
+        VehicleType type = new VehicleType();
+        type.setDescription(cmbType.getSelectedItem().toString());
+        return type;
+    }
 }

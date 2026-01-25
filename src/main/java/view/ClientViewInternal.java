@@ -17,6 +17,7 @@ import model.entities.Client;
 public class ClientViewInternal extends JInternalFrame {
 
     private final ClientController clientController = new ClientController();
+    private Client createdClient; // cliente creado recientemente
     private JTextField txtId;
     private JTextField txtPhone;
     private JTextField txtName;
@@ -139,6 +140,12 @@ public class ClientViewInternal extends JInternalFrame {
 
         String result = clientController.registerClient(id, name, phone, pref);
         JOptionPane.showMessageDialog(this, result);
+
+        // guardar referencia del cliente creado
+        createdClient = clientController.findClientById(id);
+
+        // cerrar ventana si fue creada desde otro módulo 
+        this.dispose();
 
         loadTable();
         clearForm();
@@ -290,14 +297,40 @@ public class ClientViewInternal extends JInternalFrame {
                     JOptionPane.YES_NO_OPTION);
 
             if (option == JOptionPane.YES_OPTION) {
+
+                // Mostrar la ventana SOLO si aún no está visible
+                if (!this.isVisible()) {
+                    if (desktop != null) {
+                        desktop.add(this);
+                    }
+                    this.setVisible(true);
+                }
+
+                // Traer la ventana al frente
+                try {
+                    this.setSelected(true);
+                    this.toFront();
+                } catch (java.beans.PropertyVetoException e) {
+                    // ignorar
+                }
+
+                // Preparar formulario
                 txtId.setText(id);
                 txtName.requestFocus();
+
                 JOptionPane.showMessageDialog(this,
                         "Complete los datos del cliente y presione 'Guardar Nuevo'",
                         "Crear Nuevo Cliente",
                         JOptionPane.INFORMATION_MESSAGE);
             }
+
             return null;
+
         }
     }
+
+    public Client getCreatedClient() {
+        return createdClient;
+    }
+
 }

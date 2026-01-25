@@ -58,5 +58,25 @@
       "numberOfTires": 0,
       "fee": 0.0
     }
+  },
+  {
+    "plate": "BKQ748",
+    "color": "Gris",
+    "brand": "Mitsubishi",
+    "model": "Lancer",
+    "clients": [
+      {
+        "id": "305620529",
+        "name": "Zailyn Tencio",
+        "phone": "84379367",
+        "isPreferential": false
+      }
+    ],
+    "vehicleType": {
+      "id": 0,
+      "description": "Carro",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
   }
 ]
