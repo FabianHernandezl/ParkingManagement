@@ -21,7 +21,7 @@ public class TicketViewInternal extends JInternalFrame {
     private final TicketController ticketController = new TicketController();
 
     public TicketViewInternal() {
-        super("Gestión de Clientes", true, true, true, true);
+        super("Gestión de Ticket", true, true, true, true);
         setSize(700, 400);
         setLocation(20, 20);
 

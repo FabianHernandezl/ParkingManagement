@@ -24,7 +24,7 @@ import model.entities.Space;
 public class SpaceData {
 
     private ArrayList<Space> spaces;
-    private static final String FILE_PATH = "data/vehicles.json";
+    private static final String FILE_PATH = "data/spaces.json";
 
     private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()

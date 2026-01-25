@@ -9,18 +9,62 @@ import model.data.ParkingLotData;
 import model.entities.ParkingLot;
 import model.entities.Vehicle;
 import model.entities.Space;
+import model.entities.VehicleType;
 
 /**
  *
  * @author FAMILIA
  */
+
 public class ParkingLotController {
 
     private ParkingLotData parkingLotData = new ParkingLotData();
-//public ParkingLot registerParkingLot(String name, Space spaces[]) 
-    public ParkingLot registerParkingLot(ParkingLot parkingLot) {
+
+public ParkingLot registerParkingLot(String name, int numberOfSpaces, int disabledSpaces, int motorcycleSpaces) {
         
-        return parkingLotData.addParkingLot(parkingLot); //addParkingLot(name, spaces);
+        // Crear el parqueo
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.setName(name);
+        parkingLot.setNumberOfSpaces(numberOfSpaces);
+        
+        // Crear espacios automáticamente
+        Space[] spaces = createSpacesForParkingLot(numberOfSpaces, disabledSpaces, motorcycleSpaces);
+        parkingLot.setSpaces(spaces);
+        
+        // Guardar espacios individualmente en SpaceData
+        SpaceController spaceController = new SpaceController();
+        for (Space space : spaces) {
+            spaceController.registerSpace(space.getId(), 
+                                         space.isDisabilityAdaptation(), 
+                                         space.isSpaceTaken());
+        }
+        
+        return parkingLotData.addParkingLot(parkingLot);
+    }
+    
+    private Space[] createSpacesForParkingLot(int total, int disabled, int motorcycle) {
+        Space[] spaces = new Space[total];
+        int spaceId = 1;
+        
+        // Espacios para discapacidad
+        for (int i = 0; i < disabled; i++) {
+            spaces[i] = new Space(spaceId++, true, false, 
+                                 new VehicleType(3, "Discapacitado", 4, 0.0f));
+        }
+        
+        // Espacios para motocicletas
+        for (int i = 0; i < motorcycle; i++) {
+            spaces[disabled + i] = new Space(spaceId++, false, false,
+                                           new VehicleType(2, "Motocicleta", 2, 2.5f));
+        }
+        
+        // Espacios estándar
+        for (int i = disabled + motorcycle; i < total; i++) {
+            spaces[i] = new Space(spaceId++, false, false,
+                                new VehicleType(1, "Automóvil", 4, 5.0f));
+        }
+        
+        return spaces;
     }
 
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {

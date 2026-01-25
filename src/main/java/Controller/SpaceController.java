@@ -6,7 +6,9 @@ package Controller;
 
 import java.util.ArrayList;
 import model.data.SpaceData;
+import model.entities.Client;
 import model.entities.Space;
+import model.entities.Vehicle;
 
 /**
  *
@@ -60,6 +62,43 @@ public class SpaceController {
         }
         message = "No se pudo eliminar el espacio";
         return message;
+    }
+
+    public boolean occupySpace(int id, Client client, Vehicle vehicle) {
+
+        Space space = spaceData.findSpaceById(id);
+        boolean result = false;
+
+        if (space != null && !space.isSpaceTaken()) {
+
+            space.setSpaceTaken(true);
+            space.setClient(client);
+            space.setVehicle(vehicle);
+            spaceData.updateSpace(space);
+            result = true;
+
+        }
+
+        return result;
+
+    }
+
+    public boolean releaseSpace(int id) {
+
+        Space space = spaceData.findSpaceById(id);
+        boolean result = false;
+
+        if (space != null && space.isSpaceTaken()) {
+
+            space.setSpaceTaken(false);
+            space.setClient(null);
+            space.setVehicle(null);
+            spaceData.updateSpace(space);
+            result = true;
+
+        }
+
+        return result;
     }
 
 }
