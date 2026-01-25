@@ -130,32 +130,35 @@ public class ParkingSpacesPanel extends JPanel {
     }
 
     private void handleClick(int mx, int my) {
+        if (spaces == null) {
+            return;
+        }
+
         int x = 50;
         int y = 50;
+        int spacesPerRow = Math.max(1, (getWidth() - 100) / 130);
+        int spaceCount = 0;
 
         for (Space space : spaces) {
-            if (mx >= x && mx <= x + 100 && my >= y && my <= y + 60) {
+            if (space != null && mx >= x && mx <= x + 100 && my >= y && my <= y + 60) {
 
                 if (!space.isSpaceTaken()) {
-                    Client client = new Client("199233", "Jimena Calvo", "7788997", false);
-                    Vehicle vehicle = new Vehicle("988908", "Beige", "Toyota", "2001");
-
-                    boolean success = controller.occupySpace(space.getId(), client, vehicle);
-                    if (success) {
-                        animatingSpace = space;
-                        animateCarEntry(x);
-                    }
+                    // Mostrar diálogo para asignar cliente y vehículo
+                    showAssignDialog(space);
 
                 } else {
-                    boolean success = controller.releaseSpace(space.getId());
-                    if (success) {
-                        animatingSpace = space;
-                        animateCarExit(space, x);
-                    }
+                    // Mostrar opciones para liberar espacio o ver detalles
+                    showOccupiedSpaceOptions(space);
                 }
                 return;
             }
+
+            spaceCount++;
             x += 130;
+            if (spaceCount % spacesPerRow == 0) {
+                x = 50;
+                y += 80;
+            }
         }
     }
 
@@ -189,5 +192,217 @@ public class ParkingSpacesPanel extends JPanel {
             }
         });
         timer.start();
+    }
+
+    private void showAssignDialog(Space space) {
+        // Obtener el JFrame padre
+        Window parentWindow = SwingUtilities.getWindowAncestor(this);
+
+        if (parentWindow instanceof JFrame) {
+            AssignSpaceDialog dialog = new AssignSpaceDialog(
+                    (JFrame) parentWindow,
+                    space,
+                    controller
+            );
+
+            dialog.setVisible(true);
+
+            if (dialog.wasAssigned()) {
+                // Actualizar la visualización
+                Space updatedSpace = controller.findSpaceById(space.getId());
+                if (updatedSpace != null) {
+                    // Actualizar el espacio en el array
+                    for (int i = 0; i < spaces.length; i++) {
+                        if (spaces[i].getId() == space.getId()) {
+                            spaces[i] = updatedSpace;
+                            break;
+                        }
+                    }
+
+                    // Animar entrada del vehículo
+                    animatingSpace = updatedSpace;
+                    animateCarEntry(getSpacePositionX(space));
+
+                    // Actualizar información en el panel lateral
+                    infoPanel.showSpaceInfo(updatedSpace);
+                }
+            }
+        }
+    }
+
+    private int getSpacePositionX(Space space) {
+        // Calcular posición X del espacio en el panel
+        if (spaces == null) {
+            return 50;
+        }
+
+        for (int i = 0; i < spaces.length; i++) {
+            if (spaces[i] != null && spaces[i].getId() == space.getId()) {
+                int spacesPerRow = Math.max(1, (getWidth() - 100) / 130);
+                int col = i % spacesPerRow;
+                return 50 + (col * 130) + 30; // +30 para centrar el carro
+            }
+        }
+        return 50;
+    }
+
+    private void showOccupiedSpaceOptions(Space space) {
+        if (space.getClient() == null || space.getVehicle() == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Este espacio está marcado como ocupado pero no tiene información de cliente/vehículo.",
+                    "Error de datos",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Object[] options = {"Ver Detalles", "Liberar Espacio", "Cancelar"};
+
+        int choice = JOptionPane.showOptionDialog(this,
+                "Espacio #" + space.getId() + " está ocupado\n"
+                + "Cliente: " + space.getClient().getName() + "\n"
+                + "Vehículo: " + space.getVehicle().getPlate(),
+                "Espacio Ocupado",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        switch (choice) {
+            case 0: // Ver Detalles
+                showSpaceDetails(space);
+                break;
+            case 1: // Liberar Espacio
+                liberateSpace(space);
+                break;
+            // Cancelar no hace nada
+        }
+    }
+
+    private void showSpaceDetails(Space space) {
+        StringBuilder details = new StringBuilder();
+        details.append("DETALLES DEL ESPACIO\n");
+        details.append("══════════════════════\n\n");
+        details.append("Espacio #").append(space.getId()).append("\n");
+        details.append("Tipo: ").append(space.getVehicleType().getDescription()).append("\n");
+        details.append("Accesibilidad: ").append(space.isDisabilityAdaptation() ? "Adaptado para discapacidad" : "Estándar").append("\n");
+        details.append("Estado: OCUPADO\n\n");
+
+        if (space.getClient() != null) {
+            details.append("CLIENTE:\n");
+            details.append("────────\n");
+            details.append("• ID: ").append(space.getClient().getId()).append("\n");
+            details.append("• Nombre: ").append(space.getClient().getName()).append("\n");
+            details.append("• Teléfono: ").append(space.getClient().getPhone()).append("\n");
+            details.append("• Preferencial: ").append(space.getClient().isIsPreferential() ? "Sí" : "No").append("\n\n");
+        }
+
+        if (space.getVehicle() != null) {
+            details.append("VEHÍCULO:\n");
+            details.append("─────────\n");
+            details.append("• Placa: ").append(space.getVehicle().getPlate()).append("\n");
+            details.append("• Marca: ").append(space.getVehicle().getBrand()).append("\n");
+            details.append("• Modelo: ").append(space.getVehicle().getModel()).append("\n");
+            details.append("• Color: ").append(space.getVehicle().getColor()).append("\n");
+            details.append("• Tipo: ").append(space.getVehicle().getVehicleType().getDescription()).append("\n\n");
+        }
+
+        if (space.getEntryTime() != null) {
+            details.append("INFORMACIÓN DE ESTACIONAMIENTO:\n");
+            details.append("───────────────────────────────\n");
+            details.append("• Hora de entrada: ").append(space.getEntryTime()).append("\n");
+
+            // Calcular tiempo transcurrido
+            long diff = System.currentTimeMillis() - space.getEntryTime().getTime();
+            long hours = diff / (1000 * 60 * 60);
+            long minutes = (diff % (1000 * 60 * 60)) / (1000 * 60);
+
+            details.append("• Tiempo transcurrido: ").append(hours).append("h ").append(minutes).append("m\n");
+
+            // Calcular tarifa estimada
+            if (space.getVehicle() != null && space.getVehicle().getVehicleType() != null) {
+                float hourlyRate = space.getVehicle().getVehicleType().getFee();
+                float estimatedFee = Math.max(1, hours) * hourlyRate;
+                details.append("• Tarifa estimada: $").append(String.format("%.2f", estimatedFee)).append("\n");
+            }
+        }
+
+        JTextArea textArea = new JTextArea(details.toString());
+        textArea.setEditable(false);
+        textArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        textArea.setBackground(new Color(248, 248, 248));
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(500, 400));
+
+        JOptionPane.showMessageDialog(this, scrollPane,
+                "Detalles Espacio #" + space.getId(),
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void liberateSpace(Space space) {
+        String clientName = space.getClient() != null ? space.getClient().getName() : "Desconocido";
+        String vehiclePlate = space.getVehicle() != null ? space.getVehicle().getPlate() : "Desconocida";
+
+        // Calcular tarifa si hay hora de entrada
+        String feeMessage = "";
+        if (space.getEntryTime() != null && space.getVehicle() != null
+                && space.getVehicle().getVehicleType() != null) {
+
+            long diff = System.currentTimeMillis() - space.getEntryTime().getTime();
+            long hours = Math.max(1, diff / (1000 * 60 * 60));
+            float hourlyRate = space.getVehicle().getVehicleType().getFee();
+            float totalFee = hours * hourlyRate;
+
+            feeMessage = "\n\nTarifa a cobrar: $" + String.format("%.2f", totalFee)
+                    + "\n(" + hours + " hora(s) × $" + hourlyRate + ")";
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Liberar espacio #" + space.getId() + "?\n\n"
+                + "Cliente: " + clientName + "\n"
+                + "Vehículo: " + vehiclePlate + feeMessage,
+                "Confirmar Liberación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            boolean success = controller.releaseSpace(space.getId());
+
+            if (success) {
+                // Animar salida del vehículo
+                animatingSpace = space;
+                animateCarExit(space, getSpacePositionX(space));
+
+                JOptionPane.showMessageDialog(this,
+                        "Espacio liberado exitosamente"
+                        + (feeMessage.isEmpty() ? "" : "\nTarifa cobrada: " + feeMessage.substring(feeMessage.indexOf("$"))),
+                        "Liberación Exitosa",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                // Actualizar la visualización después de la animación
+                Timer timer = new Timer(1000, e -> {
+                    Space updatedSpace = controller.findSpaceById(space.getId());
+                    if (updatedSpace != null) {
+                        for (int i = 0; i < spaces.length; i++) {
+                            if (spaces[i].getId() == space.getId()) {
+                                spaces[i] = updatedSpace;
+                                break;
+                            }
+                        }
+                        repaint();
+                        infoPanel.showSpaceInfo(updatedSpace);
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
+
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Error al liberar el espacio",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }

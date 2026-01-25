@@ -1,5 +1,7 @@
 package model.entities;
 
+import java.util.Date;
+
 /**
  *
  * @author fabian
@@ -10,6 +12,7 @@ public class Space {
     private boolean disabilityAdaptation;
     private boolean spaceTaken;
     private VehicleType vehicleType;
+    private Date entryTime;
 
     private Client client;
     private Vehicle vehicle;
@@ -20,6 +23,18 @@ public class Space {
         this.spaceTaken = spaceTaken;
         this.vehicleType = vehicleType;
     }
+
+    public Space(int id, boolean disabilityAdaptation, boolean spaceTaken, VehicleType vehicleType, Date entryTime, Client client, Vehicle vehicle) {
+        this.id = id;
+        this.disabilityAdaptation = disabilityAdaptation;
+        this.spaceTaken = spaceTaken;
+        this.vehicleType = vehicleType;
+        this.entryTime = entryTime;
+        this.client = client;
+        this.vehicle = vehicle;
+    }
+    
+    
 
     public Space() {
 
@@ -97,5 +112,12 @@ public class Space {
         this.vehicle = vehicle;
     }
 
-    
+    public Date getEntryTime() {
+        return entryTime;
+    }
+
+    public void setEntryTime(Date entryTime) {
+        this.entryTime = entryTime;
+    }
+
 }
