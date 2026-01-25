@@ -6,16 +6,20 @@ import model.data.VehicleData;
 import model.entities.Vehicle;
 import model.entities.Client;
 import model.entities.ParkingLot;
+import Controller.ParkingLotController;
 
 public class VehicleController {
 
     private ParkingLotData parkingLotData = new ParkingLotData();
+    private ParkingLotController parkingLotController = new ParkingLotController();
     private ParkingLot parkingLot = new ParkingLot(); // parqueo único
 
     VehicleData vehicleData = new VehicleData();
 
     public String insertVehicle(Vehicle vehicle) {
-
+        System.out.println("\n=== VEHICLECONTROLLER: Insertando vehículo ===");
+        System.out.println("Placa: " + (vehicle != null ? vehicle.getPlate() : "null"));
+        
         String result = "Vehículo insertado con éxito";
         boolean clientHasVehicle = false;
 
@@ -30,6 +34,16 @@ public class VehicleController {
 
             if (!clientHasVehicle) {
                 result = vehicleData.insertVehicle(vehicle);
+                
+                // Intentar parquear el vehículo después de insertarlo
+                System.out.println("Intentando parquear el vehículo...");
+                int espacioAsignado = registerVehicleInParking(vehicle);
+                
+                if (espacioAsignado > 0) {
+                    result += "\n✅ Vehículo parqueado en espacio: " + espacioAsignado;
+                } else {
+                    result += "\n⚠️ Vehículo NO pudo ser parqueado (sin espacios disponibles)";
+                }
             } else {
                 result = "No se insertó el vehículo, uno de los clientes ya tiene un vehículo registrado";
             }
@@ -37,7 +51,8 @@ public class VehicleController {
         } else {
             result = "Vehículo inválido";
         }
-
+        
+        System.out.println("Resultado final: " + result);
         return result;
     }
 
@@ -54,7 +69,30 @@ public class VehicleController {
     }
 
     public int registerVehicleInParking(Vehicle vehicle) {
-        return parkingLotData.registerVehicleInParkingLot(vehicle, parkingLot);
+        System.out.println("\n=== VEHICLECONTROLLER: Registrando en parking ===");
+        System.out.println("Vehículo: " + vehicle.getPlate());
+        System.out.println("Tipo: " + (vehicle.getVehicleType() != null ? 
+                     vehicle.getVehicleType().getDescription() : "NULL"));
+        
+        // Obtener parqueos disponibles
+        ArrayList<ParkingLot> parqueos = parkingLotData.getAllParkingLots();
+        System.out.println("Parqueos disponibles: " + parqueos.size());
+        
+        if (parqueos.isEmpty()) {
+            System.out.println("❌ ERROR: No hay parqueos creados");
+            return 0;
+        }
+        
+        // Usar el primer parqueo disponible
+        ParkingLot parkingLot = parqueos.get(0);
+        System.out.println("Usando parqueo: " + parkingLot.getName());
+        System.out.println("Espacios en parqueo: " + parkingLot.getNumberOfSpaces());
+        
+        // Registrar el vehículo en el parqueo (esto creará automáticamente el ticket)
+        int espacio = parkingLotController.registerVehicleInParkingLot(vehicle, parkingLot);
+        System.out.println("Espacio asignado: " + espacio);
+        
+        return espacio;
     }
 
     public String updateVehicle(Vehicle vehicle) {
