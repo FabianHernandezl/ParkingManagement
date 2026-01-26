@@ -41,9 +41,9 @@
   },
   {
     "plate": "13513",
-    "color": "jhg",
-    "brand": "kgjh",
-    "model": "ujgj",
+    "color": "Negro",
+    "brand": "Suzuki",
+    "model": "2022",
     "clients": [
       {
         "id": "23212",
@@ -53,8 +53,8 @@
       }
     ],
     "vehicleType": {
-      "id": 3,
-      "description": "Camión",
+      "id": 0,
+      "description": "Carro",
       "numberOfTires": 0,
       "fee": 0.0
     }

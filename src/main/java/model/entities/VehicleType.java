@@ -7,7 +7,7 @@ package model.entities;
 public class VehicleType {
 
     private int id;
-    private String description;
+    private String description; //Carro, Camión o Moto
     private int numberOfTires;
     private float fee;
 

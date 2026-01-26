@@ -69,7 +69,7 @@ public class ParkingLot {
     @Override
     public String toString() {
         return " ID: " + id
-                + " | Nombre: " + name
+                + " | " + name
                 + " | Número de espacios: " + numberOfSpaces
                 + " | Vehiculos: " + vehicles
                 + " | Espacios: " + spaces;

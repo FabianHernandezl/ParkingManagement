@@ -43,8 +43,8 @@ public class LoginWindow extends JFrame implements ActionListener {
 
     public LoginWindow() {
         //this are atributos del JFrame por encapsulamiento
-        setTitle("Login");
-        setSize(400, 350);//largo x ancho
+        setTitle("Login Sistema de Parqueos de InnovaSoft");
+        setSize(600, 300);//largo x ancho
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //cerrar todo el programa 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -61,10 +61,11 @@ public class LoginWindow extends JFrame implements ActionListener {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
 
         //  Título
-        JLabel lblTitle = new JLabel("Bienvenido/a al Sistema de Parqueos de InnovaSoft", SwingConstants.CENTER);
+        JLabel lblTitle = new JLabel("Bienvenido/a", SwingConstants.CENTER);
         lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
-        lblTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
+        lblTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+              
         //  Panel de formulario
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
