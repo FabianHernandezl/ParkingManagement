@@ -52,14 +52,27 @@ public class SpaceData {
         ArrayList<ParkingLot> parkings = loadParkings();
         boolean found = false;
 
+        System.out.println("DEBUG: updateSpace llamado para espacio #" + updatedSpace.getId());
+        System.out.println("DEBUG: Ocupado: " + updatedSpace.isSpaceTaken());
+        System.out.println("DEBUG: Cliente: " + (updatedSpace.getClient() != null ? updatedSpace.getClient().getName() : "null"));
+        System.out.println("DEBUG: Vehículo: " + (updatedSpace.getVehicle() != null ? updatedSpace.getVehicle().getPlate() : "null"));
+
         for (ParkingLot p : parkings) {
             if (p.getSpaces() != null) {
                 Space[] spacesArray = p.getSpaces();
                 for (int i = 0; i < spacesArray.length; i++) {
                     if (spacesArray[i] != null && spacesArray[i].getId() == updatedSpace.getId()) {
-                        // Actualizamos la posición del arreglo directamente
-                        spacesArray[i] = updatedSpace;
+                        // IMPORTANTE: Copiar todos los campos manualmente
+                        // NO reemplazar el objeto completo para mantener las referencias del JSON
+                        spacesArray[i].setSpaceTaken(updatedSpace.isSpaceTaken());
+                        spacesArray[i].setClient(updatedSpace.getClient()); // Esto guarda el objeto Client
+                        spacesArray[i].setVehicle(updatedSpace.getVehicle()); // Esto guarda el objeto Vehicle
+                        spacesArray[i].setEntryTime(updatedSpace.getEntryTime());
+                        spacesArray[i].setDisabilityAdaptation(updatedSpace.isDisabilityAdaptation());
+                        spacesArray[i].setVehicleType(updatedSpace.getVehicleType());
+
                         found = true;
+                        System.out.println("DEBUG: Espacio actualizado en el arreglo");
                         break;
                     }
                 }
@@ -71,7 +84,11 @@ public class SpaceData {
 
         if (found) {
             saveParkings(parkings);
+            System.out.println("DEBUG: JSON guardado exitosamente");
+        } else {
+            System.out.println("DEBUG: No se encontró el espacio para actualizar");
         }
+
         return found;
     }
 
