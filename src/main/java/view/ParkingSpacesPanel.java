@@ -195,36 +195,32 @@ public class ParkingSpacesPanel extends JPanel {
     }
 
     private void showAssignDialog(Space space) {
-        // Obtener el JFrame padre
         Window parentWindow = SwingUtilities.getWindowAncestor(this);
 
         if (parentWindow instanceof JFrame) {
-            AssignSpaceDialog dialog = new AssignSpaceDialog(
-                    (JFrame) parentWindow,
-                    space,
-                    controller
-            );
-
+            AssignSpaceDialog dialog = new AssignSpaceDialog((JFrame) parentWindow, space, controller);
             dialog.setVisible(true);
 
             if (dialog.wasAssigned()) {
-                // Actualizar la visualización
+                // 1. Buscamos el espacio actualizado en el origen de datos (JSON)
                 Space updatedSpace = controller.findSpaceById(space.getId());
+
                 if (updatedSpace != null) {
-                    // Actualizar el espacio en el array
+                    // 2. Actualizamos nuestra referencia en el arreglo local Space[]
                     for (int i = 0; i < spaces.length; i++) {
-                        if (spaces[i].getId() == space.getId()) {
-                            spaces[i] = updatedSpace;
+                        if (spaces[i] != null && spaces[i].getId() == space.getId()) {
+                            spaces[i] = updatedSpace; // Ahora tiene el Client y Vehicle
                             break;
                         }
                     }
 
-                    // Animar entrada del vehículo
+                    // 3. Disparamos la animación
                     animatingSpace = updatedSpace;
-                    animateCarEntry(getSpacePositionX(space));
+                    animateCarEntry(getSpacePositionX(updatedSpace));
 
-                    // Actualizar información en el panel lateral
+                    // 4. Refrescamos la UI
                     infoPanel.showSpaceInfo(updatedSpace);
+                    repaint();
                 }
             }
         }

@@ -1,117 +1,108 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays; // Necesario para manejar el arreglo
+import model.entities.ParkingLot;
 import model.entities.Space;
 
-/**
- *
- * @author jimen
- */
 public class SpaceData {
 
-    private ArrayList<Space> spaces;
-    private static final String FILE_PATH = "data/spaces.json";
-
-    private final Gson gson = new GsonBuilder()
-            .setPrettyPrinting()
-            .create();
+    private static final String PARKING_FILE = "data/parkings.json";
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public SpaceData() {
-
         File folder = new File("data");
         if (!folder.exists()) {
             folder.mkdir();
         }
-
-        spaces = loadFromFile();
-    }
-
-    public String insertSpace(Space space) {
-        String message = "Espacio inválido";
-
-        if (findSpaceById(space.getId()) != null) {
-            message = "Ya existe un espacio con ese ID";
-        }
-
-        spaces.add(space);
-        saveToFile();
-        message = "Espacio registrado correctamente";
-        return message;
-    }
-
-    public ArrayList<Space> getAllSpaces() {
-        return new ArrayList<>(spaces);
     }
 
     public Space findSpaceById(int id) {
-
-        for (Space s : spaces) {
-            if (s.getId() == id) {
-                return s;
+        ArrayList<ParkingLot> parkings = loadParkings();
+        for (ParkingLot p : parkings) {
+            if (p.getSpaces() != null) {
+                for (Space s : p.getSpaces()) {
+                    if (s != null && s.getId() == id) {
+                        return s;
+                    }
+                }
             }
         }
         return null;
     }
 
-    public boolean updateSpace(Space updated) {
-
-        Space existing = findSpaceById(updated.getId());
-        boolean results = false;
-
-        if (existing != null) {
-            existing.setDisabilityAdaptation(updated.isDisabilityAdaptation());
-            existing.setSpaceTaken(updated.isSpaceTaken());
-            existing.setVehicleType(updated.getVehicleType());
-            saveToFile();
-            results = true;
+    public ArrayList<Space> getAllSpaces() {
+        ArrayList<Space> allSpaces = new ArrayList<>();
+        ArrayList<ParkingLot> parkings = loadParkings();
+        for (ParkingLot p : parkings) {
+            if (p.getSpaces() != null) {
+                // Convertimos el arreglo Space[] a lista para usar addAll
+                allSpaces.addAll(Arrays.asList(p.getSpaces()));
+            }
         }
-        return results;
+        return allSpaces;
     }
 
-    public boolean deleteSpace(int id) {
+    public boolean updateSpace(Space updatedSpace) {
+        ArrayList<ParkingLot> parkings = loadParkings();
+        boolean found = false;
 
-        Space space = findSpaceById(id);
-        boolean results = false;
-
-        if (space != null) {
-            spaces.remove(space);
-            saveToFile();
-            results = true;
+        for (ParkingLot p : parkings) {
+            if (p.getSpaces() != null) {
+                Space[] spacesArray = p.getSpaces();
+                for (int i = 0; i < spacesArray.length; i++) {
+                    if (spacesArray[i] != null && spacesArray[i].getId() == updatedSpace.getId()) {
+                        // Actualizamos la posición del arreglo directamente
+                        spacesArray[i] = updatedSpace;
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (found) {
+                break;
+            }
         }
-        return results;
+
+        if (found) {
+            saveParkings(parkings);
+        }
+        return found;
     }
 
-    private void saveToFile() {
-        try (Writer writer = new FileWriter(FILE_PATH)) {
-            gson.toJson(spaces, writer);
-        } catch (IOException e) {
-            System.out.println("Error guardando espacios");
-        }
-    }
-
-    private ArrayList<Space> loadFromFile() {
-        try (Reader reader = new FileReader(FILE_PATH)) {
-            Type listType = new TypeToken<ArrayList<Space>>() {
+    private ArrayList<ParkingLot> loadParkings() {
+        try (Reader reader = new FileReader(PARKING_FILE)) {
+            Type listType = new TypeToken<ArrayList<ParkingLot>>() {
             }.getType();
-            ArrayList<Space> data = gson.fromJson(reader, listType);
+            ArrayList<ParkingLot> data = gson.fromJson(reader, listType);
             return data != null ? data : new ArrayList<>();
         } catch (IOException e) {
             return new ArrayList<>();
         }
     }
 
+    private void saveParkings(ArrayList<ParkingLot> parkings) {
+        try (Writer writer = new FileWriter(PARKING_FILE)) {
+            gson.toJson(parkings, writer);
+        } catch (IOException e) {
+            System.err.println("Error al guardar: " + e.getMessage());
+        }
+    }
+
+    // Método auxiliar para mantener compatibilidad si el controlador usa insertSpace
+    public String insertSpace(Space space) {
+        // En esta estructura, los espacios ya vienen creados en el ParkingLot
+        // Si necesitas agregar uno nuevo a un arreglo fijo, tendrías que redimensionarlo.
+        return "Operación no permitida: Los espacios son fijos por parqueo.";
+    }
+
+    public boolean deleteSpace(int id) {
+        // En arreglos fijos, "borrar" suele ser poner la posición en null o marcar como inactivo
+        return false;
+    }
 }

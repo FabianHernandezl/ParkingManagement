@@ -21,19 +21,12 @@ public class AssignSpaceDialog extends JDialog {
 
     private JComboBox<String> clientCombo;
     private JComboBox<String> vehicleCombo;
-    private JTextField txtPlate;
-    private JTextField txtColor;
-    private JTextField txtBrand;
-    private JTextField txtModel;
+    private JTextField txtPlate, txtColor, txtBrand, txtModel;
     private JComboBox<String> vehicleTypeCombo;
-    private JButton btnAssign;
-    private JButton btnCancel;
-    private JButton btnNewClient;
-    private JButton btnNewVehicle;
+    private JButton btnAssign, btnCancel, btnNewClient, btnNewVehicle;
 
     private ArrayList<Client> clientsList;
     private ArrayList<Vehicle> vehiclesList;
-
     private boolean assigned = false;
 
     public AssignSpaceDialog(JFrame parent, Space space, SpaceController spaceController) {
@@ -43,7 +36,7 @@ public class AssignSpaceDialog extends JDialog {
         this.clientController = new ClientController();
         this.vehicleController = new VehicleController();
 
-        setSize(600, 500);
+        setSize(600, 550);
         setLocationRelativeTo(parent);
         initComponents();
         loadClients();
@@ -53,31 +46,19 @@ public class AssignSpaceDialog extends JDialog {
     private void initComponents() {
         setLayout(new BorderLayout(10, 10));
 
-        // Panel principal
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Información del espacio
-        JPanel spacePanel = createSpaceInfoPanel();
-        mainPanel.add(spacePanel);
+        mainPanel.add(createSpaceInfoPanel());
         mainPanel.add(Box.createRigidArea(new Dimension(0, 15)));
-
-        // Selección de cliente
-        JPanel clientPanel = createClientPanel();
-        mainPanel.add(clientPanel);
+        mainPanel.add(createClientPanel());
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-
-        // Selección/registro de vehículo
-        JPanel vehiclePanel = createVehiclePanel();
-        mainPanel.add(vehiclePanel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        mainPanel.add(createVehiclePanel());
 
         add(mainPanel, BorderLayout.CENTER);
 
-        // Panel de botones
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-
         btnAssign = new JButton("Asignar Espacio");
         btnAssign.setBackground(new Color(46, 125, 50));
         btnAssign.setForeground(Color.WHITE);
@@ -85,33 +66,30 @@ public class AssignSpaceDialog extends JDialog {
         btnAssign.addActionListener(e -> assignSpace());
 
         btnCancel = new JButton("Cancelar");
-        btnCancel.setBackground(new Color(120, 144, 156));
-        btnCancel.setForeground(Color.WHITE);
         btnCancel.addActionListener(e -> dispose());
 
         buttonPanel.add(btnCancel);
         buttonPanel.add(btnAssign);
-
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
     private JPanel createSpaceInfoPanel() {
-        JPanel panel = new JPanel(new GridLayout(2, 2, 5, 5));
+        JPanel panel = new JPanel(new GridLayout(3, 2, 5, 5));
         panel.setBorder(BorderFactory.createTitledBorder("Información del Espacio"));
         panel.setBackground(new Color(240, 248, 255));
 
         panel.add(new JLabel("Espacio #:"));
         panel.add(new JLabel(String.valueOf(space.getId())));
-        panel.add(new JLabel("Tipo:"));
+        panel.add(new JLabel("Tipo Requerido:"));
         panel.add(new JLabel(space.getVehicleType().getDescription()));
 
+        panel.add(new JLabel("Accesibilidad:"));
+        String accText = space.isDisabilityAdaptation() ? "♿ Ley 7600 (Preferencial)" : "Estándar";
+        JLabel lblAcc = new JLabel(accText);
         if (space.isDisabilityAdaptation()) {
-            JLabel lblAccessibility = new JLabel("♿ Accesible para discapacitados");
-            lblAccessibility.setForeground(Color.BLUE);
-            lblAccessibility.setFont(new Font("Arial", Font.BOLD, 11));
-            panel.add(new JLabel("Accesibilidad:"));
-            panel.add(lblAccessibility);
+            lblAcc.setForeground(Color.BLUE);
         }
+        panel.add(lblAcc);
 
         return panel;
     }
@@ -121,48 +99,17 @@ public class AssignSpaceDialog extends JDialog {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createTitledBorder("Seleccionar Cliente"));
 
-        // Panel superior con combo y botón
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        topPanel.add(new JLabel("Cliente:"));
-
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         clientCombo = new JComboBox<>();
-        clientCombo.setPreferredSize(new Dimension(250, 25));
-        topPanel.add(clientCombo);
-
-        btnNewClient = new JButton("Nuevo Cliente");
+        clientCombo.setPreferredSize(new Dimension(300, 25));
+        btnNewClient = new JButton("+");
+        btnNewClient.setToolTipText("Nuevo Cliente");
         btnNewClient.addActionListener(e -> createNewClient());
+
+        topPanel.add(new JLabel("Cliente:"));
+        topPanel.add(clientCombo);
         topPanel.add(btnNewClient);
-
         panel.add(topPanel);
-
-        // Panel de información del cliente seleccionado
-        JPanel infoPanel = new JPanel(new GridLayout(1, 3, 5, 5));
-        infoPanel.setBorder(BorderFactory.createEtchedBorder());
-
-        JLabel lblClientId = new JLabel("ID: -");
-        JLabel lblClientName = new JLabel("Nombre: -");
-        JLabel lblClientStatus = new JLabel("Preferencial: -");
-
-        lblClientId.setFont(new Font("Arial", Font.PLAIN, 11));
-        lblClientName.setFont(new Font("Arial", Font.PLAIN, 11));
-        lblClientStatus.setFont(new Font("Arial", Font.PLAIN, 11));
-
-        infoPanel.add(lblClientId);
-        infoPanel.add(lblClientName);
-        infoPanel.add(lblClientStatus);
-
-        // Actualizar información cuando se selecciona un cliente
-        clientCombo.addActionListener(e -> {
-            int index = clientCombo.getSelectedIndex();
-            if (index >= 0 && index < clientsList.size()) {
-                Client selected = clientsList.get(index);
-                lblClientId.setText("ID: " + selected.getId());
-                lblClientName.setText("Nombre: " + selected.getName());
-                lblClientStatus.setText("Preferencial: " + (selected.isIsPreferential() ? "Sí" : "No"));
-            }
-        });
-
-        panel.add(infoPanel);
 
         return panel;
     }
@@ -172,296 +119,202 @@ public class AssignSpaceDialog extends JDialog {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createTitledBorder("Vehículo"));
 
-        // Panel para seleccionar vehículo existente
-        JPanel selectPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        selectPanel.add(new JLabel("Vehículo existente:"));
-
+        JPanel selectPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         vehicleCombo = new JComboBox<>();
-        vehicleCombo.setPreferredSize(new Dimension(200, 25));
-        selectPanel.add(vehicleCombo);
-
+        vehicleCombo.setPreferredSize(new Dimension(250, 25));
         btnNewVehicle = new JButton("Nuevo Vehículo");
         btnNewVehicle.addActionListener(e -> toggleNewVehicleForm());
-        selectPanel.add(btnNewVehicle);
 
+        selectPanel.add(new JLabel("Existente:"));
+        selectPanel.add(vehicleCombo);
+        selectPanel.add(btnNewVehicle);
         panel.add(selectPanel);
 
-        // Panel para registrar nuevo vehículo (inicialmente oculto)
-        JPanel newVehiclePanel = createNewVehicleForm();
-        newVehiclePanel.setVisible(false);
-        panel.add(newVehiclePanel);
-
+        panel.add(createNewVehicleForm());
         return panel;
     }
 
+    private JPanel newVehicleForm;
+
     private JPanel createNewVehicleForm() {
-        JPanel panel = new JPanel(new GridLayout(5, 2, 5, 5));
-        panel.setBorder(BorderFactory.createTitledBorder("Registrar Nuevo Vehículo"));
+        newVehicleForm = new JPanel(new GridLayout(5, 2, 5, 5));
+        newVehicleForm.setBorder(BorderFactory.createTitledBorder("Datos del Nuevo Vehículo"));
+        newVehicleForm.setVisible(false);
 
-        panel.add(new JLabel("Placa:"));
+        newVehicleForm.add(new JLabel("Placa:"));
         txtPlate = new JTextField();
-        panel.add(txtPlate);
-
-        panel.add(new JLabel("Marca:"));
+        newVehicleForm.add(txtPlate);
+        newVehicleForm.add(new JLabel("Marca:"));
         txtBrand = new JTextField();
-        panel.add(txtBrand);
-
-        panel.add(new JLabel("Modelo:"));
+        newVehicleForm.add(txtBrand);
+        newVehicleForm.add(new JLabel("Modelo:"));
         txtModel = new JTextField();
-        panel.add(txtModel);
-
-        panel.add(new JLabel("Color:"));
+        newVehicleForm.add(txtModel);
+        newVehicleForm.add(new JLabel("Color:"));
         txtColor = new JTextField();
-        panel.add(txtColor);
+        newVehicleForm.add(txtColor);
+        newVehicleForm.add(new JLabel("Tipo:"));
+        vehicleTypeCombo = new JComboBox<>(new String[]{"Carro", "Motocicleta", "Camión"});
+        newVehicleForm.add(vehicleTypeCombo);
 
-        panel.add(new JLabel("Tipo:"));
-        vehicleTypeCombo = new JComboBox<>(new String[]{"Carro", "Moto", "Camión"});
-        panel.add(vehicleTypeCombo);
-
-        return panel;
+        return newVehicleForm;
     }
 
     private void loadClients() {
         clientsList = clientController.getAllClients();
         clientCombo.removeAllItems();
-
-        for (Client client : clientsList) {
-            clientCombo.addItem(client.getId() + " - " + client.getName());
-        }
-
-        if (clientsList.isEmpty()) {
-            clientCombo.addItem("No hay clientes registrados");
-            clientCombo.setEnabled(false);
+        for (Client c : clientsList) {
+            clientCombo.addItem(c.getId() + " - " + c.getName());
         }
     }
 
     private void loadVehicles() {
         vehiclesList = vehicleController.getAllVehicles();
         vehicleCombo.removeAllItems();
-
-        for (Vehicle vehicle : vehiclesList) {
-            vehicleCombo.addItem(vehicle.getPlate() + " - " + vehicle.getBrand());
-        }
-
-        if (vehiclesList.isEmpty()) {
-            vehicleCombo.addItem("No hay vehículos registrados");
-        }
-    }
-
-    private void createNewClient() {
-        // Usar la ventana existente de gestión de clientes
-        ClientViewInternal clientView = new ClientViewInternal();
-        JDesktopPane desktopPane = (JDesktopPane) SwingUtilities.getAncestorOfClass(JDesktopPane.class, this);
-
-        if (desktopPane != null) {
-            desktopPane.add(clientView);
-            clientView.setVisible(true);
-
-            // Esperar a que se cree el cliente
-            // Podrías implementar un listener o verificar periódicamente
-            JOptionPane.showMessageDialog(this,
-                    "Complete el formulario de cliente y presione 'Guardar Nuevo'",
-                    "Crear Nuevo Cliente",
-                    JOptionPane.INFORMATION_MESSAGE);
-
-            // Recargar lista de clientes después de un tiempo
-            Timer timer = new Timer(2000, e -> {
-                loadClients();
-                if (!clientsList.isEmpty()) {
-                    clientCombo.setSelectedIndex(clientsList.size() - 1);
-                }
-            });
-            timer.setRepeats(false);
-            timer.start();
+        for (Vehicle v : vehiclesList) {
+            vehicleCombo.addItem(v.getPlate() + " - " + v.getBrand());
         }
     }
 
     private void toggleNewVehicleForm() {
-        Component[] components = ((JPanel) vehicleCombo.getParent().getParent()).getComponents();
-        for (Component comp : components) {
-            if (comp instanceof JPanel && ((JPanel) comp).getBorder() != null
-                    && ((JPanel) comp).getBorder().toString().contains("Registrar Nuevo Vehículo")) {
-                comp.setVisible(!comp.isVisible());
-                vehicleCombo.setEnabled(!comp.isVisible());
-                btnNewVehicle.setText(comp.isVisible() ? "Usar existente" : "Nuevo Vehículo");
-                break;
-            }
-        }
+        boolean isVisible = newVehicleForm.isVisible();
+        newVehicleForm.setVisible(!isVisible);
+        vehicleCombo.setEnabled(isVisible);
+        btnNewVehicle.setText(!isVisible ? "Cancelar Nuevo" : "Nuevo Vehículo");
+        revalidate();
     }
 
+    // --- LÓGICA DE ASIGNACIÓN CORREGIDA ---
     private void assignSpace() {
         try {
-            // Validar que se haya seleccionado un cliente
+            // 1. Validar Cliente seleccionado
             int clientIndex = clientCombo.getSelectedIndex();
-            if (clientIndex < 0 || clientIndex >= clientsList.size()) {
-                JOptionPane.showMessageDialog(this,
-                        "Debe seleccionar un cliente válido",
-                        "Error", JOptionPane.ERROR_MESSAGE);
+            if (clientIndex < 0) {
+                showError("Debe seleccionar un cliente.");
                 return;
             }
-
             Client selectedClient = clientsList.get(clientIndex);
 
-            // Obtener o crear vehículo
-            Vehicle vehicle;
-            boolean usingNewVehicle = false;
-
-            // Verificar si se está usando el formulario de nuevo vehículo
-            Component[] components = ((JPanel) vehicleCombo.getParent().getParent()).getComponents();
-            JPanel newVehiclePanel = null;
-            for (Component comp : components) {
-                if (comp instanceof JPanel && comp.isVisible()
-                        && ((JPanel) comp).getBorder() != null
-                        && ((JPanel) comp).getBorder().toString().contains("Registrar Nuevo Vehículo")) {
-                    newVehiclePanel = (JPanel) comp;
-                    break;
+            // 2. Obtener Vehículo (Nuevo o Existente)
+            Vehicle selectedVehicle = null;
+            if (newVehicleForm.isVisible()) {
+                selectedVehicle = createNewVehicleFromForm(selectedClient);
+                if (selectedVehicle == null) {
+                    return; // Error ya mostrado en el método
                 }
-            }
-
-            if (newVehiclePanel != null && newVehiclePanel.isVisible()) {
-                // Crear nuevo vehículo
-                String plate = txtPlate.getText().trim();
-                String color = txtColor.getText().trim();
-                String brand = txtBrand.getText().trim();
-                String model = txtModel.getText().trim();
-                String typeStr = (String) vehicleTypeCombo.getSelectedItem();
-
-                // Validar campos
-                if (plate.isEmpty() || color.isEmpty() || brand.isEmpty() || model.isEmpty()) {
-                    JOptionPane.showMessageDialog(this,
-                            "Complete todos los campos del vehículo",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                // Verificar si la placa ya existe
-                if (vehicleController.findVehicleByPlate(plate) != null) {
-                    JOptionPane.showMessageDialog(this,
-                            "Ya existe un vehículo con la placa: " + plate,
-                            "Placa Duplicada",
-                            JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                // Crear VehicleType
-                VehicleType vehicleType = new VehicleType();
-                vehicleType.setDescription(typeStr);
-
-                // Crear vehículo
-                vehicle = new Vehicle(plate, color, brand, model, selectedClient, vehicleType);
-
-                // Registrar vehículo
-                String result = vehicleController.insertVehicle(vehicle);
-                if (!result.contains("éxito") && !result.contains("exito")) {
-                    JOptionPane.showMessageDialog(this,
-                            "Error al registrar vehículo: " + result,
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                usingNewVehicle = true;
             } else {
-                // Usar vehículo existente
-                int vehicleIndex = vehicleCombo.getSelectedIndex();
-                if (vehicleIndex < 0 || vehicleIndex >= vehiclesList.size()) {
-                    JOptionPane.showMessageDialog(this,
-                            "Debe seleccionar un vehículo válido",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                int vIndex = vehicleCombo.getSelectedIndex();
+                if (vIndex < 0) {
+                    showError("Debe seleccionar un vehículo.");
                     return;
                 }
-
-                vehicle = vehiclesList.get(vehicleIndex);
+                selectedVehicle = vehiclesList.get(vIndex);
             }
 
-            // Validar compatibilidad del vehículo con el espacio
-            if (!isVehicleCompatibleWithSpace(vehicle, space, selectedClient)) {
-                String message = "El vehículo no es compatible con este espacio.\n\n";
-
-                if (space.isDisabilityAdaptation() && !selectedClient.isIsPreferential()) {
-                    message += "Este espacio es para clientes con discapacidad.\n";
-                    message += "El cliente seleccionado no es preferencial.";
-                } else if (!space.getVehicleType().getDescription().equals(vehicle.getVehicleType().getDescription())) {
-                    message += "Tipo requerido: " + space.getVehicleType().getDescription() + "\n";
-                    message += "Tipo del vehículo: " + vehicle.getVehicleType().getDescription();
-                }
-
-                JOptionPane.showMessageDialog(this, message,
-                        "Incompatibilidad", JOptionPane.WARNING_MESSAGE);
+            // 3. Validar Compatibilidad (Aquí estaba el fallo de mensajes mentirosos)
+            if (!isVehicleCompatibleWithSpace(selectedVehicle, space, selectedClient)) {
+                // El mensaje detallado ahora se maneja dentro de la validación o aquí
                 return;
             }
 
-            // Confirmar asignación
-            String confirmMessage = "¿Confirmar asignación?\n\n"
-                    + "Espacio: #" + space.getId() + "\n"
-                    + "Cliente: " + selectedClient.getName() + "\n"
-                    + "Vehículo: " + vehicle.getPlate() + " - " + vehicle.getBrand() + "\n"
-                    + (usingNewVehicle ? "(Vehículo nuevo registrado)" : "(Vehículo existente)");
-
+            // 4. Confirmación final
             int confirm = JOptionPane.showConfirmDialog(this,
-                    confirmMessage,
-                    "Confirmar Asignación",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
+                    "¿Asignar espacio #" + space.getId() + " a " + selectedVehicle.getPlate() + "?",
+                    "Confirmar", JOptionPane.YES_NO_OPTION);
 
             if (confirm == JOptionPane.YES_OPTION) {
-                // Asignar espacio usando el SpaceController
-                boolean success = spaceController.occupySpace(space.getId(), selectedClient, vehicle);
+                // LLAMADA AL CONTROLADOR
+                String result = spaceController.occupySpace(space.getId(), selectedClient, selectedVehicle);
 
-                if (success) {
-                    // Registrar hora de entrada
-                    space.setEntryTime(new Date());
+                // --- Busca esta parte en tu método assignSpace() ---
+                if (result.equals("OK")) {
+                    // Sincronizamos el objeto local con los nuevos datos
+                    Space updated = spaceController.findSpaceById(space.getId());
+                    if (updated != null) {
+                        this.space.setSpaceTaken(true);
+                        this.space.setClient(selectedClient);
+                        this.space.setVehicle(selectedVehicle);
+                        this.space.setEntryTime(updated.getEntryTime());
+                    }
 
-                    JOptionPane.showMessageDialog(this,
-                            "¡Espacio asignado exitosamente!\n\n"
-                            + "Cliente: " + selectedClient.getName() + "\n"
-                            + "Vehículo: " + vehicle.getPlate() + "\n"
-                            + "Hora de entrada: " + new Date(),
-                            "Asignación Exitosa",
-                            JOptionPane.INFORMATION_MESSAGE);
-
+                    JOptionPane.showMessageDialog(this, "¡Espacio asignado exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     assigned = true;
                     dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this,
-                            "Error al asignar el espacio. Puede que ya esté ocupado.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
                 }
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,
-                    "Error inesperado: " + e.getMessage(),
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            showError("Error inesperado: " + e.getMessage());
         }
     }
 
-    private boolean isVehicleCompatibleWithSpace(Vehicle vehicle, Space space, Client client) {
-        // Validar tipo de vehículo
-        if (vehicle.getVehicleType() == null || space.getVehicleType() == null) {
+    private Vehicle createNewVehicleFromForm(Client owner) {
+        String plate = txtPlate.getText().trim();
+        if (plate.isEmpty()) {
+            showError("La placa es obligatoria.");
+            return null;
+        }
+
+        // Verificar si la placa ya existe para evitar errores de BD
+        if (vehicleController.findVehicleByPlate(plate) != null) {
+            showError("La placa " + plate + " ya está registrada en el sistema.");
+            return null;
+        }
+
+        VehicleType type = new VehicleType();
+        type.setDescription((String) vehicleTypeCombo.getSelectedItem());
+
+        Vehicle v = new Vehicle(plate, txtColor.getText(), txtBrand.getText(), txtModel.getText(), owner, type);
+        String res = vehicleController.insertVehicle(v);
+
+        if (res.toLowerCase().contains("exito") || res.toLowerCase().contains("éxito")) {
+            return v;
+        } else {
+            showError("No se pudo registrar el vehículo: " + res);
+            return null;
+        }
+    }
+
+    private boolean isVehicleCompatibleWithSpace(Vehicle v, Space s, Client c) {
+        String vType = v.getVehicleType().getDescription().toLowerCase().replace("ó", "o").trim();
+        String sType = s.getVehicleType().getDescription().toLowerCase().replace("ó", "o").trim();
+
+        // Normalizar nombres (Moto = Motocicleta, Carro = Automovil)
+        if (vType.equals("motocicleta")) {
+            vType = "moto";
+        }
+        if (sType.equals("motocicleta")) {
+            sType = "moto";
+        }
+        if (vType.equals("automovil")) {
+            vType = "carro";
+        }
+        if (sType.equals("automovil")) {
+            sType = "carro";
+        }
+
+        // Validar Tipo
+        if (!vType.equals(sType)) {
+            showError("Incompatibilidad de TIPO:\nEspacio para: " + s.getVehicleType().getDescription()
+                    + "\nVehículo es: " + v.getVehicleType().getDescription());
             return false;
         }
 
-        String vehicleType = vehicle.getVehicleType().getDescription();
-        String spaceType = space.getVehicleType().getDescription();
-
-        // Mapeo de tipos compatibles
-        if (!vehicleType.equals(spaceType)) {
-            // Si es espacio para discapacitados, solo debe aceptar "Carro" con cliente preferencial
-            if (space.isDisabilityAdaptation()) {
-                return vehicleType.equals("Carro") && client.isIsPreferential();
-            }
-            return false;
-        }
-
-        // Validar discapacidad
-        if (space.isDisabilityAdaptation() && !client.isIsPreferential()) {
+        // Validar Ley 7600 (Discapacidad)
+        if (s.isDisabilityAdaptation() && !c.isIsPreferential()) {
+            showError("Espacio RESTRINGIDO:\nEste espacio es exclusivo para clientes preferenciales (Ley 7600).");
             return false;
         }
 
         return true;
+    }
+
+    private void showError(String msg) {
+        JOptionPane.showMessageDialog(this, msg, "Atención", JOptionPane.WARNING_MESSAGE);
+    }
+
+    private void createNewClient() {
+        JOptionPane.showMessageDialog(this, "Abra la pestaña 'Clientes' para registrar uno nuevo.");
     }
 
     public boolean wasAssigned() {

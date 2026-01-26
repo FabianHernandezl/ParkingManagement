@@ -79,10 +79,14 @@ public class ParkingSpacesInternal extends JInternalFrame {
             String selected = (String) parkingLotCombo.getSelectedItem();
             int parkingLotId = Integer.parseInt(selected.split(" - ")[0]);
 
+            // IMPORTANTE: Asegúrate de que findParkingLotById vuelva a leer el JSON
             ParkingLot parkingLot = parkingLotController.findParkingLotById(parkingLotId);
-            if (parkingLot != null && parkingLot.getSpaces() != null) {
-                Space[] spaces = parkingLot.getSpaces();
-                spacesPanel.setSpaces(spaces);
+
+            if (parkingLot != null) {
+                // Pasamos el arreglo directo (Space[])
+                spacesPanel.setSpaces(parkingLot.getSpaces());
+                // Forzamos al panel a redibujarse
+                spacesPanel.revalidate();
                 spacesPanel.repaint();
             }
         }
