@@ -5,6 +5,7 @@
 package view;
 
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -74,21 +75,16 @@ public class ClerkMenu extends JFrame {
             openInternalFrame(new TicketViewInternal());
         });
 
-        //--------------Sign Out---------- TO DO
-        JMenu comebackMenu = new JMenu("Salir");
+       //--------------Sign Out----------
+        JButton comebackMenu = new JButton("Salir");
         menuBar.add(comebackMenu);
 
         comebackMenu.addActionListener(e -> {
-            new LoginWindow();
+            openJFrame(new LoginWindow());
             
         });
      
         menuBar.updateUI();
-
-        
-
-           //FALTA SING OUT
-
 
 
     }
@@ -96,6 +92,10 @@ public class ClerkMenu extends JFrame {
     private void openInternalFrame(JInternalFrame frame) {
         desktop.add(frame);
         frame.setVisible(true);
+    }
+     private void openJFrame(LoginWindow loginWindow) {
+        this.setVisible(false);
+        loginWindow.setVisible(true);
     }
 
 }

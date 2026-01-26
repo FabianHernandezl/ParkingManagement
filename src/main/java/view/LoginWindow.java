@@ -47,13 +47,13 @@ public class LoginWindow extends JFrame implements ActionListener {
         setSize(600, 300);//largo x ancho
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //cerrar todo el programa 
         setLocationRelativeTo(null);
-        setVisible(true);
         setResizable(false);
          
         clerkController = new ClerkController(); //buena practica en POO
         administratorController = new AdministratorController();
 
         initComponents();
+        setVisible(true);
     }
 
     private void initComponents() {
@@ -171,14 +171,11 @@ public class LoginWindow extends JFrame implements ActionListener {
 
     }
 
-    // En tu clase de login (adaptar según tu estructura)
     private boolean verificarPassword(String passwordAlmacenado, String passwordIngresado) {
         // Verificar que no sean nulos
         if (passwordAlmacenado == null || passwordIngresado == null) {
             return false;
         }
-
-        // Si estás usando texto plano (NO RECOMENDADO)
         return passwordAlmacenado.equals(passwordIngresado);
     }
 }
