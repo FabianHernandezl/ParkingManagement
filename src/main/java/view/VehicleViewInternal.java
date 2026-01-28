@@ -59,17 +59,17 @@ public class VehicleViewInternal extends JInternalFrame {
 
         setSize(900, 620);
         setLayout(null);
-        
+
         // Fondo general
         getContentPane().setBackground(LIGHT_BG);
-        
+
         // Inicializar lista de clientes
         selectedClients = new ArrayList<>();
         clientListModel = new DefaultListModel<>();
-        
+
         initComponents();
         loadTable();
-        
+
         setVisible(true);
     }
 
@@ -94,8 +94,8 @@ public class VehicleViewInternal extends JInternalFrame {
         searchPanel.setLayout(null);
         searchPanel.setBackground(WHITE);
         searchPanel.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(PRIMARY_COLOR, 2),
-            BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                BorderFactory.createLineBorder(PRIMARY_COLOR, 2),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
         add(searchPanel);
 
@@ -144,8 +144,8 @@ public class VehicleViewInternal extends JInternalFrame {
         formPanel.setLayout(null);
         formPanel.setBackground(WHITE);
         formPanel.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(PRIMARY_COLOR, 2),
-            BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                BorderFactory.createLineBorder(PRIMARY_COLOR, 2),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
         ));
         add(formPanel);
 
@@ -243,14 +243,14 @@ public class VehicleViewInternal extends JInternalFrame {
         separator.setBounds(10, 355, 290, 2);
         separator.setForeground(PRIMARY_COLOR);
         formPanel.add(separator);
-        
+
         // Título de acciones
         JLabel lblActions = new JLabel("⚡ Acciones");
         lblActions.setBounds(10, 365, 280, 25);
         lblActions.setFont(new Font("Segoe UI", Font.BOLD, 13));
         lblActions.setForeground(DARK_COLOR);
         formPanel.add(lblActions);
-        
+
         // Botón: Guardar
         btnSave = new JButton("💾 Guardar");
         btnSave.setBounds(10, 395, 140, 35);
@@ -307,7 +307,7 @@ public class VehicleViewInternal extends JInternalFrame {
     private void setupEvents() {
         // Evento: Búsqueda
         btnSearch.addActionListener(e -> searchVehicle());
-        
+
         // Búsqueda al presionar Enter
         txtSearch.addActionListener(e -> searchVehicle());
 
@@ -349,8 +349,9 @@ public class VehicleViewInternal extends JInternalFrame {
     // ================= GESTIÓN DE CLIENTES =================
     private void addClient() {
         ClientViewInternal cv = new ClientViewInternal();
-        getDesktopPane().add(cv);
 
+        // NO agregar aquí - selectOrCreateClient lo hace si es necesario
+        // getDesktopPane().add(cv);  ← ELIMINAR ESTA LÍNEA
         Client c = cv.selectOrCreateClient(getDesktopPane());
 
         // Si el cliente no existía, esperar a que se cree
@@ -396,7 +397,7 @@ public class VehicleViewInternal extends JInternalFrame {
         }
 
         Client removedClient = selectedClients.get(selectedIndex);
-        
+
         int confirm = JOptionPane.showConfirmDialog(this,
                 "¿Quitar a " + removedClient.getName() + " de este vehículo?",
                 "Confirmar",
@@ -439,7 +440,7 @@ public class VehicleViewInternal extends JInternalFrame {
 
             // Seleccionar la fila automáticamente
             table.setRowSelectionInterval(0, 0);
-            
+
             JOptionPane.showMessageDialog(this,
                     "✅ Vehículo encontrado: " + vehicle.getPlate(),
                     "Búsqueda exitosa",
@@ -540,7 +541,7 @@ public class VehicleViewInternal extends JInternalFrame {
         if (vehicle != null && vehicle.getClients() != null) {
             selectedClients.clear();
             clientListModel.clear();
-            
+
             for (Client client : vehicle.getClients()) {
                 selectedClients.add(client);
                 clientListModel.addElement(client.getName() + " (ID: " + client.getId() + ")");
@@ -554,14 +555,14 @@ public class VehicleViewInternal extends JInternalFrame {
         txtModel.setText("");
         txtColor.setText("");
         cmbType.setSelectedIndex(0);
-        
+
         // Limpiar lista de clientes
         selectedClients.clear();
         clientListModel.clear();
 
         txtPlate.setEnabled(true);
         table.clearSelection();
-        
+
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
     }
@@ -597,12 +598,12 @@ public class VehicleViewInternal extends JInternalFrame {
         v.setModel(txtModel.getText().trim());
         v.setColor(txtColor.getText().trim());
         v.setVehicleType(buildVehicleType());
-        
+
         // Agregar todos los clientes seleccionados
         for (Client client : selectedClients) {
             v.addClient(client);
         }
-        
+
         return v;
     }
 
@@ -620,12 +621,13 @@ public class VehicleViewInternal extends JInternalFrame {
         button.setFocusPainted(false);
         button.setBorderPainted(false);
         button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        
+
         // Efecto hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(bgColor.darker());
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 button.setBackground(bgColor);
             }

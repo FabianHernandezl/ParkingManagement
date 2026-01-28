@@ -34,11 +34,8 @@ public class Vehicle {
         this.color = color;
         this.brand = brand;
         this.model = model;
-    }
-    
-    
+    }  
 
-    // ===================== GETTERS =====================
     public String getPlate() {
         return plate;
     }
