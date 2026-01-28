@@ -1,0 +1,7 @@
+--- LISTA DE CLIENTES ---
+ID: 119520051 | Nombre: Jimena Calvo Soto | Teléfono: 71133584
+ID: 3032900 | Nombre: Ana Brenes | Teléfono: 88889999
+ID: 119360128 | Nombre: Mariana Blanco | Teléfono: 86621670
+ID: 1 | Nombre: fa | Teléfono: 85
+ID: 119360128 | Nombre: Mariana Blanco | Teléfono: 86621670
+-------------------------
