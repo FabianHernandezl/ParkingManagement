@@ -95,14 +95,31 @@ public class ClientData {
 
         try (FileWriter txtWriter = new FileWriter(TXT_FILE_PATH); PrintWriter printWriter = new PrintWriter(txtWriter)) {
 
-            printWriter.println("--- LISTA DE CLIENTES ---");
+            printWriter.println("========================================");
+            printWriter.println("          REGISTRO DE CLIENTES          ");
+            printWriter.println("========================================");
+            printWriter.printf("Total de clientes: %d%n", clients.size());
+            printWriter.println("========================================");
+            printWriter.println();
+
+            int contador = 1;
             for (Client client : clients) {
-                printWriter.printf("ID: %s | Nombre: %s | Teléfono: %s%n",
-                        client.getId(),
-                        client.getName(),
-                        client.getPhone());
+                printWriter.printf("CLIENTE #%d%n", contador++);
+                printWriter.println("----------------------------------------");
+                printWriter.printf("%-14s %s%n", "ID:", client.getId());
+                printWriter.printf("%-14s %s%n", "Nombre:", client.getName());
+                printWriter.printf("%-14s %s%n", "Teléfono:", client.getPhone());
+
+                String esPreferencial = client.isIsPreferential() ? "Sí" : "No";
+                printWriter.printf("%-14s %s%n", "Preferencial:", esPreferencial);
+
+                printWriter.println("----------------------------------------");
+                printWriter.println(); 
             }
-            printWriter.println("-------------------------");
+
+            printWriter.println("========================================");
+            printWriter.println("            Fin del registro            ");
+            printWriter.println("========================================");
 
         } catch (Exception e) {
             System.out.println("Error saving TXT: " + e.getMessage());

@@ -22,7 +22,8 @@ import javax.swing.table.DefaultTableModel;
 import model.entities.Client;
 
 /**
- * Vista con colores personalizados en tabla y corrección de scope de botones.
+ *
+ * @author Jimena
  */
 public class ClientViewInternal extends JInternalFrame {
 
@@ -33,7 +34,6 @@ public class ClientViewInternal extends JInternalFrame {
     private DefaultTableModel model;
     private Client createdClient;
 
-    // Declarar botones aquí arriba para evitar el error "cannot find symbol"
     private JButton btnUpdate;
     private JButton btnDelete;
     private JButton btnSave;
@@ -46,16 +46,12 @@ public class ClientViewInternal extends JInternalFrame {
         setLayout(null);
         getContentPane().setBackground(new Color(245, 245, 245));
 
-        // --- Campos de texto ---
         initInputs();
 
-        // --- Botones con Colores ---
         initButtons();
 
-        // --- Tabla con Diseño Especial ---
         initTable();
 
-        // --- Eventos ---
         setupEvents();
 
         loadTable();
@@ -95,33 +91,33 @@ public class ClientViewInternal extends JInternalFrame {
     private void initButtons() {
         btnSave = new JButton("Guardar Nuevo");
         btnSave.setBounds(30, 190, 140, 30);
-        btnSave.setBackground(new Color(40, 167, 69)); // Verde
+        btnSave.setBackground(new Color(40, 167, 69));
         btnSave.setForeground(Color.WHITE);
         add(btnSave);
 
         btnClear = new JButton("Limpiar");
         btnClear.setBounds(180, 190, 90, 30);
-        btnClear.setBackground(new Color(108, 117, 125)); // Gris
+        btnClear.setBackground(new Color(108, 117, 125));
         btnClear.setForeground(Color.WHITE);
         add(btnClear);
 
         btnUpdate = new JButton("Actualizar");
         btnUpdate.setBounds(30, 230, 140, 30);
-        btnUpdate.setBackground(new Color(0, 123, 255)); // Azul
+        btnUpdate.setBackground(new Color(0, 123, 255));
         btnUpdate.setForeground(Color.WHITE);
         btnUpdate.setEnabled(false);
         add(btnUpdate);
 
         btnDelete = new JButton("Eliminar");
         btnDelete.setBounds(180, 230, 90, 30);
-        btnDelete.setBackground(new Color(220, 53, 69)); // Rojo
+        btnDelete.setBackground(new Color(220, 53, 69));
         btnDelete.setForeground(Color.WHITE);
         btnDelete.setEnabled(false);
         add(btnDelete);
 
         btnReport = new JButton("Abrir Reporte TXT");
         btnReport.setBounds(30, 280, 240, 35);
-        btnReport.setBackground(new Color(255, 193, 7)); // Amarillo
+        btnReport.setBackground(new Color(255, 193, 7));
         add(btnReport);
     }
 
@@ -135,12 +131,10 @@ public class ClientViewInternal extends JInternalFrame {
 
         table = new JTable(model);
 
-        // 1. Color a los nombres de los atributos (Encabezado)
         table.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 12));
-        table.getTableHeader().setBackground(new Color(52, 73, 94)); // Azul oscuro/Grisáceo
-        table.getTableHeader().setForeground(Color.WHITE); // Texto blanco
+        table.getTableHeader().setBackground(new Color(52, 73, 94));
+        table.getTableHeader().setForeground(Color.WHITE);
 
-        // 2. Color suave a la fila si es "Sí" en Preferencial
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
@@ -148,18 +142,16 @@ public class ClientViewInternal extends JInternalFrame {
 
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-                // Verificar el valor de la columna "Preferencial" (índice 3)
                 String estado = table.getValueAt(row, 3).toString();
 
                 if (estado.equals("Sí")) {
-                    c.setBackground(new Color(210, 235, 210)); // Verde muy suave
+                    c.setBackground(new Color(210, 235, 210));
                     c.setForeground(Color.BLACK);
                 } else {
                     c.setBackground(Color.WHITE);
                     c.setForeground(Color.BLACK);
                 }
 
-                // Si la fila está seleccionada, mantener el color azul de selección estándar
                 if (isSelected) {
                     c.setBackground(new Color(184, 218, 255));
                 }
@@ -207,7 +199,7 @@ public class ClientViewInternal extends JInternalFrame {
         txtPhone.setText("");
         chkPreferential.setSelected(false);
         table.clearSelection();
-        btnUpdate.setEnabled(false); // Ahora sí funcionará sin error
+        btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
         txtId.requestFocus();
     }
@@ -304,7 +296,6 @@ public class ClientViewInternal extends JInternalFrame {
 
         if (client != null) {
 
-            // Si existe, mostrarlo en el formulario
             txtId.setText(client.getId());
 
             txtName.setText(client.getName());
@@ -349,7 +340,6 @@ public class ClientViewInternal extends JInternalFrame {
 
             if (option == JOptionPane.YES_OPTION) {
 
-                // Mostrar la ventana SOLO si aún no está visible
                 if (!this.isVisible()) {
 
                     if (desktop != null) {
@@ -362,7 +352,6 @@ public class ClientViewInternal extends JInternalFrame {
 
                 }
 
-                // Traer la ventana al frente
                 try {
 
                     this.setSelected(true);
@@ -371,10 +360,8 @@ public class ClientViewInternal extends JInternalFrame {
 
                 } catch (java.beans.PropertyVetoException e) {
 
-                    // ignorar
                 }
 
-                // Preparar formulario
                 txtId.setText(id);
 
                 txtName.requestFocus();
