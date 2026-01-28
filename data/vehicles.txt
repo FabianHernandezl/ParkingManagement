@@ -84,9 +84,9 @@ Clientes:
 VEHÍCULO #8
 ----------------------------------------
 Placa:        hhy678
-Marca:        hvvjb
-Modelo:       kghhg
-Color:        hvghgv
+Marca:        Tesla
+Modelo:       2025
+Color:        Negro
 Tipo:         Carro
 Clientes:     
               - Arón (ID: 65798732)

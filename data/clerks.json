@@ -3,15 +3,6 @@
     "employeeCode": 1001,
     "shedule": "Mañana",
     "age": 20,
-    "id": "CLK0001",
-    "name": "Camila Montoya",
-    "username": "op_camila",
-    "password": "123asd"
-  },
-  {
-    "employeeCode": 1002,
-    "shedule": "Tarde",
-    "age": 21,
     "parkingLot": {
       "id": 1,
       "name": "Cami´s Parkinglot",
@@ -119,6 +110,78 @@
         },
         {
           "id": 10,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        }
+      ]
+    },
+    "id": "CLK0001",
+    "name": "Camila Montoya",
+    "username": "op_camila",
+    "password": "123asd"
+  },
+  {
+    "employeeCode": 1002,
+    "shedule": "Tarde",
+    "age": 21,
+    "parkingLot": {
+      "id": 3,
+      "name": "Jime ParkingLot",
+      "numberOfSpaces": 5,
+      "vehicles": [],
+      "spaces": [
+        {
+          "id": 1,
+          "disabilityAdaptation": true,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 3,
+            "description": "Camión",
+            "numberOfTires": 4,
+            "fee": 6.5
+          }
+        },
+        {
+          "id": 2,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 2,
+            "description": "Motocicleta",
+            "numberOfTires": 2,
+            "fee": 2.5
+          }
+        },
+        {
+          "id": 3,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 4,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 5,
           "disabilityAdaptation": false,
           "spaceTaken": false,
           "vehicleType": {
@@ -371,5 +434,242 @@
     "name": "Fabi",
     "username": "fabi",
     "password": "123"
+  },
+  {
+    "employeeCode": 1004,
+    "shedule": "Jornada Nocturna",
+    "age": 40,
+    "parkingLot": {
+      "id": 2,
+      "name": "UCR ParkingLot",
+      "numberOfSpaces": 20,
+      "vehicles": [],
+      "spaces": [
+        {
+          "id": 1,
+          "disabilityAdaptation": true,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 3,
+            "description": "Camión",
+            "numberOfTires": 4,
+            "fee": 6.5
+          }
+        },
+        {
+          "id": 2,
+          "disabilityAdaptation": true,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 3,
+            "description": "Camión",
+            "numberOfTires": 4,
+            "fee": 6.5
+          }
+        },
+        {
+          "id": 3,
+          "disabilityAdaptation": true,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 3,
+            "description": "Camión",
+            "numberOfTires": 4,
+            "fee": 6.5
+          }
+        },
+        {
+          "id": 4,
+          "disabilityAdaptation": true,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 3,
+            "description": "Camión",
+            "numberOfTires": 4,
+            "fee": 6.5
+          }
+        },
+        {
+          "id": 5,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 2,
+            "description": "Motocicleta",
+            "numberOfTires": 2,
+            "fee": 2.5
+          }
+        },
+        {
+          "id": 6,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 2,
+            "description": "Motocicleta",
+            "numberOfTires": 2,
+            "fee": 2.5
+          }
+        },
+        {
+          "id": 7,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 2,
+            "description": "Motocicleta",
+            "numberOfTires": 2,
+            "fee": 2.5
+          }
+        },
+        {
+          "id": 8,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 2,
+            "description": "Motocicleta",
+            "numberOfTires": 2,
+            "fee": 2.5
+          }
+        },
+        {
+          "id": 9,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 2,
+            "description": "Motocicleta",
+            "numberOfTires": 2,
+            "fee": 2.5
+          }
+        },
+        {
+          "id": 10,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 11,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 12,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 13,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 14,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 15,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 16,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 17,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 18,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 19,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        },
+        {
+          "id": 20,
+          "disabilityAdaptation": false,
+          "spaceTaken": false,
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        }
+      ]
+    },
+    "id": "CLK0004",
+    "name": "Juan Perez",
+    "username": "op_juan",
+    "password": "juan1"
   }
 ]
