@@ -124,7 +124,7 @@ public class AdminMenu extends JFrame {
         feeMenu.add(fees);
 
         fees.addActionListener(e -> {
-            openInternalFrame(new TicketViewInternal());//TO DO crud de Tarifas
+            openInternalFrame(new ParkingRateViewInternal());//TO DO crud de Tarifas
         });
 
         //--------------REPORTS ---------- TO DO 

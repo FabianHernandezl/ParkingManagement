@@ -98,5 +98,71 @@
       "numberOfTires": 4,
       "fee": 5.0
     }
+  },
+  {
+    "plate": "nhy678",
+    "color": "Blanco",
+    "brand": "Honda",
+    "model": "Civic",
+    "clients": [
+      {
+        "id": "0987654321",
+        "name": "Yoyo",
+        "phone": "87642376",
+        "isPreferential": false
+      }
+    ],
+    "vehicleType": {
+      "id": 0,
+      "description": "Carro",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
+  },
+  {
+    "plate": "GTR762",
+    "color": "BHKS",
+    "brand": "HYKIOL",
+    "model": "VFRTH",
+    "clients": [
+      {
+        "id": "98712346",
+        "name": "Gaby",
+        "phone": "876878698",
+        "isPreferential": false
+      }
+    ],
+    "vehicleType": {
+      "id": 0,
+      "description": "Carro",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
+  },
+  {
+    "plate": "hhy678",
+    "color": "hvghgv",
+    "brand": "hvvjb",
+    "model": "kghhg",
+    "clients": [
+      {
+        "id": "65798732",
+        "name": "Arón",
+        "phone": "67554342",
+        "isPreferential": false
+      },
+      {
+        "id": "787587558",
+        "name": "Luis",
+        "phone": "767448787",
+        "isPreferential": false
+      }
+    ],
+    "vehicleType": {
+      "id": 0,
+      "description": "Carro",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
   }
 ]

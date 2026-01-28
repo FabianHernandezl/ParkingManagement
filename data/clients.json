@@ -16,5 +16,41 @@
     "name": "Mariana Blanco",
     "phone": "86621670",
     "isPreferential": true
+  },
+  {
+    "id": "306789432",
+    "name": "Pedro",
+    "phone": "8787585",
+    "isPreferential": false
+  },
+  {
+    "id": "305620529",
+    "name": "Zailyn Tencio",
+    "phone": "84379367",
+    "isPreferential": false
+  },
+  {
+    "id": "0987654321",
+    "name": "Yoyo",
+    "phone": "87642376",
+    "isPreferential": false
+  },
+  {
+    "id": "65798732",
+    "name": "Arón",
+    "phone": "67554342",
+    "isPreferential": false
+  },
+  {
+    "id": "98712346",
+    "name": "Gaby",
+    "phone": "876878698",
+    "isPreferential": false
+  },
+  {
+    "id": "787587558",
+    "name": "Luis",
+    "phone": "767448787",
+    "isPreferential": false
   }
 ]

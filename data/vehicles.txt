@@ -1,0 +1,98 @@
+========================================
+      REGISTRO DE VEHÍCULOS
+========================================
+Total de vehículos: 8
+========================================
+
+VEHÍCULO #1
+----------------------------------------
+Placa:        KKK777
+Marca:        HYUNDAI
+Modelo:       ACCER
+Color:        MORADO
+Tipo:         Moto
+Clientes:     
+              - JDKJCK (ID: 36373772)
+----------------------------------------
+
+VEHÍCULO #2
+----------------------------------------
+Placa:        677678
+Marca:        Toyota
+Modelo:       2001
+Color:        blanco
+Tipo:         Carro
+Clientes:     
+              - Jimena (ID: 119520051)
+----------------------------------------
+
+VEHÍCULO #3
+----------------------------------------
+Placa:        13513
+Marca:        Suzuki
+Modelo:       2022
+Color:        Negro
+Tipo:         Carro
+Clientes:     
+              - jgfhg (ID: 23212)
+----------------------------------------
+
+VEHÍCULO #4
+----------------------------------------
+Placa:        BKQ748
+Marca:        Mitsubishi
+Modelo:       Lancer
+Color:        Gris
+Tipo:         Carro
+Clientes:     
+              - Zailyn Tencio (ID: 305620529)
+----------------------------------------
+
+VEHÍCULO #5
+----------------------------------------
+Placa:        460220
+Marca:        Fiat
+Modelo:       2015
+Color:        N/A
+Tipo:         Automóvil
+Clientes:     
+              - Jimena Calvo Soto (ID: 119520051)
+----------------------------------------
+
+VEHÍCULO #6
+----------------------------------------
+Placa:        nhy678
+Marca:        Honda
+Modelo:       Civic
+Color:        Blanco
+Tipo:         Carro
+Clientes:     
+              - Yoyo (ID: 0987654321)
+----------------------------------------
+
+VEHÍCULO #7
+----------------------------------------
+Placa:        GTR762
+Marca:        HYKIOL
+Modelo:       VFRTH
+Color:        BHKS
+Tipo:         Carro
+Clientes:     
+              - Gaby (ID: 98712346)
+----------------------------------------
+
+VEHÍCULO #8
+----------------------------------------
+Placa:        hhy678
+Marca:        hvvjb
+Modelo:       kghhg
+Color:        hvghgv
+Tipo:         Carro
+Clientes:     
+              - Arón (ID: 65798732)
+              - Luis (ID: 787587558)
+----------------------------------------
+
+========================================
+Fin del registro
+========================================
