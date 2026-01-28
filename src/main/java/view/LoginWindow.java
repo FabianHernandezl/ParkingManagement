@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import model.entities.Administrator;
@@ -55,6 +56,11 @@ public class LoginWindow extends JFrame implements ActionListener {
     private static FileLock lock;
 
     public LoginWindow() {
+
+        UIManager.put("OptionPane.yesButtonText", "Sí");
+        UIManager.put("OptionPane.noButtonText", "No");
+        UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+        UIManager.put("OptionPane.okButtonText", "Aceptar");
 
         //Verificar si ya existe otra instancia
         if (!acquireLock()) {
