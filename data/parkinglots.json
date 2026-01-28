@@ -344,5 +344,68 @@
         }
       }
     ]
+  },
+  {
+    "id": 3,
+    "name": "Jime",
+    "numberOfSpaces": 5,
+    "vehicles": [],
+    "spaces": [
+      {
+        "id": 1,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 3,
+          "description": "Camión",
+          "numberOfTires": 4,
+          "fee": 6.5
+        }
+      },
+      {
+        "id": 2,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 2,
+          "description": "Motocicleta",
+          "numberOfTires": 2,
+          "fee": 2.5
+        }
+      },
+      {
+        "id": 3,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        }
+      },
+      {
+        "id": 4,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        }
+      },
+      {
+        "id": 5,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        }
+      }
+    ]
   }
 ]

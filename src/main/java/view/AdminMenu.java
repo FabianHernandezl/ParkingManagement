@@ -20,21 +20,22 @@ import javax.swing.WindowConstants;
  */
 public class AdminMenu extends JFrame {
 
+    private LoginWindow loginWindow;
     private HomeDesktop desktop;
 
-    public AdminMenu() {
+    public AdminMenu(LoginWindow loginWindow) {
 
         super("Menú Administrador de Parqueos");
+        this.loginWindow = loginWindow;
 
-        desktop = new HomeDesktop(); // Call the HomeDesktop
+        desktop = new HomeDesktop();
         this.add(desktop);
 
         this.setSize(1000, 700);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setResizable(true);
-        
 
         createMenuBar();
     }
@@ -76,7 +77,7 @@ public class AdminMenu extends JFrame {
         entryTicket.addActionListener(e -> {
             openInternalFrame(new TicketViewInternal());
         });
- 
+
         ///------------FIN FUNCIONES OPERADOR ------------
         //---------Parqueos--------
         JMenu parkingMenu = new JMenu("Parqueos");
@@ -104,7 +105,7 @@ public class AdminMenu extends JFrame {
         parkingSpacesItem.addActionListener(e -> {
             desktop.add(new SpaceManagementGUI());
         });
-        
+
         // ---------- OPERARIOS - users ----------
         JMenu clerksMenu = new JMenu("Operarios");
         menuBar.add(clerksMenu);
@@ -155,9 +156,20 @@ public class AdminMenu extends JFrame {
         menuBar.add(comebackMenu);
 
         comebackMenu.addActionListener(e -> {
-            openJFrame(new LoginWindow());
-            
+
+            int option = javax.swing.JOptionPane.showConfirmDialog(
+                    this,
+                    "¿Desea cerrar sesión y volver al login?",
+                    "Cerrar sesión",
+                    javax.swing.JOptionPane.YES_NO_OPTION
+            );
+
+            if (option == javax.swing.JOptionPane.YES_OPTION) {
+                this.dispose();              // cerramos AdminMenu
+                loginWindow.setVisible(true); // volvemos al login original
+            }
         });
+
     }
 
     private void openInternalFrame(JInternalFrame frame) {
