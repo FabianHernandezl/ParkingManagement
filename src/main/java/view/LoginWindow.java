@@ -45,6 +45,7 @@ public class LoginWindow extends JFrame implements ActionListener {
     private JTextField txtUsername;
     private JPasswordField txtPassword;
     private JButton btnSignIn;
+    private JButton btnCancel;
     private JPanel mainPanel;
 
     ClerkController clerkController;
@@ -333,11 +334,45 @@ public class LoginWindow extends JFrame implements ActionListener {
             }
         });
 
+        // Botón cancelar
+        btnCancel = new JButton("CANCELAR");
+        btnCancel.setFont(new Font("Arial", Font.BOLD, 13));
+        btnCancel.setBackground(new Color(231, 76, 60)); // rojo elegante
+        btnCancel.setForeground(Color.WHITE);
+        btnCancel.setBorder(normalBorder);
+        btnCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnCancel.setFocusPainted(false);
+        btnCancel.addActionListener(this);
+
+        Dimension btnCancelSize = new Dimension(260, 40);
+        btnCancel.setPreferredSize(btnCancelSize);
+        btnCancel.setMinimumSize(btnCancelSize);
+        btnCancel.setMaximumSize(btnCancelSize);
+
+        // Hover cancelar
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancel.setBackground(new Color(192, 57, 43));
+                btnCancel.setBorder(hoverBorder);
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancel.setBackground(new Color(231, 76, 60));
+                btnCancel.setBorder(normalBorder);
+            }
+        });
+
         cardGbc.gridx = 0;
         cardGbc.gridy = 6;
         cardGbc.gridwidth = 2;
         cardGbc.insets = new Insets(20, 0, 0, 0);
         loginCard.add(btnSignIn, cardGbc);
+
+        cardGbc.gridy = 7;
+        cardGbc.insets = new Insets(10, 0, 0, 0);
+        loginCard.add(btnCancel, cardGbc);
 
         JLabel lblHelp = new JLabel("<html><center>¿Problemas para ingresar?<br>Contacte al administrador del sistema</center></html>",
                 SwingConstants.CENTER);
@@ -403,6 +438,8 @@ public class LoginWindow extends JFrame implements ActionListener {
                     setVisible(false);
                 }
             }
+        } else if (e.getSource() == btnCancel) {
+            confirmExit();
         }
     }
 
