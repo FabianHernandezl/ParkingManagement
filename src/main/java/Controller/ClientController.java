@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.ArrayList;
 import model.data.ClientData;
+import model.data.VehicleData;
 import model.entities.Client;
 
 /**
@@ -11,9 +12,11 @@ import model.entities.Client;
 public class ClientController {
 
     private ClientData clientData;
+    private VehicleData vehicleData;
 
     public ClientController() {
         clientData = new ClientData();
+        vehicleData = new VehicleData();
     }
 
     public String registerClient(String id, String name, String phone, boolean isPreferential) {
@@ -48,7 +51,21 @@ public class ClientController {
 
     public String deleteClient(String id) {
 
-        return clientData.delete(id) ? "Cliente eliminado correctamente" : "Cliente no encontrado";
+        Client client = clientData.findClientById(id);
+        if (client == null) {
+            return "Cliente no encontrado";
+        }
+        if (vehicleData.findVehicle(client) != null) {
+            return "No se puede eliminar: El cliente tiene vehículos asociados.";
+        }
+
+        boolean eliminado = clientData.delete(id, vehicleData);
+
+        if (eliminado) {
+            return "Cliente eliminado correctamente";
+        } else {
+            return "Error al intentar eliminar el cliente";
+        }
     }
 
 }

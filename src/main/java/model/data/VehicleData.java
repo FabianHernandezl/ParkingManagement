@@ -15,7 +15,6 @@ import model.entities.Vehicle;
  */
 public class VehicleData {
 
-    // Simulación de la base de datos
     private ArrayList<Vehicle> vehicleDB;
 
     private static final String FILE_PATH_JSON = "data/vehicles.json";

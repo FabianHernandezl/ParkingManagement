@@ -233,14 +233,23 @@ public class ClientViewInternal extends JInternalFrame {
         String name = txtName.getText().trim();
         String phone = txtPhone.getText().trim();
         boolean pref = chkPreferential.isSelected();
-        if (id.isEmpty() || name.isEmpty()) {
+
+        if (id.isEmpty() || name.isEmpty() || phone.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Todos los campos (ID, Nombre y Teléfono) son obligatorios.",
+                    "Campos vacíos",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         String res = clientController.registerClient(id, name, phone, pref);
+
         JOptionPane.showMessageDialog(this, res);
-        loadTable();
-        clearForm();
+
+        if (res.contains("exitosamente") || res.contains("correctamente")) {
+            loadTable();
+            clearForm();
+        }
     }
 
     private void updateClient() {
@@ -265,15 +274,25 @@ public class ClientViewInternal extends JInternalFrame {
     private void deleteClient() {
         String id = txtId.getText().trim();
         if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID.");
             return;
         }
 
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar cliente " + id + "?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Está seguro de eliminar al cliente con ID: " + id + "?",
+                "Confirmar Eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+
         if (confirm == JOptionPane.YES_OPTION) {
             String result = clientController.deleteClient(id);
+
             JOptionPane.showMessageDialog(this, result);
-            loadTable();
-            clearForm();
+
+            if (result.contains("exitosamente")) {
+                loadTable();
+                clearForm();
+            }
         }
     }
 

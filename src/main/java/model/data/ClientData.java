@@ -19,7 +19,9 @@ public class ClientData {
 
     private static final String FILE_PATH = "data/clients.json";
     private static final String TXT_FILE_PATH = "data/clients.txt";
+    private VehicleData vehicleData;
     private ArrayList<Client> clients;
+    
     private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
@@ -65,11 +67,18 @@ public class ClientData {
         return false;
     }
 
-    public boolean delete(String id) {
+    public boolean delete(String id, VehicleData vehicleData) {
         Client client = findClientById(id);
+
         if (client == null) {
             return false;
         }
+
+        if (vehicleData.findVehicle(client) != null) {
+            System.out.println("No se puede eliminar: El cliente tiene vehículos asociados.");
+            return false;
+        }
+
         clients.remove(client);
         saveClients();
         return true;
@@ -114,7 +123,7 @@ public class ClientData {
                 printWriter.printf("%-14s %s%n", "Preferencial:", esPreferencial);
 
                 printWriter.println("----------------------------------------");
-                printWriter.println(); 
+                printWriter.println();
             }
 
             printWriter.println("========================================");
