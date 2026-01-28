@@ -60,7 +60,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         if (!acquireLock()) {
             JOptionPane.showMessageDialog(
                     null,
-                    "El sistema ya se encuentra en ejecución.\nNo se permiten múltiples instancias.",
+                    "El sistema ya se encuentra en ejecución.",
                     "Sistema en ejecución",
                     JOptionPane.WARNING_MESSAGE
             );
