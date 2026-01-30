@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 4
+Total de clientes: 6
 ========================================
 
 CLIENTE #1
@@ -33,6 +33,22 @@ CLIENTE #4
 ID:            09909
 Nombre:        Laura
 Teléfono:      999999
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #5
+----------------------------------------
+ID:            C-001
+Nombre:        Cliente Prueba
+Teléfono:      8888-8888
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #6
+----------------------------------------
+ID:            305620529
+Nombre:        Zailyn Tencio
+Teléfono:      84379367
 Preferencial:  No
 ----------------------------------------
 

@@ -1,7 +1,7 @@
 ========================================
       REGISTRO DE VEHÍCULOS
 ========================================
-Total de vehículos: 8
+Total de vehículos: 9
 ========================================
 
 VEHÍCULO #1
@@ -45,6 +45,7 @@ Modelo:       Lancer
 Color:        Gris
 Tipo:         Carro
 Clientes:     
+              - Zailyn Tencio (ID: 305620529)
               - Zailyn Tencio (ID: 305620529)
 ----------------------------------------
 
@@ -91,6 +92,17 @@ Tipo:         Carro
 Clientes:     
               - Arón (ID: 65798732)
               - Luis (ID: 787587558)
+----------------------------------------
+
+VEHÍCULO #9
+----------------------------------------
+Placa:        ABC123
+Marca:        Toyota
+Modelo:       Corolla
+Color:        Rojo
+Tipo:         Motocicleta
+Clientes:     
+              - Cliente Prueba (ID: C-001)
 ----------------------------------------
 
 ========================================

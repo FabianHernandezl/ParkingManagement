@@ -70,6 +70,12 @@
         "name": "Zailyn Tencio",
         "phone": "84379367",
         "isPreferential": false
+      },
+      {
+        "id": "305620529",
+        "name": "Zailyn Tencio",
+        "phone": "84379367",
+        "isPreferential": false
       }
     ],
     "vehicleType": {
@@ -163,6 +169,26 @@
       "description": "Carro",
       "numberOfTires": 0,
       "fee": 0.0
+    }
+  },
+  {
+    "plate": "ABC123",
+    "color": "Rojo",
+    "brand": "Toyota",
+    "model": "Corolla",
+    "clients": [
+      {
+        "id": "C-001",
+        "name": "Cliente Prueba",
+        "phone": "8888-8888",
+        "isPreferential": false
+      }
+    ],
+    "vehicleType": {
+      "id": 2,
+      "description": "Motocicleta",
+      "numberOfTires": 2,
+      "fee": 2.5
     }
   }
 ]

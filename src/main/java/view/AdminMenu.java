@@ -99,12 +99,12 @@ public class AdminMenu extends JFrame {
         JMenuItem manageSpaces = new JMenuItem("Gestionar Espacios");
         spacesMenu.add(manageSpaces);
 
+        manageSpaces.addActionListener(e -> {
+            openInternalFrame(new SpaceView());
+        });
+
         JMenuItem parkingSpacesItem = new JMenuItem("Ver Espacios");
         spacesMenu.add(parkingSpacesItem);
-
-        parkingSpacesItem.addActionListener(e -> {
-            desktop.add(new SpaceManagementGUI());
-        });
 
         // ---------- OPERARIOS - users ----------
         JMenu clerksMenu = new JMenu("Operarios");

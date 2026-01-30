@@ -33,8 +33,6 @@ public class Space {
         this.client = client;
         this.vehicle = vehicle;
     }
-    
-    
 
     public Space() {
 
@@ -118,6 +116,11 @@ public class Space {
 
     public void setEntryTime(Date entryTime) {
         this.entryTime = entryTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Espacio #" + id + (spaceTaken ? " (Ocupado)" : " (Libre)");
     }
 
 }

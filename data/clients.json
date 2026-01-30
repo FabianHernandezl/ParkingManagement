@@ -22,5 +22,17 @@
     "name": "Laura",
     "phone": "999999",
     "isPreferential": false
+  },
+  {
+    "id": "C-001",
+    "name": "Cliente Prueba",
+    "phone": "8888-8888",
+    "isPreferential": false
+  },
+  {
+    "id": "305620529",
+    "name": "Zailyn Tencio",
+    "phone": "84379367",
+    "isPreferential": false
   }
 ]

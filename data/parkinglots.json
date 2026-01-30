@@ -41,23 +41,83 @@
       {
         "id": 4,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 2,
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
+        },
+        "entryTime": "Jan 30, 2026, 9:28:07 AM",
+        "client": {
+          "id": "C-001",
+          "name": "Cliente Prueba",
+          "phone": "8888-8888",
+          "isPreferential": false
+        },
+        "vehicle": {
+          "plate": "ABC123",
+          "color": "Rojo",
+          "brand": "Toyota",
+          "model": "Corolla",
+          "clients": [
+            {
+              "id": "C-001",
+              "name": "Cliente Prueba",
+              "phone": "8888-8888",
+              "isPreferential": false
+            }
+          ],
+          "vehicleType": {
+            "id": 2,
+            "description": "Motocicleta",
+            "numberOfTires": 2,
+            "fee": 2.5
+          }
         }
       },
       {
         "id": 5,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 2,
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
+        },
+        "entryTime": "Jan 30, 2026, 9:42:38 AM",
+        "client": {
+          "id": "305620529",
+          "name": "Zailyn Tencio",
+          "phone": "84379367",
+          "isPreferential": false
+        },
+        "vehicle": {
+          "plate": "BKQ748",
+          "color": "Gris",
+          "brand": "Mitsubishi",
+          "model": "Lancer",
+          "clients": [
+            {
+              "id": "305620529",
+              "name": "Zailyn Tencio",
+              "phone": "84379367",
+              "isPreferential": false
+            },
+            {
+              "id": "305620529",
+              "name": "Zailyn Tencio",
+              "phone": "84379367",
+              "isPreferential": false
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
         }
       },
       {
@@ -397,6 +457,124 @@
       },
       {
         "id": 5,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Jumopt",
+    "numberOfSpaces": 10,
+    "vehicles": [],
+    "spaces": [
+      {
+        "id": 1,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 3,
+          "description": "Camión",
+          "numberOfTires": 4,
+          "fee": 6.5
+        }
+      },
+      {
+        "id": 2,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 3,
+          "description": "Camión",
+          "numberOfTires": 4,
+          "fee": 6.5
+        }
+      },
+      {
+        "id": 3,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 3,
+          "description": "Camión",
+          "numberOfTires": 4,
+          "fee": 6.5
+        }
+      },
+      {
+        "id": 4,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 2,
+          "description": "Motocicleta",
+          "numberOfTires": 2,
+          "fee": 2.5
+        }
+      },
+      {
+        "id": 5,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 2,
+          "description": "Motocicleta",
+          "numberOfTires": 2,
+          "fee": 2.5
+        }
+      },
+      {
+        "id": 6,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 2,
+          "description": "Motocicleta",
+          "numberOfTires": 2,
+          "fee": 2.5
+        }
+      },
+      {
+        "id": 7,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        }
+      },
+      {
+        "id": 8,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        }
+      },
+      {
+        "id": 9,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        }
+      },
+      {
+        "id": 10,
         "disabilityAdaptation": false,
         "spaceTaken": false,
         "vehicleType": {
