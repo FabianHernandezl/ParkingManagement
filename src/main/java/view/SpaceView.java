@@ -1,233 +1,154 @@
 package view;
 
-import Controller.SpaceController;
+import model.data.VehicleData;
 import model.entities.Space;
 import model.entities.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import model.data.VehicleData;
-import model.entities.Client;
+import java.util.List;
 
 public class SpaceView extends JInternalFrame {
 
-    private JComboBox<Space> cmbSpaces;
-    private JLabel lblStatus;
-    private JLabel lblEntryTime;
-    private JTextArea txtVehicleInfo;
-    private JComboBox<Vehicle> cmbVehicles;
-    private JButton btnOccupy;
-    private VehicleData vehicleData;
-
-    private JButton btnRelease;
-
-    private SpaceController spaceController;
+    private List<Space> spaces;
+    private ParkingLotPanel parkingLotPanel;
+    private SpacePanel selectedPanel;
 
     public SpaceView() {
-        super("Espacios de Parqueo", true, true, true, true);
-        spaceController = new SpaceController();
-        vehicleData = new VehicleData();
+        setTitle("Gestión de Espacios");
+        setClosable(true);
+        setSize(800, 500);
+        setLayout(new BorderLayout());
 
-        initComponents();
-        loadSpaces();
-        loadVehicles();
+        spaces = createSpacesFromVehicles();
 
+        parkingLotPanel = new ParkingLotPanel(spaces, this);
+        add(parkingLotPanel, BorderLayout.CENTER);
+
+        add(createButtonsPanel(), BorderLayout.SOUTH);
     }
 
-    private void initComponents() {
-        setSize(650, 400);
-        setLayout(new BorderLayout(10, 10));
+    // ================= BOTONES =================
+    private JPanel createButtonsPanel() {
+        JPanel panel = new JPanel();
 
-        // ---------- PANEL SUPERIOR ----------
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        topPanel.add(new JLabel("Espacio:"));
+        JButton btnOccupy = new JButton("Ocupar");
+        JButton btnRelease = new JButton("Liberar");
 
-        cmbSpaces = new JComboBox<>();
-        cmbSpaces.setPreferredSize(new Dimension(150, 25));
-        cmbSpaces.addActionListener(e -> showSpaceInfo());
-        topPanel.add(cmbSpaces);
-
-        add(topPanel, BorderLayout.NORTH);
-
-        // ---------- PANEL CENTRAL ----------
-        JPanel centerPanel = new JPanel(new GridLayout(2, 1, 5, 5));
-
-        lblStatus = new JLabel("Estado: ");
-        lblEntryTime = new JLabel("Hora de entrada: ");
-
-        centerPanel.add(lblStatus);
-        centerPanel.add(lblEntryTime);
-
-        add(centerPanel, BorderLayout.CENTER);
-
-        // ---------- PANEL VEHÍCULO ----------
-        txtVehicleInfo = new JTextArea();
-        txtVehicleInfo.setEditable(false);
-        txtVehicleInfo.setLineWrap(true);
-        txtVehicleInfo.setWrapStyleWord(true);
-        txtVehicleInfo.setFont(new Font("Monospaced", Font.PLAIN, 12));
-
-        JScrollPane scrollVehicle = new JScrollPane(txtVehicleInfo);
-        scrollVehicle.setBorder(
-                BorderFactory.createTitledBorder("Datos del Vehículo"));
-
-        add(scrollVehicle, BorderLayout.EAST);
-
-        // ---------- PANEL INFERIOR ----------
-        JPanel bottomPanel = new JPanel();
-
-        btnRelease = new JButton("Liberar espacio");
+        btnOccupy.addActionListener(e -> occupySpace());
         btnRelease.addActionListener(e -> releaseSpace());
 
-        bottomPanel.add(btnRelease);
+        panel.add(btnOccupy);
+        panel.add(btnRelease);
 
-        add(bottomPanel, BorderLayout.SOUTH);
-
-        // ---------- PANEL OCUPAR ----------
-        JPanel occupyPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        occupyPanel.setBorder(
-                BorderFactory.createTitledBorder("Ocupar espacio")
-        );
-
-        occupyPanel.add(new JLabel("Vehículo:"));
-
-        cmbVehicles = new JComboBox<>();
-        cmbVehicles.setPreferredSize(new Dimension(200, 25));
-        occupyPanel.add(cmbVehicles);
-
-        btnOccupy = new JButton("Ocupar espacio");
-        btnOccupy.addActionListener(e -> occupySpace());
-        occupyPanel.add(btnOccupy);
-
-        add(occupyPanel, BorderLayout.WEST);
-
+        return panel;
     }
 
-    private void loadSpaces() {
-        cmbSpaces.removeAllItems();
-        ArrayList<Space> spaces = spaceController.getAllSpaces();
-
-        for (Space s : spaces) {
-            cmbSpaces.addItem(s);
-        }
-
-        if (!spaces.isEmpty()) {
-            cmbSpaces.setSelectedIndex(0);
-        }
-
-        showSpaceInfo();
-    }
-
-    private void showSpaceInfo() {
-        Space space = (Space) cmbSpaces.getSelectedItem();
-        if (space == null) {
-            return;
-        }
-
-        lblStatus.setText(
-                "Estado: " + (space.isSpaceTaken() ? "Ocupado" : "Libre")
-        );
-
-        if (space.isSpaceTaken() && space.getEntryTime() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            lblEntryTime.setText(
-                    "Hora de entrada: " + sdf.format(space.getEntryTime())
-            );
-        } else {
-            lblEntryTime.setText("Hora de entrada: —");
-        }
-
-        // 🔥 AQUÍ ESTÁ LA CLAVE
-        if (space.isSpaceTaken() && space.getVehicle() != null) {
-            Vehicle vehicle = space.getVehicle();
-
-            // Muestra TODO lo que viene del JSON
-            txtVehicleInfo.setText(vehicle.toString());
-
-        } else {
-            txtVehicleInfo.setText("El espacio se encuentra libre.");
-        }
-    }
-
-    private void releaseSpace() {
-        Space space = (Space) cmbSpaces.getSelectedItem();
-        if (space == null) {
-            return;
-        }
-
-        if (!space.isSpaceTaken()) {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "El espacio ya está libre",
-                    "Aviso",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
-            return;
-        }
-
-        int confirm = JOptionPane.showConfirmDialog(
-                this,
-                "¿Desea liberar el espacio?",
-                "Confirmar",
-                JOptionPane.YES_NO_OPTION
-        );
-
-        if (confirm == JOptionPane.YES_OPTION) {
-            boolean ok = spaceController.releaseSpace(space.getId());
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    ok ? "Espacio liberado correctamente"
-                            : "Error al liberar el espacio"
-            );
-
-            loadSpaces();
-        }
-    }
-
+    // ================= LÓGICA =================
     private void occupySpace() {
-        Space space = (Space) cmbSpaces.getSelectedItem();
-        Vehicle vehicle = (Vehicle) cmbVehicles.getSelectedItem();
-
-        if (space == null || vehicle == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar espacio y vehículo");
+        if (selectedPanel == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione un espacio");
             return;
         }
+
+        Space space = selectedPanel.getSpace();
 
         if (space.isSpaceTaken()) {
             JOptionPane.showMessageDialog(this, "El espacio ya está ocupado");
             return;
         }
 
-        // Tomamos el cliente del vehículo (YA VIENE DEL JSON)
-        Client client = vehicle.getClients().isEmpty()
-                ? null
-                : vehicle.getClients().get(0);
+        VehicleData vehicleData = new VehicleData();
+        List<Vehicle> vehicles = vehicleData.getAllVehicles();
 
-        if (client == null) {
-            JOptionPane.showMessageDialog(this, "El vehículo no tiene cliente asociado");
+        Vehicle selectedVehicle = (Vehicle) JOptionPane.showInputDialog(
+                this,
+                "Seleccione un vehículo",
+                "Vehículos",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                vehicles.toArray(),
+                null
+        );
+
+        if (selectedVehicle != null) {
+            space.setVehicle(selectedVehicle);
+            space.setClient(
+                    selectedVehicle.getClients().isEmpty()
+                    ? null
+                    : selectedVehicle.getClients().get(0)
+            );
+            space.setSpaceTaken(true);
+            space.setAvailable(false);
+            space.setDisabilityAdaptation(selectedVehicle.hasPreferentialClient());
+
+            selectedPanel.updateColor();
+            selectedPanel.updateTooltip();
+        }
+    }
+
+    private void releaseSpace() {
+        if (selectedPanel == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione un espacio");
             return;
         }
 
-        String result = spaceController.occupySpace(
-                space.getId(),
-                client,
-                vehicle
-        );
+        Space space = selectedPanel.getSpace();
 
-        JOptionPane.showMessageDialog(this, result);
-        loadSpaces();
+        if (!space.isSpaceTaken()) {
+            JOptionPane.showMessageDialog(this, "El espacio ya está libre");
+            return;
+        }
+
+        space.setVehicle(null);
+        space.setClient(null);
+        space.setSpaceTaken(false);
+        space.setAvailable(true);
+        space.setDisabilityAdaptation(false);
+
+        selectedPanel.updateColor();
+        selectedPanel.updateTooltip();
     }
 
-    private void loadVehicles() {
-        cmbVehicles.removeAllItems();
-        ArrayList<Vehicle> vehicles = vehicleData.getAllVehicles();
+    // ================= SELECCIÓN =================
+    public void setSelectedPanel(SpacePanel panel) {
+        if (selectedPanel != null) {
+            selectedPanel.setSelected(false);
+        }
+        selectedPanel = panel;
+        selectedPanel.setSelected(true);
+    }
+
+    // ================= DATOS =================
+    private List<Space> createSpacesFromVehicles() {
+        List<Space> list = new ArrayList<>();
+
+        VehicleData vehicleData = new VehicleData();
+        List<Vehicle> vehicles = vehicleData.getAllVehicles();
+
+        int id = 1;
 
         for (Vehicle v : vehicles) {
-            cmbVehicles.addItem(v);
+            Space space = new Space();
+            space.setId(id++);
+            space.setVehicle(v);
+            space.setClient(v.getClients().isEmpty() ? null : v.getClients().get(0));
+            space.setSpaceTaken(true);
+            space.setAvailable(false);
+            space.setDisabilityAdaptation(v.hasPreferentialClient());
+            list.add(space);
         }
-    }
 
+        while (list.size() < 12) {
+            Space space = new Space();
+            space.setId(id++);
+            space.setSpaceTaken(false);
+            space.setAvailable(true);
+            space.setDisabilityAdaptation(false);
+            list.add(space);
+        }
+
+        return list;
+    }
 }

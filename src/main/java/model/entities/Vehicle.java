@@ -29,12 +29,14 @@ public class Vehicle {
         this.clients.add(client);
     }
 
+    
     public Vehicle(String plate, String color, String brand, String model) {
         this.plate = plate;
         this.color = color;
         this.brand = brand;
         this.model = model;
-    }  
+        this.clients = new ArrayList<>();
+    }
 
     public String getPlate() {
         return plate;

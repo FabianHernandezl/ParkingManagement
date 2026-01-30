@@ -13,6 +13,7 @@ public class Space {
     private boolean spaceTaken;
     private VehicleType vehicleType;
     private Date entryTime;
+    private boolean available;
 
     private Client client;
     private Vehicle vehicle;
@@ -22,9 +23,10 @@ public class Space {
         this.disabilityAdaptation = disabilityAdaptation;
         this.spaceTaken = spaceTaken;
         this.vehicleType = vehicleType;
+
     }
 
-    public Space(int id, boolean disabilityAdaptation, boolean spaceTaken, VehicleType vehicleType, Date entryTime, Client client, Vehicle vehicle) {
+    public Space(int id, boolean disabilityAdaptation, boolean spaceTaken, VehicleType vehicleType, Date entryTime, Client client, Vehicle vehicle, boolean available) {
         this.id = id;
         this.disabilityAdaptation = disabilityAdaptation;
         this.spaceTaken = spaceTaken;
@@ -32,6 +34,7 @@ public class Space {
         this.entryTime = entryTime;
         this.client = client;
         this.vehicle = vehicle;
+        this.available = available;
     }
 
     public Space() {
@@ -116,6 +119,14 @@ public class Space {
 
     public void setEntryTime(Date entryTime) {
         this.entryTime = entryTime;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     @Override

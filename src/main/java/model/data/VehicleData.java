@@ -19,7 +19,7 @@ public class VehicleData {
 
     private static final String FILE_PATH_JSON = "data/vehicles.json";
     private static final String FILE_PATH_TXT = "data/vehicles.txt";
-    
+
     private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
@@ -41,7 +41,7 @@ public class VehicleData {
         if (vehicle != null && findVehicleByPlate(vehicle.getPlate()) == null) {
             vehicleDB.add(vehicle);
             saveToFile();
-            saveToTxt(); 
+            saveToTxt();
             message = "Vehículo insertado correctamente";
         }
 
@@ -126,7 +126,7 @@ public class VehicleData {
 
                 updated = true;
                 saveToFile();
-                saveToTxt(); 
+                saveToTxt();
             }
         }
 
@@ -175,7 +175,7 @@ public class VehicleData {
     // ===================== TXT =====================
     private void saveToTxt() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH_TXT))) {
-            
+
             // Encabezado del archivo
             writer.write("========================================");
             writer.newLine();
@@ -197,48 +197,48 @@ public class VehicleData {
                 // Escribir cada vehículo
                 int contador = 1;
                 for (Vehicle vehicle : vehicleDB) {
-                    
+
                     writer.write("VEHÍCULO #" + contador);
                     writer.newLine();
                     writer.write("----------------------------------------");
                     writer.newLine();
-                    
+
                     // Placa
-                    writer.write("Placa:        " + 
-                            (vehicle.getPlate() != null ? vehicle.getPlate() : "No definida"));
+                    writer.write("Placa:        "
+                            + (vehicle.getPlate() != null ? vehicle.getPlate() : "No definida"));
                     writer.newLine();
-                    
+
                     // Marca
-                    writer.write("Marca:        " + 
-                            (vehicle.getBrand() != null ? vehicle.getBrand() : "No definida"));
+                    writer.write("Marca:        "
+                            + (vehicle.getBrand() != null ? vehicle.getBrand() : "No definida"));
                     writer.newLine();
-                    
+
                     // Modelo
-                    writer.write("Modelo:       " + 
-                            (vehicle.getModel() != null ? vehicle.getModel() : "No definido"));
+                    writer.write("Modelo:       "
+                            + (vehicle.getModel() != null ? vehicle.getModel() : "No definido"));
                     writer.newLine();
-                    
+
                     // Color
-                    writer.write("Color:        " + 
-                            (vehicle.getColor() != null ? vehicle.getColor() : "No definido"));
+                    writer.write("Color:        "
+                            + (vehicle.getColor() != null ? vehicle.getColor() : "No definido"));
                     writer.newLine();
-                    
+
                     // Tipo de vehículo
-                    writer.write("Tipo:         " + 
-                            (vehicle.getVehicleType() != null ? 
-                                    vehicle.getVehicleType().getDescription() : "No definido"));
+                    writer.write("Tipo:         "
+                            + (vehicle.getVehicleType() != null
+                            ? vehicle.getVehicleType().getDescription() : "No definido"));
                     writer.newLine();
-                    
+
                     // Clientes asociados
                     writer.write("Clientes:     ");
                     if (vehicle.getClients() != null && !vehicle.getClients().isEmpty()) {
                         writer.newLine();
                         for (Client client : vehicle.getClients()) {
                             if (client != null) {
-                                writer.write("              - " + 
-                                        (client.getName() != null ? client.getName() : "Sin nombre") +
-                                        " (ID: " + 
-                                        (client.getId() != null ? client.getId() : "N/A") + ")");
+                                writer.write("              - "
+                                        + (client.getName() != null ? client.getName() : "Sin nombre")
+                                        + " (ID: "
+                                        + (client.getId() != null ? client.getId() : "N/A") + ")");
                                 writer.newLine();
                             }
                         }
@@ -246,22 +246,22 @@ public class VehicleData {
                         writer.write("No hay clientes asociados");
                         writer.newLine();
                     }
-                    
+
                     writer.write("----------------------------------------");
                     writer.newLine();
                     writer.newLine();
-                    
+
                     contador++;
                 }
             }
-            
+
             // Pie de página
             writer.write("========================================");
             writer.newLine();
             writer.write("Fin del registro");
             writer.newLine();
             writer.write("========================================");
-            
+
         } catch (IOException e) {
             System.out.println("Error guardando vehículos en TXT: " + e.getMessage());
         }
