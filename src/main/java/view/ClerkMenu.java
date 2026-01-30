@@ -20,11 +20,13 @@ import javax.swing.WindowConstants;
  */
 public class ClerkMenu extends JFrame {
 
-    private HomeDesktop desktop;
+    private LoginWindow loginWindow;
+    private final HomeDesktop desktop;
 
-    public ClerkMenu() {
+    public ClerkMenu(LoginWindow loginWindow) {
 
         super("Menú Operario de Parqueos");
+        this.loginWindow = loginWindow;
 
         desktop = new HomeDesktop(); // Call the HomeDesktop
         this.add(desktop);
@@ -32,7 +34,7 @@ public class ClerkMenu extends JFrame {
         this.setSize(1000, 700);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setResizable(true);
 
         createMenuBar();
@@ -75,17 +77,26 @@ public class ClerkMenu extends JFrame {
             openInternalFrame(new TicketViewInternal());
         });
 
-       //--------------Sign Out----------
+        //--------------Sign Out----------
         JButton comebackMenu = new JButton("Salir");
         menuBar.add(comebackMenu);
 
         comebackMenu.addActionListener(e -> {
-            openJFrame(new LoginWindow());
-            
-        });
-     
-        menuBar.updateUI();
 
+            int option = javax.swing.JOptionPane.showConfirmDialog(
+                    this,
+                    "¿Desea cerrar sesión y volver al login?",
+                    "Cerrar sesión",
+                    javax.swing.JOptionPane.YES_NO_OPTION
+            );
+
+            if (option == javax.swing.JOptionPane.YES_OPTION) {
+                this.dispose();              // cerramos AdminMenu
+                loginWindow.setVisible(true); // volvemos al login original
+            }
+        });
+
+        menuBar.updateUI();
 
     }
 
@@ -93,7 +104,8 @@ public class ClerkMenu extends JFrame {
         desktop.add(frame);
         frame.setVisible(true);
     }
-     private void openJFrame(LoginWindow loginWindow) {
+
+    private void openJFrame(LoginWindow loginWindow) {
         this.setVisible(false);
         loginWindow.setVisible(true);
     }

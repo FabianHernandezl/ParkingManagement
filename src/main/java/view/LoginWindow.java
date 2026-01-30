@@ -75,7 +75,7 @@ public class LoginWindow extends JFrame implements ActionListener {
             return;
         }
 
-        setTitle("Login - Sistema Parqueos InnovaSoft");
+        setTitle("Sistema Parqueos InnovaSoft");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setResizable(false);
 
@@ -434,7 +434,7 @@ public class LoginWindow extends JFrame implements ActionListener {
             if (!autenticado) {
                 Clerk clerk = clerkController.findClerkByUsername(username);
                 if (clerk != null && verificarPassword(clerk.getPassword(), password)) {
-                    new ClerkMenu();
+                    new ClerkMenu(this);
                     setVisible(false);
                 }
             }
