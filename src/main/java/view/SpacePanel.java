@@ -9,72 +9,100 @@ import java.awt.event.MouseEvent;
 
 public class SpacePanel extends JPanel {
 
-    private final Space space;
+    private Space space;
     private boolean selected = false;
+    private SpaceView parent;
+    private JLabel lblTitle;
+    private JLabel lblStatus;
 
     public SpacePanel(Space space, SpaceView parent) {
         this.space = space;
+        this.parent = parent;
 
-        setPreferredSize(new Dimension(120, 80));
-        setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        setPreferredSize(new Dimension(140, 90));
         setLayout(new BorderLayout());
+        setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        JLabel lbl = new JLabel("Espacio " + space.getId(), SwingConstants.CENTER);
-        lbl.setFont(new Font("Arial", Font.BOLD, 14));
-        add(lbl, BorderLayout.CENTER);
+        lblTitle = new JLabel("Espacio " + space.getId(), SwingConstants.CENTER);
+        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 14));
 
-        updateColor();
-        updateTooltip();
+        lblStatus = new JLabel("", SwingConstants.CENTER);
+        lblStatus.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+
+        add(lblTitle, BorderLayout.CENTER);
+        add(lblStatus, BorderLayout.SOUTH);
+
+        updateView();
 
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
-                // Selecciona visualmente el espacio
                 parent.setSelectedPanel(SpacePanel.this);
-
-                // 👉 SI EL ESPACIO ESTÁ OCUPADO, MOSTRAR VEHÍCULO
-                if (space.isSpaceTaken() && space.getVehicle() != null) {
-                    JOptionPane.showMessageDialog(
-                            SpacePanel.this,
-                            space.getVehicle().toString(),
-                            "Información del Vehículo",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
-                }
             }
         });
-
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-        setBorder(BorderFactory.createLineBorder(
-                selected ? Color.YELLOW : Color.BLACK,
-                selected ? 4 : 2
-        ));
-    }
-
-    public void updateColor() {
+    public void updateView() {
         if (space.isSpaceTaken()) {
-            setBackground(Color.RED);
+            setBackground(new Color(244, 67, 54)); // rojo suave
+            lblStatus.setText("🚗 Ocupado");
         } else if (space.isDisabilityAdaptation()) {
-            setBackground(Color.CYAN);
+            setBackground(new Color(3, 169, 244)); // azul
+            lblStatus.setText("♿ Preferencial");
         } else {
-            setBackground(Color.GREEN);
+            setBackground(new Color(76, 175, 80)); // verde
+            lblStatus.setText("✔ Disponible");
         }
         setOpaque(true);
+        updateTooltip();
     }
 
     public void updateTooltip() {
         if (space.isSpaceTaken() && space.getVehicle() != null) {
-            setToolTipText("<html>" + space.getVehicle().toString().replace("\n", "<br>") + "</html>");
+            setToolTipText("<html><pre>" + space.getVehicle().toString() + "</pre></html>");
         } else {
             setToolTipText("Espacio disponible");
         }
     }
 
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+        setBorder(
+                selected
+                        ? BorderFactory.createLineBorder(Color.YELLOW, 4)
+                        : BorderFactory.createLineBorder(Color.DARK_GRAY, 2)
+        );
+    }
+
     public Space getSpace() {
         return space;
     }
+
+    public void animateChange(Color targetColor) {
+        Color start = getBackground();
+
+        Timer timer = new Timer(15, null);
+        final int[] step = {0};
+        final int maxSteps = 20;
+
+        timer.addActionListener(e -> {
+            float ratio = step[0] / (float) maxSteps;
+
+            int r = (int) (start.getRed() + ratio * (targetColor.getRed() - start.getRed()));
+            int g = (int) (start.getGreen() + ratio * (targetColor.getGreen() - start.getGreen()));
+            int b = (int) (start.getBlue() + ratio * (targetColor.getBlue() - start.getBlue()));
+
+            setBackground(new Color(r, g, b));
+            repaint();
+
+            step[0]++;
+            if (step[0] > maxSteps) {
+                timer.stop();
+            }
+        });
+
+        timer.start();
+    }
+
 }

@@ -136,8 +136,21 @@ public class SpaceView extends JInternalFrame {
 
     // ================= REFRESH =================
     private void refreshPanel() {
-        selectedPanel.updateColor();
-        selectedPanel.updateTooltip();
-        parkingLotPanel.repaint();
+        if (selectedPanel != null) {
+            Color target;
+
+            if (selectedPanel.getSpace().isSpaceTaken()) {
+                target = new Color(244, 67, 54);
+            } else if (selectedPanel.getSpace().isDisabilityAdaptation()) {
+                target = new Color(3, 169, 244);
+            } else {
+                target = new Color(76, 175, 80);
+            }
+
+            selectedPanel.animateChange(target);
+            selectedPanel.updateView();
+            parkingLotPanel.repaint();
+        }
     }
+
 }
