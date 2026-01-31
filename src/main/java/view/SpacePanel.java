@@ -29,9 +29,22 @@ public class SpacePanel extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
+                // Selecciona visualmente el espacio
                 parent.setSelectedPanel(SpacePanel.this);
+
+                // 👉 SI EL ESPACIO ESTÁ OCUPADO, MOSTRAR VEHÍCULO
+                if (space.isSpaceTaken() && space.getVehicle() != null) {
+                    JOptionPane.showMessageDialog(
+                            SpacePanel.this,
+                            space.getVehicle().toString(),
+                            "Información del Vehículo",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
             }
         });
+
     }
 
     public void setSelected(boolean selected) {

@@ -1,27 +1,33 @@
 package view;
 
 import model.data.VehicleData;
+import model.entities.ParkingLot;
 import model.entities.Space;
 import model.entities.Vehicle;
+import Controller.ParkingLotController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SpaceView extends JInternalFrame {
 
-    private List<Space> spaces;
+    private ParkingLot parkingLot;
     private ParkingLotPanel parkingLotPanel;
     private SpacePanel selectedPanel;
+    private AdminMenu parent;
 
-    public SpaceView() {
-        setTitle("Gestión de Espacios");
+    public SpaceView(ParkingLot parkingLot, AdminMenu parent) {
+        this.parkingLot = parkingLot;
+        this.parent = parent;
+
+        setTitle("Espacios - " + parkingLot.getName());
         setClosable(true);
         setSize(800, 500);
         setLayout(new BorderLayout());
 
-        spaces = createSpacesFromVehicles();
+        List<Space> spaces = Arrays.asList(parkingLot.getSpaces());
 
         parkingLotPanel = new ParkingLotPanel(spaces, this);
         add(parkingLotPanel, BorderLayout.CENTER);
@@ -35,12 +41,22 @@ public class SpaceView extends JInternalFrame {
 
         JButton btnOccupy = new JButton("Ocupar");
         JButton btnRelease = new JButton("Liberar");
+        JButton btnChangeParking = new JButton("Cambiar parqueo");
 
         btnOccupy.addActionListener(e -> occupySpace());
         btnRelease.addActionListener(e -> releaseSpace());
 
+        btnChangeParking.addActionListener(e -> {
+            ParkingLotController controller = new ParkingLotController();
+            parent.openInternalFrame(
+                    new SelectParkingLotView(controller.getAllParkingLots(), parent)
+            );
+            dispose(); // cerrar esta vista
+        });
+
         panel.add(btnOccupy);
         panel.add(btnRelease);
+        panel.add(btnChangeParking);
 
         return panel;
     }
@@ -83,8 +99,7 @@ public class SpaceView extends JInternalFrame {
             space.setAvailable(false);
             space.setDisabilityAdaptation(selectedVehicle.hasPreferentialClient());
 
-            selectedPanel.updateColor();
-            selectedPanel.updateTooltip();
+            refreshPanel();
         }
     }
 
@@ -107,8 +122,7 @@ public class SpaceView extends JInternalFrame {
         space.setAvailable(true);
         space.setDisabilityAdaptation(false);
 
-        selectedPanel.updateColor();
-        selectedPanel.updateTooltip();
+        refreshPanel();
     }
 
     // ================= SELECCIÓN =================
@@ -120,35 +134,10 @@ public class SpaceView extends JInternalFrame {
         selectedPanel.setSelected(true);
     }
 
-    // ================= DATOS =================
-    private List<Space> createSpacesFromVehicles() {
-        List<Space> list = new ArrayList<>();
-
-        VehicleData vehicleData = new VehicleData();
-        List<Vehicle> vehicles = vehicleData.getAllVehicles();
-
-        int id = 1;
-
-        for (Vehicle v : vehicles) {
-            Space space = new Space();
-            space.setId(id++);
-            space.setVehicle(v);
-            space.setClient(v.getClients().isEmpty() ? null : v.getClients().get(0));
-            space.setSpaceTaken(true);
-            space.setAvailable(false);
-            space.setDisabilityAdaptation(v.hasPreferentialClient());
-            list.add(space);
-        }
-
-        while (list.size() < 12) {
-            Space space = new Space();
-            space.setId(id++);
-            space.setSpaceTaken(false);
-            space.setAvailable(true);
-            space.setDisabilityAdaptation(false);
-            list.add(space);
-        }
-
-        return list;
+    // ================= REFRESH =================
+    private void refreshPanel() {
+        selectedPanel.updateColor();
+        selectedPanel.updateTooltip();
+        parkingLotPanel.repaint();
     }
 }

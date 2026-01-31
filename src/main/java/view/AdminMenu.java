@@ -4,6 +4,7 @@
  */
 package view;
 
+import Controller.ParkingLotController;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ public class AdminMenu extends JFrame {
 
     private LoginWindow loginWindow;
     private HomeDesktop desktop;
+    private ParkingLotController parkingLotController = new ParkingLotController();
 
     public AdminMenu(LoginWindow loginWindow) {
 
@@ -100,11 +102,13 @@ public class AdminMenu extends JFrame {
         spacesMenu.add(manageSpaces);
 
         manageSpaces.addActionListener(e -> {
-            openInternalFrame(new SpaceView());
+            openInternalFrame(
+                    new SelectParkingLotView(
+                            parkingLotController.getAllParkingLots(),
+                            this
+                    )
+            );
         });
-
-        JMenuItem parkingSpacesItem = new JMenuItem("Ver Espacios");
-        spacesMenu.add(parkingSpacesItem);
 
         // ---------- OPERARIOS - users ----------
         JMenu clerksMenu = new JMenu("Operarios");
@@ -172,7 +176,7 @@ public class AdminMenu extends JFrame {
 
     }
 
-    private void openInternalFrame(JInternalFrame frame) {
+    void openInternalFrame(JInternalFrame frame) {
         desktop.add(frame);
         frame.setVisible(true);
     }
