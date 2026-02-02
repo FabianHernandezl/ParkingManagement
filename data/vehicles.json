@@ -185,10 +185,10 @@
       }
     ],
     "vehicleType": {
-      "id": 2,
-      "description": "Motocicleta",
-      "numberOfTires": 2,
-      "fee": 2.5
+      "id": 0,
+      "description": "Carro",
+      "numberOfTires": 0,
+      "fee": 0.0
     }
   }
 ]

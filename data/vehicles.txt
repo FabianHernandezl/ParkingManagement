@@ -100,7 +100,7 @@ Placa:        ABC123
 Marca:        Toyota
 Modelo:       Corolla
 Color:        Rojo
-Tipo:         Motocicleta
+Tipo:         Carro
 Clientes:     
               - Cliente Prueba (ID: C-001)
 ----------------------------------------
