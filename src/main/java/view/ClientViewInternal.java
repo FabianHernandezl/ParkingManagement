@@ -112,6 +112,7 @@ public class ClientViewInternal extends JInternalFrame {
     private void initTable() {
         model = new DefaultTableModel(
                 new String[]{"ID", "Nombre", "Teléfono", "Preferencial"}, 0) {
+            @Override
             public boolean isCellEditable(int r, int c) {
                 return false;
             }
@@ -120,23 +121,32 @@ public class ClientViewInternal extends JInternalFrame {
         table = new JTable(model);
         UITheme.styleTable(table);
 
+        table.setRowHeight(28); // 🔹 más aire visual
+
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(
                     JTable table, Object value, boolean isSelected,
                     boolean hasFocus, int row, int column) {
 
-                Component c = super.getTableCellRendererComponent(
+                JLabel cell = (JLabel) super.getTableCellRendererComponent(
                         table, value, isSelected, hasFocus, row, column);
 
+                cell.setOpaque(true); // 🔴 CLAVE para evitar transparencia
+                cell.setForeground(Color.BLACK);
+
                 boolean pref = table.getValueAt(row, 3).toString().equals("Sí");
-                c.setBackground(pref ? new Color(210, 235, 210) : Color.WHITE);
 
                 if (isSelected) {
-                    c.setBackground(UITheme.SECONDARY);
-                    c.setForeground(Color.WHITE);
+                    cell.setBackground(UITheme.PRIMARY);
+                    cell.setForeground(Color.WHITE);
+                } else {
+                    cell.setBackground(pref
+                            ? new Color(220, 240, 220) // verde suave
+                            : Color.WHITE);
                 }
-                return c;
+
+                return cell;
             }
         });
 
@@ -219,10 +229,20 @@ public class ClientViewInternal extends JInternalFrame {
     }
 
     private void deleteClient() {
-        JOptionPane.showMessageDialog(this,
-                clientController.deleteClient(txtId.getText()));
-        loadTable();
-        clearForm();
+        int option = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro de eliminar este cliente?\nEsta acción no se puede deshacer.",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (option == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this,
+                    clientController.deleteClient(txtId.getText()));
+            loadTable();
+            clearForm();
+        }
     }
 
     private void openReport() {

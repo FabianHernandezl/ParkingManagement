@@ -20,26 +20,6 @@
     }
   },
   {
-    "plate": "677678",
-    "color": "blanco",
-    "brand": "Toyota",
-    "model": "2001",
-    "clients": [
-      {
-        "id": "119520051",
-        "name": "Jimena",
-        "phone": "71133584",
-        "isPreferential": false
-      }
-    ],
-    "vehicleType": {
-      "id": 1,
-      "description": "Carro",
-      "numberOfTires": 0,
-      "fee": 0.0
-    }
-  },
-  {
     "plate": "13513",
     "color": "Negro",
     "brand": "Suzuki",
