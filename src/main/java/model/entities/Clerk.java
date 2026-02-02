@@ -4,6 +4,8 @@
  */
 package model.entities;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author FAMILIA
@@ -12,26 +14,28 @@ public class Clerk extends User{
     private int employeeCode;
    private String shedule;
    private int age;
-   private ParkingLot parkingLot;
+   private ArrayList<ParkingLot> parkingLot;
    //+ los atributos de User por herencia
 
     public Clerk() {
     }
 
-    public Clerk(int employeeCode, String shedule, int age, ParkingLot parkingLot) {
+    public Clerk(int employeeCode, String shedule, int age, ArrayList<ParkingLot> parkingLot) {
         this.employeeCode = employeeCode;
         this.shedule = shedule;
         this.age = age;
         this.parkingLot = parkingLot;
     }
 
-    public Clerk(int employeeCode, String shedule, int age, ParkingLot parkingLot, String id, String name, String username, String password) {
+    public Clerk(int employeeCode, String shedule, int age, ArrayList<ParkingLot> parkingLot, String id, String name, String username, String password) {
         super(id, name, username, password);
         this.employeeCode = employeeCode;
         this.shedule = shedule;
         this.age = age;
         this.parkingLot = parkingLot;
     }
+
+ 
 
     public int getEmployeeCode() {
         return employeeCode;
@@ -57,19 +61,22 @@ public class Clerk extends User{
         this.age = age;
     }
 
-    public ParkingLot getParkingLot() {
+    public ArrayList<ParkingLot> getParkingLot() {
         return parkingLot;
     }
 
-    public void setParkingLot(ParkingLot parkingLot) {
+    public void setParkingLot(ArrayList<ParkingLot> parkingLot) {
         this.parkingLot = parkingLot;
     }
 
     @Override
     public String toString() {
-        return "Clerk{" + "employeeCode=" + employeeCode + ", shedule=" + shedule + ", age=" + age + ", parkingLot=" + parkingLot + '}';
+        return "Clerk{" + "employeeCode=" + employeeCode + ", shedule=" + shedule + ", age=" + age + ", parkingLot(s)=" + parkingLot + '}';
     }
 
+   
+
+    
     @Override
     public boolean verifyUserLogin(String[] loginDetails) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
