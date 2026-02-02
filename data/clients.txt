@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 6
+Total de clientes: 7
 ========================================
 
 CLIENTE #1
@@ -49,6 +49,14 @@ CLIENTE #6
 ID:            305620529
 Nombre:        Zailyn Tencio
 Teléfono:      84379367
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #7
+----------------------------------------
+ID:            j
+Nombre:        k
+Teléfono:      0
 Preferencial:  No
 ----------------------------------------
 

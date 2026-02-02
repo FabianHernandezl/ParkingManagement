@@ -29,7 +29,6 @@ public class Vehicle {
         this.clients.add(client);
     }
 
-    
     public Vehicle(String plate, String color, String brand, String model) {
         this.plate = plate;
         this.color = color;
@@ -127,6 +126,19 @@ public class Vehicle {
                 + "Clientes:\n"
                 + infoClients
                 + "==============================";
+    }
+
+    public String getIcon() {
+        if (vehicleType.getDescription().equalsIgnoreCase("Carro")) {
+            return "🚗";
+        }
+        if (vehicleType.getDescription().equalsIgnoreCase("Moto")) {
+            return "🏍";
+        }
+        if (vehicleType.getDescription().equalsIgnoreCase("Camión")) {
+            return "🚚";
+        }
+        return "❓";
     }
 
 }
