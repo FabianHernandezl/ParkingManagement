@@ -24,7 +24,8 @@ public class ClerksView extends JInternalFrame {
     private JTextField txtEmployeeCode;
     private JComboBox<String> cmbSchedule;
     private JTextField txtAge;
-    private JComboBox<ParkingLot> cmbParkingLot;
+    private JList<ParkingLot> lstParkingLots; // Cambiado de JComboBox a JList
+    private DefaultListModel<ParkingLot> parkingLotModel; // Modelo para el JList
     private JTable table;
     private DefaultTableModel model;
     private JButton btnUpdate;
@@ -39,7 +40,7 @@ public class ClerksView extends JInternalFrame {
         // Inicializar ClerkData
         clerkData = new ClerkData();
 
-        setSize(800, 600);
+        setSize(900, 650); // Aumentado el tamaño para acomodar el JList
         setLayout(null);
         setVisible(true);
 
@@ -58,7 +59,7 @@ public class ClerksView extends JInternalFrame {
 
         txtId = new JTextField();
         txtId.setBounds(x + labelWidth, y, fieldWidth, 20);
-        txtId.setEditable(false); // No editable porque se genera automáticamente
+        txtId.setEditable(false);
         txtId.setBackground(new Color(240, 240, 240));
         add(txtId);
         y += verticalSpacing;
@@ -71,7 +72,7 @@ public class ClerksView extends JInternalFrame {
 
         txtEmployeeCode = new JTextField();
         txtEmployeeCode.setBounds(x + labelWidth + 5, y, fieldWidth, 20);
-        txtEmployeeCode.setEditable(false); // No editable porque se genera automáticamente
+        txtEmployeeCode.setEditable(false);
         txtEmployeeCode.setBackground(new Color(240, 240, 240));
         add(txtEmployeeCode);
         y += verticalSpacing;
@@ -127,16 +128,48 @@ public class ClerksView extends JInternalFrame {
         add(txtAge);
         y += verticalSpacing;
 
-        // Parqueo Asignado
-        JLabel lblParkingLot = new JLabel("Parqueo Asignado:");
+        // Parqueo/s Asignado/s - AHORA CON JLIST
+        JLabel lblParkingLot = new JLabel("Parqueo/s Asignado/s:");
         lblParkingLot.setBounds(x, y, labelWidth, 25);
         add(lblParkingLot);
+        y += 25; // Espacio extra para la etiqueta
 
-        cmbParkingLot = new JComboBox<>();
-        loadParkingLots();
-        cmbParkingLot.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(cmbParkingLot);
-        y += verticalSpacing;
+        // Inicializar el JList con DefaultListModel
+        parkingLotModel = new DefaultListModel<>();
+        lstParkingLots = new JList<>(parkingLotModel);
+        lstParkingLots.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        
+        // Configurar renderer para mostrar mejor los ParkingLot
+        lstParkingLots.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value,
+                    int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                
+                if (value instanceof ParkingLot) {
+                    ParkingLot pl = (ParkingLot) value;
+                    setText(pl.getName() + " - " + pl.getNumberOfSpaces());
+                } else if (value == null) {
+                    setText("Sin asignar");
+                }
+                
+                return this;
+            }
+        });
+        
+        // Crear JScrollPane para el JList con posición y tamaño definidos
+        JScrollPane scrollPanePL = new JScrollPane(lstParkingLots);
+        scrollPanePL.setBounds(x + labelWidth + 10, y, fieldWidth, 100); // ALTURA AUMENTADA
+        add(scrollPanePL);
+        y += 110; // Espacio después del JList
+
+        // Etiqueta informativa
+        JLabel lblInfo = new JLabel("Seleccione varios con Ctrl+Click o Shift+Click");
+        lblInfo.setBounds(x + labelWidth + 10, y, fieldWidth, 20);
+        lblInfo.setFont(new Font("Arial", Font.ITALIC, 10));
+        lblInfo.setForeground(Color.GRAY);
+        add(lblInfo);
+        y += 25;
 
         // Botones
         JButton btnSave = new JButton("Guardar Nuevo");
@@ -166,9 +199,12 @@ public class ClerksView extends JInternalFrame {
         btnDelete.setEnabled(false);
         add(btnDelete);
 
+        // Cargar los parking lots en el JList
+        loadParkingLots();
+
         // Tabla
         model = new DefaultTableModel(new String[]{
-            "ID", "Nombre", "Usuario", "Código", "Horario", "Edad", "Parqueo"
+            "ID", "Nombre", "Usuario", "Código", "Horario", "Edad", "Parqueo/s"
         }, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -186,10 +222,10 @@ public class ClerksView extends JInternalFrame {
         table.getColumnModel().getColumn(3).setPreferredWidth(70);   // Código
         table.getColumnModel().getColumn(4).setPreferredWidth(100);  // Horario
         table.getColumnModel().getColumn(5).setPreferredWidth(50);   // Edad
-        table.getColumnModel().getColumn(6).setPreferredWidth(120);  // Parqueo
+        table.getColumnModel().getColumn(6).setPreferredWidth(150);  // Parqueo/s
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(350, 20, 420, 500);
+        scrollPane.setBounds(400, 20, 450, 500); // Ajustada posición por el tamaño aumentado
         add(scrollPane);
 
         // Cargar datos iniciales
@@ -221,17 +257,14 @@ public class ClerksView extends JInternalFrame {
      */
     private void generateNextIds() {
         try {
-            // Generar próximo ID
             int nextIdNumber = clerkData.findLastIdNumberOfClerk() + 1;
             String nextId = String.format("CLK%04d", nextIdNumber);
             txtId.setText(nextId);
 
-            // Generar próximo código de empleado
             int nextEmployeeCode = clerkData.findLastEmployeeCode() + 1;
             txtEmployeeCode.setText(String.valueOf(nextEmployeeCode));
 
         } catch (Exception e) {
-            // Valores por defecto si hay error
             txtId.setText("CLK0001");
             txtEmployeeCode.setText("1001");
             System.err.println("Error generando IDs: " + e.getMessage());
@@ -240,15 +273,16 @@ public class ClerksView extends JInternalFrame {
 
     private void loadParkingLots() {
         try {
-            //método para obtener todos los parking lots
+            parkingLotModel.clear();
+            
+            // Agregar opción "Sin asignar" como primer elemento
+            parkingLotModel.addElement(null);
+            
             ParkingLotData parkingLotData = new ParkingLotData();
             ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
 
-            cmbParkingLot.removeAllItems();
-            cmbParkingLot.addItem(null); // Opción vacía para "Sin asignar"
-
             for (ParkingLot parkingLot : parkingLots) {
-                cmbParkingLot.addItem(parkingLot);
+                parkingLotModel.addElement(parkingLot);
             }
         } catch (Exception e) {
             System.err.println("Error cargando parqueos: " + e.getMessage());
@@ -266,9 +300,8 @@ public class ClerksView extends JInternalFrame {
         };
 
         try {
-
             cmbSchedule.removeAllItems();
-            cmbSchedule.addItem(null); // Opción vacía para "Sin asignar"
+            cmbSchedule.addItem(null);
 
             for (String schedule : schedules) {
                 cmbSchedule.addItem(schedule);
@@ -284,8 +317,19 @@ public class ClerksView extends JInternalFrame {
             ArrayList<Clerk> clerks = clerkData.getAllClerks();
 
             for (Clerk clerk : clerks) {
-                ParkingLot parkingLot = clerk.getParkingLot();
-                String parkingLotName = (parkingLot != null) ? parkingLot.getName() : "Sin asignar";
+                ArrayList<ParkingLot> parkingLots = clerk.getParkingLot();
+                
+                // Formatear nombres de parking lots para mostrar en tabla
+                String parkingLotNames;
+                if (parkingLots != null && !parkingLots.isEmpty()) {
+                    ArrayList<String> nombres = new ArrayList<>();
+                    for (ParkingLot pl : parkingLots) {
+                        nombres.add(pl.getName());
+                    }
+                    parkingLotNames = String.join(", ", nombres);
+                } else {
+                    parkingLotNames = "Sin asignar";
+                }
 
                 model.addRow(new Object[]{
                     clerk.getId(),
@@ -294,7 +338,7 @@ public class ClerksView extends JInternalFrame {
                     clerk.getEmployeeCode(),
                     clerk.getShedule(),
                     clerk.getAge(),
-                    parkingLotName
+                    parkingLotNames
                 });
             }
         } catch (Exception e) {
@@ -304,12 +348,10 @@ public class ClerksView extends JInternalFrame {
 
     private void saveClerk() {
         try {
-            // Validar campos requeridos
             if (!validateRequiredFields()) {
                 return;
             }
 
-            // Verificar si el ID ya existe
             String id = txtId.getText().trim();
             if (clerkData.findClerkById(id) != null) {
                 JOptionPane.showMessageDialog(this,
@@ -320,7 +362,6 @@ public class ClerksView extends JInternalFrame {
                 return;
             }
 
-            // Verificar si el usuario ya existe
             String username = txtUsername.getText().trim();
             if (clerkData.findClerkByUsername(username) != null) {
                 JOptionPane.showMessageDialog(this,
@@ -331,10 +372,7 @@ public class ClerksView extends JInternalFrame {
                 return;
             }
 
-            // Crear objeto Clerk
             Clerk clerk = createClerkFromForm();
-
-            // Guardar en ClerkData
             Clerk clerkToInsert = clerkData.addClerk(clerk);
 
             if (clerkToInsert != null) {
@@ -381,7 +419,6 @@ public class ClerksView extends JInternalFrame {
                 return;
             }
 
-            // Verificar que el operario existe
             Clerk existingClerk = clerkData.findClerkById(id);
             if (existingClerk == null) {
                 JOptionPane.showMessageDialog(this,
@@ -391,7 +428,6 @@ public class ClerksView extends JInternalFrame {
                 return;
             }
 
-            // Validar campos requeridos
             if (!validateRequiredFields()) {
                 return;
             }
@@ -449,7 +485,6 @@ public class ClerksView extends JInternalFrame {
             return;
         }
 
-        // Obtener nombre para mostrar en confirmación
         String name = txtName.getText().trim();
         String displayName = name.isEmpty() ? id : name;
 
@@ -486,14 +521,22 @@ public class ClerksView extends JInternalFrame {
     private Clerk createClerkFromForm() throws NumberFormatException {
         int employeeCode = Integer.parseInt(txtEmployeeCode.getText().trim());
         int age = Integer.parseInt(txtAge.getText().trim());
-        ParkingLot parkingLot = (ParkingLot) cmbParkingLot.getSelectedItem();
+        
+        // Obtener los parking lots seleccionados del JList
+        ArrayList<ParkingLot> selectedParkingLots = new ArrayList<>(lstParkingLots.getSelectedValuesList());
+        
+        // Si solo se seleccionó "Sin asignar" (null), lista vacía
+        if (selectedParkingLots.size() == 1 && selectedParkingLots.get(0) == null) {
+            selectedParkingLots.clear();
+        }
+        
         String schedule = (String) cmbSchedule.getSelectedItem();
 
         return new Clerk(
                 employeeCode,
                 schedule,
                 age,
-                parkingLot,
+                selectedParkingLots,
                 txtId.getText().trim(),
                 txtName.getText().trim(),
                 txtUsername.getText().trim(),
@@ -516,7 +559,7 @@ public class ClerksView extends JInternalFrame {
             errors.append("• Contraseña es obligatoria\n");
         }
 
-        if (cmbSchedule.getSelectedItem().equals(null)) {
+        if (cmbSchedule.getSelectedItem() == null) {
             errors.append("• Horario es obligatorio\n");
         }
 
@@ -551,7 +594,6 @@ public class ClerksView extends JInternalFrame {
         }
 
         try {
-            // Obtener datos de la fila seleccionada
             String id = model.getValueAt(row, 0).toString();
             Clerk clerk = clerkData.findClerkById(id);
 
@@ -564,27 +606,49 @@ public class ClerksView extends JInternalFrame {
                 txtAge.setText(String.valueOf(clerk.getAge()));
 
                 // Seleccionar el horario en el combo
-                String schedule = (clerk.getShedule());
+                String schedule = clerk.getShedule();
                 if (schedule != null) {
                     cmbSchedule.setSelectedItem(schedule);
                 } else {
                     cmbSchedule.setSelectedIndex(0);
                 }
 
-                // Seleccionar el parking lot en el combo
-                ParkingLot parkingLot = clerk.getParkingLot();
-                if (parkingLot != null) {
-                    cmbParkingLot.setSelectedItem(parkingLot);
+                // Seleccionar los parking lots en el JList
+                ArrayList<ParkingLot> parkingLots = clerk.getParkingLot();
+                if (parkingLots != null && !parkingLots.isEmpty()) {
+                    // Buscar los índices de los parking lots en el modelo
+                    ArrayList<Integer> indices = new ArrayList<>();
+                    for (ParkingLot pl : parkingLots) {
+                        for (int i = 0; i < parkingLotModel.getSize(); i++) {
+                            ParkingLot item = parkingLotModel.getElementAt(i);
+                            if (item != null && item.equals(pl)) {
+                                indices.add(i);
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // Convertir a array y seleccionar
+                    if (!indices.isEmpty()) {
+                        int[] indicesArray = new int[indices.size()];
+                        for (int i = 0; i < indices.size(); i++) {
+                            indicesArray[i] = indices.get(i);
+                        }
+                        lstParkingLots.setSelectedIndices(indicesArray);
+                    } else {
+                        lstParkingLots.clearSelection();
+                    }
                 } else {
-                    cmbParkingLot.setSelectedIndex(0);
+                    // Si no tiene parking lots asignados, seleccionar "Sin asignar" (índice 0)
+                    lstParkingLots.setSelectedIndex(0);
                 }
 
-                // Hacer el ID y código editables para actualización
-                txtId.setEditable(false); // ID no se puede cambiar
-                txtEmployeeCode.setEditable(false); // Código no se puede cambiar
+                txtId.setEditable(false);
+                txtEmployeeCode.setEditable(false);
             }
         } catch (Exception e) {
             System.err.println("Error al llenar formulario: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -594,15 +658,13 @@ public class ClerksView extends JInternalFrame {
         txtPassword.setText("");
         cmbSchedule.setSelectedIndex(0);
         txtAge.setText("");
-        cmbParkingLot.setSelectedIndex(0);
+        lstParkingLots.clearSelection(); // Limpiar selección del JList
 
-        // Restaurar campos no editables
         txtId.setEditable(false);
         txtEmployeeCode.setEditable(false);
 
         table.clearSelection();
 
-        // Deshabilitar botones de actualizar y eliminar
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
 

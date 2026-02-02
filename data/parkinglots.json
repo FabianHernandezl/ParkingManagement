@@ -14,7 +14,8 @@
           "description": "Discapacitado",
           "numberOfTires": 4,
           "fee": 0.0
-        }
+        },
+        "available": false
       },
       {
         "id": 2,
@@ -25,7 +26,8 @@
           "description": "Discapacitado",
           "numberOfTires": 4,
           "fee": 0.0
-        }
+        },
+        "available": false
       },
       {
         "id": 3,
@@ -36,7 +38,8 @@
           "description": "Discapacitado",
           "numberOfTires": 4,
           "fee": 0.0
-        }
+        },
+        "available": false
       },
       {
         "id": 4,
@@ -49,6 +52,7 @@
           "fee": 2.5
         },
         "entryTime": "Jan 30, 2026, 9:28:07 AM",
+        "available": false,
         "client": {
           "id": "C-001",
           "name": "Cliente Prueba",
@@ -87,6 +91,7 @@
           "fee": 2.5
         },
         "entryTime": "Jan 30, 2026, 9:42:38 AM",
+        "available": false,
         "client": {
           "id": "305620529",
           "name": "Zailyn Tencio",
@@ -129,7 +134,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 7,
@@ -140,7 +146,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 8,
@@ -151,7 +158,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 9,
@@ -162,7 +170,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 10,
@@ -173,7 +182,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       }
     ]
   },
@@ -192,7 +202,8 @@
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
-        }
+        },
+        "available": false
       },
       {
         "id": 2,
@@ -203,7 +214,8 @@
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
-        }
+        },
+        "available": false
       },
       {
         "id": 3,
@@ -214,7 +226,8 @@
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
-        }
+        },
+        "available": false
       },
       {
         "id": 4,
@@ -225,7 +238,8 @@
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
-        }
+        },
+        "available": false
       },
       {
         "id": 5,
@@ -236,7 +250,8 @@
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
-        }
+        },
+        "available": false
       },
       {
         "id": 6,
@@ -247,7 +262,8 @@
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
-        }
+        },
+        "available": false
       },
       {
         "id": 7,
@@ -258,7 +274,8 @@
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
-        }
+        },
+        "available": false
       },
       {
         "id": 8,
@@ -269,7 +286,8 @@
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
-        }
+        },
+        "available": false
       },
       {
         "id": 9,
@@ -280,7 +298,8 @@
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
-        }
+        },
+        "available": false
       },
       {
         "id": 10,
@@ -291,7 +310,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 11,
@@ -302,7 +322,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 12,
@@ -313,7 +334,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 13,
@@ -324,7 +346,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 14,
@@ -335,7 +358,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 15,
@@ -346,7 +370,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 16,
@@ -357,7 +382,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 17,
@@ -368,7 +394,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 18,
@@ -379,7 +406,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 19,
@@ -390,7 +418,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 20,
@@ -401,7 +430,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       }
     ]
   },
@@ -420,7 +450,8 @@
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
-        }
+        },
+        "available": false
       },
       {
         "id": 2,
@@ -431,7 +462,8 @@
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
-        }
+        },
+        "available": false
       },
       {
         "id": 3,
@@ -442,7 +474,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 4,
@@ -453,7 +486,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 5,
@@ -464,13 +498,14 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       }
     ]
   },
   {
     "id": 4,
-    "name": "Jumopt",
+    "name": "Parqueo Central",
     "numberOfSpaces": 10,
     "vehicles": [],
     "spaces": [
@@ -483,7 +518,8 @@
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
-        }
+        },
+        "available": false
       },
       {
         "id": 2,
@@ -494,7 +530,8 @@
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
-        }
+        },
+        "available": false
       },
       {
         "id": 3,
@@ -505,7 +542,8 @@
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
-        }
+        },
+        "available": false
       },
       {
         "id": 4,
@@ -516,7 +554,8 @@
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
-        }
+        },
+        "available": false
       },
       {
         "id": 5,
@@ -527,7 +566,8 @@
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
-        }
+        },
+        "available": false
       },
       {
         "id": 6,
@@ -538,7 +578,8 @@
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
-        }
+        },
+        "available": false
       },
       {
         "id": 7,
@@ -549,7 +590,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 8,
@@ -560,7 +602,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 9,
@@ -571,7 +614,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       },
       {
         "id": 10,
@@ -582,7 +626,8 @@
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
-        }
+        },
+        "available": false
       }
     ]
   }
