@@ -4,29 +4,30 @@
  */
 package model.entities;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author FAMILIA
  */
 public class Administrator extends User{
     private int adminNumber;
-    private ParkingLot parkingLot;
-
+    private ArrayList<ParkingLot> parkingLot;
+   //+ los atributos de User por herencia
     public Administrator() {
     }
 
-    public Administrator(int adminNumber, ParkingLot parkingLot) {
+    public Administrator(int adminNumber, ArrayList<ParkingLot> parkingLot) {
         this.adminNumber = adminNumber;
         this.parkingLot = parkingLot;
     }
 
-    public Administrator(int adminNumber, ParkingLot parkingLot, String id, String name, String username, String password) {
+    public Administrator(int adminNumber, ArrayList<ParkingLot> parkingLot, String id, String name, String username, String password) {
         super(id, name, username, password);
         this.adminNumber = adminNumber;
         this.parkingLot = parkingLot;
     }
 
-    
 
     public int getAdminNumber() {
         return adminNumber;
@@ -36,13 +37,15 @@ public class Administrator extends User{
         this.adminNumber = adminNumber;
     }
 
-    public ParkingLot getParkingLot() {
+    public ArrayList<ParkingLot> getParkingLot() {
         return parkingLot;
     }
 
-    public void setParkingLot(ParkingLot parkingLot) {
+    public void setParkingLot(ArrayList<ParkingLot> parkingLot) {
         this.parkingLot = parkingLot;
     }
+
+  
 
     @Override
     public String toString() {

@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,6 +36,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import model.data.ParkingLotData;
 import model.entities.Administrator;
 import model.entities.Clerk;
 import model.entities.ParkingLot;
@@ -50,7 +52,8 @@ public class LoginWindow extends JFrame implements ActionListener {
 
     ClerkController clerkController;
     AdministratorController administratorController;
-
+    ParkingLotData parkingLotController;
+    
     // Variables para evitar múltiples ejecuciones
     private static File lockFile;
     private static FileChannel lockChannel;
@@ -412,10 +415,11 @@ public class LoginWindow extends JFrame implements ActionListener {
                 return;
             }
 
+           ArrayList<ParkingLot> parkingLots = new  ArrayList<ParkingLot>();
             User userAuthenticatedClerk = clerkController.searchUser(
                     new Clerk(1, "", 0, null, "3", "", username, password));
             User userAuthenticatedAdmin = administratorController.searchUser(
-                    new Administrator(1, new ParkingLot(), "1", null, username, password));
+                    new Administrator(1,  parkingLots, "1", null, username, password));
 
             if (userAuthenticatedClerk == null && userAuthenticatedAdmin == null) {
                 showErrorMessage("Usuario no encontrado en el sistema");

@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import model.entities.Administrator;
+import model.entities.Clerk;
 import model.entities.ParkingLot;
 
 /**
@@ -22,6 +23,7 @@ public class AdministratorData {
 
     private static final String FILE_PATH = "data/administrators.json";
     private ArrayList<Administrator> administrators;
+    ParkingLotData parkingLotData = new ParkingLotData();
     static int adminId = 0;
 
     private final Gson gson = new GsonBuilder()
@@ -29,28 +31,27 @@ public class AdministratorData {
             .create();
 
     public AdministratorData() {
-        administrators = loadAdmins();
-
+        administrators = loadAdministrators();
+        administrators = new ArrayList<Administrator>();
+         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();//trae todos los parqueos actuales
+         administrators.add(new Administrator(1001, parkingLots, "ID-FAB", "Fabián", "admin_fabian", "fabian123"));
+        administrators.add(new Administrator(1002, parkingLots, "ID-ZAY", "Zaylin", "admin_zailyn", "zailyn456"));
+        administrators.add(new Administrator(1003, parkingLots, "ID-JIM", "Jimena", "admin_jimena", "jimena789"));
+        administrators.add(new Administrator(1004, parkingLots, "ID-CAM", "Camila", "admin_camila", "camila012"));
     }
 
     // devuelve todos los Administrators de la lista que simula la base de datos.
     public ArrayList<Administrator> getAllAdministrators() {
-        
-        ParkingLot parkingLot = new ParkingLot();
+        return new ArrayList<>(administrators); // Retorna copia para evitar modificación externa
 
-        administrators.add(new Administrator(1001, parkingLot, "ID-FAB", "Fabián", "admin_fabian", "fabian123"));
-        administrators.add(new Administrator(1002, parkingLot, "ID-ZAY", "Zaylin", "admin_zailyn", "zailyn456"));
-        administrators.add(new Administrator(1003, parkingLot, "ID-JIM", "Jimena", "admin_jimena", "jimena789"));
-        administrators.add(new Administrator(1004, parkingLot, "ID-CAM", "Camila", "admin_camila", "camila012"));
-
-        return administrators;
     }
 
     /*
     Loads clients from JSON file
      */
-    private ArrayList<Administrator> loadAdmins() {
+    private ArrayList<Administrator> loadAdministrators() {
 
+        
         try (FileReader reader = new FileReader(FILE_PATH)) {
 
             Type listType = new TypeToken<ArrayList<Administrator>>() {
@@ -66,9 +67,24 @@ public class AdministratorData {
     }
 
     /*
+    Add new admin
+     */
+    public Administrator addAdministrator(Administrator admin) {
+        Administrator adminToReturn = null;
+
+        if (admin != null && findAdministratorById(admin.getId()) == null) {
+            administrators.add(admin);
+            saveAdministrators();
+            adminToReturn = admin;
+        }
+
+        return adminToReturn;
+    }
+
+    /*
     Saves clients to JSON file
      */
-    private void saveParkingLots() {
+    private void saveAdministrators() {
 
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             gson.toJson(administrators, writer);
@@ -77,19 +93,104 @@ public class AdministratorData {
         }
 
     }
-    
-      /*
+
+    /*
+    Finds a admin by id
+     */
+    public Administrator findAdministratorById(String id) {
+        for (Administrator admin : administrators) {
+            if (admin.getId().equals(id)) {
+                return admin;
+            }
+        }
+        return null;
+    }
+
+    /*
     Finds a admin by username 
      */
     public Administrator findAdminByUsername(String username) {
         Administrator adminToReturn = new Administrator();
-        
+
         for (Administrator admin : administrators) {
             if (admin.getUsername().equals(username)) {
                 adminToReturn = admin;
             }
         }
         return adminToReturn;
+    }
+
+    /*
+    Updates an existing admin
+     */
+    public boolean updateAdministrator(Administrator updatedAdministrator) {
+        for (int i = 0; i < administrators.size(); i++) {
+            if (administrators.get(i).getId().equals(updatedAdministrator.getId())) {
+                administrators.set(i, updatedAdministrator);
+                saveAdministrators();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    Removes a admin by id
+     */
+    public boolean removeAdministrator(String id) {
+        Administrator admin = findAdministratorById(id);
+        if (admin != null) {
+            administrators.remove(admin);
+            saveAdministrators();
+            return true;
+        }
+        return false;
+    }
+
+    /*
+    Authenticates a admin 
+     */
+    public Administrator authenticateAdmin(String username, String password) {
+        Administrator clerk = findAdminByUsername(username);
+        if (clerk != null && clerk.getPassword().equals(password)) {
+            return clerk;
+        }
+        return null;
+    }
+
+    public int findLastIdNumberOfAdmins() {
+        int maxId = 0;
+        for (Administrator admin : administrators) {
+            String id = admin.getId();
+            if (id.startsWith("CLK")) {
+                try {
+                    int idNum = Integer.parseInt(id.substring(3));
+                    if (idNum > maxId) {
+                        maxId = idNum;
+                    }
+                } catch (NumberFormatException e) {
+                    // Ignorar IDs con formato incorrecto
+                }
+            }
+        }
+        return maxId;
+    }
+
+    public int findLastAdminNumber() {
+        int maxCode = 1000; // Código inicial
+        for (Administrator admin : administrators) {
+            if (admin.getAdminNumber() > maxCode) {
+                maxCode = admin.getAdminNumber();
+            }
+        }
+        return maxCode;
+    }
+
+    /*
+    Get number of registered clerks
+     */
+    public int getAdminsCount() {
+        return administrators.size();
     }
 
 }
