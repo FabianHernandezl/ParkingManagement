@@ -13,12 +13,12 @@ public class Ticket {
     private Vehicle vehicle;
     private Space space;
     private LocalDateTime entryTime;
-    private LocalDateTime exitTime; // ← debe iniciar en null
+    private LocalDateTime exitTime; 
     private double total;
 
     public Ticket() {
         this.entryTime = LocalDateTime.now();
-        this.exitTime = null; // 🔑 CLAVE
+        this.exitTime = null; 
         this.total = 0.0;
     }
 

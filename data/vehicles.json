@@ -170,5 +170,25 @@
       "numberOfTires": 0,
       "fee": 0.0
     }
+  },
+  {
+    "plate": "1",
+    "color": "n",
+    "brand": "n",
+    "model": "n",
+    "clients": [
+      {
+        "id": "j",
+        "name": "k",
+        "phone": "0",
+        "isPreferential": false
+      }
+    ],
+    "vehicleType": {
+      "id": 0,
+      "description": "Carro",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
   }
 ]

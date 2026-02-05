@@ -8,26 +8,66 @@
       {
         "id": 1,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 3,
           "description": "Discapacitado",
           "numberOfTires": 4,
           "fee": 0.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "j",
+          "color": "p",
+          "brand": "c",
+          "model": "u",
+          "clients": [
+            {
+              "id": "j",
+              "name": "k",
+              "phone": "0",
+              "isPreferential": false
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
+        }
       },
       {
         "id": 2,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 3,
           "description": "Discapacitado",
           "numberOfTires": 4,
           "fee": 0.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "1",
+          "color": "n",
+          "brand": "n",
+          "model": "n",
+          "clients": [
+            {
+              "id": "j",
+              "name": "k",
+              "phone": "0",
+              "isPreferential": false
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
+        }
       },
       {
         "id": 3,

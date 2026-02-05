@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 7
+Total de clientes: 8
 ========================================
 
 CLIENTE #1
@@ -57,6 +57,14 @@ CLIENTE #7
 ID:            j
 Nombre:        k
 Teléfono:      0
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #8
+----------------------------------------
+ID:            1
+Nombre:        k
+Teléfono:      52
 Preferencial:  No
 ----------------------------------------
 
