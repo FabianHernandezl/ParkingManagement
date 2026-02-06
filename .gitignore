@@ -1,1 +1,28 @@
-/target/
+# Archivos compilados
+*.class
+*.jar
+*.war
+*.ear
+*.exe
+
+# Carpetas de build
+target/
+dist/
+build/
+
+# Archivos generados por Maven
+dependency-reduced-pom.xml
+
+# Archivos de Launch4j
+ParkingManagement.xml
+launch4j.log
+
+# Archivos de NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
