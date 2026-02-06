@@ -163,11 +163,18 @@ public class SpaceController {
         for (ParkingLot parkingLot : parkingLots) {
             if (parkingLot.getSpaces() != null) {
                 Space[] spaces = parkingLot.getSpaces();
+
                 for (int i = 0; i < spaces.length; i++) {
                     if (spaces[i] != null && spaces[i].getId() == updatedSpace.getId()) {
-                        // Actualizar el espacio
-                        spaces[i] = updatedSpace;
-                        // Guardar cambios en el parqueo
+
+                        // ✅ COPIAR CAMPOS (NO reemplazar el objeto)
+                        spaces[i].setSpaceTaken(updatedSpace.isSpaceTaken());
+                        spaces[i].setClient(updatedSpace.getClient());
+                        spaces[i].setVehicle(updatedSpace.getVehicle());
+                        spaces[i].setEntryTime(updatedSpace.getEntryTime());
+                        spaces[i].setDisabilityAdaptation(updatedSpace.isDisabilityAdaptation());
+                        spaces[i].setVehicleType(updatedSpace.getVehicleType());
+
                         return parkingLotData.updateParkingLot(parkingLot);
                     }
                 }

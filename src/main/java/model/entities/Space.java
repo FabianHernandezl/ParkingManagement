@@ -131,7 +131,11 @@ public class Space {
 
     @Override
     public String toString() {
-        return "Espacio #" + id + (spaceTaken ? " (Ocupado)" : " (Libre)");
+        if (spaceTaken && vehicle != null) {
+            return "Espacio #" + id
+                    + " (Ocupado) - Vehículo: " + vehicle.getPlate();
+        }
+        return "Espacio #" + id + " (Libre)";
     }
 
 }

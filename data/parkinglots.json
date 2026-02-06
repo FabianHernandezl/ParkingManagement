@@ -188,50 +188,133 @@
       {
         "id": 6,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "7",
+          "color": "0",
+          "brand": "9",
+          "model": "0",
+          "clients": [
+            {
+              "id": "3032900",
+              "name": "Ana Brenes",
+              "phone": "88889999",
+              "isPreferential": false
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
+        }
       },
       {
         "id": 7,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "33",
+          "color": "33",
+          "brand": "33",
+          "model": "33",
+          "clients": [
+            {
+              "id": "11",
+              "name": "j",
+              "phone": "d",
+              "isPreferential": false,
+              "email": "d"
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
+        }
       },
       {
         "id": 8,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "462607",
+          "color": "Vino",
+          "brand": "Fiat",
+          "model": "2001",
+          "clients": [
+            {
+              "id": "33260704",
+              "name": "Shirley",
+              "phone": "71133584",
+              "isPreferential": false,
+              "email": "calvo.shirley@yahoo. es"
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
+        }
       },
       {
         "id": 9,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "3",
+          "color": "k",
+          "brand": "hh",
+          "model": "k",
+          "clients": [
+            {
+              "id": "302030937",
+              "name": "Maria",
+              "phone": "9009093",
+              "isPreferential": false,
+              "email": "jiimendnendoe"
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
+        }
       },
       {
         "id": 10,

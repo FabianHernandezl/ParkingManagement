@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42477424-68ba-4ffa-8c05-9f57770cb9fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/data/clerks.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/clerks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/parkinglots.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/parkinglots.json" afterDir="false" />
-    </list>
+    <list default="true" id="42477424-68ba-4ffa-8c05-9f57770cb9fd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,12 +16,12 @@
     &quot;assignee&quot;: &quot;JimeCS-22&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/FabianHernandezl/ParkingManagement.git",
-    "accountId": "058a3909-7402-424c-9ffc-7061ec0a45a9"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/FabianHernandezl/ParkingManagement.git&quot;,
+    &quot;accountId&quot;: &quot;058a3909-7402-424c-9ffc-7061ec0a45a9&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -38,7 +35,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "JimeBranch",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>

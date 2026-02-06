@@ -1,7 +1,7 @@
 ========================================
       REGISTRO DE VEHÍCULOS
 ========================================
-Total de vehículos: 9
+Total de vehículos: 13
 ========================================
 
 VEHÍCULO #1
@@ -103,6 +103,50 @@ Color:        2
 Tipo:         Moto
 Clientes:     
               - Mariana Blanco (ID: 119360128)
+----------------------------------------
+
+VEHÍCULO #10
+----------------------------------------
+Placa:        7
+Marca:        9
+Modelo:       0
+Color:        0
+Tipo:         Carro
+Clientes:     
+              - Ana Brenes (ID: 3032900)
+----------------------------------------
+
+VEHÍCULO #11
+----------------------------------------
+Placa:        33
+Marca:        33
+Modelo:       33
+Color:        33
+Tipo:         Carro
+Clientes:     
+              - j (ID: 11)
+----------------------------------------
+
+VEHÍCULO #12
+----------------------------------------
+Placa:        462607
+Marca:        Fiat
+Modelo:       2001
+Color:        Vino
+Tipo:         Carro
+Clientes:     
+              - Shirley (ID: 33260704)
+----------------------------------------
+
+VEHÍCULO #13
+----------------------------------------
+Placa:        3
+Marca:        hh
+Modelo:       k
+Color:        k
+Tipo:         Carro
+Clientes:     
+              - Maria (ID: 302030937)
 ----------------------------------------
 
 ========================================
