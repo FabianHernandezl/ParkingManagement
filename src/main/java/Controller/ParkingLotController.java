@@ -16,97 +16,90 @@ import model.entities.Ticket;
  *
  * @author FAMILIA
  */
-
 public class ParkingLotController {
 
     private ParkingLotData parkingLotData = new ParkingLotData();
     private TicketController ticketController = TicketController.getInstance();
 
     public ParkingLot registerParkingLot(String name, int numberOfSpaces, int disabledSpaces, int motorcycleSpaces) {
-        
+
         // Crear el parqueo
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.setName(name);
         parkingLot.setNumberOfSpaces(numberOfSpaces);
-        
+
         // Crear espacios automáticamente
         Space[] spaces = createSpacesForParkingLot(numberOfSpaces, disabledSpaces, motorcycleSpaces);
         parkingLot.setSpaces(spaces);
-        
+
         // Guardar espacios individualmente en SpaceData
         SpaceController spaceController = new SpaceController();
         for (Space space : spaces) {
-            spaceController.registerSpace(space.getId(), 
-                                         space.isDisabilityAdaptation(), 
-                                         space.isSpaceTaken());
+            spaceController.registerSpace(space.getId(),
+                    space.isDisabilityAdaptation(),
+                    space.isSpaceTaken());
         }
-        
+
         return parkingLotData.addParkingLot(parkingLot);
     }
-    
+
     private Space[] createSpacesForParkingLot(int total, int disabled, int motorcycle) {
         Space[] spaces = new Space[total];
         int spaceId = 1;
-        
+
         // Espacios para discapacidad
         for (int i = 0; i < disabled; i++) {
-            spaces[i] = new Space(spaceId++, true, false, 
-                                 new VehicleType(3, "Discapacitado", 4, 0.0f));
+            spaces[i] = new Space(spaceId++, true, false,
+                    new VehicleType(3, "Discapacitado", 4, 0.0f));
         }
-        
+
         // Espacios para motocicletas
         for (int i = 0; i < motorcycle; i++) {
             spaces[disabled + i] = new Space(spaceId++, false, false,
-                                           new VehicleType(2, "Motocicleta", 2, 2.5f));
+                    new VehicleType(2, "Motocicleta", 2, 2.5f));
         }
-        
+
         // Espacios estándar
         for (int i = disabled + motorcycle; i < total; i++) {
             spaces[i] = new Space(spaceId++, false, false,
-                                new VehicleType(1, "Automóvil", 4, 5.0f));
+                    new VehicleType(1, "Automóvil", 4, 5.0f));
         }
-        
+
         return spaces;
     }
 
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
         System.out.println("\n=== PARKINGLOTCONTROLLER: Registrando vehículo ===");
-        System.out.println("Vehículo: " + (vehicle != null ? vehicle.getPlate() : "null"));
-        System.out.println("ParkingLot: " + (parkingLot != null ? parkingLot.getName() : "null"));
-        
-        if (vehicle == null || parkingLot == null) {
-            System.out.println("❌ ERROR: Vehículo o parkingLot es null");
+
+        if (vehicle == null || parkingLot == null || parkingLot.getSpaces() == null) {
             return 0;
         }
 
-        // Registrar vehículo en el parking y obtener ID del espacio
-        int spaceId = parkingLotData.registerVehicleInParkingLot(vehicle, parkingLot);
-        System.out.println("SpaceId retornado: " + spaceId);
+        for (Space space : parkingLot.getSpaces()) {
+            if (!space.isSpaceTaken()) {
 
-        // Generar ticket de entrada si se asignó un espacio
-        if (spaceId > 0) {
-            Space[] spaces = parkingLot.getSpaces();
-            if (spaces != null) {
-                for (Space space : spaces) {
-                    if (space != null && space.getId() == spaceId) {
-                        System.out.println("✅ Espacio " + spaceId + " asignado, creando ticket...");
-                        
-                        Ticket ticket = ticketController.generateEntryTicket(vehicle, space);
-                        
-                        if (ticket != null) {
-                            System.out.println("✅ Ticket creado exitosamente! ID: " + ticket.getId());
-                        } else {
-                            System.out.println("❌ ERROR: No se pudo crear el ticket!");
-                        }
-                        break;
-                    }
+                // Marcar espacio como ocupado
+                space.setSpaceTaken(true);
+                space.setVehicle(vehicle);
+
+                // Guardar cambio en Data
+                parkingLotData.updateParkingLot(parkingLot);
+
+                System.out.println("✅ Espacio asignado: " + space.getId());
+
+                // 🎟 Crear ticket
+                Ticket ticket = ticketController.generateEntryTicket(vehicle, space);
+
+                if (ticket != null) {
+                    System.out.println("🎟 Ticket creado ID: " + ticket.getId());
                 }
+
+                return space.getId();
             }
-        } else {
-            System.out.println("⚠️ No se pudo asignar espacio al vehículo");
         }
 
-        return spaceId;
+        System.out.println("⚠️ No hay espacios disponibles");
+        return 0;
     }
 
     public void removeVehicleFromParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
@@ -134,7 +127,7 @@ public class ParkingLotController {
 
     public String removeParkingLot(ParkingLot parkingLot) { //será mejor hacerlo por id? 
         String result = "";
-        if (parkingLotData.findParkingLotById(parkingLot.getId()) != null) { 
+        if (parkingLotData.findParkingLotById(parkingLot.getId()) != null) {
             parkingLotData.deleteParkingLot(parkingLot);
             result = "El parqueo se eliminó ";
         } else {
