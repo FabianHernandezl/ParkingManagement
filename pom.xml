@@ -76,6 +76,7 @@
                             <headerType>gui</headerType>
                             <outfile>target/ParkingManagement.exe</outfile>
                             <jar>target/ParkingManagement-1.0-SNAPSHOT.jar</jar>
+                            <icon>icono.ico</icon>
                             <errTitle>Error al iniciar la aplicación</errTitle>
                             <classPath>
                                 <mainClass>view.ParkingManagement</mainClass>
