@@ -33,14 +33,11 @@ public class AdminView extends JInternalFrame{
     private JButton btnUpdate;
     private JButton btnDelete;
 
-    // Instancia de AdministratorData para manejar datos persistentes
-    private AdministratorData administratorData;
+    
 
     public AdminView() {
         super("Gestión de Administradores", true, true, true, true);
 
-        // Inicializar AdministratorData
-        administratorData = new AdministratorData();
 
         setSize(900, 600);
         setLayout(null);
@@ -236,11 +233,11 @@ public class AdminView extends JInternalFrame{
      */
     private void generateNextIds() {
         try {
-            int nextIdNumber = administratorData.findLastAdminNumber()+ 1;
+            int nextIdNumber = administratorController.findLastAdminNumber()+ 1;
             String nextId = String.format("ADM%04d", nextIdNumber);
             txtId.setText(nextId);
 
-            int nextAdminNumber = administratorData.findLastAdminNumber() + 1;
+            int nextAdminNumber = administratorController.findLastAdminNumber() + 1;
             txtAdminNumber.setText(String.valueOf(nextAdminNumber));
 
         } catch (Exception e) {
@@ -271,7 +268,7 @@ public class AdminView extends JInternalFrame{
     private void loadTable() {
         model.setRowCount(0);
         try {
-            ArrayList<Administrator> administrators = administratorData.getAllAdministrators();
+            ArrayList<Administrator> administrators = administratorController.getAllAdministrators();
 
             for (Administrator admin : administrators) {
                 ArrayList<ParkingLot> parkingLots = admin.getParkingLot();
@@ -308,7 +305,7 @@ public class AdminView extends JInternalFrame{
             }
 
             String id = txtId.getText().trim();
-            if (administratorData.findAdministratorById(id) != null) {
+            if (administratorController.findAdministratorById(id) != null) {
                 JOptionPane.showMessageDialog(this,
                         "Error: Ya existe un administrador con el ID: " + id + "\n"
                         + "Por favor, presione 'Limpiar' para generar un nuevo ID.",
@@ -318,7 +315,7 @@ public class AdminView extends JInternalFrame{
             }
 
             String username = txtUsername.getText().trim();
-            if (administratorData.findAdminByUsername(username) != null) {
+            if (administratorController.findAdminByUsername(username) != null) {
                 JOptionPane.showMessageDialog(this,
                         "Error: Ya existe un administrador con el usuario: " + username,
                         "Usuario Duplicado",
@@ -328,7 +325,7 @@ public class AdminView extends JInternalFrame{
             }
 
             Administrator admin = createAdministratorFromForm();
-            Administrator adminToInsert = administratorData.addAdministrator(admin);
+            Administrator adminToInsert = administratorController.addAdministrator(admin);
 
             if (adminToInsert != null) {
                 JOptionPane.showMessageDialog(this,
@@ -374,7 +371,7 @@ public class AdminView extends JInternalFrame{
                 return;
             }
 
-            Administrator existingAdmin = administratorData.findAdministratorById(id);
+            Administrator existingAdmin = administratorController.findAdministratorById(id);
             if (existingAdmin == null) {
                 JOptionPane.showMessageDialog(this,
                         "No existe un administrador con el ID: " + id,
@@ -396,7 +393,7 @@ public class AdminView extends JInternalFrame{
 
             if (confirm == JOptionPane.YES_OPTION) {
                 Administrator updatedAdmin = createAdministratorFromForm();
-                boolean success = administratorData.updateAdministrator(updatedAdmin);
+                boolean success = administratorController.updateAdministrator(updatedAdmin);
 
                 if (success) {
                     JOptionPane.showMessageDialog(this,
@@ -453,7 +450,7 @@ public class AdminView extends JInternalFrame{
                 JOptionPane.WARNING_MESSAGE);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            boolean success = administratorData.removeAdministrator(id);
+            boolean success = administratorController.removeAdministrator(id);
 
             if (success) {
                 JOptionPane.showMessageDialog(this,
@@ -538,7 +535,7 @@ public class AdminView extends JInternalFrame{
 
         try {
             String id = model.getValueAt(row, 0).toString();
-            Administrator admin = administratorData.findAdministratorById(id);
+            Administrator admin = administratorController.findAdministratorById(id);
 
             if (admin != null) {
                 txtId.setText(admin.getId());

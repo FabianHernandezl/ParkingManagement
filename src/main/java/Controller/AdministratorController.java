@@ -18,6 +18,29 @@ import model.entities.UserOperations;
 public class AdministratorController implements UserOperations {
      AdministratorData administratorData = new AdministratorData();
 
+     //CRUD 
+     public ArrayList<Administrator> getAllAdministrators() {
+        return administratorData.getAllAdministrators();
+    }
+     
+        public Administrator addAdministrator(Administrator admin) {
+            return administratorData.addAdministrator(admin);
+    }
+     
+     
+      public boolean updateAdministrator(Administrator updatedAdministrator) {
+        
+        return administratorData.updateAdministrator(updatedAdministrator);
+    }
+     
+      public boolean removeAdministrator(String id) {
+       
+        return administratorData.removeAdministrator(id);
+    }
+      
+     
+     
+     
     @Override
     public User searchUser(String identification) {
         ArrayList<Administrator> administrators = administratorData.getAllAdministrators();//lista de admins
@@ -32,8 +55,8 @@ public class AdministratorController implements UserOperations {
 
     @Override
     public User searchUser(User user) {
-       //punto 10 lab
-        ArrayList<Administrator> administrators = administratorData.getAllAdministrators();//list of admins just we 4
+    
+        ArrayList<Administrator> administrators = administratorData.getAllAdministrators();//list of admins 
         Administrator adminToReturn = null;
         for (Administrator admin : administrators) {
             if (admin.getUsername().equalsIgnoreCase(user.getUsername()) 
@@ -43,10 +66,21 @@ public class AdministratorController implements UserOperations {
         }
         return adminToReturn;
     }
+    
+    
+    public int findLastAdminNumber() {
+       
+        return administratorData.findLastIdNumberOfAdmins();
+    }
 
       //for login
     public Administrator findAdminByUsername(String username) {
        return administratorData.findAdminByUsername(username);
+    }
+      
+    public Administrator findAdministratorById(String id) {
+       
+        return administratorData.findAdministratorById(id);
     }
    
     public ArrayList<User> sortUsers(Clerk[] allUsers) {

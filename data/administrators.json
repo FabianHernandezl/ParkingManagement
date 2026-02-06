@@ -1293,38 +1293,98 @@
           {
             "id": 1,
             "disabilityAdaptation": true,
-            "spaceTaken": false,
+            "spaceTaken": true,
             "vehicleType": {
               "id": 3,
               "description": "Discapacitado",
               "numberOfTires": 4,
               "fee": 0.0
             },
-            "available": false
+            "available": false,
+            "vehicle": {
+              "plate": "j",
+              "color": "p",
+              "brand": "c",
+              "model": "u",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
           },
           {
             "id": 2,
             "disabilityAdaptation": true,
-            "spaceTaken": false,
+            "spaceTaken": true,
             "vehicleType": {
               "id": 3,
               "description": "Discapacitado",
               "numberOfTires": 4,
               "fee": 0.0
             },
-            "available": false
+            "available": false,
+            "vehicle": {
+              "plate": "1",
+              "color": "n",
+              "brand": "n",
+              "model": "n",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
           },
           {
             "id": 3,
             "disabilityAdaptation": true,
-            "spaceTaken": false,
+            "spaceTaken": true,
             "vehicleType": {
               "id": 3,
               "description": "Discapacitado",
               "numberOfTires": 4,
               "fee": 0.0
             },
-            "available": false
+            "available": false,
+            "vehicle": {
+              "plate": "8",
+              "color": "t",
+              "brand": "o",
+              "model": "i",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
           },
           {
             "id": 4,
@@ -1918,7 +1978,7 @@
       }
     ],
     "id": "ID-JIM",
-    "name": "Jimena",
+    "name": "Jimena Calvo",
     "username": "admin_jimena",
     "password": "jimena789"
   },
@@ -1934,38 +1994,355 @@
           {
             "id": 1,
             "disabilityAdaptation": true,
-            "spaceTaken": false,
+            "spaceTaken": true,
             "vehicleType": {
               "id": 3,
               "description": "Discapacitado",
               "numberOfTires": 4,
               "fee": 0.0
             },
-            "available": false
+            "available": false,
+            "vehicle": {
+              "plate": "j",
+              "color": "p",
+              "brand": "c",
+              "model": "u",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
           },
           {
             "id": 2,
             "disabilityAdaptation": true,
-            "spaceTaken": false,
+            "spaceTaken": true,
             "vehicleType": {
               "id": 3,
               "description": "Discapacitado",
               "numberOfTires": 4,
               "fee": 0.0
             },
-            "available": false
+            "available": false,
+            "vehicle": {
+              "plate": "1",
+              "color": "n",
+              "brand": "n",
+              "model": "n",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
           },
           {
             "id": 3,
             "disabilityAdaptation": true,
-            "spaceTaken": false,
+            "spaceTaken": true,
             "vehicleType": {
               "id": 3,
               "description": "Discapacitado",
               "numberOfTires": 4,
               "fee": 0.0
             },
+            "available": false,
+            "vehicle": {
+              "plate": "8",
+              "color": "t",
+              "brand": "o",
+              "model": "i",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:28:07 AM",
+            "available": false,
+            "client": {
+              "id": "C-001",
+              "name": "Cliente Prueba",
+              "phone": "8888-8888",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "ABC123",
+              "color": "Rojo",
+              "brand": "Toyota",
+              "model": "Corolla",
+              "clients": [
+                {
+                  "id": "C-001",
+                  "name": "Cliente Prueba",
+                  "phone": "8888-8888",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 2,
+                "description": "Motocicleta",
+                "numberOfTires": 2,
+                "fee": 2.5
+              }
+            }
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:42:38 AM",
+            "available": false,
+            "client": {
+              "id": "305620529",
+              "name": "Zailyn Tencio",
+              "phone": "84379367",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "BKQ748",
+              "color": "Gris",
+              "brand": "Mitsubishi",
+              "model": "Lancer",
+              "clients": [
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                },
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
             "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      }
+    ],
+    "id": "ADM1004",
+    "name": "Juan",
+    "username": "juan1",
+    "password": "1234"
+  },
+  {
+    "adminNumber": 1005,
+    "parkingLot": [
+      {
+        "id": 1,
+        "name": "Cami´s Parkinglot",
+        "numberOfSpaces": 10,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "j",
+              "color": "p",
+              "brand": "c",
+              "model": "u",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "1",
+              "color": "n",
+              "brand": "n",
+              "model": "n",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "8",
+              "color": "t",
+              "brand": "o",
+              "model": "i",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
           },
           {
             "id": 4,
@@ -2362,9 +2739,9 @@
         ]
       }
     ],
-    "id": "ID-CAM",
-    "name": "Camila Montoya",
-    "username": "admin_camila",
-    "password": "camila012"
+    "id": "ADM1005",
+    "name": "Camila Mariana",
+    "username": "cam123",
+    "password": "asd123"
   }
 ]

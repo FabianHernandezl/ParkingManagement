@@ -24,26 +24,25 @@ public class AdministratorData {
     private static final String FILE_PATH = "data/administrators.json";
     private ArrayList<Administrator> administrators;
     ParkingLotData parkingLotData = new ParkingLotData();
-    static int adminId = 0;
 
     private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
 
     public AdministratorData() {
-        administrators = loadAdministrators();
-        administrators = new ArrayList<Administrator>();
-         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();//trae todos los parqueos actuales
-         administrators.add(new Administrator(1001, parkingLots, "ID-FAB", "Fabián", "admin_fabian", "fabian123"));
+    administrators = loadAdministrators();
+
+    if (administrators.isEmpty()) {
+        ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
+        administrators.add(new Administrator(1001, parkingLots, "ID-FAB", "Fabián", "admin_fabian", "fabian123"));
         administrators.add(new Administrator(1002, parkingLots, "ID-ZAY", "Zaylin", "admin_zailyn", "zailyn456"));
         administrators.add(new Administrator(1003, parkingLots, "ID-JIM", "Jimena", "admin_jimena", "jimena789"));
         administrators.add(new Administrator(1004, parkingLots, "ID-CAM", "Camila", "admin_camila", "camila012"));
+        saveAdministrators();
     }
-
-    // devuelve todos los Administrators de la lista que simula la base de datos.
-    public ArrayList<Administrator> getAllAdministrators() {
+}
+  public ArrayList<Administrator> getAllAdministrators() {
         return new ArrayList<>(administrators); // Retorna copia para evitar modificación externa
-
     }
 
     /*
@@ -98,19 +97,21 @@ public class AdministratorData {
     Finds a admin by id
      */
     public Administrator findAdministratorById(String id) {
+        Administrator adminToReturn = null;
+        
         for (Administrator admin : administrators) {
             if (admin.getId().equals(id)) {
-                return admin;
+                adminToReturn = admin;
             }
         }
-        return null;
+        return adminToReturn;
     }
 
     /*
     Finds a admin by username 
      */
     public Administrator findAdminByUsername(String username) {
-        Administrator adminToReturn = new Administrator();
+        Administrator adminToReturn = null;
 
         for (Administrator admin : administrators) {
             if (admin.getUsername().equals(username)) {
@@ -162,7 +163,7 @@ public class AdministratorData {
         int maxId = 0;
         for (Administrator admin : administrators) {
             String id = admin.getId();
-            if (id.startsWith("CLK")) {
+            if (id.startsWith("ID") || id.startsWith("ADM")) {
                 try {
                     int idNum = Integer.parseInt(id.substring(3));
                     if (idNum > maxId) {
