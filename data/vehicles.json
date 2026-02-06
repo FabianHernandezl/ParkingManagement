@@ -172,21 +172,21 @@
     }
   },
   {
-    "plate": "8",
-    "color": "t",
-    "brand": "o",
-    "model": "i",
+    "plate": "22",
+    "color": "2",
+    "brand": "2",
+    "model": "2",
     "clients": [
       {
-        "id": "j",
-        "name": "k",
-        "phone": "0",
-        "isPreferential": false
+        "id": "119360128",
+        "name": "Mariana Blanco",
+        "phone": "86621670",
+        "isPreferential": true
       }
     ],
     "vehicleType": {
       "id": 0,
-      "description": "Carro",
+      "description": "Moto",
       "numberOfTires": 0,
       "fee": 0.0
     }

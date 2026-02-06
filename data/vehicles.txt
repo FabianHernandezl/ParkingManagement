@@ -96,13 +96,13 @@ Clientes:
 
 VEHÍCULO #9
 ----------------------------------------
-Placa:        8
-Marca:        o
-Modelo:       i
-Color:        t
-Tipo:         Carro
+Placa:        22
+Marca:        2
+Modelo:       2
+Color:        2
+Tipo:         Moto
 Clientes:     
-              - k (ID: j)
+              - Mariana Blanco (ID: 119360128)
 ----------------------------------------
 
 ========================================

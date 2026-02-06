@@ -9,6 +9,7 @@ CLIENTE #1
 ID:            119520051
 Nombre:        Jimena Calvo Soto
 Teléfono:      71133584
+Email:         No registrado
 Preferencial:  No
 ----------------------------------------
 
@@ -17,6 +18,7 @@ CLIENTE #2
 ID:            3032900
 Nombre:        Ana Brenes
 Teléfono:      88889999
+Email:         No registrado
 Preferencial:  No
 ----------------------------------------
 
@@ -25,6 +27,7 @@ CLIENTE #3
 ID:            119360128
 Nombre:        Mariana Blanco
 Teléfono:      86621670
+Email:         No registrado
 Preferencial:  Sí
 ----------------------------------------
 
@@ -33,6 +36,7 @@ CLIENTE #4
 ID:            09909
 Nombre:        Laura
 Teléfono:      999999
+Email:         No registrado
 Preferencial:  No
 ----------------------------------------
 
@@ -41,6 +45,7 @@ CLIENTE #5
 ID:            C-001
 Nombre:        Cliente Prueba
 Teléfono:      8888-8888
+Email:         No registrado
 Preferencial:  No
 ----------------------------------------
 
@@ -49,6 +54,7 @@ CLIENTE #6
 ID:            305620529
 Nombre:        Zailyn Tencio
 Teléfono:      84379367
+Email:         No registrado
 Preferencial:  No
 ----------------------------------------
 
@@ -57,6 +63,16 @@ CLIENTE #7
 ID:            j
 Nombre:        k
 Teléfono:      0
+Email:         No registrado
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #8
+----------------------------------------
+ID:            11
+Nombre:        j
+Teléfono:      d
+Email:         d
 Preferencial:  No
 ----------------------------------------
 

@@ -55,10 +55,9 @@ public class SpacePanel extends JPanel {
 
         if (space.isSpaceTaken() && space.getVehicle() != null) {
 
-            setBackground(new Color(244, 67, 54)); // rojo ocupado
+            setBackground(new Color(244, 67, 54)); 
             lblStatus.setText("Ocupado");
 
-            // Mostrar icono según tipo de vehículo
             lblVehicleIcon.setText(space.getVehicle().getIcon());
             lblVehicleIcon.setVisible(true);
 
@@ -67,13 +66,13 @@ public class SpacePanel extends JPanel {
 
         } else if (space.isDisabilityAdaptation()) {
 
-            setBackground(new Color(3, 169, 244)); // azul preferencial
+            setBackground(new Color(3, 169, 244)); 
             lblStatus.setText("♿ Preferencial");
             lblVehicleIcon.setVisible(false);
 
         } else {
 
-            setBackground(new Color(76, 175, 80)); // verde disponible
+            setBackground(new Color(76, 175, 80));
             lblStatus.setText("Disponible");
 
             animateVehicleOut();

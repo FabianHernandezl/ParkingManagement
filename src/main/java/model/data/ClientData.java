@@ -11,17 +11,13 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 
-/**
- *
- * @author Jimena
- */
 public class ClientData {
 
     private static final String FILE_PATH = "data/clients.json";
     private static final String TXT_FILE_PATH = "data/clients.txt";
-    private VehicleData vehicleData;
+
     private ArrayList<Client> clients;
-    
+
     private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
@@ -34,6 +30,7 @@ public class ClientData {
         clients = loadClients();
     }
 
+    // ================= CRUD =================
     public boolean addClient(Client client) {
         if (client == null || findClientById(client.getId()) != null) {
             return false;
@@ -84,6 +81,7 @@ public class ClientData {
         return true;
     }
 
+    // ================= LOAD / SAVE =================
     private ArrayList<Client> loadClients() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             Type listType = new TypeToken<ArrayList<Client>>() {
@@ -96,12 +94,14 @@ public class ClientData {
     }
 
     private void saveClients() {
+        // ===== JSON =====
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             gson.toJson(clients, writer);
         } catch (Exception e) {
             System.out.println("Error saving JSON: " + e.getMessage());
         }
 
+        // ===== TXT =====
         try (FileWriter txtWriter = new FileWriter(TXT_FILE_PATH); PrintWriter printWriter = new PrintWriter(txtWriter)) {
 
             printWriter.println("========================================");
@@ -118,6 +118,8 @@ public class ClientData {
                 printWriter.printf("%-14s %s%n", "ID:", client.getId());
                 printWriter.printf("%-14s %s%n", "Nombre:", client.getName());
                 printWriter.printf("%-14s %s%n", "Teléfono:", client.getPhone());
+                printWriter.printf("%-14s %s%n", "Email:",
+                        client.getEmail() == null ? "No registrado" : client.getEmail());
 
                 String esPreferencial = client.isIsPreferential() ? "Sí" : "No";
                 printWriter.printf("%-14s %s%n", "Preferencial:", esPreferencial);
