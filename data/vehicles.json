@@ -170,5 +170,25 @@
       "numberOfTires": 0,
       "fee": 0.0
     }
+  },
+  {
+    "plate": "22",
+    "color": "2",
+    "brand": "2",
+    "model": "2",
+    "clients": [
+      {
+        "id": "119360128",
+        "name": "Mariana Blanco",
+        "phone": "86621670",
+        "isPreferential": true
+      }
+    ],
+    "vehicleType": {
+      "id": 0,
+      "description": "Moto",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
   }
 ]

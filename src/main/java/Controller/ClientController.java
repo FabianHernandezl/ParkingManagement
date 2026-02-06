@@ -19,13 +19,13 @@ public class ClientController {
         vehicleData = new VehicleData();
     }
 
-    public String registerClient(String id, String name, String phone, boolean isPreferential) {
+    public String registerClient(String id, String name, String phone, boolean isPreferential, String email) {
 
         if (id == null || id.isEmpty() || name == null || name.isEmpty()) {
             return "Información invalida, por favor intente de nueva";
         }
 
-        Client client = new Client(id, name, phone, isPreferential);
+        Client client = new Client(id, name, phone, isPreferential, email);
         boolean added = clientData.addClient(client);
 
         return added ? "Cliente registrado con exito" : "Cliente ya existe";
@@ -42,9 +42,9 @@ public class ClientController {
         return clientData.findClientById(id);
     }
 
-    public String updateClient(String id, String name, String phone, boolean preferential) {
+    public String updateClient(String id, String name, String phone, boolean preferential, String email) {
 
-        Client client = new Client(id, name, phone, preferential);
+        Client client = new Client(id, name, phone, preferential, email);
 
         return clientData.update(client) ? "Cliente actualizado con exito" : "Cliente no encontrado";
     }
