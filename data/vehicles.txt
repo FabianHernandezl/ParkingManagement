@@ -96,10 +96,10 @@ Clientes:
 
 VEHÍCULO #9
 ----------------------------------------
-Placa:        1
-Marca:        n
-Modelo:       n
-Color:        n
+Placa:        8
+Marca:        o
+Modelo:       i
+Color:        t
 Tipo:         Carro
 Clientes:     
               - k (ID: j)

@@ -72,14 +72,34 @@
       {
         "id": 3,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 3,
           "description": "Discapacitado",
           "numberOfTires": 4,
           "fee": 0.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "8",
+          "color": "t",
+          "brand": "o",
+          "model": "i",
+          "clients": [
+            {
+              "id": "j",
+              "name": "k",
+              "phone": "0",
+              "isPreferential": false
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
+        }
       },
       {
         "id": 4,
