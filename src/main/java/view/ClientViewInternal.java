@@ -14,12 +14,10 @@ import model.entities.Client;
 public class ClientViewInternal extends JInternalFrame {
 
     private final ClientController clientController = new ClientController();
-
-    private JTextField txtId, txtPhone, txtName;
+    private JTextField txtId, txtPhone, txtName, txtEmail;
     private JCheckBox chkPreferential;
     private JTable table;
     private DefaultTableModel model;
-
     private JButton btnSave, btnUpdate, btnDelete, btnClear, btnReport;
 
     public ClientViewInternal() {
@@ -42,7 +40,7 @@ public class ClientViewInternal extends JInternalFrame {
         formPanel.setBorder(UITheme.panelBorder());
         add(formPanel);
 
-        JLabel title = new JLabel("👤 Cliente");
+        JLabel title = new JLabel("Cliente");
         title.setFont(UITheme.TITLE_FONT);
         title.setBounds(10, 10, 200, 25);
         formPanel.add(title);
@@ -74,8 +72,17 @@ public class ClientViewInternal extends JInternalFrame {
         txtPhone.setBounds(90, 120, 150, 25);
         formPanel.add(txtPhone);
 
+        JLabel lblEmail = new JLabel("Email:");
+        lblEmail.setFont(UITheme.LABEL_FONT);
+        lblEmail.setBounds(10, 155, 80, 25);
+        formPanel.add(lblEmail);
+
+        txtEmail = new JTextField();
+        txtEmail.setBounds(90, 155, 150, 25);
+        formPanel.add(txtEmail);
+
         chkPreferential = new JCheckBox("Preferencial");
-        chkPreferential.setBounds(10, 160, 150, 25);
+        chkPreferential.setBounds(10, 195, 150, 25);
         chkPreferential.setBackground(UITheme.PANEL_BG);
         formPanel.add(chkPreferential);
     }
@@ -111,7 +118,8 @@ public class ClientViewInternal extends JInternalFrame {
 
     private void initTable() {
         model = new DefaultTableModel(
-                new String[]{"ID", "Nombre", "Teléfono", "Preferencial"}, 0) {
+                new String[]{"ID", "Nombre", "Teléfono", "Email", "Preferencial"}, 0) {
+
             @Override
             public boolean isCellEditable(int r, int c) {
                 return false;
@@ -121,7 +129,7 @@ public class ClientViewInternal extends JInternalFrame {
         table = new JTable(model);
         UITheme.styleTable(table);
 
-        table.setRowHeight(28); // 🔹 más aire visual
+        table.setRowHeight(28);
 
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
@@ -132,17 +140,17 @@ public class ClientViewInternal extends JInternalFrame {
                 JLabel cell = (JLabel) super.getTableCellRendererComponent(
                         table, value, isSelected, hasFocus, row, column);
 
-                cell.setOpaque(true); // 🔴 CLAVE para evitar transparencia
+                cell.setOpaque(true);
                 cell.setForeground(Color.BLACK);
 
-                boolean pref = table.getValueAt(row, 3).toString().equals("Sí");
+                boolean pref = table.getValueAt(row, 4).toString().equals("Sí");
 
                 if (isSelected) {
                     cell.setBackground(UITheme.PRIMARY);
                     cell.setForeground(Color.WHITE);
                 } else {
                     cell.setBackground(pref
-                            ? new Color(220, 240, 220) // verde suave
+                            ? new Color(220, 240, 220)
                             : Color.WHITE);
                 }
 
@@ -179,6 +187,7 @@ public class ClientViewInternal extends JInternalFrame {
                 c.getId(),
                 c.getName(),
                 c.getPhone(),
+                c.getEmail(),
                 c.isIsPreferential() ? "Sí" : "No"
             });
         }
@@ -193,13 +202,15 @@ public class ClientViewInternal extends JInternalFrame {
         txtId.setText(model.getValueAt(row, 0).toString());
         txtName.setText(model.getValueAt(row, 1).toString());
         txtPhone.setText(model.getValueAt(row, 2).toString());
-        chkPreferential.setSelected(model.getValueAt(row, 3).equals("Sí"));
+        txtEmail.setText(model.getValueAt(row, 3).toString());
+        chkPreferential.setSelected(model.getValueAt(row, 4).equals("Sí"));
     }
 
     private void clearForm() {
         txtId.setText("");
         txtName.setText("");
         txtPhone.setText("");
+        txtEmail.setText("");
         chkPreferential.setSelected(false);
         table.clearSelection();
         btnUpdate.setEnabled(false);
@@ -213,17 +224,23 @@ public class ClientViewInternal extends JInternalFrame {
         }
         JOptionPane.showMessageDialog(this,
                 clientController.registerClient(
-                        txtId.getText(), txtName.getText(),
-                        txtPhone.getText(), chkPreferential.isSelected()));
+                        txtId.getText(),
+                        txtName.getText(),
+                        txtPhone.getText(),
+                        chkPreferential.isSelected(),
+                        txtEmail.getText()));
         loadTable();
         clearForm();
     }
 
     private void updateClient() {
         JOptionPane.showMessageDialog(this,
-                clientController.updateClient(
-                        txtId.getText(), txtName.getText(),
-                        txtPhone.getText(), chkPreferential.isSelected()));
+                clientController.registerClient(
+                        txtId.getText(),
+                        txtName.getText(),
+                        txtPhone.getText(),
+                        chkPreferential.isSelected(),
+                        txtEmail.getText()));
         loadTable();
         clearForm();
     }
