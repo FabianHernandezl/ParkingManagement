@@ -69,7 +69,7 @@ public class Client {
                 + " | Name: " + name
                 + " | Phone: " + phone
                 + " | Preferential: " + (isPreferential ? "Yes" : "No"
-                        + "Email: " + email);
+                        + " | Email: " + email);
     }
 
 }

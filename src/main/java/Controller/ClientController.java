@@ -24,7 +24,6 @@ public class ClientController {
         if (id == null || id.isEmpty() || name == null || name.isEmpty()) {
             return "Información invalida, por favor intente de nueva";
         }
-
         Client client = new Client(id, name, phone, isPreferential, email);
         boolean added = clientData.addClient(client);
 
