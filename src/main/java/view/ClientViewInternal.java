@@ -14,12 +14,10 @@ import model.entities.Client;
 public class ClientViewInternal extends JInternalFrame {
 
     private final ClientController clientController = new ClientController();
-
     private JTextField txtId, txtPhone, txtName, txtEmail;
     private JCheckBox chkPreferential;
     private JTable table;
     private DefaultTableModel model;
-
     private JButton btnSave, btnUpdate, btnDelete, btnClear, btnReport;
 
     public ClientViewInternal() {
@@ -231,7 +229,6 @@ public class ClientViewInternal extends JInternalFrame {
                         txtPhone.getText(),
                         chkPreferential.isSelected(),
                         txtEmail.getText()));
-
         loadTable();
         clearForm();
     }
@@ -244,7 +241,6 @@ public class ClientViewInternal extends JInternalFrame {
                         txtPhone.getText(),
                         chkPreferential.isSelected(),
                         txtEmail.getText()));
-
         loadTable();
         clearForm();
     }

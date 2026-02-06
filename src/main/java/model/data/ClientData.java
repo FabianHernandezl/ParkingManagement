@@ -30,7 +30,6 @@ public class ClientData {
         clients = loadClients();
     }
 
-    // ================= CRUD =================
     public boolean addClient(Client client) {
         if (client == null || findClientById(client.getId()) != null) {
             return false;
@@ -81,7 +80,6 @@ public class ClientData {
         return true;
     }
 
-    // ================= LOAD / SAVE =================
     private ArrayList<Client> loadClients() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             Type listType = new TypeToken<ArrayList<Client>>() {
@@ -94,7 +92,6 @@ public class ClientData {
     }
 
     private void saveClients() {
-        // ===== JSON =====
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             gson.toJson(clients, writer);
         } catch (Exception e) {
