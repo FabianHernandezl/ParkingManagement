@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 8
+Total de clientes: 10
 ========================================
 
 CLIENTE #1
@@ -76,6 +76,23 @@ Email:         d
 Preferencial:  No
 ----------------------------------------
 
+CLIENTE #9
+----------------------------------------
+ID:            33260704
+Nombre:        Shirley
+Teléfono:      71133584
+Email:         calvo.shirley@yahoo. es
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #10
+----------------------------------------
+ID:            302030937
+Nombre:        Maria
+Teléfono:      9009093
+Email:         jiimendnendoe
+Preferencial:  No
+----------------------------------------
 
 ========================================
             Fin del registro            
