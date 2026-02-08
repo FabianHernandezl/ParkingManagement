@@ -1,21 +1,29 @@
 package view;
 
 import Controller.ClientController;
+import Controller.ParkingLotController;
 import controller.VehicleController;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
 import model.entities.Client;
 import model.entities.Vehicle;
 import model.entities.VehicleType;
+import model.entities.ParkingLot;
+
 import java.util.ArrayList;
 
 public class VehicleViewInternal extends JInternalFrame {
 
     private final VehicleController controller = new VehicleController();
     private final ClientController clientController = new ClientController();
+    private final ParkingLotController parkingController = new ParkingLotController();
 
     private JTextField txtPlate, txtBrand, txtModel, txtColor;
     private JComboBox<String> cmbType;
+    private JComboBox<ParkingLot> cmbParking;
+
     private JTable table;
     private DefaultTableModel model;
 
@@ -32,7 +40,7 @@ public class VehicleViewInternal extends JInternalFrame {
 
     public VehicleViewInternal() {
         super("Gestión de Vehículos", true, true, true, true);
-        setSize(900, 620);
+        setSize(900, 650);
         setLayout(null);
         getContentPane().setBackground(UITheme.BACKGROUND);
 
@@ -40,12 +48,14 @@ public class VehicleViewInternal extends JInternalFrame {
         initTable();
         setupEvents();
         loadTable();
+        loadParkings();
     }
 
     // ================= FORMULARIO =================
     private void initForm() {
+
         JPanel panel = new JPanel(null);
-        panel.setBounds(20, 20, 320, 560);
+        panel.setBounds(20, 20, 320, 600);
         panel.setBackground(UITheme.PANEL_BG);
         panel.setBorder(UITheme.panelBorder());
         add(panel);
@@ -78,9 +88,16 @@ public class VehicleViewInternal extends JInternalFrame {
         cmbType.setBounds(100, y, 200, 25);
         panel.add(cmbType);
 
+        // ===== PARQUEO =====
+        y += 35;
+        panel.add(label("Parqueo:", y));
+        cmbParking = new JComboBox<>();
+        cmbParking.setBounds(100, y, 200, 25);
+        panel.add(cmbParking);
+
         // ===== BUSCAR CLIENTE =====
         JLabel lblSearch = new JLabel("Buscar cliente:");
-        lblSearch.setBounds(10, y + 40, 120, 25);
+        lblSearch.setBounds(10, y + 40, 150, 25);
         lblSearch.setFont(UITheme.LABEL_FONT);
         panel.add(lblSearch);
 
@@ -121,8 +138,10 @@ public class VehicleViewInternal extends JInternalFrame {
 
     // ================= TABLA =================
     private void initTable() {
+
         model = new DefaultTableModel(
                 new String[]{"Placa", "Marca", "Modelo", "Color", "Tipo"}, 0) {
+            @Override
             public boolean isCellEditable(int r, int c) {
                 return false;
             }
@@ -132,7 +151,7 @@ public class VehicleViewInternal extends JInternalFrame {
         UITheme.styleTable(table);
 
         JScrollPane sp = new JScrollPane(table);
-        sp.setBounds(360, 20, 510, 560);
+        sp.setBounds(360, 20, 510, 600);
         sp.setBorder(UITheme.panelBorder());
         add(sp);
     }
@@ -166,6 +185,7 @@ public class VehicleViewInternal extends JInternalFrame {
         txtSearchClient.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
 
             private void search() {
+
                 String text = txtSearchClient.getText().trim().toLowerCase();
 
                 if (text.isEmpty()) {
@@ -231,7 +251,15 @@ public class VehicleViewInternal extends JInternalFrame {
         }
     }
 
+    private void loadParkings() {
+        cmbParking.removeAllItems();
+        for (ParkingLot p : parkingController.getAllParkingLots()) {
+            cmbParking.addItem(p);
+        }
+    }
+
     private void fillForm() {
+
         int r = table.getSelectedRow();
         if (r == -1) {
             return;
@@ -245,6 +273,7 @@ public class VehicleViewInternal extends JInternalFrame {
     }
 
     private void clear() {
+
         txtPlate.setText("");
         txtBrand.setText("");
         txtModel.setText("");
@@ -262,8 +291,20 @@ public class VehicleViewInternal extends JInternalFrame {
     }
 
     private void save() {
+
         Vehicle v = build();
-        JOptionPane.showMessageDialog(this, controller.insertVehicle(v));
+        ParkingLot parking = (ParkingLot) cmbParking.getSelectedItem();
+
+        if (parking == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un parqueo");
+            return;
+        }
+
+        JOptionPane.showMessageDialog(
+                this,
+                controller.insertVehicle(v, parking)
+        );
+
         loadTable();
         clear();
     }
@@ -283,6 +324,7 @@ public class VehicleViewInternal extends JInternalFrame {
     }
 
     private Vehicle build() {
+
         Vehicle v = new Vehicle();
         v.setPlate(txtPlate.getText());
         v.setBrand(txtBrand.getText());
@@ -293,7 +335,6 @@ public class VehicleViewInternal extends JInternalFrame {
         t.setDescription(cmbType.getSelectedItem().toString());
         v.setVehicleType(t);
 
-        // 🔥 CLIENTES ASIGNADOS
         v.setClients(new ArrayList<>(selectedClients));
 
         return v;

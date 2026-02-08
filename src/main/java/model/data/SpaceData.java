@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays; // Necesario para manejar el arreglo
+import java.util.Arrays;
 import model.entities.ParkingLot;
 import model.entities.Space;
 
@@ -41,7 +41,6 @@ public class SpaceData {
         ArrayList<ParkingLot> parkings = loadParkings();
         for (ParkingLot p : parkings) {
             if (p.getSpaces() != null) {
-                // Convertimos el arreglo Space[] a lista para usar addAll
                 allSpaces.addAll(Arrays.asList(p.getSpaces()));
             }
         }
@@ -62,11 +61,9 @@ public class SpaceData {
                 Space[] spacesArray = p.getSpaces();
                 for (int i = 0; i < spacesArray.length; i++) {
                     if (spacesArray[i] != null && spacesArray[i].getId() == updatedSpace.getId()) {
-                        // IMPORTANTE: Copiar todos los campos manualmente
-                        // NO reemplazar el objeto completo para mantener las referencias del JSON
                         spacesArray[i].setSpaceTaken(updatedSpace.isSpaceTaken());
-                        spacesArray[i].setClient(updatedSpace.getClient()); // Esto guarda el objeto Client
-                        spacesArray[i].setVehicle(updatedSpace.getVehicle()); // Esto guarda el objeto Vehicle
+                        spacesArray[i].setClient(updatedSpace.getClient());
+                        spacesArray[i].setVehicle(updatedSpace.getVehicle());
                         spacesArray[i].setEntryTime(updatedSpace.getEntryTime());
                         spacesArray[i].setDisabilityAdaptation(updatedSpace.isDisabilityAdaptation());
                         spacesArray[i].setVehicleType(updatedSpace.getVehicleType());
@@ -111,15 +108,11 @@ public class SpaceData {
         }
     }
 
-    // Método auxiliar para mantener compatibilidad si el controlador usa insertSpace
     public String insertSpace(Space space) {
-        // En esta estructura, los espacios ya vienen creados en el ParkingLot
-        // Si necesitas agregar uno nuevo a un arreglo fijo, tendrías que redimensionarlo.
         return "Operación no permitida: Los espacios son fijos por parqueo.";
     }
 
     public boolean deleteSpace(int id) {
-        // En arreglos fijos, "borrar" suele ser poner la posición en null o marcar como inactivo
         return false;
     }
 }

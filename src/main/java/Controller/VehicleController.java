@@ -20,7 +20,7 @@ public class VehicleController {
 
     VehicleData vehicleData = new VehicleData();
 
-    public String insertVehicle(Vehicle vehicle) {
+    public String insertVehicle(Vehicle vehicle, ParkingLot selectedParkingLot) {
 
         System.out.println("\n=== VEHICLECONTROLLER: Insertando vehículo ===");
         System.out.println("Placa: " + (vehicle != null ? vehicle.getPlate() : "null"));
@@ -42,7 +42,8 @@ public class VehicleController {
                 result = vehicleData.insertVehicle(vehicle);
 
                 System.out.println("Intentando parquear el vehículo...");
-                ParkingAssignment assignment = registerVehicleInParking(vehicle);
+                ParkingAssignment assignment
+                        = registerVehicleInParking(vehicle, selectedParkingLot);
 
                 if (assignment != null) {
                     result += "\n✅ Parqueo: " + assignment.getParkingLot().getName()
@@ -75,15 +76,11 @@ public class VehicleController {
         return vehicleData.findVehicleByPlate(plate);
     }
 
-    public ParkingAssignment registerVehicleInParking(Vehicle vehicle) {
+    public ParkingAssignment registerVehicleInParking(Vehicle vehicle, ParkingLot parkingLot) {
 
-        ArrayList<ParkingLot> parqueos = parkingLotData.getAllParkingLots();
-
-        if (parqueos.isEmpty()) {
+        if (vehicle == null || parkingLot == null) {
             return null;
         }
-
-        ParkingLot parkingLot = parqueos.get(0);
 
         int espacioId = parkingLotController
                 .registerVehicleInParkingLot(vehicle, parkingLot);

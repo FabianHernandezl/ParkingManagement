@@ -61,5 +61,12 @@
     "phone": "9009093",
     "isPreferential": false,
     "email": "jiimendnendoe"
+  },
+  {
+    "id": "C-002",
+    "name": "Cliente",
+    "phone": "8888888",
+    "isPreferential": false,
+    "email": "cliente"
   }
 ]
