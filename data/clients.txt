@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 10
+Total de clientes: 11
 ========================================
 
 CLIENTE #1
@@ -91,6 +91,15 @@ ID:            302030937
 Nombre:        Maria
 Teléfono:      9009093
 Email:         jiimendnendoe
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #11
+----------------------------------------
+ID:            C-002
+Nombre:        Cliente
+Teléfono:      8888888
+Email:         cliente
 Preferencial:  No
 ----------------------------------------
 

@@ -14,6 +14,7 @@ public class Space {
     private VehicleType vehicleType;
     private Date entryTime;
     private boolean available;
+    private ParkingLot parkingLot;
 
     private Client client;
     private Vehicle vehicle;
@@ -129,13 +130,26 @@ public class Space {
         this.available = available;
     }
 
+    public ParkingLot getParkingLot() {
+        return parkingLot;
+    }
+
+    public void setParkingLot(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
+    }
+
     @Override
     public String toString() {
+        String parkingName = parkingLot != null ? parkingLot.getName() : "Sin parqueo";
+
         if (spaceTaken && vehicle != null) {
             return "Espacio #" + id
-                    + " (Ocupado) - Vehículo: " + vehicle.getPlate();
+                    + " | Parqueo: " + parkingName
+                    + " | Ocupado por: " + vehicle.getPlate();
         }
-        return "Espacio #" + id + " (Libre)";
+        return "Espacio #" + id
+                + " | Parqueo: " + parkingName
+                + " | Libre";
     }
 
 }

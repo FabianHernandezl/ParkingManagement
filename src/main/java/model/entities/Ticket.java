@@ -13,12 +13,12 @@ public class Ticket {
     private Vehicle vehicle;
     private Space space;
     private LocalDateTime entryTime;
-    private LocalDateTime exitTime; 
+    private LocalDateTime exitTime;
     private double total;
 
     public Ticket() {
         this.entryTime = LocalDateTime.now();
-        this.exitTime = null; 
+        this.exitTime = null;
         this.total = 0.0;
     }
 
@@ -73,8 +73,8 @@ public class Ticket {
 
     // ================= LÓGICA DEL NEGOCIO =================
     /**
-     * Calcula el total a pagar según el tiempo y el tipo de vehículo
-     * NO modifica el atributo total
+     * Calcula el total a pagar según el tiempo y el tipo de vehículo NO
+     * modifica el atributo total
      */
     public double calculateTotal() {
         if (entryTime == null || exitTime == null || vehicle == null || vehicle.getVehicleType() == null) {
