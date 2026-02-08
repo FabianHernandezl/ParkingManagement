@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 12
+Total de clientes: 13
 ========================================
 
 CLIENTE #1
@@ -87,15 +87,6 @@ Preferencial:  No
 
 CLIENTE #10
 ----------------------------------------
-ID:            302030937
-Nombre:        Maria
-Teléfono:      9009093
-Email:         jiimendnendoe
-Preferencial:  No
-----------------------------------------
-
-CLIENTE #11
-----------------------------------------
 ID:            C-002
 Nombre:        Cliente
 Teléfono:      8888888
@@ -103,13 +94,31 @@ Email:         cliente
 Preferencial:  No
 ----------------------------------------
 
-CLIENTE #12
+CLIENTE #11
 ----------------------------------------
 ID:            88
 Nombre:        k
 Teléfono:      l
 Email:         l
 Preferencial:  No
+----------------------------------------
+
+CLIENTE #12
+----------------------------------------
+ID:            6773
+Nombre:        Rosita
+Teléfono:      8989902
+Email:         ljsadjkjads
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #13
+----------------------------------------
+ID:            222332
+Nombre:        Karla
+Teléfono:      9889982
+Email:         aksljdljas
+Preferencial:  Sí
 ----------------------------------------
 
 ========================================

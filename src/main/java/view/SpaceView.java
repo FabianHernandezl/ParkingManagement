@@ -3,8 +3,8 @@ package view;
 import Controller.ParkingLotController;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import javax.swing.*;
 import model.entities.ParkingLot;
 import model.entities.Space;
@@ -32,20 +32,27 @@ public class SpaceView extends JInternalFrame {
     }
 
     private void initUI() {
-
-        // 🔹 Panel superior
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         JLabel lblTitle = new JLabel("Parqueo: " + parkingLot.getName());
-        lblTitle.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
+        lblTitle.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18));
 
         JButton btnRefresh = new JButton("Actualizar");
-        btnRefresh.addActionListener(e -> refreshParkingLot());
+        btnRefresh.addActionListener(e -> loadSpaces());
+
+        JButton btnChangeParking = new JButton("Cambiar Parqueo");
+        btnChangeParking.addActionListener(e -> {
+            parent.openInternalFrame(new SelectParkingLotView(
+                    parkingLotController.getAllParkingLots(), 
+                    parent
+            ));
+            this.dispose(); 
+        });
 
         topPanel.add(lblTitle);
         topPanel.add(btnRefresh);
+        topPanel.add(btnChangeParking); 
 
-        // 🔹 Contenedor de espacios
         spacesContainer = new JPanel();
         spacesContainer.setLayout(new GridLayout(0, 5, 15, 15));
         spacesContainer.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -56,14 +63,20 @@ public class SpaceView extends JInternalFrame {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    // 🔄 Carga inicial de espacios
-    private void loadSpaces() {
+    
+    public void loadSpaces() {
         spacesContainer.removeAll();
 
-        if (parkingLot.getSpaces() != null) {
-            for (Space space : parkingLot.getSpaces()) {
-                SpacePanel panel = new SpacePanel(space, this);
-                spacesContainer.add(panel);
+        ParkingLot fresh = parkingLotController.getParkingLotById(parkingLot.getId());
+
+        if (fresh != null) {
+            this.parkingLot = fresh;
+
+            if (fresh.getSpaces() != null) {
+                for (Space space : fresh.getSpaces()) {
+                    SpacePanel panel = new SpacePanel(space, this);
+                    spacesContainer.add(panel);
+                }
             }
         }
 
@@ -71,27 +84,7 @@ public class SpaceView extends JInternalFrame {
         spacesContainer.repaint();
     }
 
-    // 🔄 Refresca desde DATA (JSON / memoria)
-    private void refreshParkingLot() {
-
-        ParkingLot updated = parkingLotController.getParkingLotById(parkingLot.getId());
-
-        if (updated != null) {
-            this.parkingLot = updated;
-            loadSpaces();
-        } else {
-            JOptionPane.showMessageDialog(
-                    this,
-                    "No se pudo actualizar el parqueo",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-            );
-        }
-    }
-
-    // 🔹 Manejo de selección visual
     public void setSelectedPanel(SpacePanel panel) {
-
         if (selectedPanel != null) {
             selectedPanel.setSelected(false);
         }
@@ -106,4 +99,55 @@ public class SpaceView extends JInternalFrame {
     public SpacePanel getSelectedPanel() {
         return selectedPanel;
     }
+
+   
+    public void markSpaceOccupied(int spaceId) {
+        ParkingLot fresh = parkingLotController.getParkingLotById(parkingLot.getId());
+
+        if (fresh == null || fresh.getSpaces() == null) {
+            return;
+        }
+
+        for (Space s : fresh.getSpaces()) {
+            if (s != null && s.getId() == spaceId) {
+                if (s.isSpaceTaken()) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "⚠️ El espacio #" + spaceId + " ya está ocupado",
+                            "Espacio ocupado",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+                s.setSpaceTaken(true);
+                break;
+            }
+        }
+
+        this.parkingLot = fresh;
+        loadSpaces();
+    }
+
+    public void refreshSpaces() {
+        if (parkingLot == null) {
+            return;
+        }
+
+        ParkingLot updated = parkingLotController.getParkingLotById(parkingLot.getId());
+
+        if (updated != null) {
+            this.parkingLot = updated;
+
+            // recargar la UI
+            loadSpaces();
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "No se pudo actualizar el parqueo",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
 }

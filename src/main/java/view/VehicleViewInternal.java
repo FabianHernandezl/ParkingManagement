@@ -164,11 +164,25 @@ public class VehicleViewInternal extends JInternalFrame {
         btnDelete.addActionListener(e -> delete());
         btnClear.addActionListener(e -> clear());
 
+        // ===== QUITAR CLIENTE =====
         btnRemoveClient.addActionListener(e -> {
             int index = listClients.getSelectedIndex();
             if (index != -1) {
-                selectedClients.remove(index);
+                Client removed = selectedClients.remove(index);
                 clientListModel.remove(index);
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Cliente " + removed.getName() + " removido correctamente",
+                        "Cliente eliminado",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+            } else {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Seleccione un cliente de la lista para quitar",
+                        "Atención",
+                        JOptionPane.WARNING_MESSAGE
+                );
             }
         });
 
@@ -307,6 +321,8 @@ public class VehicleViewInternal extends JInternalFrame {
 
         loadTable();
         clear();
+
+        parkingController.refreshParkingLot(parking.getId());
     }
 
     private void update() {
@@ -362,4 +378,9 @@ public class VehicleViewInternal extends JInternalFrame {
         p.add(b);
         return b;
     }
+
+    public void refreshTable() {
+        loadTable();
+    }
+
 }
