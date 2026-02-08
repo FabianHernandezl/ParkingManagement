@@ -5,35 +5,37 @@ import java.util.Date;
 import model.data.ClientData;
 import model.data.SpaceData;
 import model.data.VehicleData;
-import model.data.ParkingLotData;  // AÑADIR ESTO
+import model.data.ParkingLotData;
 import model.entities.Client;
 import model.entities.Space;
 import model.entities.Vehicle;
-import model.entities.ParkingLot;  // AÑADIR ESTO
+import model.entities.VehicleType;
+import model.entities.ParkingLot;
 
-/**
- * Controlador para la gestión de espacios de parqueo. Se comunica con SpaceData
- * para persistencia en el archivo de parqueos.
- */
 public class SpaceController {
 
     private SpaceData spaceData;
-    private ParkingLotData parkingLotData;  // NUEVO: para acceder a parqueos
+    private ParkingLotData parkingLotData;
 
     public SpaceController() {
         spaceData = new SpaceData();
-        parkingLotData = new ParkingLotData();  // Inicializar
+        parkingLotData = new ParkingLotData();
     }
 
-    public String registerSpace(int id, boolean disability, boolean taken) {
+    // ================= REGISTRAR ESPACIO =================
+    public String registerSpace(int id, boolean disability, boolean taken, String vehicleTypeDesc) {
         Space space = new Space();
         space.setId(id);
         space.setDisabilityAdaptation(disability);
         space.setSpaceTaken(taken);
+
+        VehicleType type = new VehicleType();
+        type.setDescription(vehicleTypeDesc);
+        space.setVehicleType(type);
+
         return spaceData.insertSpace(space);
     }
 
-    // MODIFICAR ESTE MÉTODO para obtener espacios desde los parqueos
     public ArrayList<Space> getAllSpaces() {
         ArrayList<Space> allSpaces = new ArrayList<>();
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
@@ -51,169 +53,141 @@ public class SpaceController {
         return allSpaces;
     }
 
-    public Space findSpaceById(int id) {
-        return spaceData.findSpaceById(id);
-    }
+    // ================= OCUPAR ESPACIO AUTOMÁTICO =================
+    public String occupySpace(Client client, Vehicle vehicle) {
 
-    public String updateSpace(Space space) {
-        boolean updated = spaceData.updateSpace(space);
-        return updated ? "Espacio actualizado correctamente" : "No se pudo actualizar el espacio";
-    }
-
-    public String deleteSpace(int id) {
-        boolean deleted = spaceData.deleteSpace(id);
-        return deleted ? "Espacio eliminado correctamente" : "No se pudo eliminar el espacio";
-    }
-
-    /**
-     * Método principal para asignar un vehículo a un espacio.
-     *
-     * @return "OK" si tuvo éxito, o un mensaje descriptivo del error.
-     */
-    public String occupySpace(int id, Client client, Vehicle vehicle) {
-        System.out.println("=== DEBUG OCCUPY SPACE ===");
-        System.out.println("Espacio ID: " + id);
-        System.out.println("Cliente recibido: " + (client != null ? client.toString() : "null"));
-        System.out.println("Vehículo recibido: " + (vehicle != null ? vehicle.toString() : "null"));
-
-        // PRIMERO buscar en todos los parqueos
-        Space space = findSpaceInAllParkingLots(id);
-
-        if (space == null) {
-            System.out.println("DEBUG: Espacio no encontrado en ningún parqueo");
-            return "Error: El espacio #" + id + " no existe en la base de datos.";
+        if (client == null || vehicle == null) {
+            return "Error: Cliente o vehículo inválido.";
         }
 
-        System.out.println("DEBUG: Espacio encontrado en parqueo - Ocupado: " + space.isSpaceTaken());
+        Space available = findAvailableSpace(client, vehicle);
 
-        // Resto del código permanece igual...
-        if (space.isSpaceTaken()) {
-            System.out.println("DEBUG: Espacio ya ocupado");
-            return "Error: El espacio ya se encuentra ocupado.";
-        }
-
-        if (space.isDisabilityAdaptation() && !client.isIsPreferential()) {
-            System.out.println("DEBUG: Violación Ley 7600");
-            return "Error: Este espacio es exclusivo para personas con discapacidad (Ley 7600).";
+        if (available == null) {
+            return "Error: No hay espacios disponibles para este vehículo/cliente";
         }
 
         ClientData clientData = new ClientData();
-        VehicleData vehicleData = new VehicleData();
-
         Client existingClient = clientData.findClientById(client.getId());
+
         if (existingClient == null) {
-            System.out.println("DEBUG: Cliente no encontrado, registrando nuevo");
             clientData.addClient(client);
         } else {
-            System.out.println("DEBUG: Cliente ya existe en base de datos");
+            client = existingClient;
         }
 
+        VehicleData vehicleData = new VehicleData();
         Vehicle existingVehicle = vehicleData.findVehicleByPlate(vehicle.getPlate());
+
         if (existingVehicle == null) {
-            System.out.println("DEBUG: Vehículo no encontrado, registrando nuevo");
             vehicle.addClient(client);
             vehicleData.insertVehicle(vehicle);
         } else {
-            System.out.println("DEBUG: Vehículo ya existe en base de datos");
             existingVehicle.addClient(client);
             vehicleData.updateVehicle(existingVehicle);
             vehicle = existingVehicle;
         }
 
-        space.setSpaceTaken(true);
-        space.setClient(client);
-        space.setVehicle(vehicle);
-        space.setEntryTime(new Date());
+        available.setSpaceTaken(true);
+        available.setClient(client);
+        available.setVehicle(vehicle);
+        available.setEntryTime(new Date());
 
-        System.out.println("DEBUG: Space configurado:");
-        System.out.println("  - Ocupado: " + space.isSpaceTaken());
-        System.out.println("  - Cliente: " + (space.getClient() != null ? space.getClient().getName() : "null"));
-        System.out.println("  - Vehículo: " + (space.getVehicle() != null ? space.getVehicle().getPlate() : "null"));
-        System.out.println("  - Hora entrada: " + space.getEntryTime());
+        boolean updated = updateSpaceInParkingLot(available);
 
-        // Aquí necesitamos actualizar el espacio en el parqueo correspondiente
-        boolean updated = updateSpaceInParkingLot(space);
-
-        System.out.println("DEBUG: updateSpaceInParkingLot resultó: " + updated);
-        System.out.println("=== FIN DEBUG OCCUPY SPACE ===\n");
-
-        return updated ? "OK" : "Error crítico: No se pudo actualizar el archivo de datos.";
+        return updated ? "OK: Espacio asignado" : "Error crítico: No se pudo actualizar el parqueo.";
     }
 
-    // NUEVO MÉTODO: Buscar espacio en todos los parqueos
-    private Space findSpaceInAllParkingLots(int spaceId) {
+    // ================= BUSCAR ESPACIO DISPONIBLE =================
+    private Space findAvailableSpace(Client client, Vehicle vehicle) {
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
+        String vehicleType = vehicle.getVehicleType().getDescription().toLowerCase();
 
-        for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.getSpaces() != null) {
-                for (Space space : parkingLot.getSpaces()) {
-                    if (space != null && space.getId() == spaceId) {
-                        return space;
-                    }
+        for (ParkingLot lot : parkingLots) {
+            if (lot.getSpaces() == null) {
+                continue;
+            }
+
+            for (Space s : lot.getSpaces()) {
+                if (s == null || s.isSpaceTaken() || s.getVehicleType() == null) {
+                    continue;
+                }
+
+                String spaceType = s.getVehicleType().getDescription().toLowerCase();
+
+                if (s.isDisabilityAdaptation() && client.isIsPreferential()) {
+                    return s;
+                }
+
+                
+                if (spaceType.contains("motocicleta") && vehicleType.contains("motocicleta")) {
+                    return s;
+                }
+
+                if (!s.isDisabilityAdaptation() && !spaceType.contains("motocicleta") && !vehicleType.contains("motocicleta")) {
+                    return s;
                 }
             }
         }
+
         return null;
     }
 
-    // NUEVO MÉTODO: Actualizar espacio en el parqueo correspondiente
+    // ================= ACTUALIZAR ESPACIO EN PARQUEO =================
     private boolean updateSpaceInParkingLot(Space updatedSpace) {
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
 
         for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.getSpaces() != null) {
-                Space[] spaces = parkingLot.getSpaces();
+            if (parkingLot.getSpaces() == null) {
+                continue;
+            }
 
-                for (int i = 0; i < spaces.length; i++) {
-                    if (spaces[i] != null && spaces[i].getId() == updatedSpace.getId()) {
+            Space[] spaces = parkingLot.getSpaces();
 
-                        // ✅ COPIAR CAMPOS (NO reemplazar el objeto)
-                        spaces[i].setSpaceTaken(updatedSpace.isSpaceTaken());
-                        spaces[i].setClient(updatedSpace.getClient());
-                        spaces[i].setVehicle(updatedSpace.getVehicle());
-                        spaces[i].setEntryTime(updatedSpace.getEntryTime());
-                        spaces[i].setDisabilityAdaptation(updatedSpace.isDisabilityAdaptation());
-                        spaces[i].setVehicleType(updatedSpace.getVehicleType());
+            for (int i = 0; i < spaces.length; i++) {
+                if (spaces[i] != null && spaces[i].getId() == updatedSpace.getId()) {
 
-                        return parkingLotData.updateParkingLot(parkingLot);
-                    }
+                    spaces[i].setSpaceTaken(updatedSpace.isSpaceTaken());
+                    spaces[i].setClient(updatedSpace.getClient());
+                    spaces[i].setVehicle(updatedSpace.getVehicle());
+                    spaces[i].setEntryTime(updatedSpace.getEntryTime());
+                    spaces[i].setDisabilityAdaptation(updatedSpace.isDisabilityAdaptation());
+                    spaces[i].setVehicleType(updatedSpace.getVehicleType());
+
+                    return parkingLotData.updateParkingLot(parkingLot);
                 }
             }
         }
         return false;
     }
 
-    /**
-     * Libera un espacio y limpia los datos del cliente y vehículo.
-     */
     public boolean releaseSpace(int id) {
-        Space space = findSpaceInAllParkingLots(id);
-        if (space != null && space.isSpaceTaken()) {
-            space.setSpaceTaken(false);
-            space.setClient(null);
-            space.setVehicle(null);
-            space.setEntryTime(null);
-            return updateSpaceInParkingLot(space);
+        for (ParkingLot lot : parkingLotData.getAllParkingLots()) {
+            if (lot.getSpaces() == null) {
+                continue;
+            }
+            for (Space s : lot.getSpaces()) {
+                if (s != null && s.getId() == id && s.isSpaceTaken()) {
+                    s.setSpaceTaken(false);
+                    s.setClient(null);
+                    s.setVehicle(null);
+                    s.setEntryTime(null);
+                    return updateSpaceInParkingLot(s);
+                }
+            }
         }
         return false;
     }
 
-    /**
-     * Calcula la tarifa basada en el tipo de vehículo y el tiempo transcurrido.
-     */
     public double calculateFee(Space space) {
         if (space.getEntryTime() == null || space.getVehicle() == null
                 || space.getVehicle().getVehicleType() == null) {
             return 0.0;
         }
 
-        // Diferencia en milisegundos
         long diff = System.currentTimeMillis() - space.getEntryTime().getTime();
-
-        // Convertir a horas (mínimo 1 hora)
         long hours = Math.max(1, diff / (1000 * 60 * 60));
-        float hourlyRate = space.getVehicle().getVehicleType().getFee();
+        float rate = space.getVehicle().getVehicleType().getFee();
 
-        return hours * hourlyRate;
+        return hours * rate;
     }
 }

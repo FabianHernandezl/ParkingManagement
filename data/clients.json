@@ -56,13 +56,6 @@
     "email": "calvo.shirley@yahoo. es"
   },
   {
-    "id": "302030937",
-    "name": "Maria",
-    "phone": "9009093",
-    "isPreferential": false,
-    "email": "jiimendnendoe"
-  },
-  {
     "id": "C-002",
     "name": "Cliente",
     "phone": "8888888",
@@ -75,5 +68,19 @@
     "phone": "l",
     "isPreferential": false,
     "email": "l"
+  },
+  {
+    "id": "6773",
+    "name": "Rosita",
+    "phone": "8989902",
+    "isPreferential": false,
+    "email": "ljsadjkjads"
+  },
+  {
+    "id": "222332",
+    "name": "Karla",
+    "phone": "9889982",
+    "isPreferential": true,
+    "email": "aksljdljas"
   }
 ]

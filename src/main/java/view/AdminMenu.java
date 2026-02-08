@@ -132,7 +132,7 @@ public class AdminMenu extends JFrame {
             openInternalFrame(new ParkingRateViewInternal());//TO DO crud de Tarifas
         });
 
-            //--------------Administrador ----------
+        //--------------Administrador ----------
         JMenu adminMenu = new JMenu("Administradores");
         menuBar.add(adminMenu);
 
@@ -189,10 +189,12 @@ public class AdminMenu extends JFrame {
     void openInternalFrame(JInternalFrame frame) {
         desktop.add(frame);
         frame.setVisible(true);
+
     }
 
     private void openJFrame(LoginWindow loginWindow) {
         this.setVisible(false);
         loginWindow.setVisible(true);
     }
+
 }

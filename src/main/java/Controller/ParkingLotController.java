@@ -35,9 +35,15 @@ public class ParkingLotController {
         // Guardar espacios individualmente en SpaceData
         SpaceController spaceController = new SpaceController();
         for (Space space : spaces) {
-            spaceController.registerSpace(space.getId(),
+            String typeDescription = space.getVehicleType() != null
+                    ? space.getVehicleType().getDescription()
+                    : "Automóvil"; // por defecto si no tiene tipo
+            spaceController.registerSpace(
+                    space.getId(),
                     space.isDisabilityAdaptation(),
-                    space.isSpaceTaken());
+                    space.isSpaceTaken(),
+                    typeDescription
+            );
         }
 
         return parkingLotData.addParkingLot(parkingLot);
@@ -148,4 +154,11 @@ public class ParkingLotController {
         return null;
     }
 
+    public ParkingLot refreshParkingLot(int parkingId) {
+        ParkingLot updated = parkingLotData.findParkingLotById(parkingId);
+        if (updated != null) {
+            
+        }
+        return updated;
+    }
 }

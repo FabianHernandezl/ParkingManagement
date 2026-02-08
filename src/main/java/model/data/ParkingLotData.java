@@ -125,14 +125,12 @@ public ParkingLot findParkingLotByName(String name) {
 
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
 
-        // Validaciones básicas
         if (parkingLot == null || vehicle == null) {
             return 0;
         }
 
         Space[] spaces = parkingLot.getSpaces();
 
-        // 🚨 ESTE ERA EL PROBLEMA
         if (spaces == null || spaces.length == 0) {
             System.out.println("El parqueo no tiene espacios inicializados");
             return 0;
@@ -166,14 +164,12 @@ public ParkingLot findParkingLotByName(String name) {
                 continue;
             }
 
-            // Registrar vehículo
             vehiclesInParkingLot.add(vehicle);
             space.setSpaceTaken(true);
 
-            return space.getId(); // ← retorno inmediato
+            return space.getId(); 
         }
 
-        // No se encontró espacio
         return 0;
     }
 
@@ -181,8 +177,7 @@ public ParkingLot findParkingLotByName(String name) {
 
         ArrayList<Vehicle> vehiclesInParkingLot = parkingLot.getVehicles();
         Space spaces[] = parkingLot.getSpaces();
-        //recorre la lista de vehículos para ver en qué posición
-        //debemos retirar al vehículo actual
+ 
         for (int i = 0; i < vehiclesInParkingLot.size(); i++) {
 
             if (vehiclesInParkingLot.get(i) == vehicle) {
@@ -193,8 +188,7 @@ public ParkingLot findParkingLotByName(String name) {
             }
 
         }
-        //*************actualizamos los espacios liberados
-        //y los vehículos registrados en el parqueo
+      
 
         parkingLot.setSpaces(spaces);
         parkingLot.setVehicles(vehiclesInParkingLot);
