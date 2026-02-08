@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 11
+Total de clientes: 12
 ========================================
 
 CLIENTE #1
@@ -100,6 +100,15 @@ ID:            C-002
 Nombre:        Cliente
 Teléfono:      8888888
 Email:         cliente
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #12
+----------------------------------------
+ID:            88
+Nombre:        k
+Teléfono:      l
+Email:         l
 Preferencial:  No
 ----------------------------------------
 
