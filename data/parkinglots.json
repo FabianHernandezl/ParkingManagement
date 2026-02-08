@@ -608,14 +608,35 @@
       {
         "id": 1,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 3,
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "555",
+          "color": "azul",
+          "brand": "hyundai",
+          "model": "acer",
+          "clients": [
+            {
+              "id": "C-002",
+              "name": "Cliente",
+              "phone": "8888888",
+              "isPreferential": false,
+              "email": "cliente"
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
+        }
       },
       {
         "id": 2,

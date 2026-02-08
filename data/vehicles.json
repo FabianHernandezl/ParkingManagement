@@ -252,5 +252,26 @@
       "numberOfTires": 0,
       "fee": 0.0
     }
+  },
+  {
+    "plate": "555",
+    "color": "azul",
+    "brand": "hyundai",
+    "model": "acer",
+    "clients": [
+      {
+        "id": "C-002",
+        "name": "Cliente",
+        "phone": "8888888",
+        "isPreferential": false,
+        "email": "cliente"
+      }
+    ],
+    "vehicleType": {
+      "id": 0,
+      "description": "Carro",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
   }
 ]

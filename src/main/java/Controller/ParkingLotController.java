@@ -135,4 +135,17 @@ public class ParkingLotController {
         }
         return result;
     }
+
+    public ParkingLot getParkingLotById(int id) {
+
+        ArrayList<ParkingLot> lots = parkingLotData.getAllParkingLots();
+
+        for (ParkingLot p : lots) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
 }
