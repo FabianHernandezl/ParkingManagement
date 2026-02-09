@@ -1,4 +1,6 @@
-package view;
+package view.main;
+
+import view.LoginWindow;
 
 public class ParkingManagement {
 
