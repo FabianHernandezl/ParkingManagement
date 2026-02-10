@@ -151,25 +151,24 @@ Clientes:
 
 VEHÍCULO #14
 ----------------------------------------
-Placa:        323232
-Marca:        24242
-Modelo:       4223442
-Color:        233223
+Placa:        dgf
+Marca:        dfgd
+Modelo:       dfgdf
+Color:        dfgdf
 Tipo:         Moto
 Clientes:     
-              - Rosita (ID: 6773)
-              - Rosita (ID: 6773)
+              - Karla (ID: 222332)
 ----------------------------------------
 
 VEHÍCULO #15
 ----------------------------------------
-Placa:        321312
-Marca:        2131
-Modelo:       1231
-Color:        123213
-Tipo:         Camión
+Placa:        654645
+Marca:        jhghjgh
+Modelo:       jghgj
+Color:        jgjghjg
+Tipo:         Carro
 Clientes:     
-              - Karla (ID: 222332)
+              - Rosita (ID: 6773)
 ----------------------------------------
 
 ========================================
