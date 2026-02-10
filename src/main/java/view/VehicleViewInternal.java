@@ -45,7 +45,7 @@ public class VehicleViewInternal extends JInternalFrame {
 
     public VehicleViewInternal() {
         super("Gestión de Vehículos", true, true, true, true);
-        setSize(900, 650);
+        setSize(920, 640);
         setLayout(null);
         getContentPane().setBackground(UITheme.BACKGROUND);
 
@@ -144,7 +144,7 @@ public class VehicleViewInternal extends JInternalFrame {
     private void initTable() {
 
         JPanel searchPanel = new JPanel(null);
-        searchPanel.setBounds(360, 20, 510, 50);
+        searchPanel.setBounds(360, 20, 530, 50);
         searchPanel.setBackground(UITheme.PANEL_BG);
         searchPanel.setBorder(UITheme.panelBorder());
         add(searchPanel);
@@ -178,7 +178,7 @@ public class VehicleViewInternal extends JInternalFrame {
         UITheme.styleTable(table);
 
         JScrollPane sp = new JScrollPane(table);
-        sp.setBounds(360, 80, 510, 580);
+        sp.setBounds(360, 80, 530, 520);
         sp.setBorder(UITheme.panelBorder());
         add(sp);
 
