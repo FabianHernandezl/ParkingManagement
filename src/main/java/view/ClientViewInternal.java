@@ -222,6 +222,12 @@ public class ClientViewInternal extends JInternalFrame {
             JOptionPane.showMessageDialog(this, "Complete todos los campos");
             return;
         }
+
+        if (!txtEmail.getText().isEmpty() && !txtEmail.getText().contains("@")) {
+            JOptionPane.showMessageDialog(this, "Email inválido. Debe contener '@'");
+            return;
+        }
+
         JOptionPane.showMessageDialog(this,
                 clientController.registerClient(
                         txtId.getText(),
@@ -234,6 +240,11 @@ public class ClientViewInternal extends JInternalFrame {
     }
 
     private void updateClient() {
+        if (!txtEmail.getText().isEmpty() && !txtEmail.getText().contains("@")) {
+            JOptionPane.showMessageDialog(this, "Email inválido. Debe contener '@'");
+            return;
+        }
+
         JOptionPane.showMessageDialog(this,
                 clientController.updateClient(
                         txtId.getText(),
