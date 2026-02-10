@@ -235,7 +235,7 @@ public class ClientViewInternal extends JInternalFrame {
 
     private void updateClient() {
         JOptionPane.showMessageDialog(this,
-                clientController.registerClient(
+                clientController.updateClient(
                         txtId.getText(),
                         txtName.getText(),
                         txtPhone.getText(),
