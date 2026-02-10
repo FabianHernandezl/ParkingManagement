@@ -53,56 +53,63 @@ public class SpacePanel extends JPanel {
 
     public void updateView() {
 
+        String statusText = "";
+        Color bgColor = Color.LIGHT_GRAY;
+
+        String vehicleTypeDesc = (space.getVehicleType() != null)
+                ? space.getVehicleType().getDescription()
+                : "Tipo desconocido";
+
         if (space.isSpaceTaken() && space.getVehicle() != null) {
-
-            setBackground(new Color(244, 67, 54)); 
-            lblStatus.setText("Ocupado");
-
+            bgColor = new Color(244, 67, 54); // rojo
+            statusText = "Ocupado";
             lblVehicleIcon.setText(space.getVehicle().getIcon());
             lblVehicleIcon.setVisible(true);
-
-            updateTooltip();
             animateVehicleIn();
-
         } else if (space.isDisabilityAdaptation()) {
-
-            setBackground(new Color(3, 169, 244)); 
-            lblStatus.setText("♿ Preferencial");
+            bgColor = new Color(3, 169, 244); // azul
+            statusText = "♿ Preferencial";
             lblVehicleIcon.setVisible(false);
-
         } else {
-
-            setBackground(new Color(76, 175, 80));
-            lblStatus.setText("Disponible");
-
+            bgColor = new Color(76, 175, 80); // verde
+            statusText = "Disponible";
+            lblVehicleIcon.setVisible(false);
             animateVehicleOut();
         }
+
+        setBackground(bgColor);
+        lblStatus.setText("<html>" + vehicleTypeDesc + "<br>" + statusText + "</html>");
 
         setOpaque(true);
         updateTooltip();
     }
 
     public void updateTooltip() {
-    if (space.isSpaceTaken() && space.getVehicle() != null) {
-        Vehicle v = space.getVehicle();
+        String tooltip = "<html>";
+        tooltip += "<b>Espacio #" + space.getId() + "</b><br>";
 
-        String tooltip = "<html>"
-                + "<b>Vehículo</b><br>"
-                + "Placa: " + v.getPlate() + "<br>"
-                + "Modelo: " + v.getModel() + "<br>";
+        String vehicleTypeDesc = (space.getVehicleType() != null)
+                ? space.getVehicleType().getDescription()
+                : "Tipo desconocido";
 
-        if (space.getClient() != null) {
-            tooltip += "Cliente: " + space.getClient().getName() + "<br>";
+        tooltip += vehicleTypeDesc + "<br>";
+
+        if (space.isSpaceTaken() && space.getVehicle() != null) {
+            Vehicle v = space.getVehicle();
+            tooltip += "<hr>";
+            tooltip += "<b>Vehículo:</b><br>";
+            tooltip += "Placa: " + v.getPlate() + "<br>";
+            tooltip += "Modelo: " + v.getModel() + "<br>";
+            if (space.getClient() != null) {
+                tooltip += "Cliente: " + space.getClient().getName() + "<br>";
+            }
+        } else {
+            tooltip += "<i>Libre</i>";
         }
 
         tooltip += "</html>";
-
         setToolTipText(tooltip);
-    } else {
-        setToolTipText("Espacio disponible");
     }
-}
-
 
     public void setSelected(boolean selected) {
         this.selected = selected;
@@ -143,7 +150,7 @@ public class SpacePanel extends JPanel {
         timer.start();
     }
 
-     void animateVehicleIn() {
+    void animateVehicleIn() {
         lblVehicleIcon.setVisible(true);
         lblVehicleIcon.setForeground(new Color(0, 0, 0, 0));
 
