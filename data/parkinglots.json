@@ -602,14 +602,35 @@
       {
         "id": 6,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 2,
           "description": "Motocicleta",
           "numberOfTires": 2,
           "fee": 2.5
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "tyry",
+          "color": "tyrt",
+          "brand": "rtyry",
+          "model": "tryrt",
+          "clients": [
+            {
+              "id": "6773",
+              "name": "Rosita",
+              "phone": "8989902",
+              "isPreferential": false,
+              "email": "ljsadjkjads"
+            }
+          ],
+          "vehicleType": {
+            "id": 0,
+            "description": "Moto",
+            "numberOfTires": 0,
+            "fee": 0.0
+          }
+        }
       },
       {
         "id": 7,
