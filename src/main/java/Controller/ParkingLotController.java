@@ -6,6 +6,7 @@ package Controller;
 
 import java.util.ArrayList;
 import model.data.ParkingLotData;
+import model.data.ParkingLotReportPDF;
 import model.entities.ParkingLot;
 import model.entities.Vehicle;
 import model.entities.Space;
@@ -157,8 +158,25 @@ public class ParkingLotController {
     public ParkingLot refreshParkingLot(int parkingId) {
         ParkingLot updated = parkingLotData.findParkingLotById(parkingId);
         if (updated != null) {
-            
+
         }
         return updated;
     }
+
+    public void generateOccupancyReports() {
+
+        ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
+
+        if (parkingLots == null || parkingLots.isEmpty()) {
+            System.out.println("⚠️ No hay parqueos registrados para generar reportes");
+            return;
+        }
+
+        for (ParkingLot parkingLot : parkingLots) {
+            ParkingLotReportPDF.generate(parkingLot);
+        }
+
+        System.out.println("✅ Reportes de ocupación generados correctamente");
+    }
+
 }
