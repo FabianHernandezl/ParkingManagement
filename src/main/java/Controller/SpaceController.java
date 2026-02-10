@@ -114,16 +114,23 @@ public class SpaceController {
 
                 String spaceType = s.getVehicleType().getDescription().toLowerCase();
 
-                if (s.isDisabilityAdaptation() && client.isIsPreferential()) {
-                    return s;
+                // ESPACIOS PARA DISCAPACIDAD
+                if (s.isDisabilityAdaptation()) {
+                    if (client.isIsPreferential()) {
+                        // Solo clientes preferenciales pueden usar este espacio
+                        return s;
+                    } else {
+                        continue; // ignorar este espacio para clientes normales
+                    }
                 }
 
-                
+                // ESPACIOS PARA MOTOCICLETA
                 if (spaceType.contains("motocicleta") && vehicleType.contains("motocicleta")) {
                     return s;
                 }
 
-                if (!s.isDisabilityAdaptation() && !spaceType.contains("motocicleta") && !vehicleType.contains("motocicleta")) {
+                // ESPACIOS NORMALES PARA CARROS Y CAMIONES
+                if (!spaceType.contains("motocicleta") && !vehicleType.contains("motocicleta")) {
                     return s;
                 }
             }
@@ -165,6 +172,7 @@ public class SpaceController {
             if (lot.getSpaces() == null) {
                 continue;
             }
+
             for (Space s : lot.getSpaces()) {
                 if (s != null && s.getId() == id && s.isSpaceTaken()) {
                     s.setSpaceTaken(false);
