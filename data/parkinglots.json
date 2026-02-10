@@ -1151,7 +1151,7 @@
   {
     "id": 5,
     "name": "Prueba",
-    "numberOfSpaces": 8,
+    "numberOfSpaces": 10,
     "vehicles": [],
     "spaces": [
       {
@@ -1303,6 +1303,30 @@
       },
       {
         "id": 8,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 9,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 10,
         "disabilityAdaptation": false,
         "spaceTaken": false,
         "vehicleType": {

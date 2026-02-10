@@ -7,8 +7,11 @@ package model.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import model.entities.Clerk;
@@ -20,14 +23,20 @@ import model.entities.ParkingLot;
  */
 public class ClerkData {
 
-    private static final String FILE_PATH = "data/clerks.json";
     private ArrayList<Clerk> clerks = new ArrayList<>();
+
+    private static final String FILE_PATH = "data/clerks.json";
+    private static final String FILE_PATH_TXT = "data/clerks.txt";
 
     private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
             .create();
 
     public ClerkData() {
+        File folder = new File("data");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
         clerks = loadClerks();
 
     }
@@ -60,6 +69,7 @@ public class ClerkData {
         if (clerk != null && findClerkById(clerk.getId()) == null) {
             clerks.add(clerk);
             saveClerks();
+            saveClerksToTxt();
             clerkToReturn = clerk;
         }
 
@@ -105,6 +115,7 @@ public class ClerkData {
             if (clerks.get(i).getId().equals(updatedClerk.getId())) {
                 clerks.set(i, updatedClerk);
                 saveClerks();
+                saveClerksToTxt();
                 return true;
             }
         }
@@ -119,6 +130,7 @@ public class ClerkData {
         if (clerk != null) {
             clerks.remove(clerk);
             saveClerks();
+            saveClerksToTxt();
             return true;
         }
         return false;
@@ -179,6 +191,96 @@ public class ClerkData {
      */
     public int getClerkCount() {
         return clerks.size();
+    }
+
+    // ===================== TXT =====================
+    private void saveClerksToTxt() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH_TXT))) {
+
+            // Encabezado
+            writer.write("========================================");
+            writer.newLine();
+            writer.write("        REGISTRO DE EMPLEADOS");
+            writer.newLine();
+            writer.write("========================================");
+            writer.newLine();
+            writer.write("Total de empleados: " + clerks.size());
+            writer.newLine();
+            writer.write("========================================");
+            writer.newLine();
+            writer.newLine();
+
+            // Si no hay empleados
+            if (clerks.isEmpty()) {
+                writer.write("No hay empleados registrados.");
+                writer.newLine();
+            } else {
+
+                int contador = 1;
+                for (Clerk clerk : clerks) {
+
+                    writer.write("EMPLEADO #" + contador);
+                    writer.newLine();
+                    writer.write("----------------------------------------");
+                    writer.newLine();
+
+                    // Datos heredados de User
+                    writer.write("ID:             " + (clerk.getId() != null ? clerk.getId() : "No definido"));
+                    writer.newLine();
+
+                    writer.write("Nombre:         " + (clerk.getName() != null ? clerk.getName() : "No definido"));
+                    writer.newLine();
+
+                    writer.write("Usuario:        " + (clerk.getUsername() != null ? clerk.getUsername() : "No definido"));
+                    writer.newLine();
+
+                    // Datos propios de Clerk
+                    writer.write("Código empleado:" + clerk.getEmployeeCode());
+                    writer.newLine();
+
+                    writer.write("Horario:        "
+                            + (clerk.getShedule() != null ? clerk.getShedule() : "No definido"));
+                    writer.newLine();
+
+                    writer.write("Edad:           " + clerk.getAge());
+                    writer.newLine();
+
+                    // Parqueos asignados
+                    writer.write("Parqueos:       ");
+                    if (clerk.getParkingLot() != null && !clerk.getParkingLot().isEmpty()) {
+                        writer.newLine();
+                        for (ParkingLot parking : clerk.getParkingLot()) {
+                            if (parking != null) {
+                                writer.write("                 - "
+                                        + (parking.getName() != null ? parking.getName() : "Sin nombre")
+                                        + " (ID: "
+                                        + parking.getId() + ")");
+                                writer.newLine();
+                            }
+                        }
+                    } else {
+                        writer.write("No tiene parqueos asignados");
+                        writer.newLine();
+                    }
+
+                    writer.write("----------------------------------------");
+                    writer.newLine();
+                    writer.newLine();
+
+                    contador++;
+                }
+            }
+
+            // Pie
+            writer.write("========================================");
+            writer.newLine();
+            writer.write("Fin del registro");
+            writer.newLine();
+            writer.write("========================================");
+
+        } catch (IOException e) {
+            System.out.println("Error guardando empleados en TXT: " + e.getMessage());
+        }
     }
 
 }
