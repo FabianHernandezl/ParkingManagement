@@ -12,6 +12,8 @@ import model.entities.Vehicle;
 import model.entities.VehicleType;
 import model.entities.ParkingLot;
 
+import java.awt.Cursor;
+import java.awt.Font;
 import java.util.ArrayList;
 
 public class VehicleViewInternal extends JInternalFrame {
@@ -27,16 +29,19 @@ public class VehicleViewInternal extends JInternalFrame {
     private JTable table;
     private DefaultTableModel model;
 
-    private JButton btnSave, btnUpdate, btnDelete, btnClear, btnRemoveClient;
+    private JButton btnSave, btnUpdate, btnDelete, btnClear, btnRemoveClient, btnClearSearch;
 
     private ArrayList<Client> selectedClients = new ArrayList<>();
     private DefaultListModel<String> clientListModel = new DefaultListModel<>();
     private JList<String> listClients;
 
-    // Buscador tipo Google
     private JTextField txtSearchClient;
     private JPopupMenu popupClients;
     private JList<Client> listSuggestions;
+
+    private JTextField txtSearchVehicle;
+    private JPopupMenu popupVehicles;
+    private JList<Vehicle> listVehicleSuggestions;
 
     public VehicleViewInternal() {
         super("Gestión de Vehículos", true, true, true, true);
@@ -51,11 +56,10 @@ public class VehicleViewInternal extends JInternalFrame {
         loadParkings();
     }
 
-    // ================= FORMULARIO =================
     private void initForm() {
 
         JPanel panel = new JPanel(null);
-        panel.setBounds(20, 20, 320, 600);
+        panel.setBounds(20, 20, 320, 580);
         panel.setBackground(UITheme.PANEL_BG);
         panel.setBorder(UITheme.panelBorder());
         add(panel);
@@ -88,14 +92,12 @@ public class VehicleViewInternal extends JInternalFrame {
         cmbType.setBounds(100, y, 200, 25);
         panel.add(cmbType);
 
-        // ===== PARQUEO =====
         y += 35;
         panel.add(label("Parqueo:", y));
         cmbParking = new JComboBox<>();
         cmbParking.setBounds(100, y, 200, 25);
         panel.add(cmbParking);
 
-        // ===== BUSCAR CLIENTE =====
         JLabel lblSearch = new JLabel("Buscar cliente:");
         lblSearch.setBounds(10, y + 40, 150, 25);
         lblSearch.setFont(UITheme.LABEL_FONT);
@@ -105,7 +107,6 @@ public class VehicleViewInternal extends JInternalFrame {
         txtSearchClient.setBounds(10, y + 65, 290, 25);
         panel.add(txtSearchClient);
 
-        // ===== CLIENTES ASIGNADOS =====
         JLabel lblClients = new JLabel("Clientes asignados:");
         lblClients.setBounds(10, y + 100, 150, 25);
         lblClients.setFont(UITheme.LABEL_FONT);
@@ -121,23 +122,49 @@ public class VehicleViewInternal extends JInternalFrame {
         UITheme.styleButton(btnRemoveClient, UITheme.DANGER);
         panel.add(btnRemoveClient);
 
-        btnSave = action(panel, "Guardar", UITheme.SUCCESS, y + 245);
-        btnClear = action(panel, "Limpiar", UITheme.SECONDARY, y + 285);
-        btnUpdate = action(panel, "Actualizar", UITheme.PRIMARY, y + 325);
-        btnDelete = action(panel, "Eliminar", UITheme.DANGER, y + 365);
+        int btnY = y + 250;
+        int btnWidth = 140;
+        int btnHeight = 40;
+        int gap = 10;
+
+        btnSave = actionGrid(panel, "Guardar", UITheme.SUCCESS, 10, btnY, btnWidth, btnHeight);
+        btnClear = actionGrid(panel, "Limpiar", UITheme.SECONDARY, 10 + btnWidth + gap, btnY, btnWidth, btnHeight);
+        btnUpdate = actionGrid(panel, "Actualizar", UITheme.PRIMARY, 10, btnY + btnHeight + gap, btnWidth, btnHeight);
+        btnDelete = actionGrid(panel, "Eliminar", UITheme.DANGER, 10 + btnWidth + gap, btnY + btnHeight + gap, btnWidth, btnHeight);
 
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
 
-        // ===== POPUP DE SUGERENCIAS =====
         popupClients = new JPopupMenu();
         listSuggestions = new JList<>();
         listSuggestions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         popupClients.add(new JScrollPane(listSuggestions));
     }
 
-    // ================= TABLA =================
     private void initTable() {
+
+        JPanel searchPanel = new JPanel(null);
+        searchPanel.setBounds(360, 20, 510, 50);
+        searchPanel.setBackground(UITheme.PANEL_BG);
+        searchPanel.setBorder(UITheme.panelBorder());
+        add(searchPanel);
+
+        JLabel lblSearchVehicle = new JLabel("🔍 Buscar vehículo:");
+        lblSearchVehicle.setBounds(10, 10, 150, 25);
+        lblSearchVehicle.setFont(UITheme.LABEL_FONT);
+        searchPanel.add(lblSearchVehicle);
+
+        txtSearchVehicle = new JTextField();
+        txtSearchVehicle.setBounds(130, 10, 320, 25);
+        searchPanel.add(txtSearchVehicle);
+
+        btnClearSearch = new JButton("Limpiar");
+        btnClearSearch.setBounds(460, 10, 40, 25);
+        btnClearSearch.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        btnClearSearch.setFocusPainted(false);
+        btnClearSearch.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnClearSearch.setToolTipText("Limpiar búsqueda");
+        searchPanel.add(btnClearSearch);
 
         model = new DefaultTableModel(
                 new String[]{"Placa", "Marca", "Modelo", "Color", "Tipo"}, 0) {
@@ -151,12 +178,16 @@ public class VehicleViewInternal extends JInternalFrame {
         UITheme.styleTable(table);
 
         JScrollPane sp = new JScrollPane(table);
-        sp.setBounds(360, 20, 510, 600);
+        sp.setBounds(360, 80, 510, 580);
         sp.setBorder(UITheme.panelBorder());
         add(sp);
+
+        popupVehicles = new JPopupMenu();
+        listVehicleSuggestions = new JList<>();
+        listVehicleSuggestions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        popupVehicles.add(new JScrollPane(listVehicleSuggestions));
     }
 
-    // ================= EVENTOS =================
     private void setupEvents() {
 
         btnSave.addActionListener(e -> save());
@@ -164,7 +195,6 @@ public class VehicleViewInternal extends JInternalFrame {
         btnDelete.addActionListener(e -> delete());
         btnClear.addActionListener(e -> clear());
 
-        // ===== QUITAR CLIENTE =====
         btnRemoveClient.addActionListener(e -> {
             int index = listClients.getSelectedIndex();
             if (index != -1) {
@@ -195,7 +225,6 @@ public class VehicleViewInternal extends JInternalFrame {
             }
         });
 
-        // ===== BUSCADOR TIPO GOOGLE =====
         txtSearchClient.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
 
             private void search() {
@@ -222,19 +251,22 @@ public class VehicleViewInternal extends JInternalFrame {
                 }
 
                 listSuggestions.setListData(results.toArray(new Client[0]));
-                popupClients.show(txtSearchClient, 0, txtSearchClient.getHeight());
+
+                if (!popupClients.isVisible()) {
+                    popupClients.show(txtSearchClient, 0, txtSearchClient.getHeight());
+                }
             }
 
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
-                search();
+                SwingUtilities.invokeLater(() -> search());
             }
 
             public void removeUpdate(javax.swing.event.DocumentEvent e) {
-                search();
+                SwingUtilities.invokeLater(() -> search());
             }
 
             public void changedUpdate(javax.swing.event.DocumentEvent e) {
-                search();
+                SwingUtilities.invokeLater(() -> search());
             }
         });
 
@@ -249,9 +281,89 @@ public class VehicleViewInternal extends JInternalFrame {
                 }
             }
         });
+
+        btnClearSearch.addActionListener(e -> {
+            txtSearchVehicle.setText("");
+            popupVehicles.setVisible(false);
+            loadTable();
+            table.clearSelection();
+        });
+
+        txtSearchVehicle.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+
+            private void searchVehicle() {
+
+                String text = txtSearchVehicle.getText().trim().toLowerCase();
+
+                if (text.isEmpty()) {
+                    popupVehicles.setVisible(false);
+                    loadTable();
+                    return;
+                }
+
+                ArrayList<Vehicle> results = new ArrayList<>();
+
+                for (Vehicle v : controller.getAllVehicles()) {
+                    if (v.getPlate().toLowerCase().contains(text)
+                            || v.getBrand().toLowerCase().contains(text)
+                            || v.getModel().toLowerCase().contains(text)) {
+                        results.add(v);
+                    }
+                }
+
+                model.setRowCount(0);
+                for (Vehicle v : results) {
+                    model.addRow(new Object[]{
+                        v.getPlate(),
+                        v.getBrand(),
+                        v.getModel(),
+                        v.getColor(),
+                        v.getVehicleType().getDescription()
+                    });
+                }
+
+                if (!results.isEmpty()) {
+                    listVehicleSuggestions.setListData(results.toArray(new Vehicle[0]));
+
+                    if (!popupVehicles.isVisible()) {
+                        popupVehicles.show(txtSearchVehicle, 0, txtSearchVehicle.getHeight());
+                    }
+                } else {
+                    popupVehicles.setVisible(false);
+                }
+            }
+
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                SwingUtilities.invokeLater(() -> searchVehicle());
+            }
+
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                SwingUtilities.invokeLater(() -> searchVehicle());
+            }
+
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                SwingUtilities.invokeLater(() -> searchVehicle());
+            }
+        });
+
+        listVehicleSuggestions.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                Vehicle selected = listVehicleSuggestions.getSelectedValue();
+                if (selected != null) {
+                    for (int i = 0; i < model.getRowCount(); i++) {
+                        if (model.getValueAt(i, 0).equals(selected.getPlate())) {
+                            table.setRowSelectionInterval(i, i);
+                            table.scrollRectToVisible(table.getCellRect(i, 0, true));
+                            break;
+                        }
+                    }
+                    popupVehicles.setVisible(false);
+                    txtSearchVehicle.requestFocus();
+                }
+            }
+        });
     }
 
-    // ================= CRUD =================
     private void loadTable() {
         model.setRowCount(0);
         for (Vehicle v : controller.getAllVehicles()) {
@@ -279,11 +391,29 @@ public class VehicleViewInternal extends JInternalFrame {
             return;
         }
 
-        txtPlate.setText(model.getValueAt(r, 0).toString());
+        String plate = model.getValueAt(r, 0).toString();
+
+        txtPlate.setText(plate);
         txtBrand.setText(model.getValueAt(r, 1).toString());
         txtModel.setText(model.getValueAt(r, 2).toString());
         txtColor.setText(model.getValueAt(r, 3).toString());
         cmbType.setSelectedItem(model.getValueAt(r, 4));
+
+        loadClientsForVehicle(plate);
+    }
+
+    private void loadClientsForVehicle(String plate) {
+        selectedClients.clear();
+        clientListModel.clear();
+
+        Vehicle vehicle = controller.findVehicleByPlate(plate);
+
+        if (vehicle != null && vehicle.getClients() != null) {
+            for (Client client : vehicle.getClients()) {
+                selectedClients.add(client);
+                clientListModel.addElement(client.toString());
+            }
+        }
     }
 
     private void clear() {
@@ -356,7 +486,6 @@ public class VehicleViewInternal extends JInternalFrame {
         return v;
     }
 
-    // ================= HELPERS =================
     private JLabel label(String text, int y) {
         JLabel l = new JLabel(text);
         l.setBounds(10, y, 80, 25);
@@ -371,9 +500,9 @@ public class VehicleViewInternal extends JInternalFrame {
         return t;
     }
 
-    private JButton action(JPanel p, String text, java.awt.Color c, int y) {
+    private JButton actionGrid(JPanel p, String text, java.awt.Color c, int x, int y, int width, int height) {
         JButton b = new JButton(text);
-        b.setBounds(10, y, 290, 30);
+        b.setBounds(x, y, width, height);
         UITheme.styleButton(b, c);
         p.add(b);
         return b;
