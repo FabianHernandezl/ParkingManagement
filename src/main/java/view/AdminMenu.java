@@ -142,27 +142,15 @@ public class AdminMenu extends JFrame {
         admins.addActionListener(e -> {
             openInternalFrame(new AdminView());
         });
-        //--------------REPORTS ---------- TO DO 
+        //-------------- REPORTES ----------
         JMenu reportsMenu = new JMenu("Reportes");
         menuBar.add(reportsMenu);
 
-        JMenuItem report1 = new JMenuItem("Generar Reporte 1");
-        reportsMenu.add(report1);
+        JMenuItem reportsCenter = new JMenuItem("Centro de Reportes");
+        reportsMenu.add(reportsCenter);
 
-        report1.addActionListener(e -> {
-            openInternalFrame(new TicketViewInternal());
-        });
-
-        JMenuItem report2 = new JMenuItem("Generar Reporte 2");
-        reportsMenu.add(report2);
-        report2.addActionListener(e -> {
-            openInternalFrame(new TicketViewInternal());
-        });
-
-        JMenuItem report3 = new JMenuItem("Generar Reporte 3");
-        reportsMenu.add(report3);
-        report3.addActionListener(e -> {
-            openInternalFrame(new TicketViewInternal());
+        reportsCenter.addActionListener(e -> {
+            openInternalFrame(new ReportsCenterInternal());
         });
 
         //--------------Sign Out---------- 
