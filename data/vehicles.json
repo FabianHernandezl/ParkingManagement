@@ -275,31 +275,10 @@
     }
   },
   {
-    "plate": "dgf",
-    "color": "dfgdf",
-    "brand": "dfgd",
-    "model": "dfgdf",
-    "clients": [
-      {
-        "id": "222332",
-        "name": "Karla",
-        "phone": "9889982",
-        "isPreferential": true,
-        "email": "aksljdljas"
-      }
-    ],
-    "vehicleType": {
-      "id": 0,
-      "description": "Moto",
-      "numberOfTires": 0,
-      "fee": 0.0
-    }
-  },
-  {
-    "plate": "654645",
-    "color": "jgjghjg",
-    "brand": "jhghjgh",
-    "model": "jghgj",
+    "plate": "tyry",
+    "color": "tyrt",
+    "brand": "rtyry",
+    "model": "tryrt",
     "clients": [
       {
         "id": "6773",
@@ -311,7 +290,7 @@
     ],
     "vehicleType": {
       "id": 0,
-      "description": "Carro",
+      "description": "Moto",
       "numberOfTires": 0,
       "fee": 0.0
     }
