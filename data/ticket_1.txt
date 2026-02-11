@@ -1,0 +1,10 @@
+==============================
+        TICKET DE PARQUEO
+==============================
+Ticket #: 1
+Cliente: 1
+Vehículo: Carro
+Placa: 1
+Espacio: 3
+Monto a pagar: ₡0.0
+==============================

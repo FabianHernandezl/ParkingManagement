@@ -163,11 +163,11 @@ Clientes:
 
 VEHÍCULO #15
 ----------------------------------------
-Placa:        321312
-Marca:        2131
-Modelo:       1231
-Color:        123213
-Tipo:         Camión
+Placa:        1
+Marca:        e
+Modelo:       f
+Color:        f
+Tipo:         Carro
 Clientes:     
               - Karla (ID: 222332)
 ----------------------------------------

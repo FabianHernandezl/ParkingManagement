@@ -1,0 +1,28 @@
+TICKET ENTRADA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Placa: 1
+Tipo de vehículo: Carro
+Espacio asignado: 3
+Hora de ingreso: 10/02/2026 18:19:53
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+TICKET SALIDA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Placa: 1
+Tipo de vehículo: Carro
+Espacio asignado: 3
+Hora de ingreso: 10/02/2026 18:19:53
+Hora de salida: 10/02/2026 18:21:10
+Total a pagar: ₡0.00
+==============================
+
+
