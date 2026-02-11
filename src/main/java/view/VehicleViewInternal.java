@@ -452,7 +452,8 @@ public class VehicleViewInternal extends JInternalFrame {
         loadTable();
         clear();
 
-        parkingController.refreshParkingLot(parking.getId());
+        // Refrescar lista de parqueos en el combo
+        loadParkings();
     }
 
     private void update() {

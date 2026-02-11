@@ -80,7 +80,7 @@ CLIENTE #9
 ----------------------------------------
 ID:            33260704
 Nombre:        Shirley
-Teléfono:      71133584
+Teléfono:      71133588
 Email:         calvo.shirley@yahoo. es
 Preferencial:  No
 ----------------------------------------

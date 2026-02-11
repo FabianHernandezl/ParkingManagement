@@ -1149,109 +1149,45 @@
     ]
   },
   {
-    "id": 5,
-    "name": "Prueba",
-    "numberOfSpaces": 8,
-    "vehicles": [],
+    "id": 6,
+    "name": "Parking Lot",
+    "numberOfSpaces": 25,
     "spaces": [
       {
         "id": 1,
-        "disabilityAdaptation": true,
-        "spaceTaken": true,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
         "vehicleType": {
-          "id": 3,
-          "description": "Camión",
+          "id": 1,
+          "description": "Automóvil",
           "numberOfTires": 4,
-          "fee": 6.5
+          "fee": 5.0
         },
-        "available": false,
-        "vehicle": {
-          "plate": "343343",
-          "color": "3453",
-          "brand": "4534543",
-          "model": "34534",
-          "clients": [
-            {
-              "id": "222332",
-              "name": "Karla",
-              "phone": "9889982",
-              "isPreferential": true,
-              "email": "aksljdljas"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Carro",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
+        "available": false
       },
       {
         "id": 2,
-        "disabilityAdaptation": true,
-        "spaceTaken": true,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
         "vehicleType": {
-          "id": 3,
-          "description": "Camión",
+          "id": 1,
+          "description": "Automóvil",
           "numberOfTires": 4,
-          "fee": 6.5
+          "fee": 5.0
         },
-        "available": false,
-        "vehicle": {
-          "plate": "321312",
-          "color": "123213",
-          "brand": "2131",
-          "model": "1231",
-          "clients": [
-            {
-              "id": "222332",
-              "name": "Karla",
-              "phone": "9889982",
-              "isPreferential": true,
-              "email": "aksljdljas"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Camión",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
+        "available": false
       },
       {
         "id": 3,
         "disabilityAdaptation": false,
-        "spaceTaken": true,
+        "spaceTaken": false,
         "vehicleType": {
-          "id": 2,
-          "description": "Motocicleta",
-          "numberOfTires": 2,
-          "fee": 2.5
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
         },
-        "available": false,
-        "vehicle": {
-          "plate": "erwr",
-          "color": "dfsdsd",
-          "brand": "fdsfsd",
-          "model": "sdfsd",
-          "clients": [
-            {
-              "id": "222332",
-              "name": "Karla",
-              "phone": "9889982",
-              "isPreferential": true,
-              "email": "aksljdljas"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Camión",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
+        "available": false
       },
       {
         "id": 4,
@@ -1303,6 +1239,210 @@
       },
       {
         "id": 8,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 9,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 10,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 11,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 12,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 13,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 14,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 15,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 16,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 17,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 18,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 19,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 20,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 21,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 22,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 23,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 24,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 1,
+          "description": "Automóvil",
+          "numberOfTires": 4,
+          "fee": 5.0
+        },
+        "available": false
+      },
+      {
+        "id": 25,
         "disabilityAdaptation": false,
         "spaceTaken": false,
         "vehicleType": {
