@@ -21,8 +21,8 @@ public class EmailSender {
 
     public static void sendTicketByEmail(String toEmail, String filePath) {
 
-        final String fromEmail = "tucorreo@gmail.com";   // correo del sistema
-        final String password = "CONTRASEÑA_DE_APP";     // contraseña de aplicación
+        final String fromEmail = "fabianherlea@gmail.com";   // correo del sistema
+        final String password = "MIstry514!!!";     // contraseña de aplicación
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

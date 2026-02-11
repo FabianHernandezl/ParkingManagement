@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Cami´s Parkinglot",
-    "numberOfSpaces": 10,
+    "name": "fabian",
+    "numberOfSpaces": 20,
     "vehicles": [],
     "spaces": [
       {
@@ -15,28 +15,13 @@
           "numberOfTires": 4,
           "fee": 6.5
         },
-        "entryTime": "Feb 8, 2026, 3:57:37 PM",
         "available": false,
-        "client": {
-          "id": "222332",
-          "name": "Karla",
-          "phone": "9889982",
-          "isPreferential": true,
-          "email": "aksljdljas"
-        },
         "vehicle": {
-          "plate": "4354543",
-          "color": "blanco",
-          "brand": "acer",
-          "model": "fiat",
+          "plate": "f",
+          "color": "4",
+          "brand": "f",
+          "model": "g4",
           "clients": [
-            {
-              "id": "222332",
-              "name": "Karla",
-              "phone": "9889982",
-              "isPreferential": true,
-              "email": "aksljdljas"
-            },
             {
               "id": "222332",
               "name": "Karla",
@@ -63,28 +48,13 @@
           "numberOfTires": 4,
           "fee": 6.5
         },
-        "entryTime": "Feb 8, 2026, 3:58:25 PM",
         "available": false,
-        "client": {
-          "id": "222332",
-          "name": "Karla",
-          "phone": "9889982",
-          "isPreferential": true,
-          "email": "aksljdljas"
-        },
         "vehicle": {
-          "plate": "32423",
-          "color": "242342",
-          "brand": "23422",
-          "model": "23423",
+          "plate": "d",
+          "color": "3",
+          "brand": "e",
+          "model": "3",
           "clients": [
-            {
-              "id": "222332",
-              "name": "Karla",
-              "phone": "9889982",
-              "isPreferential": true,
-              "email": "aksljdljas"
-            },
             {
               "id": "222332",
               "name": "Karla",
@@ -106,28 +76,29 @@
         "disabilityAdaptation": true,
         "spaceTaken": true,
         "vehicleType": {
-          "id": 3,
-          "description": "Discapacitado",
-          "numberOfTires": 4,
-          "fee": 0.0
+          "id": 2,
+          "description": "Motocicleta",
+          "numberOfTires": 2,
+          "fee": 2.5
         },
         "available": false,
         "vehicle": {
-          "plate": "8",
-          "color": "t",
-          "brand": "o",
-          "model": "i",
+          "plate": "dgf",
+          "color": "dfgdf",
+          "brand": "dfgd",
+          "model": "dfgdf",
           "clients": [
             {
-              "id": "j",
-              "name": "k",
-              "phone": "0",
-              "isPreferential": false
+              "id": "222332",
+              "name": "Karla",
+              "phone": "9889982",
+              "isPreferential": true,
+              "email": "aksljdljas"
             }
           ],
           "vehicleType": {
             "id": 0,
-            "description": "Carro",
+            "description": "Moto",
             "numberOfTires": 0,
             "fee": 0.0
           }
@@ -135,7 +106,7 @@
       },
       {
         "id": 4,
-        "disabilityAdaptation": false,
+        "disabilityAdaptation": true,
         "spaceTaken": true,
         "vehicleType": {
           "id": 2,
@@ -143,32 +114,26 @@
           "numberOfTires": 2,
           "fee": 2.5
         },
-        "entryTime": "Jan 30, 2026, 9:28:07 AM",
         "available": false,
-        "client": {
-          "id": "C-001",
-          "name": "Cliente Prueba",
-          "phone": "8888-8888",
-          "isPreferential": false
-        },
         "vehicle": {
-          "plate": "ABC123",
-          "color": "Rojo",
-          "brand": "Toyota",
-          "model": "Corolla",
+          "plate": "cvbc",
+          "color": "cbvb",
+          "brand": "cvbcv",
+          "model": "cvbv",
           "clients": [
             {
-              "id": "C-001",
-              "name": "Cliente Prueba",
-              "phone": "8888-8888",
-              "isPreferential": false
+              "id": "6773",
+              "name": "Rosita",
+              "phone": "8989902",
+              "isPreferential": false,
+              "email": "ljsadjkjads"
             }
           ],
           "vehicleType": {
-            "id": 2,
-            "description": "Motocicleta",
-            "numberOfTires": 2,
-            "fee": 2.5
+            "id": 0,
+            "description": "Carro",
+            "numberOfTires": 0,
+            "fee": 0.0
           }
         }
       },
@@ -182,31 +147,19 @@
           "numberOfTires": 2,
           "fee": 2.5
         },
-        "entryTime": "Jan 30, 2026, 9:42:38 AM",
         "available": false,
-        "client": {
-          "id": "305620529",
-          "name": "Zailyn Tencio",
-          "phone": "84379367",
-          "isPreferential": false
-        },
         "vehicle": {
-          "plate": "BKQ748",
-          "color": "Gris",
-          "brand": "Mitsubishi",
-          "model": "Lancer",
+          "plate": "654645",
+          "color": "jgjghjg",
+          "brand": "jhghjgh",
+          "model": "jghgj",
           "clients": [
             {
-              "id": "305620529",
-              "name": "Zailyn Tencio",
-              "phone": "84379367",
-              "isPreferential": false
-            },
-            {
-              "id": "305620529",
-              "name": "Zailyn Tencio",
-              "phone": "84379367",
-              "isPreferential": false
+              "id": "6773",
+              "name": "Rosita",
+              "phone": "8989902",
+              "isPreferential": false,
+              "email": "ljsadjkjads"
             }
           ],
           "vehicleType": {
@@ -219,137 +172,6 @@
       },
       {
         "id": 6,
-        "disabilityAdaptation": false,
-        "spaceTaken": true,
-        "vehicleType": {
-          "id": 1,
-          "description": "Automóvil",
-          "numberOfTires": 4,
-          "fee": 5.0
-        },
-        "available": false,
-        "vehicle": {
-          "plate": "7",
-          "color": "0",
-          "brand": "9",
-          "model": "0",
-          "clients": [
-            {
-              "id": "3032900",
-              "name": "Ana Brenes",
-              "phone": "88889999",
-              "isPreferential": false
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Carro",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
-      },
-      {
-        "id": 7,
-        "disabilityAdaptation": false,
-        "spaceTaken": true,
-        "vehicleType": {
-          "id": 1,
-          "description": "Automóvil",
-          "numberOfTires": 4,
-          "fee": 5.0
-        },
-        "available": false,
-        "vehicle": {
-          "plate": "33",
-          "color": "33",
-          "brand": "33",
-          "model": "33",
-          "clients": [
-            {
-              "id": "11",
-              "name": "j",
-              "phone": "d",
-              "isPreferential": false,
-              "email": "d"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Carro",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
-      },
-      {
-        "id": 8,
-        "disabilityAdaptation": false,
-        "spaceTaken": true,
-        "vehicleType": {
-          "id": 1,
-          "description": "Automóvil",
-          "numberOfTires": 4,
-          "fee": 5.0
-        },
-        "available": false,
-        "vehicle": {
-          "plate": "462607",
-          "color": "Vino",
-          "brand": "Fiat",
-          "model": "2001",
-          "clients": [
-            {
-              "id": "33260704",
-              "name": "Shirley",
-              "phone": "71133584",
-              "isPreferential": false,
-              "email": "calvo.shirley@yahoo. es"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Carro",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
-      },
-      {
-        "id": 9,
-        "disabilityAdaptation": false,
-        "spaceTaken": true,
-        "vehicleType": {
-          "id": 1,
-          "description": "Automóvil",
-          "numberOfTires": 4,
-          "fee": 5.0
-        },
-        "available": false,
-        "vehicle": {
-          "plate": "3",
-          "color": "k",
-          "brand": "hh",
-          "model": "k",
-          "clients": [
-            {
-              "id": "302030937",
-              "name": "Maria",
-              "phone": "9009093",
-              "isPreferential": false,
-              "email": "jiimendnendoe"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Carro",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
-      },
-      {
-        "id": 10,
         "disabilityAdaptation": false,
         "spaceTaken": false,
         "vehicleType": {
@@ -364,8 +186,40 @@
   },
   {
     "id": 2,
-    "name": "UCR ParkingLot",
-    "numberOfSpaces": 20,
+    "name": "ali",
+    "numberOfSpaces": 5,
+    "vehicles": [],
+    "spaces": [
+      {
+        "id": 1,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 3,
+          "description": "Camión",
+          "numberOfTires": 4,
+          "fee": 6.5
+        },
+        "available": false
+      },
+      {
+        "id": 2,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "vehicleType": {
+          "id": 2,
+          "description": "Motocicleta",
+          "numberOfTires": 2,
+          "fee": 2.5
+        },
+        "available": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Parqueo Central",
+    "numberOfSpaces": 10,
     "vehicles": [],
     "spaces": [
       {
@@ -378,34 +232,19 @@
           "numberOfTires": 4,
           "fee": 6.5
         },
-        "entryTime": "Feb 8, 2026, 3:57:37 PM",
         "available": false,
-        "client": {
-          "id": "222332",
-          "name": "Karla",
-          "phone": "9889982",
-          "isPreferential": true,
-          "email": "aksljdljas"
-        },
         "vehicle": {
-          "plate": "4354543",
-          "color": "blanco",
-          "brand": "acer",
-          "model": "fiat",
+          "plate": "rerwe",
+          "color": "ewrw",
+          "brand": "ewrwe",
+          "model": "ewrwe",
           "clients": [
             {
-              "id": "222332",
-              "name": "Karla",
-              "phone": "9889982",
-              "isPreferential": true,
-              "email": "aksljdljas"
-            },
-            {
-              "id": "222332",
-              "name": "Karla",
-              "phone": "9889982",
-              "isPreferential": true,
-              "email": "aksljdljas"
+              "id": "6773",
+              "name": "Rosita",
+              "phone": "8989902",
+              "isPreferential": false,
+              "email": "ljsadjkjads"
             }
           ],
           "vehicleType": {
@@ -415,55 +254,14 @@
             "fee": 0.0
           }
         }
-      },
-      {
-        "id": 2,
-        "disabilityAdaptation": true,
-        "spaceTaken": true,
-        "vehicleType": {
-          "id": 3,
-          "description": "Camión",
-          "numberOfTires": 4,
-          "fee": 6.5
-        },
-        "entryTime": "Feb 8, 2026, 3:58:25 PM",
-        "available": false,
-        "client": {
-          "id": "222332",
-          "name": "Karla",
-          "phone": "9889982",
-          "isPreferential": true,
-          "email": "aksljdljas"
-        },
-        "vehicle": {
-          "plate": "32423",
-          "color": "242342",
-          "brand": "23422",
-          "model": "23423",
-          "clients": [
-            {
-              "id": "222332",
-              "name": "Karla",
-              "phone": "9889982",
-              "isPreferential": true,
-              "email": "aksljdljas"
-            },
-            {
-              "id": "222332",
-              "name": "Karla",
-              "phone": "9889982",
-              "isPreferential": true,
-              "email": "aksljdljas"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Carro",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
-      },
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Parking Lot",
+    "numberOfSpaces": 25,
+    "spaces": [
       {
         "id": 3,
         "disabilityAdaptation": true,
@@ -1381,6 +1179,7 @@
         },
         "available": false
       }
+     
     ]
   }
 ]
