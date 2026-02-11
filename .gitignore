@@ -22,9 +22,17 @@ nbproject/private/
 nbbuild/
 nbdist/
 .nb-gradle/
+nbactions.xml
 
 # Archivos de sistema
 .DS_Store
 Thumbs.db
 
+# Archivos de reportes
 reports/
+
+# Archivos de data (JSON)
+data/*.json
+
+# Archivos de texto / backups
+*.txt
