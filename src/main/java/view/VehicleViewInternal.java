@@ -2,7 +2,7 @@ package view;
 
 import Controller.ClientController;
 import Controller.ParkingLotController;
-import controller.VehicleController;
+import Controller.VehicleController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
