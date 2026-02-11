@@ -75,4 +75,15 @@ public class ParkingLot {
                 + " | Espacios: " + spaces;
     }
 
+    public int getOccupiedSpaces() {
+        int count = 0;
+        if (spaces != null) {
+            for (Space s : spaces) {
+                if (s.isSpaceTaken()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 }

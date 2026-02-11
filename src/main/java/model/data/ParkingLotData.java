@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import model.entities.Client;
 import model.entities.ParkingLot;
 import model.entities.Space;
 import model.entities.Vehicle;
@@ -21,19 +20,13 @@ public class ParkingLotData {
     private static final String TXT_FILE_PATH = "data/parkinglots.txt";
 
     private ArrayList<ParkingLot> parkingLots;
-    static int parkingLotId = 0;
 
-    private final Gson gson = new GsonBuilder()
-            .setPrettyPrinting()
-            .create();
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public ParkingLotData() {
         parkingLots = loadParkingLots();
     }
 
-    /*
-     Loads parking lots from JSON file
-     */
     private ArrayList<ParkingLot> loadParkingLots() {
         try (FileReader reader = new FileReader(JSON_FILE_PATH)) {
             Type listType = new TypeToken<ArrayList<ParkingLot>>() {
@@ -45,9 +38,6 @@ public class ParkingLotData {
         }
     }
 
-    /*
-     Add new parking lot
-     */
     public ParkingLot addParkingLot(ParkingLot parkingLot) {
         if (parkingLot == null || findParkingLotById(parkingLot.getId()) != null) {
             return parkingLot;
@@ -55,20 +45,14 @@ public class ParkingLotData {
 
         parkingLots.add(parkingLot);
         saveParkingLots();
-        saveParkingLotsAsTxt(); // Guardar también en TXT
+        saveParkingLotsAsTxt();
         return parkingLot;
     }
 
-    /*
-     Returns all registered parking lots
-     */
     public ArrayList<ParkingLot> getAllParkingLots() {
         return parkingLots;
     }
 
-    /*
-     Finds a parking lot by id
-     */
     public ParkingLot findParkingLotById(int id) {
         for (ParkingLot parkingLot : parkingLots) {
             if (parkingLot.getId() == id) {
@@ -87,9 +71,6 @@ public class ParkingLotData {
         return null;
     }
 
-    /*
-     Saves parking lots to JSON file
-     */
     private void saveParkingLots() {
         try (FileWriter writer = new FileWriter(JSON_FILE_PATH)) {
             gson.toJson(parkingLots, writer);
@@ -98,13 +79,9 @@ public class ParkingLotData {
         }
     }
 
-    /*
-     Saves parking lots to TXT file
-     */
     private void saveParkingLotsAsTxt() {
         try (PrintWriter writer = new PrintWriter(new File(TXT_FILE_PATH))) {
             for (ParkingLot lot : parkingLots) {
-                // Puedes personalizar este formato como quieras
                 writer.println("ID: " + lot.getId() + " | Name: " + lot.getName() + " | Spaces: " + lot.getNumberOfSpaces());
             }
         } catch (IOException e) {
@@ -122,58 +99,20 @@ public class ParkingLotData {
         return maxId;
     }
 
-    public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
-        if (parkingLot == null || vehicle == null) {
-            return 0;
-        }
-
-        Space[] spaces = parkingLot.getSpaces();
-        if (spaces == null || spaces.length == 0) {
-            System.out.println("El parqueo no tiene espacios inicializados");
-            return 0;
-        }
-
-        ArrayList<Vehicle> vehiclesInParkingLot = parkingLot.getVehicles();
-        if (vehiclesInParkingLot == null) {
-            vehiclesInParkingLot = new ArrayList<>();
-            parkingLot.setVehicles(vehiclesInParkingLot);
-        }
-
-        boolean hasDisability = vehicle.hasPreferentialClient();
-        int vehicleTypeId = vehicle.getVehicleType().getId();
-
-        for (Space space : spaces) {
-            if (space == null || space.isSpaceTaken()) {
-                continue;
-            }
-            if (space.getVehicleType().getId() != vehicleTypeId) {
-                continue;
-            }
-            if (hasDisability && !space.isDisabilityAdaptation()) {
-                continue;
-            }
-            if (!hasDisability && space.isDisabilityAdaptation()) {
-                continue;
-            }
-
-            vehiclesInParkingLot.add(vehicle);
-            space.setSpaceTaken(true);
-            saveParkingLots();      // Guardar cambios en JSON
-            saveParkingLotsAsTxt(); // Guardar cambios en TXT
-            return space.getId();
-        }
-
-        return 0;
-    }
-
     public void removeVehicleFromParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
+        if (parkingLot == null || vehicle == null) {
+            return;
+        }
+
         ArrayList<Vehicle> vehiclesInParkingLot = parkingLot.getVehicles();
         Space[] spaces = parkingLot.getSpaces();
 
         for (int i = 0; i < vehiclesInParkingLot.size(); i++) {
             if (vehiclesInParkingLot.get(i) == vehicle) {
                 vehiclesInParkingLot.remove(vehicle);
-                spaces[i].setSpaceTaken(false);
+                if (i < spaces.length) {
+                    spaces[i].setSpaceTaken(false);
+                }
                 break;
             }
         }
@@ -214,7 +153,7 @@ public class ParkingLotData {
     public boolean deleteParkingLot(ParkingLot parkingLot) {
         boolean deleted = false;
 
-        if (parkingLot.getId() != 0) {
+        if (parkingLot != null && parkingLot.getId() != 0) {
             ParkingLot parkingLotToDelete = findParkingLotById(parkingLot.getId());
             if (parkingLotToDelete != null) {
                 parkingLots.remove(parkingLotToDelete);
