@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 13
+Total de clientes: 14
 ========================================
 
 CLIENTE #1
@@ -119,6 +119,15 @@ Nombre:        Karla
 Teléfono:      9889982
 Email:         aksljdljas
 Preferencial:  Sí
+----------------------------------------
+
+CLIENTE #14
+----------------------------------------
+ID:            303640676
+Nombre:        Ana Alfaro
+Teléfono:      44556677
+Email:         zagdb@gmail.com
+Preferencial:  No
 ----------------------------------------
 
 ========================================

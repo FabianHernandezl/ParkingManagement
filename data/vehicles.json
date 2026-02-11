@@ -294,5 +294,26 @@
       "numberOfTires": 0,
       "fee": 0.0
     }
+  },
+  {
+    "plate": "CCC666",
+    "color": "gvhv",
+    "brand": "nhfg",
+    "model": "tgjhgv",
+    "clients": [
+      {
+        "id": "303640676",
+        "name": "Ana Alfaro",
+        "phone": "44556677",
+        "isPreferential": false,
+        "email": "zagdb@gmail.com"
+      }
+    ],
+    "vehicleType": {
+      "id": 0,
+      "description": "Carro",
+      "numberOfTires": 0,
+      "fee": 0.0
+    }
   }
 ]
