@@ -117,15 +117,13 @@ public class Vehicle {
             infoClients.append("No hay clientes asociados\n");
         }
 
-        return "========== VEHÍCULO ==========\n"
-                + "Placa: " + (plate != null ? plate : "No definida") + "\n"
-                + "Marca: " + (brand != null ? brand : "No definida") + "\n"
-                + "Modelo: " + (model != null ? model : "No definido") + "\n"
-                + "Color: " + (color != null ? color : "No definido") + "\n"
-                + "Tipo: " + (vehicleType != null ? vehicleType.getDescription() : "No definido") + "\n"
-                + "Clientes:\n"
-                + infoClients
-                + "==============================";
+        return "Placa: " + (plate != null ? plate : "No definida")
+                + " | Marca: " + (brand != null ? brand : "No definida")
+                + " | Modelo: " + (model != null ? model : "No definido")
+                + " | Color: " + (color != null ? color : "No definido")
+                + " | Tipo: " + (vehicleType != null ? vehicleType.getDescription() : "No definido")
+                + " | Clientes: " + infoClients;
+
     }
 
     public String getIcon() {

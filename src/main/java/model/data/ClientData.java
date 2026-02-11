@@ -42,6 +42,10 @@ public class ClientData {
     public ArrayList<Client> getAllClients() {
         return clients;
     }
+    
+    public void refresh() {
+        clients = loadClients();
+    }
 
     public Client findClientById(String id) {
         for (Client client : clients) {
@@ -98,7 +102,6 @@ public class ClientData {
             System.out.println("Error saving JSON: " + e.getMessage());
         }
 
-        // ===== TXT =====
         try (FileWriter txtWriter = new FileWriter(TXT_FILE_PATH); PrintWriter printWriter = new PrintWriter(txtWriter)) {
 
             printWriter.println("========================================");

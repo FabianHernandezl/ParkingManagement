@@ -136,9 +136,13 @@ public class VehicleViewInternal extends JInternalFrame {
         btnDelete.setEnabled(false);
 
         popupClients = new JPopupMenu();
+        popupClients.setFocusable(false);
         listSuggestions = new JList<>();
+        listSuggestions.setFocusable(false);
         listSuggestions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        popupClients.add(new JScrollPane(listSuggestions));
+        JScrollPane scrollSuggestions = new JScrollPane(listSuggestions);
+        scrollSuggestions.setFocusable(false);
+        popupClients.add(scrollSuggestions);
     }
 
     private void initTable() {
@@ -155,15 +159,18 @@ public class VehicleViewInternal extends JInternalFrame {
         searchPanel.add(lblSearchVehicle);
 
         txtSearchVehicle = new JTextField();
-        txtSearchVehicle.setBounds(130, 10, 320, 25);
+        txtSearchVehicle.setBounds(130, 10, 335, 25);
         searchPanel.add(txtSearchVehicle);
 
-        btnClearSearch = new JButton("Limpiar");
-        btnClearSearch.setBounds(460, 10, 40, 25);
-        btnClearSearch.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        btnClearSearch = new JButton("X");
+        btnClearSearch.setBounds(475, 10, 45, 25);
+        btnClearSearch.setFont(new Font("Arial", Font.BOLD, 14));
         btnClearSearch.setFocusPainted(false);
         btnClearSearch.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnClearSearch.setToolTipText("Limpiar búsqueda");
+        btnClearSearch.setBackground(new java.awt.Color(231, 76, 60));
+        btnClearSearch.setForeground(java.awt.Color.WHITE);
+        btnClearSearch.setBorderPainted(false);
         searchPanel.add(btnClearSearch);
 
         model = new DefaultTableModel(
@@ -183,9 +190,13 @@ public class VehicleViewInternal extends JInternalFrame {
         add(sp);
 
         popupVehicles = new JPopupMenu();
+        popupVehicles.setFocusable(false);
         listVehicleSuggestions = new JList<>();
+        listVehicleSuggestions.setFocusable(false);
         listVehicleSuggestions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        popupVehicles.add(new JScrollPane(listVehicleSuggestions));
+        JScrollPane scrollVehicleSuggestions = new JScrollPane(listVehicleSuggestions);
+        scrollVehicleSuggestions.setFocusable(false);
+        popupVehicles.add(scrollVehicleSuggestions);
     }
 
     private void setupEvents() {
@@ -253,7 +264,10 @@ public class VehicleViewInternal extends JInternalFrame {
                 listSuggestions.setListData(results.toArray(new Client[0]));
 
                 if (!popupClients.isVisible()) {
-                    popupClients.show(txtSearchClient, 0, txtSearchClient.getHeight());
+                    SwingUtilities.invokeLater(() -> {
+                        popupClients.show(txtSearchClient, 0, txtSearchClient.getHeight());
+                        txtSearchClient.requestFocusInWindow();
+                    });
                 }
             }
 
@@ -270,14 +284,16 @@ public class VehicleViewInternal extends JInternalFrame {
             }
         });
 
-        listSuggestions.addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
+        listSuggestions.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
                 Client selected = listSuggestions.getSelectedValue();
                 if (selected != null && !selectedClients.contains(selected)) {
                     selectedClients.add(selected);
                     clientListModel.addElement(selected.toString());
                     txtSearchClient.setText("");
                     popupClients.setVisible(false);
+                    txtSearchClient.requestFocusInWindow();
                 }
             }
         });
@@ -346,8 +362,9 @@ public class VehicleViewInternal extends JInternalFrame {
             }
         });
 
-        listVehicleSuggestions.addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
+        listVehicleSuggestions.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
                 Vehicle selected = listVehicleSuggestions.getSelectedValue();
                 if (selected != null) {
                     for (int i = 0; i < model.getRowCount(); i++) {
@@ -358,7 +375,7 @@ public class VehicleViewInternal extends JInternalFrame {
                         }
                     }
                     popupVehicles.setVisible(false);
-                    txtSearchVehicle.requestFocus();
+                    SwingUtilities.invokeLater(() -> txtSearchVehicle.requestFocusInWindow());
                 }
             }
         });
