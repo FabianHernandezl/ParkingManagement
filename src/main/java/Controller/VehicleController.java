@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import java.util.ArrayList;
 import model.data.ParkingLotData;

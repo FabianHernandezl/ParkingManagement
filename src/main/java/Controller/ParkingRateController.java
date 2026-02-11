@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import model.data.ParkingRateData;
 import model.entities.ParkingLot;
