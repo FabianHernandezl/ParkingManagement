@@ -5,6 +5,11 @@
 package view;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -22,6 +27,9 @@ public class ClerkMenu extends JFrame {
 
     private LoginWindow loginWindow;
     private final HomeDesktop desktop;
+    private static File lockFile;
+    private static FileChannel lockChannel;
+    private static FileLock lock;
 
     public ClerkMenu(LoginWindow loginWindow) {
 
@@ -37,7 +45,30 @@ public class ClerkMenu extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setResizable(true);
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                releaseLock();
+                System.exit(0);
+            }
+        });
+
         createMenuBar();
+    }
+
+    private void releaseLock() {
+        try {
+            if (lock != null && lock.isValid()) {
+                lock.release();
+            }
+            if (lockChannel != null && lockChannel.isOpen()) {
+                lockChannel.close();
+            }
+            if (lockFile != null && lockFile.exists()) {
+                lockFile.deleteOnExit();
+            }
+        } catch (Exception e) {
+        }
     }
 
     private void createMenuBar() {
