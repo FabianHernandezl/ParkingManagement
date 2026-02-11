@@ -131,6 +131,7 @@ public class SpaceController {
 
                 // ESPACIOS NORMALES PARA CARROS Y CAMIONES
                 if (!spaceType.contains("motocicleta") && !vehicleType.contains("motocicleta")) {
+
                     return s;
                 }
             }
@@ -159,6 +160,7 @@ public class SpaceController {
                     spaces[i].setEntryTime(updatedSpace.getEntryTime());
                     spaces[i].setDisabilityAdaptation(updatedSpace.isDisabilityAdaptation());
                     spaces[i].setVehicleType(updatedSpace.getVehicleType());
+                    spaces[i].setParkingLot(updatedSpace.getParkingLot());
 
                     return parkingLotData.updateParkingLot(parkingLot);
                 }

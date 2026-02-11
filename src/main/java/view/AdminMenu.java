@@ -7,6 +7,11 @@ package view;
 import Controller.ParkingLotController;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -24,6 +29,9 @@ public class AdminMenu extends JFrame {
     private LoginWindow loginWindow;
     private HomeDesktop desktop;
     private ParkingLotController parkingLotController = new ParkingLotController();
+    private static File lockFile;
+    private static FileChannel lockChannel;
+    private static FileLock lock;
 
     public AdminMenu(LoginWindow loginWindow) {
 
@@ -39,7 +47,30 @@ public class AdminMenu extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setResizable(true);
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                releaseLock();
+                System.exit(0);
+            }
+        });
+
         createMenuBar();
+    }
+
+    private void releaseLock() {
+        try {
+            if (lock != null && lock.isValid()) {
+                lock.release();
+            }
+            if (lockChannel != null && lockChannel.isOpen()) {
+                lockChannel.close();
+            }
+            if (lockFile != null && lockFile.exists()) {
+                lockFile.deleteOnExit();
+            }
+        } catch (Exception e) {
+        }
     }
 
     private void createMenuBar() {
