@@ -1,7 +1,7 @@
 ========================================
       REGISTRO DE VEHÍCULOS
 ========================================
-Total de vehículos: 15
+Total de vehículos: 14
 ========================================
 
 VEHÍCULO #1
@@ -151,25 +151,13 @@ Clientes:
 
 VEHÍCULO #14
 ----------------------------------------
-Placa:        323232
-Marca:        24242
-Modelo:       4223442
-Color:        233223
+Placa:        tyry
+Marca:        rtyry
+Modelo:       tryrt
+Color:        tyrt
 Tipo:         Moto
 Clientes:     
               - Rosita (ID: 6773)
-              - Rosita (ID: 6773)
-----------------------------------------
-
-VEHÍCULO #15
-----------------------------------------
-Placa:        321312
-Marca:        2131
-Modelo:       1231
-Color:        123213
-Tipo:         Camión
-Clientes:     
-              - Karla (ID: 222332)
 ----------------------------------------
 
 ========================================

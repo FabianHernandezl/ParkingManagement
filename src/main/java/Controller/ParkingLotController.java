@@ -1,73 +1,53 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controller;
 
 import java.util.ArrayList;
 import model.data.ParkingLotData;
-import model.data.ParkingLotReportPDF;
 import model.entities.ParkingLot;
 import model.entities.Vehicle;
 import model.entities.Space;
 import model.entities.VehicleType;
-import model.entities.Ticket;
 
-/**
- *
- * @author FAMILIA
- */
 public class ParkingLotController {
 
     private ParkingLotData parkingLotData = new ParkingLotData();
-    private TicketController ticketController = TicketController.getInstance();
 
-    public ParkingLot registerParkingLot(String name, int numberOfSpaces, int disabledSpaces, int motorcycleSpaces) {
-
-        // Crear el parqueo
+    // Registrar parqueo simple o con espacios opcionales
+    public ParkingLot registerParkingLot(String name, int totalSpaces, int disabledSpaces, int motorcycleSpaces, int preferentialSpaces) {
         ParkingLot parkingLot = new ParkingLot();
+        parkingLot.setId(parkingLotData.findLastIdNumberOfParkingLot() + 1);
         parkingLot.setName(name);
-        parkingLot.setNumberOfSpaces(numberOfSpaces);
+        parkingLot.setNumberOfSpaces(totalSpaces);
 
-        // Crear espacios automáticamente
-        Space[] spaces = createSpacesForParkingLot(numberOfSpaces, disabledSpaces, motorcycleSpaces);
+        // Crear espacios
+        Space[] spaces = createSpacesForParkingLot(totalSpaces, disabledSpaces, motorcycleSpaces, preferentialSpaces);
         parkingLot.setSpaces(spaces);
-
-        // Guardar espacios individualmente en SpaceData
-        SpaceController spaceController = new SpaceController();
-        for (Space space : spaces) {
-            String typeDescription = space.getVehicleType() != null
-                    ? space.getVehicleType().getDescription()
-                    : "Automóvil"; // por defecto si no tiene tipo
-            spaceController.registerSpace(
-                    space.getId(),
-                    space.isDisabilityAdaptation(),
-                    space.isSpaceTaken(),
-                    typeDescription
-            );
-        }
 
         return parkingLotData.addParkingLot(parkingLot);
     }
 
-    private Space[] createSpacesForParkingLot(int total, int disabled, int motorcycle) {
+    public ParkingLot registerParkingLot(String name, int totalSpaces, int disabledSpaces, int motorcycleSpaces) {
+        return registerParkingLot(name, totalSpaces, disabledSpaces, motorcycleSpaces, 0);
+    }
+
+    private Space[] createSpacesForParkingLot(int total, int disabled, int motorcycle, int preferential) {
         Space[] spaces = new Space[total];
         int spaceId = 1;
 
-        // Espacios para discapacidad
         for (int i = 0; i < disabled; i++) {
             spaces[i] = new Space(spaceId++, true, false,
                     new VehicleType(3, "Discapacitado", 4, 0.0f));
         }
 
-        // Espacios para motocicletas
-        for (int i = 0; i < motorcycle; i++) {
-            spaces[disabled + i] = new Space(spaceId++, false, false,
+        for (int i = disabled; i < disabled + preferential; i++) {
+            spaces[i] = new Space(spaceId++, true, false, null);
+        }
+
+        for (int i = disabled + preferential; i < disabled + preferential + motorcycle; i++) {
+            spaces[i] = new Space(spaceId++, false, false,
                     new VehicleType(2, "Motocicleta", 2, 2.5f));
         }
 
-        // Espacios estándar
-        for (int i = disabled + motorcycle; i < total; i++) {
+        for (int i = disabled + preferential + motorcycle; i < total; i++) {
             spaces[i] = new Space(spaceId++, false, false,
                     new VehicleType(1, "Automóvil", 4, 5.0f));
         }
@@ -76,36 +56,30 @@ public class ParkingLotController {
     }
 
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
-        System.out.println("\n=== PARKINGLOTCONTROLLER: Registrando vehículo ===");
-
         if (vehicle == null || parkingLot == null || parkingLot.getSpaces() == null) {
             return 0;
         }
 
+        boolean hasDisability = vehicle.hasPreferentialClient();
+        int vehicleTypeId = vehicle.getVehicleType().getId();
+
         for (Space space : parkingLot.getSpaces()) {
-            if (!space.isSpaceTaken()) {
-
-                // Marcar espacio como ocupado
-                space.setSpaceTaken(true);
-                space.setVehicle(vehicle);
-
-                // Guardar cambio en Data
-                parkingLotData.updateParkingLot(parkingLot);
-
-                System.out.println("✅ Espacio asignado: " + space.getId());
-
-                // 🎟 Crear ticket
-                Ticket ticket = ticketController.generateEntryTicket(vehicle, space);
-
-                if (ticket != null) {
-                    System.out.println("🎟 Ticket creado ID: " + ticket.getId());
-                }
-
-                return space.getId();
+            if (space.isSpaceTaken()) {
+                continue;
             }
+            if (hasDisability && !space.isDisabilityAdaptation()) {
+                continue;
+            }
+            if (space.getVehicleType() != null && space.getVehicleType().getId() != vehicleTypeId) {
+                continue;
+            }
+
+            space.setSpaceTaken(true);
+            space.setVehicle(vehicle);
+            parkingLotData.updateParkingLot(parkingLot);
+            return space.getId();
         }
 
-        System.out.println("⚠️ No hay espacios disponibles");
         return 0;
     }
 
@@ -122,61 +96,21 @@ public class ParkingLotController {
     }
 
     public String updateParkingLot(int id, ParkingLot newParkingLot) {
-        String result = "";
-        if (parkingLotData.findParkingLotById(id) != null) { //rev this creo que es !=
+        if (parkingLotData.findParkingLotById(id) != null) {
             parkingLotData.updateParkingLot(newParkingLot);
-            result = "El parqueo fue actualizado correctamente";
+            return "El parqueo fue actualizado correctamente";
         } else {
-            result = "El parqueo no se actualizó porque no se encontró en la base de datos.";
+            return "El parqueo no se actualizó porque no se encontró en la base de datos.";
         }
-        return result;
     }
 
-    public String removeParkingLot(ParkingLot parkingLot) { //será mejor hacerlo por id? 
-        String result = "";
-        if (parkingLotData.findParkingLotById(parkingLot.getId()) != null) {
-            parkingLotData.deleteParkingLot(parkingLot);
-            result = "El parqueo se eliminó ";
+    public String removeParkingLot(int id) {
+        ParkingLot lot = parkingLotData.findParkingLotById(id);
+        if (lot != null) {
+            parkingLotData.deleteParkingLot(lot);
+            return "El parqueo se eliminó correctamente";
         } else {
-            result = "El parqueo no se eliminó porque no se encontró en la base de datos.";
+            return "El parqueo no se eliminó porque no se encontró en la base de datos.";
         }
-        return result;
     }
-
-    public ParkingLot getParkingLotById(int id) {
-
-        ArrayList<ParkingLot> lots = parkingLotData.getAllParkingLots();
-
-        for (ParkingLot p : lots) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-        return null;
-    }
-
-    public ParkingLot refreshParkingLot(int parkingId) {
-        ParkingLot updated = parkingLotData.findParkingLotById(parkingId);
-        if (updated != null) {
-
-        }
-        return updated;
-    }
-
-    public void generateOccupancyReports() {
-
-        ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
-
-        if (parkingLots == null || parkingLots.isEmpty()) {
-            System.out.println("⚠️ No hay parqueos registrados para generar reportes");
-            return;
-        }
-
-        for (ParkingLot parkingLot : parkingLots) {
-            ParkingLotReportPDF.generate(parkingLot);
-        }
-
-        System.out.println("✅ Reportes de ocupación generados correctamente");
-    }
-
 }

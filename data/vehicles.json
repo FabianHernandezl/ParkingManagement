@@ -275,18 +275,11 @@
     }
   },
   {
-    "plate": "323232",
-    "color": "233223",
-    "brand": "24242",
-    "model": "4223442",
+    "plate": "tyry",
+    "color": "tyrt",
+    "brand": "rtyry",
+    "model": "tryrt",
     "clients": [
-      {
-        "id": "6773",
-        "name": "Rosita",
-        "phone": "8989902",
-        "isPreferential": false,
-        "email": "ljsadjkjads"
-      },
       {
         "id": "6773",
         "name": "Rosita",
@@ -298,27 +291,6 @@
     "vehicleType": {
       "id": 0,
       "description": "Moto",
-      "numberOfTires": 0,
-      "fee": 0.0
-    }
-  },
-  {
-    "plate": "321312",
-    "color": "123213",
-    "brand": "2131",
-    "model": "1231",
-    "clients": [
-      {
-        "id": "222332",
-        "name": "Karla",
-        "phone": "9889982",
-        "isPreferential": true,
-        "email": "aksljdljas"
-      }
-    ],
-    "vehicleType": {
-      "id": 0,
-      "description": "Camión",
       "numberOfTires": 0,
       "fee": 0.0
     }

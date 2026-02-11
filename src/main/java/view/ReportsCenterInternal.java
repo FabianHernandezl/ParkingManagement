@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view;
 
 import Controller.ParkingLotReportController;
@@ -9,18 +5,20 @@ import model.entities.ParkingLotReportRow;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.swing.table.DefaultTableCellRenderer;
 
 public class ReportsCenterInternal extends JInternalFrame {
 
     private JTable table;
     private DefaultTableModel tableModel;
-    private JComboBox<String> parkingFilter;
-    private ParkingLotReportController controller;
 
+    private JComboBox<String> reportTypeFilter;
+    private JComboBox<String> dynamicFilter; // Filtro dinámico según el reporte
+
+    private ParkingLotReportController controller;
     private List<ParkingLotReportRow> allRows;
 
     public ReportsCenterInternal() {
@@ -35,19 +33,27 @@ public class ReportsCenterInternal extends JInternalFrame {
         topPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         topPanel.setBackground(UITheme.PANEL_BG);
 
-        JLabel titleLabel = new JLabel("Reporte de Ocupación de Parqueos");
+        JLabel titleLabel = new JLabel("Reportes del Parqueo");
         titleLabel.setFont(UITheme.TITLE_FONT);
 
-        // ===== FILTRO =====
-        parkingFilter = new JComboBox<>();
-        parkingFilter.addItem("Todos");
-        parkingFilter.addActionListener(e -> applyFilter());
+        // ===== FILTROS =====
+        reportTypeFilter = new JComboBox<>();
+        reportTypeFilter.addItem("Ocupación por Parqueo");
+        reportTypeFilter.addItem("Tarifas");
+        reportTypeFilter.addItem("Vehículos Estacionados");
+        reportTypeFilter.addActionListener(e -> loadDynamicFilter());
+
+        dynamicFilter = new JComboBox<>();
+        dynamicFilter.addItem("Todos");
+        dynamicFilter.addActionListener(e -> applyFilter());
 
         JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         leftPanel.setBackground(UITheme.PANEL_BG);
         leftPanel.add(titleLabel);
-        leftPanel.add(new JLabel("Parqueo:"));
-        leftPanel.add(parkingFilter);
+        leftPanel.add(new JLabel("Tipo de Reporte:"));
+        leftPanel.add(reportTypeFilter);
+        leftPanel.add(new JLabel("Filtro:"));
+        leftPanel.add(dynamicFilter);
 
         // ===== BOTONES =====
         JButton refreshBtn = new JButton("Refrescar");
@@ -57,9 +63,19 @@ public class ReportsCenterInternal extends JInternalFrame {
         JButton generatePdfBtn = new JButton("Generar PDF");
         UITheme.styleButton(generatePdfBtn, UITheme.PRIMARY);
         generatePdfBtn.addActionListener(e -> {
-            controller.generateOccupationReportForAll();
-            JOptionPane.showMessageDialog(this,
-                    "Reportes PDF generados correctamente");
+            String selectedReport = reportTypeFilter.getSelectedItem().toString();
+            switch (selectedReport) {
+                case "Ocupación por Parqueo" ->
+                    controller.generateOccupationReportForAll();
+                case "Tarifas", "Vehículos Estacionados" -> {
+                    JOptionPane.showMessageDialog(this,
+                            "Reporte no disponible por el momento",
+                            "Información",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Reporte PDF generado correctamente");
         });
 
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
@@ -72,13 +88,7 @@ public class ReportsCenterInternal extends JInternalFrame {
 
         // ================== TABLA ==================
         tableModel = new DefaultTableModel(
-                new Object[]{
-                    "Parqueo",
-                    "Espacio",
-                    "Estado",
-                    "Tipo Vehículo",
-                    "Placa"
-                }, 0
+                new Object[]{"Parqueo", "Espacio", "Estado", "Tipo Vehículo", "Placa"}, 0
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -97,23 +107,14 @@ public class ReportsCenterInternal extends JInternalFrame {
         add(scrollPane, BorderLayout.CENTER);
 
         loadTableData();
+        loadDynamicFilter();
     }
 
     // ================== CARGAR DATOS ==================
     private void loadTableData() {
         tableModel.setRowCount(0);
-        parkingFilter.removeAllItems();
-        parkingFilter.addItem("Todos");
+        allRows = controller.getOccupationReportRows(); // Traemos todos los datos
 
-        allRows = controller.getOccupationReportRows();
-
-        // Llenar combo de parqueos
-        allRows.stream()
-                .map(ParkingLotReportRow::getParkingLotName)
-                .distinct()
-                .forEach(parkingFilter::addItem);
-
-        // Llenar tabla
         for (ParkingLotReportRow row : allRows) {
             tableModel.addRow(new Object[]{
                 row.getParkingLotName(),
@@ -125,22 +126,51 @@ public class ReportsCenterInternal extends JInternalFrame {
         }
     }
 
-    // ================== FILTRO ==================
+    // ================== FILTRO DINÁMICO ==================
+    private void loadDynamicFilter() {
+        dynamicFilter.removeAllItems();
+        dynamicFilter.addItem("Todos");
+
+        String selectedReport = reportTypeFilter.getSelectedItem().toString();
+
+        switch (selectedReport) {
+            case "Ocupación por Parqueo" ->
+                allRows.stream()
+                        .map(ParkingLotReportRow::getParkingLotName)
+                        .distinct()
+                        .forEach(dynamicFilter::addItem);
+
+            case "Tarifas", "Vehículos Estacionados" -> {
+                // Mostrar un mensaje opcional en el combo
+                dynamicFilter.addItem("No disponible");
+            }
+        }
+
+        applyFilter();
+    }
+
     private void applyFilter() {
-
-        Object selectedObj = parkingFilter.getSelectedItem();
-
-        // 🔒 Protección contra null (MUY IMPORTANTE)
+        Object selectedObj = dynamicFilter.getSelectedItem();
         if (selectedObj == null || allRows == null) {
             return;
         }
 
         String selected = selectedObj.toString();
-
         tableModel.setRowCount(0);
 
-        List<ParkingLotReportRow> filtered = selected.equals("Todos")
-                ? allRows
+        String selectedReport = reportTypeFilter.getSelectedItem().toString();
+
+        // Reportes no implementados
+        if (selectedReport.equals("Tarifas") || selectedReport.equals("Vehículos Estacionados")) {
+            JOptionPane.showMessageDialog(this,
+                    "Reporte no disponible por el momento",
+                    "Información",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Filtro solo para Ocupación por Parqueo
+        List<ParkingLotReportRow> filtered = selected.equals("Todos") ? allRows
                 : allRows.stream()
                         .filter(r -> r.getParkingLotName().equals(selected))
                         .collect(Collectors.toList());
@@ -157,9 +187,7 @@ public class ReportsCenterInternal extends JInternalFrame {
     }
 
     private void applyRowColors() {
-
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
-
             @Override
             public Component getTableCellRendererComponent(
                     JTable table, Object value, boolean isSelected,
@@ -177,17 +205,12 @@ public class ReportsCenterInternal extends JInternalFrame {
                 String estado = table.getValueAt(row, 2).toString(); // Estado
                 String tipo = table.getValueAt(row, 3).toString();   // Tipo vehículo
 
-                // 🔴 OCUPADO
                 if (estado.equalsIgnoreCase("Ocupado")) {
                     c.setBackground(new Color(255, 230, 230));
                     c.setForeground(UITheme.DANGER);
-
-                    // 🟨 PREFERENCIAL / DISCAPACIDAD
                 } else if (tipo.equalsIgnoreCase("Discapacitado")) {
                     c.setBackground(new Color(255, 249, 196));
                     c.setForeground(new Color(130, 119, 23));
-
-                    // 🟢 DISPONIBLE
                 } else {
                     c.setBackground(new Color(232, 245, 233));
                     c.setForeground(new Color(27, 94, 32));
@@ -197,5 +220,4 @@ public class ReportsCenterInternal extends JInternalFrame {
             }
         });
     }
-
 }

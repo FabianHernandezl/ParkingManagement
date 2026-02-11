@@ -1,0 +1,86 @@
+[
+  {
+    "id": "119520051",
+    "name": "Jimena Calvo Soto",
+    "phone": "71133584",
+    "isPreferential": false
+  },
+  {
+    "id": "3032900",
+    "name": "Ana Brenes",
+    "phone": "88889999",
+    "isPreferential": false
+  },
+  {
+    "id": "119360128",
+    "name": "Mariana Blanco",
+    "phone": "86621670",
+    "isPreferential": true
+  },
+  {
+    "id": "09909",
+    "name": "Laura",
+    "phone": "999999",
+    "isPreferential": false
+  },
+  {
+    "id": "C-001",
+    "name": "Cliente Prueba",
+    "phone": "8888-8888",
+    "isPreferential": false
+  },
+  {
+    "id": "305620529",
+    "name": "Zailyn Tencio",
+    "phone": "84379367",
+    "isPreferential": false
+  },
+  {
+    "id": "j",
+    "name": "k",
+    "phone": "0",
+    "isPreferential": false
+  },
+  {
+    "id": "11",
+    "name": "j",
+    "phone": "d",
+    "isPreferential": false,
+    "email": "d"
+  },
+  {
+    "id": "33260704",
+    "name": "Shirley",
+    "phone": "71133588",
+    "isPreferential": false,
+    "email": "calvo.shirley@yahoo. es"
+  },
+  {
+    "id": "C-002",
+    "name": "Cliente",
+    "phone": "8888888",
+    "isPreferential": false,
+    "email": "cliente"
+  },
+  {
+    "id": "88",
+    "name": "k",
+    "phone": "l",
+    "isPreferential": false,
+    "email": "l"
+  },
+  {
+    "id": "6773",
+    "name": "Rosita",
+    "phone": "8989902",
+    "isPreferential": false,
+    "email": "ljsadjkjads"
+  },
+  {
+    "id": "222332",
+    "name": "Karla",
+    "phone": "9889982",
+    "isPreferential": true,
+    "email": "aksljdljas"
+  }
+]
