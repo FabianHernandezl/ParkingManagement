@@ -4,7 +4,7 @@ import Controller.TicketController;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import model.entities.Ticket;
@@ -32,7 +32,12 @@ public class TicketViewInternal extends JInternalFrame {
         // Panel superior con botones
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         btnRefresh = new JButton("Actualizar");
+        btnRefresh.setBackground(new Color(0, 102, 204)); // Azul
+        btnRefresh.setForeground(Color.WHITE);
         btnRegisterExit = new JButton("Registrar Salida");
+        btnRegisterExit.setBackground(new Color(204, 0, 0)); // Rojo
+        btnRegisterExit.setForeground(Color.WHITE);
+
         lblStatus = new JLabel("Cargando tickets...");
 
         topPanel.add(btnRefresh);
@@ -63,6 +68,22 @@ public class TicketViewInternal extends JInternalFrame {
         table = new JTable(tableModel);
         table.setRowHeight(25);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        // Renderizador para cambiar el color según estado
+        table.setDefaultRenderer(String.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                String estado = table.getModel().getValueAt(row, 6).toString();
+                if (estado.equals("CERRADO")) {
+                    c.setForeground(Color.GRAY); // Cerrados en gris
+                } else {
+                    c.setForeground(Color.BLACK); // Activos en negro
+                }
+                return c;
+            }
+        });
 
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
@@ -98,20 +119,16 @@ public class TicketViewInternal extends JInternalFrame {
         try {
             tableModel.setRowCount(0);
 
-            // 1️⃣ Tickets activos en memoria
             ArrayList<Ticket> activeTickets = ticketController.getActiveTickets();
-
-            // 2️⃣ Tickets históricos desde TXT
             ArrayList<Ticket> txtTickets = TxtTicketUtil.leerTicketsTXT();
 
-            // Combinar todo pero solo mostrar activos + historicos como inactivos
             ArrayList<Ticket> allTickets = new ArrayList<>();
             allTickets.addAll(activeTickets);
             allTickets.addAll(txtTickets);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-
             int countActive = 0;
+
             for (Ticket ticket : allTickets) {
                 String placa = "N/A";
                 String tipo = "N/A";
@@ -175,7 +192,6 @@ public class TicketViewInternal extends JInternalFrame {
             int ticketId = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
             Ticket ticket = ticketController.findTicketById(ticketId);
 
-            // Si no está en memoria (solo TXT), buscarlo ahí
             if (ticket == null) {
                 for (Ticket t : TxtTicketUtil.leerTicketsTXT()) {
                     if (t.getId() == ticketId) {
@@ -198,7 +214,6 @@ public class TicketViewInternal extends JInternalFrame {
                         ticket.getEntryTime() != null ? ticket.getEntryTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) : "N/A"));
                 details.append(String.format("Hora Salida: %s\n",
                         ticket.getExitTime() != null ? ticket.getExitTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) : "No registrado"));
-
                 details.append(String.format("Total Pagado: ₡%.2f\n", ticket.getTotal()));
                 detailArea.setText(details.toString());
             }
