@@ -163,10 +163,10 @@ Clientes:
 
 VEHÍCULO #15
 ----------------------------------------
-Placa:        1
-Marca:        e
-Modelo:       f
-Color:        f
+Placa:        123
+Marca:        f
+Modelo:       fabi
+Color:        rosa
 Tipo:         Carro
 Clientes:     
               - Karla (ID: 222332)

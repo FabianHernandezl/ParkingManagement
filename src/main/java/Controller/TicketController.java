@@ -112,10 +112,16 @@ public class TicketController {
         }
     }
 
+    /**
+     * Retorna los tickets activos (sin salida)
+     */
     public ArrayList<Ticket> getActiveTickets() {
         return ticketData.getActiveTickets();
     }
 
+    /**
+     * Busca un ticket por ID
+     */
     public Ticket findTicketById(int id) {
         return ticketData.getAllTickets().stream()
                 .filter(t -> t.getId() == id)
@@ -123,7 +129,21 @@ public class TicketController {
                 .orElse(null);
     }
 
+    /**
+     * Retorna todos los tickets en memoria
+     */
     public ArrayList<Ticket> getAllTickets() {
         return ticketData.getAllTickets();
+    }
+
+    /**
+     * Retorna todos los tickets leídos desde el archivo TXT histórico
+     */
+    public ArrayList<Ticket> getAllTicketsFromTxt() {
+        ArrayList<Ticket> ticketsFromTxt = TxtTicketUtil.leerTicketsTXT();
+        if (ticketsFromTxt == null) {
+            ticketsFromTxt = new ArrayList<>();
+        }
+        return ticketsFromTxt;
     }
 }

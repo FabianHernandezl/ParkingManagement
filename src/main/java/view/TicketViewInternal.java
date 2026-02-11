@@ -6,11 +6,12 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.time.format.DateTimeFormatter;
-import model.entities.ParkingLot;
+import java.util.ArrayList;
 import model.entities.Ticket;
-import model.entities.VehicleType;
 import model.entities.Vehicle;
+import model.entities.VehicleType;
 import model.entities.Space;
+import util.TxtTicketUtil;
 
 public class TicketViewInternal extends JInternalFrame {
 
@@ -19,7 +20,6 @@ public class TicketViewInternal extends JInternalFrame {
     private DefaultTableModel tableModel;
     private JButton btnRefresh;
     private JButton btnRegisterExit;
-    private JButton btnTestTicket;
     private JLabel lblStatus;
 
     public TicketViewInternal() {
@@ -33,12 +33,10 @@ public class TicketViewInternal extends JInternalFrame {
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         btnRefresh = new JButton("Actualizar");
         btnRegisterExit = new JButton("Registrar Salida");
-        btnTestTicket = new JButton("Crear Ticket Prueba");
         lblStatus = new JLabel("Cargando tickets...");
 
         topPanel.add(btnRefresh);
         topPanel.add(btnRegisterExit);
-        topPanel.add(btnTestTicket);
         topPanel.add(Box.createHorizontalStrut(20));
         topPanel.add(lblStatus);
 
@@ -66,15 +64,6 @@ public class TicketViewInternal extends JInternalFrame {
         table.setRowHeight(25);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        // Hacer la tabla más ancha
-        table.getColumnModel().getColumn(0).setPreferredWidth(50);
-        table.getColumnModel().getColumn(1).setPreferredWidth(100);
-        table.getColumnModel().getColumn(2).setPreferredWidth(80);
-        table.getColumnModel().getColumn(3).setPreferredWidth(70);
-        table.getColumnModel().getColumn(4).setPreferredWidth(150);
-        table.getColumnModel().getColumn(5).setPreferredWidth(120);
-        table.getColumnModel().getColumn(6).setPreferredWidth(80);
-
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -85,24 +74,14 @@ public class TicketViewInternal extends JInternalFrame {
         detailArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
         bottomPanel.add(new JLabel("Detalles del ticket seleccionado:"), BorderLayout.NORTH);
         bottomPanel.add(new JScrollPane(detailArea), BorderLayout.CENTER);
-
         add(bottomPanel, BorderLayout.SOUTH);
 
         // Cargar datos iniciales
         loadTickets();
 
         // Event Listeners
-        btnRefresh.addActionListener((ActionEvent e) -> {
-            loadTickets();
-        });
-
-        btnRegisterExit.addActionListener((ActionEvent e) -> {
-            registerExit();
-        });
-
-        btnTestTicket.addActionListener((ActionEvent e) -> {
-            createTestTicket();
-        });
+        btnRefresh.addActionListener((ActionEvent e) -> loadTickets());
+        btnRegisterExit.addActionListener((ActionEvent e) -> registerExit());
 
         table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
@@ -116,46 +95,57 @@ public class TicketViewInternal extends JInternalFrame {
     }
 
     private void loadTickets() {
-        System.out.println("=== Cargando tickets activos desde la vista ===");
-
         try {
             tableModel.setRowCount(0);
-            var activeTickets = ticketController.getActiveTickets();
+
+            // 1️⃣ Tickets activos en memoria
+            ArrayList<Ticket> activeTickets = ticketController.getActiveTickets();
+
+            // 2️⃣ Tickets históricos desde TXT
+            ArrayList<Ticket> txtTickets = TxtTicketUtil.leerTicketsTXT();
+
+            // Combinar todo pero solo mostrar activos + historicos como inactivos
+            ArrayList<Ticket> allTickets = new ArrayList<>();
+            allTickets.addAll(activeTickets);
+            allTickets.addAll(txtTickets);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
 
-            for (Ticket ticket : activeTickets) {
+            int countActive = 0;
+            for (Ticket ticket : allTickets) {
                 String placa = "N/A";
                 String tipo = "N/A";
+                String espacioInfo = "No asignado";
 
                 if (ticket.getVehicle() != null) {
-                    placa = ticket.getVehicle().getPlate();
+                    placa = ticket.getVehicle().getPlate() != null ? ticket.getVehicle().getPlate() : "N/A";
                     if (ticket.getVehicle().getVehicleType() != null) {
                         tipo = ticket.getVehicle().getVehicleType().getDescription();
                     }
                 }
 
-                String espacioInfo = "No asignado";
-
                 if (ticket.getSpace() != null) {
-                    if (ticket.getSpace().getParkingLot() != null) {
-                        espacioInfo = "Esp. " + ticket.getSpace().getId()
-                                + " - " + ticket.getSpace().getParkingLot().getName();
-                    } else {
-                        espacioInfo = "Esp. " + ticket.getSpace().getId();
-                    }
+                    espacioInfo = "Esp. " + ticket.getSpace().getId();
                 }
 
-                String horaEntrada = ticket.getEntryTime().format(formatter);
+                String horaEntrada = ticket.getEntryTime() != null
+                        ? ticket.getEntryTime().format(formatter)
+                        : "N/A";
 
-                // Calcular tiempo transcurrido
-                long horas = java.time.Duration.between(ticket.getEntryTime(),
-                        java.time.LocalDateTime.now()).toHours();
-                long minutos = java.time.Duration.between(ticket.getEntryTime(),
-                        java.time.LocalDateTime.now()).toMinutes() % 60;
+                long horas = ticket.getEntryTime() != null
+                        ? java.time.Duration.between(ticket.getEntryTime(),
+                                java.time.LocalDateTime.now()).toHours()
+                        : 0;
+                long minutos = ticket.getEntryTime() != null
+                        ? java.time.Duration.between(ticket.getEntryTime(),
+                                java.time.LocalDateTime.now()).toMinutes() % 60
+                        : 0;
                 String tiempo = String.format("%d:%02d", horas, minutos);
 
                 String estado = ticket.getExitTime() == null ? "ACTIVO" : "CERRADO";
+                if (estado.equals("ACTIVO")) {
+                    countActive++;
+                }
 
                 tableModel.addRow(new Object[]{
                     ticket.getId(),
@@ -168,11 +158,8 @@ public class TicketViewInternal extends JInternalFrame {
                 });
             }
 
-            lblStatus.setText("Tickets activos: " + activeTickets.size());
+            lblStatus.setText("Tickets activos: " + countActive);
 
-            if (activeTickets.isEmpty()) {
-                System.out.println("No hay tickets activos para mostrar");
-            }
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this,
@@ -188,6 +175,16 @@ public class TicketViewInternal extends JInternalFrame {
             int ticketId = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
             Ticket ticket = ticketController.findTicketById(ticketId);
 
+            // Si no está en memoria (solo TXT), buscarlo ahí
+            if (ticket == null) {
+                for (Ticket t : TxtTicketUtil.leerTicketsTXT()) {
+                    if (t.getId() == ticketId) {
+                        ticket = t;
+                        break;
+                    }
+                }
+            }
+
             if (ticket != null) {
                 StringBuilder details = new StringBuilder();
                 details.append(String.format("ID Ticket: %d\n", ticket.getId()));
@@ -196,44 +193,13 @@ public class TicketViewInternal extends JInternalFrame {
                 details.append(String.format("Tipo: %s\n",
                         ticket.getVehicle() != null && ticket.getVehicle().getVehicleType() != null
                         ? ticket.getVehicle().getVehicleType().getDescription() : "N/A"));
-                if (ticket.getSpace() != null) {
-                    details.append("Espacio: " + ticket.getSpace().getId() + "\n");
-
-                    if (ticket.getSpace().getParkingLot() != null) {
-                        details.append("Parqueo: "
-                                + ticket.getSpace().getParkingLot().getName() + "\n");
-                    } else {
-                        details.append("Parqueo: No definido\n");
-                    }
-                } else {
-                    details.append("Espacio: No asignado\n");
-                }
-
+                details.append("Espacio: " + (ticket.getSpace() != null ? ticket.getSpace().getId() : "No asignado") + "\n");
                 details.append(String.format("Hora Ingreso: %s\n",
-                        ticket.getEntryTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))));
+                        ticket.getEntryTime() != null ? ticket.getEntryTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) : "N/A"));
+                details.append(String.format("Hora Salida: %s\n",
+                        ticket.getExitTime() != null ? ticket.getExitTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) : "No registrado"));
 
-                if (ticket.getExitTime() != null) {
-                    details.append(String.format("Hora Salida: %s\n",
-                            ticket.getExitTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))));
-                    details.append(String.format("Total Pagado: ₡%.2f\n", ticket.getTotal()));
-                } else {
-                    long horas = java.time.Duration.between(ticket.getEntryTime(),
-                            java.time.LocalDateTime.now()).toHours();
-                    long minutos = java.time.Duration.between(ticket.getEntryTime(),
-                            java.time.LocalDateTime.now()).toMinutes() % 60;
-                    details.append(String.format("Tiempo transcurrido: %d horas, %d minutos\n", horas, minutos));
-
-                    // Calcular tarifa estimada
-                    if (ticket.getVehicle() != null && ticket.getVehicle().getVehicleType() != null) {
-                        double tarifa = ticket.getVehicle().getVehicleType().getFee();
-                        double estimado = horas * tarifa;
-                        if (horas == 0) {
-                            estimado = tarifa; // Mínimo 1 hora
-                        }
-                        details.append(String.format("Tarifa estimada: ₡%.2f\n", estimado));
-                    }
-                }
-
+                details.append(String.format("Total Pagado: ₡%.2f\n", ticket.getTotal()));
                 detailArea.setText(details.toString());
             }
         }
@@ -254,9 +220,9 @@ public class TicketViewInternal extends JInternalFrame {
 
         if (ticket == null) {
             JOptionPane.showMessageDialog(this,
-                    "No se encontró el ticket seleccionado",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+                    "Este ticket ya fue cerrado o no existe en memoria",
+                    "Ticket no disponible",
+                    JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
@@ -293,79 +259,7 @@ public class TicketViewInternal extends JInternalFrame {
                     "Éxito",
                     JOptionPane.INFORMATION_MESSAGE);
 
-            // Actualizar la tabla
             loadTickets();
-        }
-    }
-
-    private void createTestTicket() {
-        try {
-            System.out.println("\n=== CREANDO TICKET DE PRUEBA ===");
-
-            // Crear vehículo de prueba
-            Vehicle testVehicle = new Vehicle();
-            testVehicle.setPlate("TEST" + System.currentTimeMillis() % 1000);
-            testVehicle.setColor("Rojo");
-            testVehicle.setBrand("Toyota");
-            testVehicle.setModel("Corolla");
-
-            VehicleType vt = new VehicleType();
-            vt.setId(1);
-            vt.setDescription("Carro");
-            vt.setFee((float) 1000.0);
-            testVehicle.setVehicleType(vt);
-
-            System.out.println("Vehículo creado: " + testVehicle.getPlate());
-
-            // Crear espacio de prueba
-            // Crear parqueo de prueba
-            ParkingLot testParking = new ParkingLot();
-            testParking.setId(1);
-            testParking.setName("Parqueo Central");
-            testParking.setNumberOfSpaces(100);
-
-// Crear espacio de prueba
-            Space testSpace = new Space();
-            testSpace.setId(999);
-            testSpace.setSpaceTaken(false);
-            testSpace.setVehicleType(vt);
-
-// 🔥 LÍNEA CLAVE
-            testSpace.setParkingLot(testParking);
-
-            System.out.println("Espacio creado: ID " + testSpace.getId());
-
-            // Crear ticket
-            System.out.println("Llamando a TicketController...");
-            Ticket testTicket = ticketController.generateEntryTicket(testVehicle, testSpace);
-
-            if (testTicket != null) {
-                System.out.println("✅ Ticket creado exitosamente!");
-
-                JOptionPane.showMessageDialog(this,
-                        "✅ Ticket de prueba creado exitosamente\n\n"
-                        + "ID: " + testTicket.getId() + "\n"
-                        + "Placa: " + testVehicle.getPlate() + "\n"
-                        + "Espacio: " + testSpace.getId(),
-                        "Prueba exitosa",
-                        JOptionPane.INFORMATION_MESSAGE);
-
-                // Recargar la tabla
-                loadTickets();
-            } else {
-                System.out.println("❌ No se pudo crear ticket de prueba");
-
-                JOptionPane.showMessageDialog(this,
-                        "❌ No se pudo crear ticket de prueba",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this,
-                    "❌ Excepción al crear ticket:\n" + ex.getMessage(),
-                    "Excepción",
-                    JOptionPane.ERROR_MESSAGE);
         }
     }
 }

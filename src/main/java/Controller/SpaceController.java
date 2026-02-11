@@ -114,16 +114,11 @@ public class SpaceController {
 
                 String spaceType = s.getVehicleType().getDescription().toLowerCase();
 
-                if (s.isDisabilityAdaptation() && client.isIsPreferential()) {
-                    return s;
-                }
+                if ((s.isDisabilityAdaptation() && client.isIsPreferential())
+                        || (spaceType.contains("motocicleta") && vehicleType.contains("motocicleta"))
+                        || (!s.isDisabilityAdaptation() && !spaceType.contains("motocicleta") && !vehicleType.contains("motocicleta"))) {
 
-                
-                if (spaceType.contains("motocicleta") && vehicleType.contains("motocicleta")) {
-                    return s;
-                }
-
-                if (!s.isDisabilityAdaptation() && !spaceType.contains("motocicleta") && !vehicleType.contains("motocicleta")) {
+                    s.setParkingLot(lot);
                     return s;
                 }
             }
@@ -152,6 +147,7 @@ public class SpaceController {
                     spaces[i].setEntryTime(updatedSpace.getEntryTime());
                     spaces[i].setDisabilityAdaptation(updatedSpace.isDisabilityAdaptation());
                     spaces[i].setVehicleType(updatedSpace.getVehicleType());
+                    spaces[i].setParkingLot(updatedSpace.getParkingLot());
 
                     return parkingLotData.updateParkingLot(parkingLot);
                 }
