@@ -7,13 +7,18 @@ package model.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import model.entities.Administrator;
 import model.entities.Clerk;
+import model.entities.Client;
 import model.entities.ParkingLot;
+import model.entities.Vehicle;
 
 /**
  *
@@ -21,8 +26,11 @@ import model.entities.ParkingLot;
  */
 public class AdministratorData {
 
-    private static final String FILE_PATH = "data/administrators.json";
     private ArrayList<Administrator> administrators;
+
+    private static final String FILE_PATH = "data/administrators.json";
+    private static final String FILE_PATH_TXT = "data/administrators.txt";
+
     ParkingLotData parkingLotData = new ParkingLotData();
 
     private final Gson gson = new GsonBuilder()
@@ -30,18 +38,15 @@ public class AdministratorData {
             .create();
 
     public AdministratorData() {
-    administrators = loadAdministrators();
 
-    if (administrators.isEmpty()) {
-        ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
-        administrators.add(new Administrator(1001, parkingLots, "ID-FAB", "Fabián", "admin_fabian", "fabian123"));
-        administrators.add(new Administrator(1002, parkingLots, "ID-ZAY", "Zaylin", "admin_zailyn", "zailyn456"));
-        administrators.add(new Administrator(1003, parkingLots, "ID-JIM", "Jimena", "admin_jimena", "jimena789"));
-        administrators.add(new Administrator(1004, parkingLots, "ID-CAM", "Camila", "admin_camila", "camila012"));
-        saveAdministrators();
+        File folder = new File("data");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+        administrators = loadAdministrators();
     }
-}
-  public ArrayList<Administrator> getAllAdministrators() {
+
+    public ArrayList<Administrator> getAllAdministrators() {
         return new ArrayList<>(administrators); // Retorna copia para evitar modificación externa
     }
 
@@ -50,7 +55,6 @@ public class AdministratorData {
      */
     private ArrayList<Administrator> loadAdministrators() {
 
-        
         try (FileReader reader = new FileReader(FILE_PATH)) {
 
             Type listType = new TypeToken<ArrayList<Administrator>>() {
@@ -98,7 +102,7 @@ public class AdministratorData {
      */
     public Administrator findAdministratorById(String id) {
         Administrator adminToReturn = null;
-        
+
         for (Administrator admin : administrators) {
             if (admin.getId().equals(id)) {
                 adminToReturn = admin;
@@ -129,6 +133,7 @@ public class AdministratorData {
             if (administrators.get(i).getId().equals(updatedAdministrator.getId())) {
                 administrators.set(i, updatedAdministrator);
                 saveAdministrators();
+                saveAdministratorsToTxt();
                 return true;
             }
         }
@@ -143,6 +148,7 @@ public class AdministratorData {
         if (admin != null) {
             administrators.remove(admin);
             saveAdministrators();
+            saveAdministratorsToTxt();
             return true;
         }
         return false;
@@ -192,6 +198,88 @@ public class AdministratorData {
      */
     public int getAdminsCount() {
         return administrators.size();
+    }
+
+    // ===================== TXT =====================
+    private void saveAdministratorsToTxt() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH_TXT))) {
+
+            // Encabezado
+            writer.write("========================================");
+            writer.newLine();
+            writer.write("     REGISTRO DE ADMINISTRADORES");
+            writer.newLine();
+            writer.write("========================================");
+            writer.newLine();
+            writer.write("Total de administradores: " + administrators.size());
+            writer.newLine();
+            writer.write("========================================");
+            writer.newLine();
+            writer.newLine();
+
+            // Si no hay administradores
+            if (administrators.isEmpty()) {
+                writer.write("No hay administradores registrados.");
+                writer.newLine();
+            } else {
+
+                int contador = 1;
+                for (Administrator admin : administrators) {
+
+                    writer.write("ADMINISTRADOR #" + contador);
+                    writer.newLine();
+                    writer.write("----------------------------------------");
+                    writer.newLine();
+
+                    // Datos heredados de User
+                    writer.write("ID:            " + (admin.getId() != null ? admin.getId() : "No definido"));
+                    writer.newLine();
+
+                    writer.write("Nombre:        " + (admin.getName() != null ? admin.getName() : "No definido"));
+                    writer.newLine();
+
+                    writer.write("Usuario:       " + (admin.getUsername() != null ? admin.getUsername() : "No definido"));
+                    writer.newLine();
+
+                    // Datos propios de Administrator
+                    writer.write("Número Admin:  " + admin.getAdminNumber());
+                    writer.newLine();
+
+                    // Parqueos asignados
+                    writer.write("Parqueos:      ");
+                    if (admin.getParkingLot() != null && !admin.getParkingLot().isEmpty()) {
+                        writer.newLine();
+                        for (ParkingLot parking : admin.getParkingLot()) {
+                            if (parking != null) {
+                                writer.write("                - "
+                                        + (parking.getName() != null ? parking.getName() : "Sin nombre"));
+                                        
+                                writer.newLine();
+                            }
+                        }
+                    } else {
+                        writer.write("No tiene parqueos asignados");
+                        writer.newLine();
+                    }
+
+                    writer.write("----------------------------------------");
+                    writer.newLine();
+                    writer.newLine();
+
+                    contador++;
+                }
+            }
+
+            // Pie
+            writer.write("========================================");
+            writer.newLine();
+            writer.write("Fin del registro");
+            writer.newLine();
+            writer.write("========================================");
+
+        } catch (IOException e) {
+            System.out.println("Error guardando administradores en TXT: " + e.getMessage());
+        }
     }
 
 }
