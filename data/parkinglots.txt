@@ -1,54 +1,5 @@
-========================================
-        REGISTRO DE PARQUEOS
-========================================
-Total de parqueos: 5
-========================================
-
-PARQUEO #1
-----------------------------------------
-ID:               1
-Nombre:           Cami´s Parkinglot
-Número espacios:  10
-Vehículos:        No hay vehículos registrados
-Espacios físicos: Total: 10
-----------------------------------------
-
-PARQUEO #2
-----------------------------------------
-ID:               2
-Nombre:           UCR ParkingLot
-Número espacios:  20
-Vehículos:        No hay vehículos registrados
-Espacios físicos: Total: 20
-----------------------------------------
-
-PARQUEO #3
-----------------------------------------
-ID:               3
-Nombre:           Jime ParkingLot
-Número espacios:  5
-Vehículos:        No hay vehículos registrados
-Espacios físicos: Total: 5
-----------------------------------------
-
-PARQUEO #4
-----------------------------------------
-ID:               4
-Nombre:           Parqueo Central
-Número espacios:  10
-Vehículos:        No hay vehículos registrados
-Espacios físicos: Total: 10
-----------------------------------------
-
-PARQUEO #5
-----------------------------------------
-ID:               5
-Nombre:           Prueba
-Número espacios:  10
-Vehículos:        No hay vehículos registrados
-Espacios físicos: Total: 10
-----------------------------------------
-
-========================================
-Fin del registro
-========================================
+ID: 1 | Name: Cami´s Parkinglot | Spaces: 10
+ID: 2 | Name: UCR ParkingLot | Spaces: 20
+ID: 3 | Name: Jime ParkingLot | Spaces: 5
+ID: 4 | Name: Parqueo Central | Spaces: 10
+ID: 6 | Name: Parking Lot | Spaces: 25

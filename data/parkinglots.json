@@ -351,50 +351,14 @@
       {
         "id": 10,
         "disabilityAdaptation": false,
-        "spaceTaken": true,
+        "spaceTaken": false,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "entryTime": "Feb 8, 2026, 3:26:44 PM",
-        "available": false,
-        "client": {
-          "id": "6773",
-          "name": "Rosita",
-          "phone": "8989902",
-          "isPreferential": false,
-          "email": "ljsadjkjads"
-        },
-        "vehicle": {
-          "plate": "121212",
-          "color": "133131",
-          "brand": "1123112",
-          "model": "11331",
-          "clients": [
-            {
-              "id": "6773",
-              "name": "Rosita",
-              "phone": "8989902",
-              "isPreferential": false,
-              "email": "ljsadjkjads"
-            },
-            {
-              "id": "6773",
-              "name": "Rosita",
-              "phone": "8989902",
-              "isPreferential": false,
-              "email": "ljsadjkjads"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Moto",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
+        "available": false
       }
     ]
   },
@@ -671,50 +635,14 @@
       {
         "id": 10,
         "disabilityAdaptation": false,
-        "spaceTaken": true,
+        "spaceTaken": false,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "entryTime": "Feb 8, 2026, 3:26:44 PM",
-        "available": false,
-        "client": {
-          "id": "6773",
-          "name": "Rosita",
-          "phone": "8989902",
-          "isPreferential": false,
-          "email": "ljsadjkjads"
-        },
-        "vehicle": {
-          "plate": "121212",
-          "color": "133131",
-          "brand": "1123112",
-          "model": "11331",
-          "clients": [
-            {
-              "id": "6773",
-              "name": "Rosita",
-              "phone": "8989902",
-              "isPreferential": false,
-              "email": "ljsadjkjads"
-            },
-            {
-              "id": "6773",
-              "name": "Rosita",
-              "phone": "8989902",
-              "isPreferential": false,
-              "email": "ljsadjkjads"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Moto",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
+        "available": false
       },
       {
         "id": 11,
