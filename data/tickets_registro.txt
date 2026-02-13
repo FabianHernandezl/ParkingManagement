@@ -208,3 +208,31 @@ Total a pagar: ₡0.00
 ==============================
 
 
+TICKET ENTRADA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Placa: 3213
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 13/02/2026 09:38:30
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+TICKET ENTRADA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Placa: 3224
+Tipo de vehículo: Automóvil
+Espacio asignado: 31
+Hora de ingreso: 13/02/2026 09:42:40
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+

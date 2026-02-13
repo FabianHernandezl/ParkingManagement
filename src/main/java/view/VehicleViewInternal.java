@@ -495,8 +495,24 @@ public class VehicleViewInternal extends JInternalFrame {
         v.setModel(txtModel.getText());
         v.setColor(txtColor.getText());
 
-        VehicleType t = new VehicleType();
-        t.setDescription(cmbType.getSelectedItem().toString());
+        String selected = cmbType.getSelectedItem().toString();
+
+        VehicleType t;
+
+        switch (selected) {
+            case "Carro":
+                t = new VehicleType(1, "Automóvil", 4, 5.0f);
+                break;
+            case "Moto":
+                t = new VehicleType(2, "Motocicleta", 2, 2.5f);
+                break;
+            case "Camión":
+                t = new VehicleType(1, "Automóvil", 4, 5.0f); // si los camiones usan espacio normal
+                break;
+            default:
+                t = new VehicleType(1, "Automóvil", 4, 5.0f);
+        }
+
         v.setVehicleType(t);
 
         v.setClients(new ArrayList<>(selectedClients));
