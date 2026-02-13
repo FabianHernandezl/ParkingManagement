@@ -22,46 +22,31 @@ public class VehicleController {
 
     public String insertVehicle(Vehicle vehicle, ParkingLot selectedParkingLot) {
 
-        System.out.println("\n=== VEHICLECONTROLLER: Insertando vehículo ===");
-        System.out.println("Placa: " + (vehicle != null ? vehicle.getPlate() : "null"));
-
-        String result;
-        boolean clientHasVehicle = false;
-
-        if (vehicle != null && vehicle.getClients() != null) {
-
-            for (Client c : vehicle.getClients()) {
-                if (vehicleData.findVehicle(c) != null) {
-                    clientHasVehicle = true;
-                    break;
-                }
-            }
-
-            if (!clientHasVehicle) {
-
-                result = vehicleData.insertVehicle(vehicle);
-
-                System.out.println("Intentando parquear el vehículo...");
-                ParkingAssignment assignment
-                        = registerVehicleInParking(vehicle, selectedParkingLot);
-
-                if (assignment != null) {
-                    result += "\n✅ Parqueo: " + assignment.getParkingLot().getName()
-                            + "\n📍 Espacio: " + assignment.getSpace().getId();
-                } else {
-                    result += "\n⚠️ Vehículo NO pudo ser parqueado";
-                }
-
-            } else {
-                result = "No se insertó el vehículo, el cliente ya tiene un vehículo registrado";
-            }
-
-        } else {
-            result = "Vehículo inválido";
+        if (vehicle == null || selectedParkingLot == null) {
+            return "Vehículo o parqueo inválido";
         }
 
-        System.out.println("Resultado final: " + result);
-        return result;
+        // Verificar si algún cliente ya tiene vehículo
+        for (Client c : vehicle.getClients()) {
+            if (vehicleData.findVehicle(c) != null) {
+                return "No se insertó el vehículo, el cliente ya tiene un vehículo registrado";
+            }
+        }
+
+        // 🚨 PRIMERO intentar parquear
+        ParkingAssignment assignment
+                = registerVehicleInParking(vehicle, selectedParkingLot);
+
+        if (assignment == null) {
+            return "❌ No hay espacios disponibles para este tipo de vehículo";
+        }
+
+        // ✅ Si hay espacio, ahora sí guardar
+        String result = vehicleData.insertVehicle(vehicle);
+
+        return result
+                + "\n✅ Parqueo: " + assignment.getParkingLot().getName()
+                + "\n📍 Espacio: " + assignment.getSpace().getId();
     }
 
     public ArrayList<Vehicle> getAllVehicles() {
