@@ -133,12 +133,7 @@ public class AdminMenu extends JFrame {
         spacesMenu.add(manageSpaces);
 
         manageSpaces.addActionListener(e -> {
-            openInternalFrame(
-                    new SelectParkingLotView(
-                            parkingLotController.getAllParkingLots(),
-                            this
-                    )
-            );
+            openInternalFrame(new SelectParkingLotView(this));
         });
 
         // ---------- OPERARIOS - users ----------

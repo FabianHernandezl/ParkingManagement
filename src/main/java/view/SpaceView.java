@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.*;
+import model.data.SpaceData;
 import model.entities.ParkingLot;
 import model.entities.Space;
 
@@ -17,12 +18,14 @@ public class SpaceView extends JInternalFrame {
     private JPanel spacesContainer;
     private SpacePanel selectedPanel;
     private ParkingLotController parkingLotController = new ParkingLotController();
-
     private SpaceController spaceController = new SpaceController();
+    private SpaceData sd = new SpaceData();
 
     public SpaceView(ParkingLot parkingLot, AdminMenu parent) {
         this.parkingLot = parkingLot;
         this.parent = parent;
+
+        sd.debugPrintAllSpaces();
 
         setTitle("Espacios - " + (parkingLot != null ? parkingLot.getName() : ""));
         setClosable(true);
@@ -44,11 +47,8 @@ public class SpaceView extends JInternalFrame {
 
         JButton btnChangeParking = new JButton("Cambiar Parqueo");
         btnChangeParking.addActionListener(e -> {
-            // Obtener todos los parking lots desde el controlador
-            parent.openInternalFrame(new SelectParkingLotView(
-                    parkingLotController.getAllParkingLots(),
-                    parent
-            ));
+            parent.openInternalFrame(new SelectParkingLotView(parent));
+
             this.dispose();
         });
 
@@ -99,19 +99,27 @@ public class SpaceView extends JInternalFrame {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void loadSpaces() {
+    private void loadSpaces() {
         spacesContainer.removeAll();
 
         if (parkingLot == null) {
             return;
         }
 
-        Space[] spaces = parkingLot.getSpaces();
-        if (spaces != null) {
-            for (Space space : spaces) {
-                SpacePanel panel = new SpacePanel(space, this);
-                spacesContainer.add(panel);
+        Space[] spaces = spaceController.getSpacesByParkingLot(parkingLot.getId());
+
+        System.out.println("DEBUG: Cargando espacios para parqueo: " + parkingLot.getName());
+        System.out.println("DEBUG: Espacios totales en el arreglo: " + spaces.length);
+
+        for (int i = 0; i < spaces.length; i++) {
+            Space space = spaces[i];
+            if (space == null) {
+                System.out.println("DEBUG: Espacio en posición " + i + " es null");
+                continue;
             }
+            System.out.println("DEBUG: Espacio #" + space.getId() + " | Ocupado: " + space.isSpaceTaken());
+            SpacePanel panel = new SpacePanel(space, this);
+            spacesContainer.add(panel);
         }
 
         spacesContainer.revalidate();

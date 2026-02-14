@@ -94,8 +94,18 @@ public class SpaceData {
             Type listType = new TypeToken<ArrayList<ParkingLot>>() {
             }.getType();
             ArrayList<ParkingLot> data = gson.fromJson(reader, listType);
-            return data != null ? data : new ArrayList<>();
+            if (data == null) {
+                data = new ArrayList<>();
+            }
+
+            System.out.println("DEBUG: Cargando parqueos desde JSON");
+            for (ParkingLot p : data) {
+                int total = (p.getSpaces() != null) ? p.getSpaces().length : 0;
+                System.out.println("DEBUG: Parqueo: " + p.getName() + " | Espacios cargados: " + total);
+            }
+            return data;
         } catch (IOException e) {
+            System.out.println("DEBUG: Error al leer JSON: " + e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -103,6 +113,7 @@ public class SpaceData {
     private void saveParkings(ArrayList<ParkingLot> parkings) {
         try (Writer writer = new FileWriter(PARKING_FILE)) {
             gson.toJson(parkings, writer);
+            System.out.println("DEBUG: Guardado de parqueos con " + parkings.size() + " parqueos exitoso");
         } catch (IOException e) {
             System.err.println("Error al guardar: " + e.getMessage());
         }
@@ -115,4 +126,32 @@ public class SpaceData {
     public boolean deleteSpace(int id) {
         return false;
     }
+
+    public void debugPrintAllSpaces() {
+        ArrayList<ParkingLot> parkings = loadParkings();
+        System.out.println("===== DEBUG: Revisando todos los espacios =====");
+
+        for (ParkingLot p : parkings) {
+            System.out.println("Parqueo: " + p.getName());
+            if (p.getSpaces() == null) {
+                System.out.println("  ⚠ Espacios nulos (getSpaces() == null)");
+                continue;
+            }
+
+            for (int i = 0; i < p.getSpaces().length; i++) {
+                Space s = p.getSpaces()[i];
+                if (s == null) {
+                    System.out.println("  ⚠ Espacio #" + i + " es NULL");
+                } else {
+                    System.out.println("  Espacio ID: " + s.getId()
+                            + " | Ocupado: " + s.isSpaceTaken()
+                            + " | Cliente: " + (s.getClient() != null ? s.getClient().getName() : "null")
+                            + " | Vehículo: " + (s.getVehicle() != null ? s.getVehicle().getPlate() : "null")
+                            + " | Adaptación discapacidad: " + s.isDisabilityAdaptation());
+                }
+            }
+        }
+        System.out.println("===== FIN DEBUG =====");
+    }
+
 }

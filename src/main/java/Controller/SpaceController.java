@@ -200,4 +200,16 @@ public class SpaceController {
 
         return hours * rate;
     }
+
+    public Space[] getSpacesByParkingLot(int parkingLotId) {
+        ArrayList<ParkingLot> allParkings = parkingLotData.getAllParkingLots();
+
+        for (ParkingLot lot : allParkings) {
+            if (lot.getId() == parkingLotId && lot.getSpaces() != null) {
+                return lot.getSpaces();
+            }
+        }
+        return new Space[0]; // arreglo vacío si no encuentra
+    }
+
 }

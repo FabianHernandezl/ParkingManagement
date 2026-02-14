@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
 import javax.swing.*;
+import model.data.ParkingLotData;
 import model.entities.ParkingLot;
 
 public class SelectParkingLotView extends JInternalFrame {
@@ -13,8 +14,7 @@ public class SelectParkingLotView extends JInternalFrame {
     private List<ParkingLot> parkingLots;
     private AdminMenu parent;
 
-    public SelectParkingLotView(List<ParkingLot> parkingLots, AdminMenu parent) {
-        this.parkingLots = parkingLots;
+    public SelectParkingLotView(AdminMenu parent) {
         this.parent = parent;
 
         setTitle("Seleccionar Parqueo");
@@ -23,6 +23,7 @@ public class SelectParkingLotView extends JInternalFrame {
         setLayout(new BorderLayout(10, 10));
 
         initUI();
+        refreshParkingLots(); // ← cargar siempre actualizado
     }
 
     private void initUI() {
@@ -35,9 +36,6 @@ public class SelectParkingLotView extends JInternalFrame {
         lblTitle.setAlignmentX(CENTER_ALIGNMENT);
 
         cmbParking = new JComboBox<>();
-        for (ParkingLot p : parkingLots) {
-            cmbParking.addItem(p);
-        }
 
         cmbParking.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         cmbParking.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
@@ -66,4 +64,17 @@ public class SelectParkingLotView extends JInternalFrame {
             dispose();
         }
     }
+
+    public void refreshParkingLots() {
+
+        cmbParking.removeAllItems();
+
+        ParkingLotData data = new ParkingLotData();
+        List<ParkingLot> updatedList = data.getAllParkingLots();
+
+        for (ParkingLot p : updatedList) {
+            cmbParking.addItem(p);
+        }
+    }
+
 }
