@@ -12,43 +12,78 @@ public class ParkingLotController {
     private ParkingLotData parkingLotData = new ParkingLotData();
 
     // Registrar parqueo simple o con espacios opcionales
-    public ParkingLot registerParkingLot(String name, int totalSpaces, int disabledSpaces, int motorcycleSpaces, int preferentialSpaces) {
+    public ParkingLot registerParkingLot(
+            String name,
+            int totalSpaces,
+            int disabledSpaces,
+            int preferentialSpaces,
+            int motorcycleSpaces,
+            int truckSpaces) {
+
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.setId(parkingLotData.findLastIdNumberOfParkingLot() + 1);
         parkingLot.setName(name);
         parkingLot.setNumberOfSpaces(totalSpaces);
 
-        // Crear espacios
-        Space[] spaces = createSpacesForParkingLot(totalSpaces, disabledSpaces, motorcycleSpaces, preferentialSpaces);
+        Space[] spaces = createSpacesForParkingLot(
+                totalSpaces,
+                preferentialSpaces,
+                motorcycleSpaces,
+                truckSpaces
+        );
+
         parkingLot.setSpaces(spaces);
 
         return parkingLotData.addParkingLot(parkingLot);
     }
 
-    public ParkingLot registerParkingLot(String name, int totalSpaces, int disabledSpaces, int motorcycleSpaces) {
-        return registerParkingLot(name, totalSpaces, disabledSpaces, motorcycleSpaces, 0);
+    public ParkingLot registerParkingLot(String name,
+            int totalSpaces,
+            int disabledSpaces,
+            int preferentialSpaces,
+            int motorcycleSpaces) {
+
+        return registerParkingLot(
+                name,
+                totalSpaces,
+                disabledSpaces,
+                preferentialSpaces,
+                motorcycleSpaces,
+                0 // truckSpaces por defecto
+        );
     }
 
-    private Space[] createSpacesForParkingLot(int total, int disabled, int motorcycle, int preferential) {
+    private Space[] createSpacesForParkingLot(
+            int total,
+            int preferential,
+            int motorcycle,
+            int truck) {
+
         Space[] spaces = new Space[total];
         int spaceId = 1;
+        int index = 0;
 
-        for (int i = 0; i < disabled; i++) {
-            spaces[i] = new Space(spaceId++, true, false,
-                    new VehicleType(3, "Discapacitado", 4, 0.0f));
+        // Preferenciales
+        for (int i = 0; i < preferential; i++) {
+            spaces[index++] = new Space(spaceId++, true, false,
+                    new VehicleType(1, "Automóvil", 4, 5.0f));
         }
 
-        for (int i = disabled; i < disabled + preferential; i++) {
-            spaces[i] = new Space(spaceId++, true, false, null);
-        }
-
-        for (int i = disabled + preferential; i < disabled + preferential + motorcycle; i++) {
-            spaces[i] = new Space(spaceId++, false, false,
+        // Motocicletas
+        for (int i = 0; i < motorcycle; i++) {
+            spaces[index++] = new Space(spaceId++, false, false,
                     new VehicleType(2, "Motocicleta", 2, 2.5f));
         }
 
-        for (int i = disabled + preferential + motorcycle; i < total; i++) {
-            spaces[i] = new Space(spaceId++, false, false,
+        // Camiones
+        for (int i = 0; i < truck; i++) {
+            spaces[index++] = new Space(spaceId++, false, false,
+                    new VehicleType(4, "Camión", 6, 8.0f));
+        }
+
+        // Lo que quede → Autos normales
+        while (index < total) {
+            spaces[index++] = new Space(spaceId++, false, false,
                     new VehicleType(1, "Automóvil", 4, 5.0f));
         }
 
@@ -113,6 +148,5 @@ public class ParkingLotController {
             return "El parqueo no se eliminó porque no se encontró en la base de datos.";
         }
     }
-    
-    
+
 }

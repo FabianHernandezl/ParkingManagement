@@ -32,8 +32,19 @@ public class ParkingLotData {
             Type listType = new TypeToken<ArrayList<ParkingLot>>() {
             }.getType();
             ArrayList<ParkingLot> loadedParkingLots = gson.fromJson(reader, listType);
-            return (loadedParkingLots != null) ? loadedParkingLots : new ArrayList<>();
+            if (loadedParkingLots == null) {
+                loadedParkingLots = new ArrayList<>();
+            }
+
+            System.out.println("DEBUG: Cargando parking lots desde JSON");
+            for (ParkingLot lot : loadedParkingLots) {
+                int totalSpaces = (lot.getSpaces() != null) ? lot.getSpaces().length : 0;
+                System.out.println("DEBUG: Parking: " + lot.getName() + " | Espacios: " + totalSpaces);
+            }
+
+            return loadedParkingLots;
         } catch (Exception e) {
+            System.out.println("DEBUG: Error al cargar parking lots: " + e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -74,18 +85,21 @@ public class ParkingLotData {
     private void saveParkingLots() {
         try (FileWriter writer = new FileWriter(JSON_FILE_PATH)) {
             gson.toJson(parkingLots, writer);
+            System.out.println("DEBUG: Guardado de parking lots exitoso. Total: " + parkingLots.size());
         } catch (Exception e) {
-            System.out.println("Error saving parking lots JSON: " + e.getMessage());
+            System.out.println("DEBUG: Error al guardar parking lots JSON: " + e.getMessage());
         }
     }
 
     private void saveParkingLotsAsTxt() {
         try (PrintWriter writer = new PrintWriter(new File(TXT_FILE_PATH))) {
             for (ParkingLot lot : parkingLots) {
-                writer.println("ID: " + lot.getId() + " | Name: " + lot.getName() + " | Spaces: " + lot.getNumberOfSpaces());
+                int totalSpaces = (lot.getSpaces() != null) ? lot.getSpaces().length : 0;
+                writer.println("ID: " + lot.getId() + " | Name: " + lot.getName() + " | Spaces: " + totalSpaces);
             }
+            System.out.println("DEBUG: Guardado de parking lots TXT exitoso");
         } catch (IOException e) {
-            System.out.println("Error saving parking lots TXT: " + e.getMessage());
+            System.out.println("DEBUG: Error al guardar parking lots TXT: " + e.getMessage());
         }
     }
 

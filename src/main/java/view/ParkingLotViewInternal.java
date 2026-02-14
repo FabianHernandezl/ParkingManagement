@@ -17,6 +17,10 @@ public class ParkingLotViewInternal extends JInternalFrame {
     private JTextField txtId, txtName, txtNumberOfSpaces;
     private JTable table;
     private DefaultTableModel model;
+    private JTextField txtDisabled;
+    private JTextField txtMotorcycle;
+    private JTextField txtTruck;
+    private JTextField txtPreferential;
 
     private JButton btnSave, btnUpdate, btnDelete, btnClear, btnViewDetails;
 
@@ -61,6 +65,33 @@ public class ParkingLotViewInternal extends JInternalFrame {
         txtNumberOfSpaces = new JTextField();
         txtNumberOfSpaces.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
         add(txtNumberOfSpaces);
+        y += spacing;
+
+        JLabel lblPreferential = new JLabel("Espacios Preferenciales:");
+        lblPreferential.setBounds(x, y, labelWidth, 25);
+        add(lblPreferential);
+
+        txtPreferential = new JTextField();
+        txtPreferential.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
+        add(txtPreferential);
+        y += spacing;
+
+        JLabel lblMotorcycle = new JLabel("Espacios Motocicleta:");
+        lblMotorcycle.setBounds(x, y, labelWidth, 25);
+        add(lblMotorcycle);
+
+        txtMotorcycle = new JTextField();
+        txtMotorcycle.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
+        add(txtMotorcycle);
+        y += spacing;
+
+        JLabel lblTruck = new JLabel("Espacios Camión:");
+        lblTruck.setBounds(x, y, labelWidth, 25);
+        add(lblTruck);
+
+        txtTruck = new JTextField();
+        txtTruck.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
+        add(txtTruck);
         y += spacing;
 
         btnSave = createButton("Guardar Nuevo", x, y, 140, 35, new Color(46, 125, 50));
@@ -191,15 +222,24 @@ public class ParkingLotViewInternal extends JInternalFrame {
 
             String name = txtName.getText().trim();
             int totalSpaces = Integer.parseInt(txtNumberOfSpaces.getText().trim());
+            int preferential = Integer.parseInt(txtPreferential.getText().trim());
+            int motorcycle = Integer.parseInt(txtMotorcycle.getText().trim());
+            int truck = Integer.parseInt(txtTruck.getText().trim());
 
-            int disabled = totalSpaces / 10;
-            int motorcycle = totalSpaces / 5;
+            int sum = preferential + motorcycle + truck;
+
+            if (sum > totalSpaces) {
+                JOptionPane.showMessageDialog(this,
+                        "La suma de espacios no puede ser mayor al total");
+                return;
+            }
 
             parkingLotController.registerParkingLot(
                     name,
                     totalSpaces,
-                    disabled,
-                    motorcycle
+                    preferential,
+                    motorcycle,
+                    truck
             );
 
             JOptionPane.showMessageDialog(this,
@@ -221,6 +261,17 @@ public class ParkingLotViewInternal extends JInternalFrame {
         if (row == -1) {
             JOptionPane.showMessageDialog(this,
                     "Seleccione un parqueo primero");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro que desea eliminar este parqueo?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
 
