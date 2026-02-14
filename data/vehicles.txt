@@ -173,10 +173,10 @@ Clientes:
 
 VEHÍCULO #16
 ----------------------------------------
-Placa:        3224
-Marca:        dsfds
-Modelo:       dsfsd
-Color:        sdfds
+Placa:        2321
+Marca:        21321
+Modelo:       qweqw
+Color:        qweqw
 Tipo:         Automóvil
 Clientes:     
               - k (ID: 88)

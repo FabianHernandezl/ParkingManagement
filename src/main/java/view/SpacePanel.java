@@ -49,6 +49,16 @@ public class SpacePanel extends JPanel {
                 parent.setSelectedPanel(SpacePanel.this);
             }
         });
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    parent.showVehicleInfo(SpacePanel.this);
+                }
+            }
+        });
+
     }
 
     public void updateView() {

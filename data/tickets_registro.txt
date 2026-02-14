@@ -236,3 +236,59 @@ Total a pagar: ₡0,00
 ==============================
 
 
+TICKET ENTRADA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Placa: 21321
+Tipo de vehículo: Automóvil
+Espacio asignado: 32
+Hora de ingreso: 14/02/2026 10:35:34
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+TICKET SALIDA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Placa: 21321
+Tipo de vehículo: Automóvil
+Espacio asignado: 32
+Hora de ingreso: 14/02/2026 10:35:34
+Hora de salida: 14/02/2026 10:36:22
+Total a pagar: ₡5,00
+==============================
+
+
+TICKET ENTRADA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Placa: 2321
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 14/02/2026 10:48:34
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+TICKET SALIDA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Placa: 2321
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 14/02/2026 10:48:34
+Hora de salida: 14/02/2026 10:50:10
+Total a pagar: ₡5,00
+==============================
+
+

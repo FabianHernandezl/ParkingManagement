@@ -2,9 +2,9 @@
         TICKET DE PARQUEO
 ==============================
 Ticket #: 1
-Cliente: n
-Vehículo: Carro
-Placa: n
-Espacio: 5
-Monto a pagar: ₡0.0
+Cliente: 2321
+Vehículo: Automóvil
+Placa: 2321
+Espacio: 1
+Monto a pagar: ₡5.0
 ==============================
