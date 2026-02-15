@@ -1,88 +1,97 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view;
 
-import java.awt.*;
-import javax.swing.*;
 import model.entities.Ticket;
+import model.entities.Vehicle;
+import model.entities.Space;
+import model.entities.Client;
 
-import javax.swing.JDialog;
+import javax.swing.*;
+import java.awt.*;
+import java.time.format.DateTimeFormatter;
 
-/**
- *
- * @author jimen
- */
 public class VehicleInfoDialog extends JDialog {
 
     public VehicleInfoDialog(JFrame parent, Ticket ticket) {
         super(parent, "Información del Vehículo", true);
-
-        setSize(400, 450);
+        setSize(400, 400);
         setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        // ===== VEHÍCULO =====
-        JLabel lblVehicleTitle = new JLabel("🚗 Datos del Vehículo");
-        lblVehicleTitle.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        lblVehicleTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        mainPanel.add(lblVehicleTitle);
+        // ================= VEHÍCULO =================
+        mainPanel.add(new JLabel("=== Información del Vehículo ==="));
         mainPanel.add(Box.createVerticalStrut(10));
 
-        mainPanel.add(new JLabel("Placa: " + ticket.getVehicle().getPlate()));
-        mainPanel.add(new JLabel("Marca: " + ticket.getVehicle().getBrand()));
-        mainPanel.add(new JLabel("Modelo: " + ticket.getVehicle().getModel()));
-        mainPanel.add(new JLabel("Color: " + ticket.getVehicle().getColor()));
+        Vehicle vehicle = ticket.getVehicle();
+
+        if (vehicle != null) {
+            mainPanel.add(new JLabel("Placa: " + vehicle.getPlate()));
+            mainPanel.add(new JLabel("Tipo: "
+                    + (vehicle.getVehicleType() != null
+                    ? vehicle.getVehicleType().getDescription()
+                    : "N/A")));
+        } else {
+            mainPanel.add(new JLabel("Vehículo no disponible"));
+        }
+
+        mainPanel.add(Box.createVerticalStrut(15));
+
+        // ================= CLIENTE =================
+        mainPanel.add(new JLabel("=== Información del Cliente ==="));
+        mainPanel.add(Box.createVerticalStrut(10));
+
+        Client client = null;
+
+        Space space = ticket.getSpace();
+        if (space != null) {
+            client = space.getClient();
+        }
+
+        if (client != null) {
+            mainPanel.add(new JLabel("Nombre: " + client.getName()));
+            mainPanel.add(new JLabel("Cédula: " + client.getId()));
+            mainPanel.add(new JLabel("Teléfono: " + client.getPhone()));
+            mainPanel.add(new JLabel("Email: " + client.getEmail()));
+        } else {
+            mainPanel.add(new JLabel("Cliente no disponible"));
+        }
+
+        mainPanel.add(Box.createVerticalStrut(15));
+
+        // ================= TICKET =================
+        mainPanel.add(new JLabel("=== Información del Ticket ==="));
+        mainPanel.add(Box.createVerticalStrut(10));
+
+        mainPanel.add(new JLabel("Espacio: "
+                + (space != null ? space.getId() : "N/A")));
+
+        mainPanel.add(new JLabel("Entrada: "
+                + (ticket.getEntryTime() != null
+                ? ticket.getEntryTime().format(formatter)
+                : "—")));
+
+        mainPanel.add(new JLabel("Salida: "
+                + (ticket.getExitTime() != null
+                ? ticket.getExitTime().format(formatter)
+                : "Activo")));
+
+        mainPanel.add(new JLabel("Total: ₡"
+                + String.format("%.2f", ticket.getTotal())));
 
         mainPanel.add(Box.createVerticalStrut(20));
 
-        // ===== CLIENTE =====
-        JLabel lblClientTitle = new JLabel("👤 Datos del Cliente");
-        lblClientTitle.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        lblClientTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JButton closeButton = new JButton("Cerrar");
+        closeButton.addActionListener(e -> dispose());
 
-        mainPanel.add(lblClientTitle);
-        mainPanel.add(Box.createVerticalStrut(10));
-
-        if (ticket.getSpace() != null && ticket.getSpace().getClient() != null) {
-
-            mainPanel.add(new JLabel("Nombre: "
-                    + ticket.getSpace().getClient().getName()));
-
-            mainPanel.add(new JLabel("Cédula: "
-                    + ticket.getSpace().getClient().getId()));
-
-            mainPanel.add(new JLabel("Teléfono: "
-                    + ticket.getSpace().getClient().getPhone()));
-            mainPanel.add(new JLabel("Email: " + ticket.getSpace().getClient().getEmail()));
-
-        } else {
-
-            mainPanel.add(new JLabel("Cliente no disponible"));
-
-        }
-
-        // ===== TICKET =====
-        JLabel lblTicketTitle = new JLabel("🎟 Información del Ticket");
-        lblTicketTitle.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        lblTicketTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        mainPanel.add(lblTicketTitle);
-        mainPanel.add(Box.createVerticalStrut(10));
-
-        mainPanel.add(new JLabel("Hora Entrada: " + ticket.getEntryTime()));
-
-        JButton btnClose = new JButton("Cerrar");
-        btnClose.addActionListener(e -> dispose());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
 
         add(mainPanel, BorderLayout.CENTER);
-        add(btnClose, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
-
 }
