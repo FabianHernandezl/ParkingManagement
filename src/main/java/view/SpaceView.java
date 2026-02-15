@@ -2,6 +2,7 @@ package view;
 
 import Controller.ParkingLotController;
 import Controller.SpaceController;
+import Controller.TicketController;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -10,10 +11,10 @@ import javax.swing.*;
 import model.data.SpaceData;
 import model.entities.ParkingLot;
 import model.entities.Space;
-import Controller.TicketController;
 import model.entities.Ticket;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -23,6 +24,7 @@ public class SpaceView extends JInternalFrame {
     private AdminMenu parent;
     private JPanel spacesContainer;
     private SpacePanel selectedPanel;
+
     private ParkingLotController parkingLotController = new ParkingLotController();
     private SpaceController spaceController = new SpaceController();
     private SpaceData sd = new SpaceData();
@@ -30,8 +32,6 @@ public class SpaceView extends JInternalFrame {
     public SpaceView(ParkingLot parkingLot, AdminMenu parent) {
         this.parkingLot = parkingLot;
         this.parent = parent;
-
-        sd.debugPrintAllSpaces();
 
         setTitle("Espacios - " + (parkingLot != null ? parkingLot.getName() : ""));
         setClosable(true);
@@ -43,138 +43,65 @@ public class SpaceView extends JInternalFrame {
     }
 
     private void initUI() {
-        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        JLabel lblTitle = new JLabel("Parqueo: " + (parkingLot != null ? parkingLot.getName() : ""));
-        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        getContentPane().setBackground(new Color(245, 247, 250));
 
-        JButton btnRefresh = new JButton("Actualizar");
+        JPanel header = new JPanel(new BorderLayout());
+        header.setBackground(Color.WHITE);
+        header.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+
+        JLabel lblTitle = new JLabel(
+                "Gestión de Espacios - " + parkingLot.getName());
+        lblTitle.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
+        buttonPanel.setOpaque(false);
+
+        JButton btnRefresh = createModernButton(
+                "Actualizar",
+                new Color(52, 152, 219)
+        );
+
+        JButton btnChangeParking = createModernButton(
+                "Cambiar",
+                new Color(155, 89, 182)
+        );
+
+        JButton btnRegisterExit = createModernButton(
+                "Registrar Salida",
+                new Color(231, 76, 60)
+        );
+
         btnRefresh.addActionListener(e -> loadSpaces());
 
-        JButton btnChangeParking = new JButton("Cambiar Parqueo");
         btnChangeParking.addActionListener(e -> {
             parent.openInternalFrame(new SelectParkingLotView(parent));
-
-            this.dispose();
+            dispose();
         });
 
-        JButton btnRegisterExit = new JButton("Registrar Salida");
-        btnRegisterExit.addActionListener(e -> {
+        btnRegisterExit.addActionListener(e -> handleRegisterExit());
 
-            SpacePanel selected = getSelectedPanel();
+        buttonPanel.add(btnRefresh);
+        buttonPanel.add(btnChangeParking);
+        buttonPanel.add(btnRegisterExit);
 
-            if (selected == null) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Seleccione un espacio",
-                        "Aviso",
-                        JOptionPane.WARNING_MESSAGE
-                );
-                return;
-            }
+        header.add(lblTitle, BorderLayout.WEST);
+        header.add(buttonPanel, BorderLayout.EAST);
 
-            Space space = selected.getSpace();
-
-            if (!space.isSpaceTaken()) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "El espacio no está ocupado",
-                        "Aviso",
-                        JOptionPane.WARNING_MESSAGE
-                );
-                return;
-            }
-
-            // Buscar ticket activo por vehículo
-            TicketController ticketController = TicketController.getInstance();
-            Ticket ticket = ticketController
-                    .getActiveTickets()
-                    .stream()
-                    .filter(t -> t.getSpace() != null && t.getSpace().getId() == space.getId())
-                    .findFirst()
-                    .orElse(null);
-
-            if (ticket == null) {
-                JOptionPane.showMessageDialog(
-                        this,
-                        "No se encontró ticket activo para este espacio",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
-                );
-                return;
-            }
-
-            int confirm = JOptionPane.showConfirmDialog(
-                    this,
-                    "¿Registrar salida del vehículo con placa "
-                    + ticket.getVehicle().getPlate() + "?",
-                    "Confirmar salida",
-                    JOptionPane.YES_NO_OPTION
-            );
-
-            if (confirm == JOptionPane.YES_OPTION) {
-
-                double total = ticketController.registerExit(ticket);
-
-                animateExit(selectedPanel, () -> {
-
-                    spaceController.releaseSpace(space.getId());
-
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "Salida registrada correctamente\n\n"
-                            + "Total a pagar: ₡" + total,
-                            "Salida exitosa",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
-
-                    loadSpaces();
-                });
-
-            }
-        });
-
-        styleButton(btnRefresh, new Color(52, 152, 219));       // Azul
-        styleButton(btnChangeParking, new Color(155, 89, 182)); // Morado
-        styleButton(btnRegisterExit, new Color(231, 76, 60));   // Rojo elegante
-
-        topPanel.add(lblTitle);
-        topPanel.add(btnRefresh);
-        topPanel.add(btnChangeParking);
-        topPanel.add(btnRegisterExit);
-
-        spacesContainer = new JPanel();
-        spacesContainer.setLayout(new GridLayout(0, 5, 15, 15));
-        spacesContainer.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        spacesContainer = new JPanel(new GridLayout(0, 6, 12, 12));
+        spacesContainer.setBackground(new Color(245, 247, 250));
+        spacesContainer.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
         JScrollPane scrollPane = new JScrollPane(spacesContainer);
+        scrollPane.setBorder(null);
+        scrollPane.getViewport().setBackground(new Color(245, 247, 250));
 
-        add(topPanel, BorderLayout.NORTH);
+        add(header, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void styleButton(JButton button, Color bgColor) {
-
-        button.setFocusPainted(false);
-        button.setBackground(bgColor);
-        button.setForeground(Color.WHITE);
-        button.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        button.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
-
-        // Hover effect
-        button.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent evt) {
-                button.setBackground(bgColor.darker());
-            }
-
-            public void mouseExited(MouseEvent evt) {
-                button.setBackground(bgColor);
-            }
-        });
-    }
-
     private void loadSpaces() {
+
         spacesContainer.removeAll();
 
         if (parkingLot == null) {
@@ -183,17 +110,58 @@ public class SpaceView extends JInternalFrame {
 
         Space[] spaces = spaceController.getSpacesByParkingLot(parkingLot.getId());
 
-        System.out.println("DEBUG: Cargando espacios para parqueo: " + parkingLot.getName());
-        System.out.println("DEBUG: Espacios totales en el arreglo: " + spaces.length);
-
-        for (int i = 0; i < spaces.length; i++) {
-            Space space = spaces[i];
+        for (Space space : spaces) {
             if (space == null) {
-                System.out.println("DEBUG: Espacio en posición " + i + " es null");
                 continue;
             }
-            System.out.println("DEBUG: Espacio #" + space.getId() + " | Ocupado: " + space.isSpaceTaken());
+
             SpacePanel panel = new SpacePanel(space, this);
+
+            panel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                    setSelectedPanel(panel);
+
+                    if (e.getClickCount() == 2) {
+
+                        Space sp = panel.getSpace();
+
+                        if (!sp.isSpaceTaken()) {
+                            JOptionPane.showMessageDialog(
+                                    SpaceView.this,
+                                    "Este espacio está libre",
+                                    "Información",
+                                    JOptionPane.INFORMATION_MESSAGE
+                            );
+                            return;
+                        }
+
+                        TicketController ticketController = TicketController.getInstance();
+
+                        Ticket ticket = ticketController
+                                .getActiveTickets()
+                                .stream()
+                                .filter(t -> t.getSpace() != null
+                                && t.getSpace().getId() == sp.getId())
+                                .findFirst()
+                                .orElse(null);
+
+                        if (ticket == null) {
+                            JOptionPane.showMessageDialog(
+                                    SpaceView.this,
+                                    "No se encontró ticket activo",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                            return;
+                        }
+
+                        new VehicleInfoDialog(parent, ticket).setVisible(true);
+                    }
+                }
+            });
+
             spacesContainer.add(panel);
         }
 
@@ -215,20 +183,6 @@ public class SpaceView extends JInternalFrame {
         return selectedPanel;
     }
 
-    public void markSpaceOccupied(int spaceId) {
-        String success = spaceController.occupySpace(
-                selectedPanel.getSpace().getClient(),
-                selectedPanel.getSpace().getVehicle()
-        );
-        if (!success.equals("OK: Espacio asignado")) {
-            JOptionPane.showMessageDialog(this,
-                    success,
-                    "Aviso",
-                    JOptionPane.WARNING_MESSAGE);
-        }
-        loadSpaces();
-    }
-
     private void animateExit(SpacePanel panel, Runnable onFinish) {
 
         Timer timer = new Timer(150, null);
@@ -237,14 +191,14 @@ public class SpaceView extends JInternalFrame {
         timer.addActionListener(e -> {
 
             if (count[0] % 2 == 0) {
-                panel.setBackground(new Color(46, 204, 113)); // Verde
+                panel.setBackground(new Color(46, 204, 113));
             } else {
-                panel.setBackground(Color.WHITE);
+                panel.updateView();
             }
 
             count[0]++;
 
-            if (count[0] == 6) { // 3 parpadeos
+            if (count[0] == 6) {
                 timer.stop();
                 onFinish.run();
             }
@@ -253,16 +207,26 @@ public class SpaceView extends JInternalFrame {
         timer.start();
     }
 
-    public void showVehicleInfo(SpacePanel panel) {
+    private void handleRegisterExit() {
 
-        Space space = panel.getSpace();
+        if (selectedPanel == null) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Debe seleccionar un espacio ocupado",
+                    "Aviso",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        Space space = selectedPanel.getSpace();
 
         if (!space.isSpaceTaken()) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Este espacio está libre",
-                    "Información",
-                    JOptionPane.INFORMATION_MESSAGE
+                    "El espacio seleccionado está libre",
+                    "Aviso",
+                    JOptionPane.WARNING_MESSAGE
             );
             return;
         }
@@ -272,7 +236,8 @@ public class SpaceView extends JInternalFrame {
         Ticket ticket = ticketController
                 .getActiveTickets()
                 .stream()
-                .filter(t -> t.getSpace() != null && t.getSpace().getId() == space.getId())
+                .filter(t -> t.getSpace() != null
+                && t.getSpace().getId() == space.getId())
                 .findFirst()
                 .orElse(null);
 
@@ -287,6 +252,75 @@ public class SpaceView extends JInternalFrame {
         }
 
         new VehicleInfoDialog(parent, ticket).setVisible(true);
+
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro que desea registrar la salida del vehículo?",
+                "Confirmar salida",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        animateExit(selectedPanel, () -> {
+
+            boolean released = spaceController.releaseSpace(space.getId());
+
+            if (!released) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Error al liberar el espacio",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            // 🔥 Actualizamos solo el modelo local
+            space.setSpaceTaken(false);
+            space.setVehicle(null);
+
+            // 🔥 Actualizamos solo el panel
+            selectedPanel.updateView();
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Salida registrada correctamente",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        });
     }
 
+    private JButton createModernButton(String text, Color color) {
+
+        JButton button = new JButton(text);
+
+        button.setFocusPainted(false);
+        button.setBackground(color);
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        button.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(color.darker(), 1),
+                BorderFactory.createEmptyBorder(6, 14, 6, 14)
+        ));
+
+        button.setPreferredSize(new Dimension(150, 35));
+
+        button.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(color.darker());
+            }
+
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(color);
+            }
+        });
+
+        return button;
+    }
 }

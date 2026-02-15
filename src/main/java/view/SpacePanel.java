@@ -1,97 +1,142 @@
 package view;
 
 import model.entities.Space;
+import model.entities.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import model.entities.Vehicle;
+import java.awt.geom.RoundRectangle2D;
 
 public class SpacePanel extends JPanel {
 
     private Space space;
     private boolean selected = false;
     private SpaceView parent;
+
     private JLabel lblTitle;
     private JLabel lblStatus;
     private JLabel lblVehicleIcon;
+
+    private boolean hover = false;
 
     public SpacePanel(Space space, SpaceView parent) {
         this.space = space;
         this.parent = parent;
 
-        setPreferredSize(new Dimension(140, 90));
-        setLayout(new BorderLayout());
-        setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
+        setPreferredSize(new Dimension(150, 100));
+        setLayout(new BorderLayout(5, 5));
+        setOpaque(false); // 🔥 IMPORTANTE para bordes redondeados
         setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         lblTitle = new JLabel("Espacio " + space.getId(), SwingConstants.CENTER);
         lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        lblTitle.setForeground(Color.WHITE);
 
         lblStatus = new JLabel("", SwingConstants.CENTER);
         lblStatus.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-
-        add(lblTitle, BorderLayout.CENTER);
-        add(lblStatus, BorderLayout.SOUTH);
+        lblStatus.setForeground(Color.WHITE);
 
         lblVehicleIcon = new JLabel("", SwingConstants.CENTER);
-        lblVehicleIcon.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 28));
+        lblVehicleIcon.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 30));
         lblVehicleIcon.setVisible(false);
 
         add(lblVehicleIcon, BorderLayout.NORTH);
+        add(lblTitle, BorderLayout.CENTER);
+        add(lblStatus, BorderLayout.SOUTH);
 
         updateView();
 
+        // Click
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 parent.setSelectedPanel(SpacePanel.this);
             }
-        });
 
-        addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (evt.getClickCount() == 2) {
-                    parent.showVehicleInfo(SpacePanel.this);
-                }
+            public void mouseEntered(MouseEvent e) {
+                hover = true;
+                repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                hover = false;
+                repaint();
             }
         });
+    }
 
+    // 🎨 DIBUJO PERSONALIZADO (Tarjeta con curvas y sombra)
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+        int arc = 25;
+
+        // 🔥 Sombra
+        g2.setColor(new Color(0, 0, 0, 40));
+        g2.fillRoundRect(6, 6, getWidth() - 12, getHeight() - 12, arc, arc);
+
+        // 🔥 Color principal
+        g2.setColor(getBackground());
+        g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, arc, arc);
+
+        // 🔥 Hover efecto
+        if (hover) {
+            g2.setColor(new Color(255, 255, 255, 40));
+            g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, arc, arc);
+        }
+
+        // 🔥 Selección borde elegante
+        if (selected) {
+            g2.setStroke(new BasicStroke(3));
+            g2.setColor(new Color(255, 215, 0));
+            g2.drawRoundRect(1, 1, getWidth() - 8, getHeight() - 8, arc, arc);
+        }
+
+        g2.dispose();
+
+        super.paintComponent(g);
     }
 
     public void updateView() {
 
-        String statusText = "";
-        Color bgColor = Color.LIGHT_GRAY;
+        String statusText;
+        Color bgColor;
 
         String vehicleTypeDesc = (space.getVehicleType() != null)
                 ? space.getVehicleType().getDescription()
                 : "Tipo desconocido";
 
         if (space.isSpaceTaken() && space.getVehicle() != null) {
-            bgColor = new Color(244, 67, 54); // rojo
+            bgColor = new Color(244, 67, 54);
             statusText = "Ocupado";
             lblVehicleIcon.setText(space.getVehicle().getIcon());
             lblVehicleIcon.setVisible(true);
             animateVehicleIn();
         } else if (space.isDisabilityAdaptation()) {
-            bgColor = new Color(3, 169, 244); // azul
+            bgColor = new Color(3, 169, 244);
             statusText = "♿ Preferencial";
             lblVehicleIcon.setVisible(false);
         } else {
-            bgColor = new Color(76, 175, 80); // verde
+            bgColor = new Color(76, 175, 80);
             statusText = "Disponible";
             lblVehicleIcon.setVisible(false);
             animateVehicleOut();
         }
 
         setBackground(bgColor);
+
         lblStatus.setText("<html>" + vehicleTypeDesc + "<br>" + statusText + "</html>");
 
-        setOpaque(true);
         updateTooltip();
+        repaint();
     }
 
     public void updateTooltip() {
@@ -123,41 +168,11 @@ public class SpacePanel extends JPanel {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
-        setBorder(
-                selected
-                        ? BorderFactory.createLineBorder(Color.YELLOW, 4)
-                        : BorderFactory.createLineBorder(Color.DARK_GRAY, 2)
-        );
+        repaint();
     }
 
     public Space getSpace() {
         return space;
-    }
-
-    public void animateChange(Color targetColor) {
-        Color start = getBackground();
-
-        Timer timer = new Timer(15, null);
-        final int[] step = {0};
-        final int maxSteps = 20;
-
-        timer.addActionListener(e -> {
-            float ratio = step[0] / (float) maxSteps;
-
-            int r = (int) (start.getRed() + ratio * (targetColor.getRed() - start.getRed()));
-            int g = (int) (start.getGreen() + ratio * (targetColor.getGreen() - start.getGreen()));
-            int b = (int) (start.getBlue() + ratio * (targetColor.getBlue() - start.getBlue()));
-
-            setBackground(new Color(r, g, b));
-            repaint();
-
-            step[0]++;
-            if (step[0] > maxSteps) {
-                timer.stop();
-            }
-        });
-
-        timer.start();
     }
 
     void animateVehicleIn() {
@@ -207,5 +222,4 @@ public class SpacePanel extends JPanel {
     public void setVehicleIcon(Vehicle vehicle) {
         lblVehicleIcon.setText(vehicle.getIcon());
     }
-
 }

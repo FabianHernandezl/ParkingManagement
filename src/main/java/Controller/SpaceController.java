@@ -99,39 +99,55 @@ public class SpaceController {
 
     // ================= BUSCAR ESPACIO DISPONIBLE =================
     private Space findAvailableSpace(Client client, Vehicle vehicle) {
+
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
-        String vehicleType = vehicle.getVehicleType().getDescription().toLowerCase();
+
+        String vehicleType = vehicle.getVehicleType()
+                .getDescription()
+                .toLowerCase()
+                .trim();
 
         for (ParkingLot lot : parkingLots) {
+
             if (lot.getSpaces() == null) {
                 continue;
             }
 
             for (Space s : lot.getSpaces()) {
-                if (s == null || s.isSpaceTaken() || s.getVehicleType() == null) {
+
+                if (s == null || s.isSpaceTaken()) {
                     continue;
                 }
 
-                String spaceType = s.getVehicleType().getDescription().toLowerCase();
+                // ================= CLIENTE PREFERENCIAL =================
+                if (client.isIsPreferential()) {
 
-                // ESPACIOS PARA DISCAPACIDAD
-                if (s.isDisabilityAdaptation()) {
-                    if (client.isIsPreferential()) {
-                        // Solo clientes preferenciales pueden usar este espacio
+                    // Si el espacio es preferencial y está libre → lo toma sin validar tipo
+                    if (s.isDisabilityAdaptation()) {
                         return s;
-                    } else {
-                        continue; // ignorar este espacio para clientes normales
                     }
+
+                    // Si no es preferencial, sigue buscando
+                    continue;
                 }
 
-                // ESPACIOS PARA MOTOCICLETA
-                if (spaceType.contains("motocicleta") && vehicleType.contains("motocicleta")) {
-                    return s;
+                // ================= CLIENTE NORMAL =================
+                // No puede usar espacios preferenciales
+                if (s.isDisabilityAdaptation()) {
+                    continue;
                 }
 
-                // ESPACIOS NORMALES PARA CARROS Y CAMIONES
-                if (!spaceType.contains("motocicleta") && !vehicleType.contains("motocicleta")) {
+                if (s.getVehicleType() == null) {
+                    continue;
+                }
 
+                String spaceType = s.getVehicleType()
+                        .getDescription()
+                        .toLowerCase()
+                        .trim();
+
+                // Validación estricta por tipo
+                if (spaceType.equals(vehicleType)) {
                     return s;
                 }
             }

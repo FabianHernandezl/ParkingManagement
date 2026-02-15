@@ -317,10 +317,10 @@
     }
   },
   {
-    "plate": "2321",
-    "color": "qweqw",
-    "brand": "21321",
-    "model": "qweqw",
+    "plate": "dkfhsjh",
+    "color": "dfsg",
+    "brand": "sdfg",
+    "model": "sdfgd",
     "clients": [
       {
         "id": "88",
@@ -331,10 +331,10 @@
       }
     ],
     "vehicleType": {
-      "id": 1,
-      "description": "Automóvil",
-      "numberOfTires": 4,
-      "fee": 5.0
+      "id": 2,
+      "description": "Motocicleta",
+      "numberOfTires": 2,
+      "fee": 2.5
     }
   }
 ]
