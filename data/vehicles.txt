@@ -173,11 +173,11 @@ Clientes:
 
 VEHÍCULO #16
 ----------------------------------------
-Placa:        2321
-Marca:        21321
-Modelo:       qweqw
-Color:        qweqw
-Tipo:         Automóvil
+Placa:        dkfhsjh
+Marca:        sdfg
+Modelo:       sdfgd
+Color:        dfsg
+Tipo:         Motocicleta
 Clientes:     
               - k (ID: 88)
 ----------------------------------------

@@ -76,35 +76,14 @@
       {
         "id": 1,
         "disabilityAdaptation": true,
-        "spaceTaken": true,
+        "spaceTaken": false,
         "vehicleType": {
           "id": 3,
           "description": "Camión",
           "numberOfTires": 4,
           "fee": 6.5
         },
-        "available": false,
-        "vehicle": {
-          "plate": "rerwe",
-          "color": "ewrw",
-          "brand": "ewrwe",
-          "model": "ewrwe",
-          "clients": [
-            {
-              "id": "6773",
-              "name": "Rosita",
-              "phone": "8989902",
-              "isPreferential": false,
-              "email": "ljsadjkjads"
-            }
-          ],
-          "vehicleType": {
-            "id": 0,
-            "description": "Carro",
-            "numberOfTires": 0,
-            "fee": 0.0
-          }
-        }
+        "available": false
       },
       {
         "id": 2,
@@ -367,10 +346,10 @@
         "disabilityAdaptation": false,
         "spaceTaken": false,
         "vehicleType": {
-          "id": 1,
-          "description": "Automóvil",
-          "numberOfTires": 4,
-          "fee": 5.0
+          "id": 2,
+          "description": "Motocicleta",
+          "numberOfTires": 2,
+          "fee": 2.5
         },
         "available": false
       },
@@ -946,14 +925,35 @@
       {
         "id": 32,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "34543",
+          "color": "43543",
+          "brand": "34535",
+          "model": "34543",
+          "clients": [
+            {
+              "id": "88",
+              "name": "k",
+              "phone": "l",
+              "isPreferential": false,
+              "email": "l"
+            }
+          ],
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        }
       },
       {
         "id": 33,
@@ -2088,14 +2088,35 @@
       {
         "id": 1,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "4565",
+          "color": "fgdhdgf",
+          "brand": "rtryet",
+          "model": "gfhgfd",
+          "clients": [
+            {
+              "id": "88",
+              "name": "k",
+              "phone": "l",
+              "isPreferential": false,
+              "email": "l"
+            }
+          ],
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        }
       },
       {
         "id": 2,

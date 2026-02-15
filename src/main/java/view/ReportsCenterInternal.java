@@ -7,6 +7,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Desktop;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +19,7 @@ public class ReportsCenterInternal extends JInternalFrame {
     private DefaultTableModel tableModel;
 
     private JComboBox<String> reportTypeFilter;
-    private JComboBox<String> dynamicFilter; // Filtro dinámico según el reporte
+    private JComboBox<String> dynamicFilter;
 
     private ParkingLotReportController controller;
     private List<ParkingLotReportRow> allRows;
@@ -36,7 +39,6 @@ public class ReportsCenterInternal extends JInternalFrame {
         JLabel titleLabel = new JLabel("Reportes del Parqueo");
         titleLabel.setFont(UITheme.TITLE_FONT);
 
-        // ===== FILTROS =====
         reportTypeFilter = new JComboBox<>();
         reportTypeFilter.addItem("Ocupación por Parqueo");
         reportTypeFilter.addItem("Tarifas");
@@ -55,18 +57,21 @@ public class ReportsCenterInternal extends JInternalFrame {
         leftPanel.add(new JLabel("Filtro:"));
         leftPanel.add(dynamicFilter);
 
-        // ===== BOTONES =====
         JButton refreshBtn = new JButton("Refrescar");
         UITheme.styleButton(refreshBtn, UITheme.SECONDARY);
         refreshBtn.addActionListener(e -> loadTableData());
 
         JButton generatePdfBtn = new JButton("Generar PDF");
         UITheme.styleButton(generatePdfBtn, UITheme.PRIMARY);
+
         generatePdfBtn.addActionListener(e -> {
+
             String selectedReport = reportTypeFilter.getSelectedItem().toString();
+
             switch (selectedReport) {
                 case "Ocupación por Parqueo" ->
                     controller.generateOccupationReportForAll();
+
                 case "Tarifas", "Vehículos Estacionados" -> {
                     JOptionPane.showMessageDialog(this,
                             "Reporte no disponible por el momento",
@@ -75,7 +80,25 @@ public class ReportsCenterInternal extends JInternalFrame {
                     return;
                 }
             }
+
             JOptionPane.showMessageDialog(this, "Reporte PDF generado correctamente");
+
+            // ================= ABRIR CARPETA AUTOMÁTICAMENTE =================
+            try {
+                File reportsFolder = new File("reports");
+
+                if (!reportsFolder.exists()) {
+                    reportsFolder.mkdirs(); // crea la carpeta si no existe
+                }
+
+                Desktop.getDesktop().open(reportsFolder);
+
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this,
+                        "No se pudo abrir la carpeta automáticamente",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
@@ -102,7 +125,6 @@ public class ReportsCenterInternal extends JInternalFrame {
 
         JScrollPane scrollPane = new JScrollPane(table);
 
-        // ================== ADD ==================
         add(topPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -113,7 +135,7 @@ public class ReportsCenterInternal extends JInternalFrame {
     // ================== CARGAR DATOS ==================
     private void loadTableData() {
         tableModel.setRowCount(0);
-        allRows = controller.getOccupationReportRows(); // Traemos todos los datos
+        allRows = controller.getOccupationReportRows();
 
         for (ParkingLotReportRow row : allRows) {
             tableModel.addRow(new Object[]{
@@ -140,10 +162,8 @@ public class ReportsCenterInternal extends JInternalFrame {
                         .distinct()
                         .forEach(dynamicFilter::addItem);
 
-            case "Tarifas", "Vehículos Estacionados" -> {
-                // Mostrar un mensaje opcional en el combo
+            case "Tarifas", "Vehículos Estacionados" ->
                 dynamicFilter.addItem("No disponible");
-            }
         }
 
         applyFilter();
@@ -160,7 +180,6 @@ public class ReportsCenterInternal extends JInternalFrame {
 
         String selectedReport = reportTypeFilter.getSelectedItem().toString();
 
-        // Reportes no implementados
         if (selectedReport.equals("Tarifas") || selectedReport.equals("Vehículos Estacionados")) {
             JOptionPane.showMessageDialog(this,
                     "Reporte no disponible por el momento",
@@ -169,7 +188,6 @@ public class ReportsCenterInternal extends JInternalFrame {
             return;
         }
 
-        // Filtro solo para Ocupación por Parqueo
         List<ParkingLotReportRow> filtered = selected.equals("Todos") ? allRows
                 : allRows.stream()
                         .filter(r -> r.getParkingLotName().equals(selected))
@@ -202,8 +220,8 @@ public class ReportsCenterInternal extends JInternalFrame {
                     return c;
                 }
 
-                String estado = table.getValueAt(row, 2).toString(); // Estado
-                String tipo = table.getValueAt(row, 3).toString();   // Tipo vehículo
+                String estado = table.getValueAt(row, 2).toString();
+                String tipo = table.getValueAt(row, 3).toString();
 
                 if (estado.equalsIgnoreCase("Ocupado")) {
                     c.setBackground(new Color(255, 230, 230));

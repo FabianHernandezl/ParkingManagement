@@ -507,7 +507,7 @@ public class VehicleViewInternal extends JInternalFrame {
                 t = new VehicleType(2, "Motocicleta", 2, 2.5f);
                 break;
             case "Camión":
-                t = new VehicleType(1, "Automóvil", 4, 5.0f); // si los camiones usan espacio normal
+                t = new VehicleType(3, "Camión", 4, 5.0f); // si los camiones usan espacio normal
                 break;
             default:
                 t = new VehicleType(1, "Automóvil", 4, 5.0f);
