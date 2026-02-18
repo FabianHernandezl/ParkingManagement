@@ -1,3 +1,4 @@
+
 package view;
 
 import Controller.ParkingLotController;
@@ -9,6 +10,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
+
 
 public class ParkingLotViewInternal extends JInternalFrame {
 
@@ -154,10 +156,16 @@ public class ParkingLotViewInternal extends JInternalFrame {
                 return c;
             }
         });
-
+        panel.add(btnSave);
+        panel.add(btnDelete);
+        panel.add(btnUpdate);
+        panel.add(btnClear);
+        panel.add(btnViewDetails);
+        
         btnSave.addActionListener(e -> saveParkingLot());
         btnDelete.addActionListener(e -> deleteParkingLot());
-
+        btnUpdate.addActionListener(e -> updateParkingLot());   
+        btnViewDetails.addActionListener(e -> viewDetails());
         btnClear.addActionListener(e -> {
             clearForm();
             generateNextId();
@@ -172,13 +180,6 @@ public class ParkingLotViewInternal extends JInternalFrame {
         sp.setBounds(360, 20, 530, 520);
         sp.setBorder(UITheme.panelBorder());
         add(sp);
-
-        btnViewDetails.addActionListener(e -> viewDetails());
-        panel.add(btnSave);
-        panel.add(btnDelete);
-        panel.add(btnUpdate);
-        panel.add(btnClear);
-        panel.add(btnViewDetails);
 
     }
 
@@ -270,6 +271,60 @@ public class ParkingLotViewInternal extends JInternalFrame {
         }
     }
 
+    /**
+     * Actualiza un parqueo existente
+     */
+    private void updateParkingLot() {
+        int row = table.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Seleccione un parqueo primero");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro que desea actualizar este parqueo?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int id = Integer.parseInt(model.getValueAt(row, 0).toString());
+        String newName = txtName.getText();
+        int newNumberOfSpaces = Integer.parseInt(txtNumberOfSpaces.getText());
+            // Verificar que el parqueo existe
+            ParkingLot existingParkingLot = parkingLotController.findParkingLotById(id);
+            if (existingParkingLot == null) {
+                JOptionPane.showMessageDialog(this,
+                        "No existe un parqueo con el ID: " + id,
+                        "Parqueo No Encontrado",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Validar campos requeridos
+            if (!validateRequiredFields()) {
+                return;
+            }
+
+        ParkingLot updateParkingLot = new ParkingLot();
+            updateParkingLot.setId(id);
+            updateParkingLot.setName(newName);
+            updateParkingLot.setNumberOfSpaces(newNumberOfSpaces);
+            updateParkingLot.setVehicles(existingParkingLot.getVehicles());
+        
+            String message = parkingLotController.updateParkingLot(id, updateParkingLot);   
+            JOptionPane.showMessageDialog(this, message);
+           
+            loadTable();
+            clearForm();
+            generateNextId();   
+    }
+
     private void deleteParkingLot() {
 
         int row = table.getSelectedRow();
@@ -348,12 +403,53 @@ public class ParkingLotViewInternal extends JInternalFrame {
         );
     }
 
+    /**
+     * Valida los campos del formulario
+     */
+    private boolean validateRequiredFields() {
+        StringBuilder errors = new StringBuilder();
+
+        String name = txtName.getText().trim();
+        if (name.isEmpty()) {
+            errors.append("• Nombre del parqueo es obligatorio\n");
+        } else if (name.length() < 3) {
+            errors.append("• Nombre debe tener al menos 3 caracteres\n");
+        }
+
+        String spacesText = txtNumberOfSpaces.getText().trim();
+        if (spacesText.isEmpty()) {
+            errors.append("• Número de espacios es obligatorio\n");
+        } else {
+            try {
+                int spaces = Integer.parseInt(spacesText);
+                if (spaces <= 0) {
+                    errors.append("• Número de espacios debe ser mayor a 0\n");
+                } else if (spaces > 1000) {
+                    errors.append("• Número de espacios no puede exceder 1000\n");
+                }
+            } catch (NumberFormatException e) {
+                errors.append("• Número de espacios debe ser un número válido\n");
+            }
+        }
+
+        if (errors.length() > 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor corrija los siguientes errores:\n\n" + errors.toString(),
+                    "Validación Fallida",
+                    JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
+
     private void clearForm() {
         txtName.setText("");
         txtNumberOfSpaces.setText("");
         txtId.setText("");
         table.clearSelection();
         btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
         btnViewDetails.setEnabled(false);
     }
 
@@ -362,6 +458,7 @@ public class ParkingLotViewInternal extends JInternalFrame {
         txtId.setText(model.getValueAt(row, 0).toString());
         txtName.setText(model.getValueAt(row, 1).toString());
         txtNumberOfSpaces.setText(model.getValueAt(row, 2).toString());
+        btnUpdate.setEnabled(true);
         btnDelete.setEnabled(true);
         btnViewDetails.setEnabled(true);
     }

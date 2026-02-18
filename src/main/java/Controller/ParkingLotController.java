@@ -125,6 +125,10 @@ public class ParkingLotController {
     public ParkingLot findParkingLotById(int id) {
         return parkingLotData.findParkingLotById(id);
     }
+    
+    public ParkingLot findParkingLotByName(String name) {
+        return parkingLotData.findParkingLotByName(name);
+    }
 
     public ArrayList<ParkingLot> getAllParkingLots() {
         return parkingLotData.getAllParkingLots();

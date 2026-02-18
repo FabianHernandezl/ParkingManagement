@@ -2158,7 +2158,7 @@
   {
     "id": 8,
     "name": "Park",
-    "numberOfSpaces": 10,
+    "numberOfSpaces": 1,
     "spaces": [
       {
         "id": 1,

@@ -9,14 +9,26 @@ import model.entities.Clerk;
 import model.entities.User;
 import model.entities.UserOperations;
 import model.data.ClerkData;
+
 /**
  *
  * @author FAMILIA
  */
 public class ClerkController implements UserOperations {
-    
+
     ClerkData clerkData = new ClerkData();
 
+    public Clerk addClerk(Clerk clerk) {
+        return clerkData.addClerk(clerk);
+    }
+    
+     public boolean updateClerk(Clerk updatedClerk) {
+        return clerkData.updateClerk(updatedClerk);
+    }
+     
+    public boolean removeClerk(String id) {
+      return clerkData.removeClerk(id);
+    }
     @Override
     public User searchUser(String identification) {
 
@@ -37,15 +49,28 @@ public class ClerkController implements UserOperations {
         ArrayList<Clerk> clerks = clerkData.getAllClerks();//lista de operadores
         Clerk clerkToReturn = null;
         for (Clerk clerk : clerks) {
-            if (clerk.getUsername().equalsIgnoreCase(user.getUsername()) 
-                    && clerk.getPassword().equals(user.getPassword()) ) {
+            if (clerk.getUsername().equalsIgnoreCase(user.getUsername())
+                    && clerk.getPassword().equals(user.getPassword())) {
                 clerkToReturn = clerk; //herencia 
             }
         }
         return clerkToReturn;
     }
 
+     public ArrayList<Clerk> getAllClerks() {
+        return clerkData.getAllClerks();
+    }
+    public int findLastIdNumberOfClerk() {
+        return clerkData.findLastIdNumberOfClerk();
+    }
 
+    public int findLastEmployeeCode() {
+        return clerkData.findLastEmployeeCode();
+    }
+
+    public Clerk findClerkById(String id) { 
+      return clerkData.findClerkById(id);
+    }
     public ArrayList<User> sortUsers(Clerk[] allUsers) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -54,10 +79,10 @@ public class ClerkController implements UserOperations {
     public ArrayList<User> sortUsers(String identification, User[] allUsers) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     //for login
     public Clerk findClerkByUsername(String username) {
-       return clerkData.findClerkByUsername(username);
+        return clerkData.findClerkByUsername(username);
     }
-    
+
 }

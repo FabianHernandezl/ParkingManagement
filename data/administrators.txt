@@ -59,7 +59,9 @@ ID:            ADM1005
 Nombre:        Camila Mariana
 Usuario:       admin_camila
 Número Admin:  1005
-Parqueos:      No tiene parqueos asignados
+Parqueos:      
+                - Parking
+                - Luna Parking
 ----------------------------------------
 
 ========================================
