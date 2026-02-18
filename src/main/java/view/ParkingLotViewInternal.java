@@ -26,8 +26,9 @@ public class ParkingLotViewInternal extends JInternalFrame {
 
     public ParkingLotViewInternal() {
         super("Gestión de Parqueos", true, true, true, true);
-        setSize(800, 600);
+        setSize(920, 640);
         setLayout(null);
+        getContentPane().setBackground(UITheme.BACKGROUND);
         setVisible(true);
 
         initComponents();
@@ -37,61 +38,68 @@ public class ParkingLotViewInternal extends JInternalFrame {
 
     private void initComponents() {
 
-        int x = 30, y = 20, labelWidth = 150, fieldWidth = 200, spacing = 35;
+        int x = 30, y = 20, labelWidth = 150, fieldWidth = 120, spacing = 35;
+
+        //this is for better design and uniformity in the view
+        JPanel panel = new JPanel(null);
+        panel.setBounds(x, 20, 320, 580);
+        panel.setBackground(UITheme.PANEL_BG);
+        panel.setBorder(UITheme.panelBorder());
+        add(panel);
 
         JLabel lblId = new JLabel("ID Parqueo:");
         lblId.setBounds(x, y, labelWidth, 25);
-        add(lblId);
+        panel.add(lblId);
 
         txtId = new JTextField();
         txtId.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
         txtId.setEditable(false);
-        add(txtId);
+        panel.add(txtId);
         y += spacing;
 
         JLabel lblName = new JLabel("Nombre del Parqueo:");
         lblName.setBounds(x, y, labelWidth, 25);
-        add(lblName);
+        panel.add(lblName);
 
         txtName = new JTextField();
         txtName.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtName);
+        panel.add(txtName);
         y += spacing;
 
         JLabel lblNumber = new JLabel("Número de Espacios:");
         lblNumber.setBounds(x, y, labelWidth, 25);
-        add(lblNumber);
+        panel.add(lblNumber);
 
         txtNumberOfSpaces = new JTextField();
         txtNumberOfSpaces.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtNumberOfSpaces);
+        panel.add(txtNumberOfSpaces);
         y += spacing;
 
         JLabel lblPreferential = new JLabel("Espacios Preferenciales:");
         lblPreferential.setBounds(x, y, labelWidth, 25);
-        add(lblPreferential);
+        panel.add(lblPreferential);
 
         txtPreferential = new JTextField();
         txtPreferential.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtPreferential);
+        panel.add(txtPreferential);
         y += spacing;
 
         JLabel lblMotorcycle = new JLabel("Espacios Motocicleta:");
         lblMotorcycle.setBounds(x, y, labelWidth, 25);
-        add(lblMotorcycle);
+        panel.add(lblMotorcycle);
 
         txtMotorcycle = new JTextField();
         txtMotorcycle.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtMotorcycle);
+        panel.add(txtMotorcycle);
         y += spacing;
 
         JLabel lblTruck = new JLabel("Espacios Camión:");
         lblTruck.setBounds(x, y, labelWidth, 25);
-        add(lblTruck);
+        panel.add(lblTruck);
 
         txtTruck = new JTextField();
         txtTruck.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtTruck);
+        panel.add(txtTruck);
         y += spacing;
 
         btnSave = createButton("Guardar Nuevo", x, y, 140, 35, new Color(46, 125, 50));
@@ -116,6 +124,7 @@ public class ParkingLotViewInternal extends JInternalFrame {
         };
 
         table = new JTable(model);
+        UITheme.styleTable(table);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
@@ -146,10 +155,6 @@ public class ParkingLotViewInternal extends JInternalFrame {
             }
         });
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(400, 20, 370, 500);
-        add(scrollPane);
-
         btnSave.addActionListener(e -> saveParkingLot());
         btnDelete.addActionListener(e -> deleteParkingLot());
 
@@ -163,8 +168,18 @@ public class ParkingLotViewInternal extends JInternalFrame {
                 fillFormFromTable();
             }
         });
+        JScrollPane sp = new JScrollPane(table);
+        sp.setBounds(360, 20, 530, 520);
+        sp.setBorder(UITheme.panelBorder());
+        add(sp);
 
         btnViewDetails.addActionListener(e -> viewDetails());
+        panel.add(btnSave);
+        panel.add(btnDelete);
+        panel.add(btnUpdate);
+        panel.add(btnClear);
+        panel.add(btnViewDetails);
+
     }
 
     private JButton createButton(String text, int x, int y, int w, int h, Color color) {
@@ -316,10 +331,21 @@ public class ParkingLotViewInternal extends JInternalFrame {
             }
         }
 
-        JOptionPane.showMessageDialog(this,
-                details.toString(),
+        //this is for scroll
+        JTextArea textArea = new JTextArea(details.toString());
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(350, 250));
+
+        JOptionPane.showMessageDialog(
+                this,
+                scrollPane,
                 "Detalles del Parqueo",
-                JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.INFORMATION_MESSAGE
+        );
     }
 
     private void clearForm() {

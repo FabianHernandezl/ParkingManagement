@@ -334,3 +334,59 @@ Total a pagar: ₡0,00
 ==============================
 
 
+TICKET ENTRADA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Placa: WER-456
+Tipo de vehículo: Motocicleta
+Espacio asignado: 2
+Hora de ingreso: 17/02/2026 16:55:40
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+TICKET ENTRADA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Placa: a
+Tipo de vehículo: Automóvil
+Espacio asignado: 3
+Hora de ingreso: 17/02/2026 16:59:36
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+TICKET ENTRADA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Placa: ABC-031
+Tipo de vehículo: Automóvil
+Espacio asignado: 7
+Hora de ingreso: 17/02/2026 17:08:18
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+TICKET ENTRADA
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 4
+Placa: d
+Tipo de vehículo: Camión
+Espacio asignado: 1
+Hora de ingreso: 17/02/2026 17:12:50
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
