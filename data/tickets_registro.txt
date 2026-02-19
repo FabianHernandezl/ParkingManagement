@@ -390,3 +390,48 @@ Total a pagar: ₡0,00
 ==============================
 
 
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 4365
+Tipo de vehículo: Automóvil
+Espacio asignado: 4
+Hora de ingreso: 19/02/2026 10:12:56
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Jime ParkingLot
+Placa: fghfg
+Tipo de vehículo: Automóvil
+Espacio asignado: 5
+Hora de ingreso: 19/02/2026 10:16:18
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Park
+Placa: 8797
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 19/02/2026 10:22:42
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+

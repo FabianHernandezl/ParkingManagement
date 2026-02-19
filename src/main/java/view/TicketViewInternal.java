@@ -2,6 +2,8 @@ package view;
 
 import controller.TicketController;
 import controller.ParkingLotController;
+import model.entities.Clerk;
+
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
@@ -20,6 +22,7 @@ public class TicketViewInternal extends JInternalFrame {
 
     private final TicketController ticketController = TicketController.getInstance();
     private final ParkingLotController parkingLotController = new ParkingLotController();
+    private Clerk loggedClerk; // 🔥 NUEVO
 
     private JTable table;
     private DefaultTableModel tableModel;
@@ -34,8 +37,14 @@ public class TicketViewInternal extends JInternalFrame {
             = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     public TicketViewInternal() {
+        this(null); // Admin ve todos los tickets
+    }
+
+    public TicketViewInternal(Clerk clerk) {
 
         super("Monitoreo de Tickets", true, true, true, true);
+
+        this.loggedClerk = clerk; // 🔥 NUEVO
 
         setSize(900, 500);
         setLayout(new BorderLayout());
@@ -137,6 +146,24 @@ public class TicketViewInternal extends JInternalFrame {
         for (Ticket ticket : allTickets) {
 
             String nombreParqueo = obtenerNombreParqueo(ticket);
+
+// 🔥 FILTRO PARA CLERK CON LISTA DE PARQUEOS
+            if (loggedClerk != null && loggedClerk.getParkingLot() != null) {
+
+                boolean perteneceAlClerk = false;
+
+                for (ParkingLot pl : loggedClerk.getParkingLot()) {
+                    if (pl.getName().equals(nombreParqueo)) {
+                        perteneceAlClerk = true;
+                        break;
+                    }
+                }
+
+                if (!perteneceAlClerk) {
+                    continue; // No pertenece a ninguno de sus parqueos
+                }
+            }
+
             String placa = ticket.getVehicle() != null
                     ? ticket.getVehicle().getPlate() : "N/A";
             String tipo = (ticket.getVehicle() != null

@@ -2119,5 +2119,15 @@
     "name": "Juan",
     "username": "op_juan",
     "password": "juan123"
+  },
+  {
+    "employeeCode": 1006,
+    "shedule": "Jornada Diurna",
+    "age": 24,
+    "parkingLot": [],
+    "id": "CLK0006",
+    "name": "Luna",
+    "username": "Luna",
+    "password": "luna"
   }
 ]

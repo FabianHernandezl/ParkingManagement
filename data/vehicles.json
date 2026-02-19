@@ -317,27 +317,6 @@
     }
   },
   {
-    "plate": "dkfhsjh",
-    "color": "dfsg",
-    "brand": "sdfg",
-    "model": "sdfgd",
-    "clients": [
-      {
-        "id": "88",
-        "name": "k",
-        "phone": "l",
-        "isPreferential": false,
-        "email": "l"
-      }
-    ],
-    "vehicleType": {
-      "id": 2,
-      "description": "Motocicleta",
-      "numberOfTires": 2,
-      "fee": 2.5
-    }
-  },
-  {
     "plate": "WER-456",
     "color": "Negro",
     "brand": "Toyota",
@@ -392,22 +371,22 @@
     }
   },
   {
-    "plate": "d",
-    "color": "d",
-    "brand": "d",
-    "model": "d",
+    "plate": "8797",
+    "color": "lkhk",
+    "brand": "kjkgkjg",
+    "model": "kjhkh",
     "clients": [
       {
-        "id": "1563607",
-        "name": "José Blanco",
-        "phone": "86563246",
-        "isPreferential": true,
-        "email": "joblan@gmail.com"
+        "id": "88",
+        "name": "k",
+        "phone": "l",
+        "isPreferential": false,
+        "email": "l"
       }
     ],
     "vehicleType": {
-      "id": 3,
-      "description": "Camión",
+      "id": 1,
+      "description": "Automóvil",
       "numberOfTires": 4,
       "fee": 5.0
     }

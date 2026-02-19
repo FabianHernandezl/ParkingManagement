@@ -98,26 +98,68 @@
       {
         "id": 4,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "4365",
+          "color": "cxvcx",
+          "brand": "dfdgfg",
+          "model": "vcxvcx",
+          "clients": [
+            {
+              "id": "88",
+              "name": "k",
+              "phone": "l",
+              "isPreferential": false,
+              "email": "l"
+            }
+          ],
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        }
       },
       {
         "id": 5,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "fghfg",
+          "color": "dfgdf",
+          "brand": "fgdg",
+          "model": "dfgd",
+          "clients": [
+            {
+              "id": "88",
+              "name": "k",
+              "phone": "l",
+              "isPreferential": false,
+              "email": "l"
+            }
+          ],
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        }
       }
     ]
   },
@@ -2196,14 +2238,35 @@
       {
         "id": 2,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "vehicleType": {
           "id": 1,
           "description": "Automóvil",
           "numberOfTires": 4,
           "fee": 5.0
         },
-        "available": false
+        "available": false,
+        "vehicle": {
+          "plate": "8797",
+          "color": "lkhk",
+          "brand": "kjkgkjg",
+          "model": "kjhkh",
+          "clients": [
+            {
+              "id": "88",
+              "name": "k",
+              "phone": "l",
+              "isPreferential": false,
+              "email": "l"
+            }
+          ],
+          "vehicleType": {
+            "id": 1,
+            "description": "Automóvil",
+            "numberOfTires": 4,
+            "fee": 5.0
+          }
+        }
       },
       {
         "id": 3,
