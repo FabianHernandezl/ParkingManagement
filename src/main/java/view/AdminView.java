@@ -5,7 +5,7 @@
 package view;
 
 import javax.swing.JInternalFrame;
-import Controller.AdministratorController;
+import controller.AdministratorController;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

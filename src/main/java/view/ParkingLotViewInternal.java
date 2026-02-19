@@ -1,6 +1,6 @@
 package view;
 
-import Controller.ParkingLotController;
+import controller.ParkingLotController;
 import model.entities.ParkingLot;
 import model.entities.Space;
 

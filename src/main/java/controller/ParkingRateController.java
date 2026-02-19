@@ -1,9 +1,10 @@
-package Controller;
+package controller;
 
 import model.data.ParkingRateData;
 import model.entities.ParkingLot;
 import model.entities.ParkingRate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ParkingRateController {
 
@@ -59,5 +60,29 @@ public class ParkingRateController {
         types.add("Moto");
         types.add("Camión");
         return types;
+    }
+
+    // En ParkingRateController.java
+    public boolean parkingLotHasRates(int parkingLotId) {
+        List<ParkingRate> rates = getAllParkingRates();
+        for (ParkingRate rate : rates) {
+            if (rate.getParkingLotId() == parkingLotId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getParkingLotRatesStatus(int parkingLotId) {
+        List<ParkingRate> rates = getAllParkingRates();
+        StringBuilder sb = new StringBuilder();
+        for (ParkingRate rate : rates) {
+            if (rate.getParkingLotId() == parkingLotId) {
+                sb.append("  - ").append(rate.getVehicleType())
+                        .append(": ₡").append(rate.getHourPrice())
+                        .append("/hora\n");
+            }
+        }
+        return sb.toString();
     }
 }

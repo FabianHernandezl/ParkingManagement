@@ -1,7 +1,7 @@
 package view;
 
-import Controller.AdministratorController;
-import Controller.ClerkController;
+import controller.AdministratorController;
+import controller.ClerkController;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;

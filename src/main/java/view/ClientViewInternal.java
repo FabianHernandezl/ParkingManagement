@@ -1,6 +1,6 @@
 package view;
 
-import Controller.ClientController;
+import controller.ClientController;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;

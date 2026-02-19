@@ -315,26 +315,5 @@
       "numberOfTires": 0,
       "fee": 0.0
     }
-  },
-  {
-    "plate": "dkfhsjh",
-    "color": "dfsg",
-    "brand": "sdfg",
-    "model": "sdfgd",
-    "clients": [
-      {
-        "id": "88",
-        "name": "k",
-        "phone": "l",
-        "isPreferential": false,
-        "email": "l"
-      }
-    ],
-    "vehicleType": {
-      "id": 2,
-      "description": "Motocicleta",
-      "numberOfTires": 2,
-      "fee": 2.5
-    }
   }
 ]

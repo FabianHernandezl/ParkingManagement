@@ -1,7 +1,7 @@
 ========================================
       REGISTRO DE VEHÍCULOS
 ========================================
-Total de vehículos: 16
+Total de vehículos: 15
 ========================================
 
 VEHÍCULO #1
@@ -169,17 +169,6 @@ Color:        gvhv
 Tipo:         Carro
 Clientes:     
               - Ana Alfaro (ID: 303640676)
-----------------------------------------
-
-VEHÍCULO #16
-----------------------------------------
-Placa:        dkfhsjh
-Marca:        sdfg
-Modelo:       sdfgd
-Color:        dfsg
-Tipo:         Motocicleta
-Clientes:     
-              - k (ID: 88)
 ----------------------------------------
 
 ========================================

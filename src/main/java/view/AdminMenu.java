@@ -4,7 +4,7 @@
  */
 package view;
 
-import Controller.ParkingLotController;
+import controller.ParkingLotController;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;

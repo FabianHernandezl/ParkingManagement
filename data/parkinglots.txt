@@ -1,5 +1,8 @@
-ID: 1 | Name: Cami´s Parkinglot | Spaces: 10
-ID: 2 | Name: UCR ParkingLot | Spaces: 20
 ID: 3 | Name: Jime ParkingLot | Spaces: 5
 ID: 4 | Name: Parqueo Central | Spaces: 10
-ID: 6 | Name: Parking Lot | Spaces: 25
+ID: 5 | Name: Parking Lot | Spaces: 25
+ID: 6 | Name: Parking | Spaces: 100
+ID: 7 | Name: Luna Parking | Spaces: 25
+ID: 8 | Name: Park | Spaces: 10
+ID: 9 | Name: prueba | Spaces: 80
+ID: 10 | Name: s | Spaces: 60

@@ -1,6 +1,6 @@
 package view;
 
-import Controller.ParkingLotReportController;
+import controller.ParkingLotReportController;
 import model.entities.ParkingLotReportRow;
 
 import javax.swing.*;
