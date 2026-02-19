@@ -127,16 +127,30 @@ public class Vehicle {
     }
 
     public String getIcon() {
-        if (vehicleType.getDescription().equalsIgnoreCase("Carro")) {
+
+        if (vehicleType == null || vehicleType.getDescription() == null) {
+            return "❓";
+        }
+
+        if (vehicleType.getDescription().equalsIgnoreCase("Carro")
+                || vehicleType.getDescription().equalsIgnoreCase("Automóvil")) {
             return "🚗";
         }
-        if (vehicleType.getDescription().equalsIgnoreCase("Moto")) {
+
+        if (vehicleType.getDescription().equalsIgnoreCase("Moto")
+                || vehicleType.getDescription().equalsIgnoreCase("Motocicleta")) {
             return "🏍";
         }
-        if (vehicleType.getDescription().equalsIgnoreCase("Camión")) {
+
+        if (vehicleType.getDescription().equalsIgnoreCase("Camión")
+                || vehicleType.getDescription().equalsIgnoreCase("Camion")) {
             return "🚚";
         }
+
+        if (vehicleType.getDescription().equalsIgnoreCase("Bicicleta")) {
+            return "🚲";
+        }
+
         return "❓";
     }
-
 }
