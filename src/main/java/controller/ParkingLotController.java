@@ -18,7 +18,7 @@ public class ParkingLotController {
             int disabledSpaces,
             int preferentialSpaces,
             int motorcycleSpaces,
-            int truckSpaces) {
+            int truckSpaces, int bicycleSpaces) {
 
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.setId(parkingLotData.findLastIdNumberOfParkingLot() + 1);
@@ -29,7 +29,7 @@ public class ParkingLotController {
                 totalSpaces,
                 preferentialSpaces,
                 motorcycleSpaces,
-                truckSpaces
+                truckSpaces, bicycleSpaces
         );
 
         parkingLot.setSpaces(spaces);
@@ -49,7 +49,8 @@ public class ParkingLotController {
                 disabledSpaces,
                 preferentialSpaces,
                 motorcycleSpaces,
-                0 // truckSpaces por defecto
+                0, // truck
+                0 // bicycle
         );
     }
 
@@ -57,7 +58,7 @@ public class ParkingLotController {
             int total,
             int preferential,
             int motorcycle,
-            int truck) {
+            int truck, int bicycle) {
 
         Space[] spaces = new Space[total];
         int spaceId = 1;
@@ -79,6 +80,11 @@ public class ParkingLotController {
         for (int i = 0; i < truck; i++) {
             spaces[index++] = new Space(spaceId++, false, false,
                     new VehicleType(4, "Camión", 6, 8.0f));
+        }
+        // Bicicletas
+        for (int i = 0; i < bicycle; i++) {
+            spaces[index++] = new Space(spaceId++, false, false,
+                    new VehicleType(5, "Bicicleta", 2, 1.5f));
         }
 
         // Lo que quede → Autos normales
@@ -125,7 +131,7 @@ public class ParkingLotController {
     public ParkingLot findParkingLotById(int id) {
         return parkingLotData.findParkingLotById(id);
     }
-    
+
     public ParkingLot findParkingLotByName(String name) {
         return parkingLotData.findParkingLotByName(name);
     }

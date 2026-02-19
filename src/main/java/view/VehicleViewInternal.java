@@ -606,12 +606,19 @@ public class VehicleViewInternal extends JInternalFrame {
             case "Carro":
                 t = new VehicleType(1, "Automóvil", 4, 5.0f);
                 break;
-            case "Moto":
+
+            case "Motocicleta":
                 t = new VehicleType(2, "Motocicleta", 2, 2.5f);
                 break;
+
             case "Camión":
-                t = new VehicleType(3, "Camión", 4, 5.0f);
+                t = new VehicleType(3, "Camión", 4, 8.0f);
                 break;
+
+            case "Bicicleta":
+                t = new VehicleType(4, "Bicicleta", 2, 1.5f);
+                break;
+
             default:
                 t = new VehicleType(1, "Automóvil", 4, 5.0f);
         }

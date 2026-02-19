@@ -1,4 +1,3 @@
-
 package view;
 
 import controller.ParkingLotController;
@@ -11,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-
 public class ParkingLotViewInternal extends JInternalFrame {
 
     private final ParkingLotController parkingLotController = new ParkingLotController();
@@ -19,10 +17,10 @@ public class ParkingLotViewInternal extends JInternalFrame {
     private JTextField txtId, txtName, txtNumberOfSpaces;
     private JTable table;
     private DefaultTableModel model;
-    private JTextField txtDisabled;
     private JTextField txtMotorcycle;
     private JTextField txtTruck;
     private JTextField txtPreferential;
+    private JTextField txtBicycle;
 
     private JButton btnSave, btnUpdate, btnDelete, btnClear, btnViewDetails;
 
@@ -104,6 +102,15 @@ public class ParkingLotViewInternal extends JInternalFrame {
         panel.add(txtTruck);
         y += spacing;
 
+        JLabel lblBicyle = new JLabel("Espacios Bicicleta");
+        lblBicyle.setBounds(x, y, labelWidth, 25);
+        panel.add(lblBicyle);
+
+        txtBicycle = new JTextField();
+        txtBicycle.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
+        panel.add(txtBicycle);
+        y += spacing;
+
         btnSave = createButton("Guardar Nuevo", x, y, 140, 35, new Color(46, 125, 50));
         btnClear = createButton("Limpiar", x + 150, y, 90, 35, new Color(120, 144, 156));
         y += 45;
@@ -161,10 +168,10 @@ public class ParkingLotViewInternal extends JInternalFrame {
         panel.add(btnUpdate);
         panel.add(btnClear);
         panel.add(btnViewDetails);
-        
+
         btnSave.addActionListener(e -> saveParkingLot());
         btnDelete.addActionListener(e -> deleteParkingLot());
-        btnUpdate.addActionListener(e -> updateParkingLot());   
+        btnUpdate.addActionListener(e -> updateParkingLot());
         btnViewDetails.addActionListener(e -> viewDetails());
         btnClear.addActionListener(e -> {
             clearForm();
@@ -216,16 +223,17 @@ public class ParkingLotViewInternal extends JInternalFrame {
                 }
             }
 
-            int available = lot.getNumberOfSpaces() - occupied;
+            int total = lot.getSpaces() != null ? lot.getSpaces().length : 0;
+            int available = total - occupied;
 
             String status = available == 0 ? "LLENO"
-                    : (available <= lot.getNumberOfSpaces() * 0.1
-                    ? "CASI LLENO" : "DISPONIBLE");
+                    : (available <= total * 0.1
+                            ? "CASI LLENO" : "DISPONIBLE");
 
             model.addRow(new Object[]{
                 lot.getId(),
                 lot.getName(),
-                lot.getNumberOfSpaces(),
+                total,
                 occupied,
                 available,
                 status
@@ -241,9 +249,9 @@ public class ParkingLotViewInternal extends JInternalFrame {
             int preferential = Integer.parseInt(txtPreferential.getText().trim());
             int motorcycle = Integer.parseInt(txtMotorcycle.getText().trim());
             int truck = Integer.parseInt(txtTruck.getText().trim());
+            int bicycle = Integer.parseInt(txtBicycle.getText().trim());
 
-            int sum = preferential + motorcycle + truck;
-
+            int sum = preferential + motorcycle + truck + bicycle;
             if (sum > totalSpaces) {
                 JOptionPane.showMessageDialog(this,
                         "La suma de espacios no puede ser mayor al total");
@@ -253,9 +261,11 @@ public class ParkingLotViewInternal extends JInternalFrame {
             parkingLotController.registerParkingLot(
                     name,
                     totalSpaces,
+                    0,
                     preferential,
                     motorcycle,
-                    truck
+                    truck,
+                    bicycle
             );
 
             JOptionPane.showMessageDialog(this,
@@ -296,33 +306,33 @@ public class ParkingLotViewInternal extends JInternalFrame {
         int id = Integer.parseInt(model.getValueAt(row, 0).toString());
         String newName = txtName.getText();
         int newNumberOfSpaces = Integer.parseInt(txtNumberOfSpaces.getText());
-            // Verificar que el parqueo existe
-            ParkingLot existingParkingLot = parkingLotController.findParkingLotById(id);
-            if (existingParkingLot == null) {
-                JOptionPane.showMessageDialog(this,
-                        "No existe un parqueo con el ID: " + id,
-                        "Parqueo No Encontrado",
-                        JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+        // Verificar que el parqueo existe
+        ParkingLot existingParkingLot = parkingLotController.findParkingLotById(id);
+        if (existingParkingLot == null) {
+            JOptionPane.showMessageDialog(this,
+                    "No existe un parqueo con el ID: " + id,
+                    "Parqueo No Encontrado",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-            // Validar campos requeridos
-            if (!validateRequiredFields()) {
-                return;
-            }
+        // Validar campos requeridos
+        if (!validateRequiredFields()) {
+            return;
+        }
 
         ParkingLot updateParkingLot = new ParkingLot();
-            updateParkingLot.setId(id);
-            updateParkingLot.setName(newName);
-            updateParkingLot.setNumberOfSpaces(newNumberOfSpaces);
-            updateParkingLot.setVehicles(existingParkingLot.getVehicles());
-        
-            String message = parkingLotController.updateParkingLot(id, updateParkingLot);   
-            JOptionPane.showMessageDialog(this, message);
-           
-            loadTable();
-            clearForm();
-            generateNextId();   
+        updateParkingLot.setId(id);
+        updateParkingLot.setName(newName);
+        updateParkingLot.setNumberOfSpaces(newNumberOfSpaces);
+        updateParkingLot.setVehicles(existingParkingLot.getVehicles());
+
+        String message = parkingLotController.updateParkingLot(id, updateParkingLot);
+        JOptionPane.showMessageDialog(this, message);
+
+        loadTable();
+        clearForm();
+        generateNextId();
     }
 
     private void deleteParkingLot() {
