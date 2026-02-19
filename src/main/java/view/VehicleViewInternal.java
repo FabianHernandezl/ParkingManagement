@@ -66,7 +66,7 @@ public class VehicleViewInternal extends JInternalFrame {
         panel.setBorder(UITheme.panelBorder());
         add(panel);
 
-        JLabel title = new JLabel("🚗 Vehículo");
+        JLabel title = new JLabel("Vehículo");
         title.setFont(UITheme.TITLE_FONT);
         title.setBounds(10, 10, 200, 25);
         panel.add(title);
@@ -90,7 +90,7 @@ public class VehicleViewInternal extends JInternalFrame {
 
         y += 35;
         panel.add(label("Tipo:", y));
-        cmbType = new JComboBox<>(new String[]{"Carro", "Moto", "Camión"});
+        cmbType = new JComboBox<>(new String[]{"Carro", "Motocicleta", "Camión", "Bicicleta"});
         cmbType.setBounds(100, y, 200, 25);
         panel.add(cmbType);
 
@@ -155,7 +155,7 @@ public class VehicleViewInternal extends JInternalFrame {
         searchPanel.setBorder(UITheme.panelBorder());
         add(searchPanel);
 
-        JLabel lblSearchVehicle = new JLabel("🔍 Buscar vehículo:");
+        JLabel lblSearchVehicle = new JLabel("Buscar vehículo:");
         lblSearchVehicle.setBounds(10, 10, 150, 25);
         lblSearchVehicle.setFont(UITheme.LABEL_FONT);
         searchPanel.add(lblSearchVehicle);

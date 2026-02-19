@@ -57,14 +57,11 @@ ADMINISTRADOR #5
 ----------------------------------------
 ID:            ADM1005
 Nombre:        Camila Mariana
-Usuario:       admin_cam123
+Usuario:       admin_camila
 Número Admin:  1005
 Parqueos:      
-                - Cami´s Parkinglot
-                - UCR ParkingLot
-                - Jime ParkingLot
-                - Parqueo Central
-                - Prueba
+                - Parking
+                - Luna Parking
 ----------------------------------------
 
 ========================================

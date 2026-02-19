@@ -334,168 +334,59 @@ Total a pagar: ₡0,00
 ==============================
 
 
-===== TICKET ENTRADA =====
+TICKET ENTRADA
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Parqueo: Parqueo Central
-Placa: 50
-Tipo de vehículo: Automóvil
-Espacio asignado: 6
-Hora de ingreso: 17/02/2026 21:40:00
+Placa: WER-456
+Tipo de vehículo: Motocicleta
+Espacio asignado: 2
+Hora de ingreso: 17/02/2026 16:55:40
 Hora de salida: —
-Total a pagar: ₡0.00
+Total a pagar: ₡0,00
 ==============================
 
 
-===== TICKET ENTRADA =====
+TICKET ENTRADA
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 2
-Parqueo: Jime ParkingLot
-Placa: 80
+Placa: a
 Tipo de vehículo: Automóvil
-Espacio asignado: 1
-Hora de ingreso: 17/02/2026 21:44:39
+Espacio asignado: 3
+Hora de ingreso: 17/02/2026 16:59:36
 Hora de salida: —
-Total a pagar: ₡0.00
+Total a pagar: ₡0,00
 ==============================
 
 
-===== TICKET ENTRADA =====
+TICKET ENTRADA
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 3
-Parqueo: Jime ParkingLot
-Placa: 90
+Placa: ABC-031
 Tipo de vehículo: Automóvil
-Espacio asignado: 2
-Hora de ingreso: 18/02/2026 22:40:49
+Espacio asignado: 7
+Hora de ingreso: 17/02/2026 17:08:18
 Hora de salida: —
-Total a pagar: ₡0.00
+Total a pagar: ₡0,00
 ==============================
 
 
-===== TICKET ENTRADA =====
+TICKET ENTRADA
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 4
-Parqueo: Jime ParkingLot
-Placa: 100
-Tipo de vehículo: Automóvil
-Espacio asignado: 3
-Hora de ingreso: 18/02/2026 22:46:51
+Placa: d
+Tipo de vehículo: Camión
+Espacio asignado: 1
+Hora de ingreso: 17/02/2026 17:12:50
 Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 5
-Parqueo: Jime ParkingLot
-Placa: 101
-Tipo de vehículo: Automóvil
-Espacio asignado: 2
-Hora de ingreso: 18/02/2026 22:54:16
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 6
-Parqueo: Parqueo Central
-Placa: 102
-Tipo de vehículo: Automóvil
-Espacio asignado: 7
-Hora de ingreso: 18/02/2026 22:55:07
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 7
-Parqueo: Jime ParkingLot
-Placa: 103
-Tipo de vehículo: Automóvil
-Espacio asignado: 4
-Hora de ingreso: 18/02/2026 22:59:09
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 8
-Parqueo: Jime ParkingLot
-Placa: 104
-Tipo de vehículo: Automóvil
-Espacio asignado: 5
-Hora de ingreso: 18/02/2026 23:04:23
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 9
-Parqueo: Park
-Placa: 105
-Tipo de vehículo: Automóvil
-Espacio asignado: 3
-Hora de ingreso: 18/02/2026 23:08:50
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 10
-Parqueo: prueba
-Placa: 89
-Tipo de vehículo: Automóvil
-Espacio asignado: 6
-Hora de ingreso: 18/02/2026 23:10:17
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 11
-Parqueo: s
-Placa: 2
-Tipo de vehículo: Automóvil
-Espacio asignado: 3
-Hora de ingreso: 18/02/2026 23:17:09
-Hora de salida: —
-Total a pagar: ₡0.00
+Total a pagar: ₡0,00
 ==============================
 
 

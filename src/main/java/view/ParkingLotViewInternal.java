@@ -1,3 +1,4 @@
+
 package view;
 
 import controller.ParkingLotController;
@@ -9,6 +10,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
+
 
 public class ParkingLotViewInternal extends JInternalFrame {
 
@@ -26,8 +28,9 @@ public class ParkingLotViewInternal extends JInternalFrame {
 
     public ParkingLotViewInternal() {
         super("Gestión de Parqueos", true, true, true, true);
-        setSize(800, 600);
+        setSize(920, 640);
         setLayout(null);
+        getContentPane().setBackground(UITheme.BACKGROUND);
         setVisible(true);
 
         initComponents();
@@ -37,61 +40,68 @@ public class ParkingLotViewInternal extends JInternalFrame {
 
     private void initComponents() {
 
-        int x = 30, y = 20, labelWidth = 150, fieldWidth = 200, spacing = 35;
+        int x = 30, y = 20, labelWidth = 150, fieldWidth = 120, spacing = 35;
+
+        //this is for better design and uniformity in the view
+        JPanel panel = new JPanel(null);
+        panel.setBounds(x, 20, 320, 580);
+        panel.setBackground(UITheme.PANEL_BG);
+        panel.setBorder(UITheme.panelBorder());
+        add(panel);
 
         JLabel lblId = new JLabel("ID Parqueo:");
         lblId.setBounds(x, y, labelWidth, 25);
-        add(lblId);
+        panel.add(lblId);
 
         txtId = new JTextField();
         txtId.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
         txtId.setEditable(false);
-        add(txtId);
+        panel.add(txtId);
         y += spacing;
 
         JLabel lblName = new JLabel("Nombre del Parqueo:");
         lblName.setBounds(x, y, labelWidth, 25);
-        add(lblName);
+        panel.add(lblName);
 
         txtName = new JTextField();
         txtName.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtName);
+        panel.add(txtName);
         y += spacing;
 
         JLabel lblNumber = new JLabel("Número de Espacios:");
         lblNumber.setBounds(x, y, labelWidth, 25);
-        add(lblNumber);
+        panel.add(lblNumber);
 
         txtNumberOfSpaces = new JTextField();
         txtNumberOfSpaces.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtNumberOfSpaces);
+        panel.add(txtNumberOfSpaces);
         y += spacing;
 
         JLabel lblPreferential = new JLabel("Espacios Preferenciales:");
         lblPreferential.setBounds(x, y, labelWidth, 25);
-        add(lblPreferential);
+        panel.add(lblPreferential);
 
         txtPreferential = new JTextField();
         txtPreferential.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtPreferential);
+        panel.add(txtPreferential);
         y += spacing;
 
         JLabel lblMotorcycle = new JLabel("Espacios Motocicleta:");
         lblMotorcycle.setBounds(x, y, labelWidth, 25);
-        add(lblMotorcycle);
+        panel.add(lblMotorcycle);
 
         txtMotorcycle = new JTextField();
         txtMotorcycle.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtMotorcycle);
+        panel.add(txtMotorcycle);
         y += spacing;
 
         JLabel lblTruck = new JLabel("Espacios Camión:");
         lblTruck.setBounds(x, y, labelWidth, 25);
-        add(lblTruck);
+        panel.add(lblTruck);
 
         txtTruck = new JTextField();
         txtTruck.setBounds(x + labelWidth + 10, y, fieldWidth, 25);
-        add(txtTruck);
+        panel.add(txtTruck);
         y += spacing;
 
         btnSave = createButton("Guardar Nuevo", x, y, 140, 35, new Color(46, 125, 50));
@@ -116,6 +126,7 @@ public class ParkingLotViewInternal extends JInternalFrame {
         };
 
         table = new JTable(model);
+        UITheme.styleTable(table);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
@@ -145,14 +156,16 @@ public class ParkingLotViewInternal extends JInternalFrame {
                 return c;
             }
         });
-
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(400, 20, 370, 500);
-        add(scrollPane);
-
+        panel.add(btnSave);
+        panel.add(btnDelete);
+        panel.add(btnUpdate);
+        panel.add(btnClear);
+        panel.add(btnViewDetails);
+        
         btnSave.addActionListener(e -> saveParkingLot());
         btnDelete.addActionListener(e -> deleteParkingLot());
-
+        btnUpdate.addActionListener(e -> updateParkingLot());   
+        btnViewDetails.addActionListener(e -> viewDetails());
         btnClear.addActionListener(e -> {
             clearForm();
             generateNextId();
@@ -163,8 +176,11 @@ public class ParkingLotViewInternal extends JInternalFrame {
                 fillFormFromTable();
             }
         });
+        JScrollPane sp = new JScrollPane(table);
+        sp.setBounds(360, 20, 530, 520);
+        sp.setBorder(UITheme.panelBorder());
+        add(sp);
 
-        btnViewDetails.addActionListener(e -> viewDetails());
     }
 
     private JButton createButton(String text, int x, int y, int w, int h, Color color) {
@@ -255,6 +271,60 @@ public class ParkingLotViewInternal extends JInternalFrame {
         }
     }
 
+    /**
+     * Actualiza un parqueo existente
+     */
+    private void updateParkingLot() {
+        int row = table.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "Seleccione un parqueo primero");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro que desea actualizar este parqueo?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int id = Integer.parseInt(model.getValueAt(row, 0).toString());
+        String newName = txtName.getText();
+        int newNumberOfSpaces = Integer.parseInt(txtNumberOfSpaces.getText());
+            // Verificar que el parqueo existe
+            ParkingLot existingParkingLot = parkingLotController.findParkingLotById(id);
+            if (existingParkingLot == null) {
+                JOptionPane.showMessageDialog(this,
+                        "No existe un parqueo con el ID: " + id,
+                        "Parqueo No Encontrado",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Validar campos requeridos
+            if (!validateRequiredFields()) {
+                return;
+            }
+
+        ParkingLot updateParkingLot = new ParkingLot();
+            updateParkingLot.setId(id);
+            updateParkingLot.setName(newName);
+            updateParkingLot.setNumberOfSpaces(newNumberOfSpaces);
+            updateParkingLot.setVehicles(existingParkingLot.getVehicles());
+        
+            String message = parkingLotController.updateParkingLot(id, updateParkingLot);   
+            JOptionPane.showMessageDialog(this, message);
+           
+            loadTable();
+            clearForm();
+            generateNextId();   
+    }
+
     private void deleteParkingLot() {
 
         int row = table.getSelectedRow();
@@ -316,10 +386,61 @@ public class ParkingLotViewInternal extends JInternalFrame {
             }
         }
 
-        JOptionPane.showMessageDialog(this,
-                details.toString(),
+        //this is for scroll
+        JTextArea textArea = new JTextArea(details.toString());
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(350, 250));
+
+        JOptionPane.showMessageDialog(
+                this,
+                scrollPane,
                 "Detalles del Parqueo",
-                JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    /**
+     * Valida los campos del formulario
+     */
+    private boolean validateRequiredFields() {
+        StringBuilder errors = new StringBuilder();
+
+        String name = txtName.getText().trim();
+        if (name.isEmpty()) {
+            errors.append("• Nombre del parqueo es obligatorio\n");
+        } else if (name.length() < 3) {
+            errors.append("• Nombre debe tener al menos 3 caracteres\n");
+        }
+
+        String spacesText = txtNumberOfSpaces.getText().trim();
+        if (spacesText.isEmpty()) {
+            errors.append("• Número de espacios es obligatorio\n");
+        } else {
+            try {
+                int spaces = Integer.parseInt(spacesText);
+                if (spaces <= 0) {
+                    errors.append("• Número de espacios debe ser mayor a 0\n");
+                } else if (spaces > 1000) {
+                    errors.append("• Número de espacios no puede exceder 1000\n");
+                }
+            } catch (NumberFormatException e) {
+                errors.append("• Número de espacios debe ser un número válido\n");
+            }
+        }
+
+        if (errors.length() > 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor corrija los siguientes errores:\n\n" + errors.toString(),
+                    "Validación Fallida",
+                    JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        return true;
     }
 
     private void clearForm() {
@@ -328,6 +449,7 @@ public class ParkingLotViewInternal extends JInternalFrame {
         txtId.setText("");
         table.clearSelection();
         btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
         btnViewDetails.setEnabled(false);
     }
 
@@ -336,6 +458,7 @@ public class ParkingLotViewInternal extends JInternalFrame {
         txtId.setText(model.getValueAt(row, 0).toString());
         txtName.setText(model.getValueAt(row, 1).toString());
         txtNumberOfSpaces.setText(model.getValueAt(row, 2).toString());
+        btnUpdate.setEnabled(true);
         btnDelete.setEnabled(true);
         btnViewDetails.setEnabled(true);
     }

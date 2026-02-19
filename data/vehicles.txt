@@ -1,7 +1,7 @@
 ========================================
       REGISTRO DE VEHÍCULOS
 ========================================
-Total de vehículos: 15
+Total de vehículos: 20
 ========================================
 
 VEHÍCULO #1
@@ -169,6 +169,60 @@ Color:        gvhv
 Tipo:         Carro
 Clientes:     
               - Ana Alfaro (ID: 303640676)
+----------------------------------------
+
+VEHÍCULO #16
+----------------------------------------
+Placa:        dkfhsjh
+Marca:        sdfg
+Modelo:       sdfgd
+Color:        dfsg
+Tipo:         Motocicleta
+Clientes:     
+              - k (ID: 88)
+----------------------------------------
+
+VEHÍCULO #17
+----------------------------------------
+Placa:        WER-456
+Marca:        Toyota
+Modelo:       2022
+Color:        Negro
+Tipo:         Motocicleta
+Clientes:     
+              - Laura (ID: 09909)
+----------------------------------------
+
+VEHÍCULO #18
+----------------------------------------
+Placa:        a
+Marca:        a
+Modelo:       a
+Color:        a
+Tipo:         Automóvil
+Clientes:     No hay clientes asociados
+----------------------------------------
+
+VEHÍCULO #19
+----------------------------------------
+Placa:        ABC-031
+Marca:        Ferrari
+Modelo:       2026
+Color:        Rosado
+Tipo:         Automóvil
+Clientes:     
+              - Camila Montoya (ID: 1289630)
+----------------------------------------
+
+VEHÍCULO #20
+----------------------------------------
+Placa:        d
+Marca:        d
+Modelo:       d
+Color:        d
+Tipo:         Camión
+Clientes:     
+              - José Blanco (ID: 1563607)
 ----------------------------------------
 
 ========================================

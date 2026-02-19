@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 14
+Total de clientes: 18
 ========================================
 
 CLIENTE #1
@@ -70,9 +70,9 @@ Preferencial:  No
 CLIENTE #8
 ----------------------------------------
 ID:            11
-Nombre:        j
-Teléfono:      d
-Email:         d
+Nombre:        Maria
+Teléfono:      89562356
+Email:         mari@gmail.com
 Preferencial:  No
 ----------------------------------------
 
@@ -128,6 +128,42 @@ Nombre:        Ana Alfaro
 Teléfono:      44556677
 Email:         zagdb@gmail.com
 Preferencial:  No
+----------------------------------------
+
+CLIENTE #15
+----------------------------------------
+ID:            119230725
+Nombre:        Juan
+Teléfono:      86621950
+Email:         juan@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #16
+----------------------------------------
+ID:            4560920
+Nombre:        Kiko Jimenez
+Teléfono:      8596 5263
+Email:         kiko12@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #17
+----------------------------------------
+ID:            1289630
+Nombre:        Camila Montoya
+Teléfono:      86621670
+Email:         montoyacami@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #18
+----------------------------------------
+ID:            1563607
+Nombre:        José Blanco
+Teléfono:      86563246
+Email:         joblan@gmail.com
+Preferencial:  Sí
 ----------------------------------------
 
 ========================================

@@ -1,7 +1,7 @@
 ========================================
         REGISTRO DE EMPLEADOS
 ========================================
-Total de empleados: 6
+Total de empleados: 5
 ========================================
 
 EMPLEADO #1
@@ -33,13 +33,13 @@ EMPLEADO #3
 ----------------------------------------
 ID:             CLK0003
 Nombre:         Fabian Hernandez
-Usuario:        op_fabi
+Usuario:        fabi
 Código empleado:1003
 Horario:        Medio Tiempo(Tarde)
-Edad:           23
+Edad:           21
 Parqueos:       
-                 - Jime ParkingLot (ID: 3)
                  - Parqueo Central (ID: 4)
+                 - Parking Lot (ID: 5)
 ----------------------------------------
 
 EMPLEADO #4
@@ -51,10 +51,8 @@ Código empleado:1004
 Horario:        Jornada Nocturna
 Edad:           20
 Parqueos:       
-                 - Cami´s Parkinglot (ID: 1)
-                 - UCR ParkingLot (ID: 2)
-                 - Jime ParkingLot (ID: 3)
                  - Parqueo Central (ID: 4)
+                 - Parking Lot (ID: 5)
 ----------------------------------------
 
 EMPLEADO #5
@@ -67,18 +65,6 @@ Horario:        Jornada Nocturna
 Edad:           40
 Parqueos:       
                  - UCR ParkingLot (ID: 2)
-----------------------------------------
-
-EMPLEADO #6
-----------------------------------------
-ID:             CLK0006
-Nombre:         Benito Martinez Ocasio
-Usuario:        op_beni
-Código empleado:1006
-Horario:        Medio Tiempo(Mañana)
-Edad:           31
-Parqueos:       
-                 - Cami´s Parkinglot (ID: 1)
 ----------------------------------------
 
 ========================================
