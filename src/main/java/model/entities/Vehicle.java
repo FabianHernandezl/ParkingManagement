@@ -132,25 +132,27 @@ public class Vehicle {
             return "❓";
         }
 
-        if (vehicleType.getDescription().equalsIgnoreCase("Carro")
-                || vehicleType.getDescription().equalsIgnoreCase("Automóvil")) {
+        String type = vehicleType.getDescription()
+                .toLowerCase()
+                .trim();
+
+        if (type.contains("carro") || type.contains("autom")) {
             return "🚗";
         }
 
-        if (vehicleType.getDescription().equalsIgnoreCase("Moto")
-                || vehicleType.getDescription().equalsIgnoreCase("Motocicleta")) {
+        if (type.contains("moto")) {
             return "🏍";
         }
 
-        if (vehicleType.getDescription().equalsIgnoreCase("Camión")
-                || vehicleType.getDescription().equalsIgnoreCase("Camion")) {
+        if (type.contains("camion")) {
             return "🚚";
         }
 
-        if (vehicleType.getDescription().equalsIgnoreCase("Bicicleta")) {
+        if (type.contains("bicic")) {
             return "🚲";
         }
 
         return "❓";
     }
+
 }

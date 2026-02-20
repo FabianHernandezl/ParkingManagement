@@ -11,6 +11,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.entities.Client;
 
+/**
+ * Internal window for managing clients.
+ *
+ * Provides functionality to: - Register new clients - Update existing clients -
+ * Delete clients - Display all clients in a table - Open TXT report file
+ *
+ * Uses ClientController to handle business logic.
+ */
 public class ClientViewInternal extends JInternalFrame {
 
     private final ClientController clientController = new ClientController();
@@ -45,7 +53,7 @@ public class ClientViewInternal extends JInternalFrame {
         title.setBounds(10, 10, 200, 25);
         formPanel.add(title);
 
-        JLabel lblId = new JLabel("ID:");
+        JLabel lblId = new JLabel("CEDULA:");
         lblId.setFont(UITheme.LABEL_FONT);
         lblId.setBounds(10, 50, 80, 25);
         formPanel.add(lblId);
@@ -118,7 +126,7 @@ public class ClientViewInternal extends JInternalFrame {
 
     private void initTable() {
         model = new DefaultTableModel(
-                new String[]{"ID", "Nombre", "Teléfono", "Email", "Preferencial"}, 0) {
+                new String[]{"Cedula", "Nombre", "Teléfono", "Email", "Preferencial"}, 0) {
 
             @Override
             public boolean isCellEditable(int r, int c) {

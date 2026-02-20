@@ -12,6 +12,10 @@ import model.entities.Vehicle;
 import model.entities.VehicleType;
 import model.entities.ParkingLot;
 
+/**
+ * Handles the business logic related to parking spaces. Manages assignment,
+ * release, and fee calculation.
+ */
 public class SpaceController {
 
     private SpaceData spaceData;
@@ -122,17 +126,14 @@ public class SpaceController {
                 // ================= CLIENTE PREFERENCIAL =================
                 if (client.isIsPreferential()) {
 
-                    // Si el espacio es preferencial y está libre → lo toma sin validar tipo
                     if (s.isDisabilityAdaptation()) {
                         return s;
                     }
 
-                    // Si no es preferencial, sigue buscando
                     continue;
                 }
 
                 // ================= CLIENTE NORMAL =================
-                // No puede usar espacios preferenciales
                 if (s.isDisabilityAdaptation()) {
                     continue;
                 }
@@ -225,7 +226,7 @@ public class SpaceController {
                 return lot.getSpaces();
             }
         }
-        return new Space[0]; // arreglo vacío si no encuentra
+        return new Space[0];
     }
 
 }
