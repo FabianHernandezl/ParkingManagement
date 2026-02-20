@@ -9,6 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Modal dialog that displays detailed information about: - Vehicle - Client -
+ * Ticket
+ *
+ * Information is retrieved from the provided Ticket object.
+ */
 public class VehicleInfoDialog extends JDialog {
 
     public VehicleInfoDialog(JFrame parent, Ticket ticket) {

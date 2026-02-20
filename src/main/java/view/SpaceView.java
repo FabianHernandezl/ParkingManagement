@@ -18,6 +18,13 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Internal frame that displays and manages parking spaces of a selected
+ * ParkingLot.
+ *
+ * Allows: - Viewing all spaces in grid format - Selecting a space - Viewing
+ * vehicle information (double click) - Registering vehicle exit
+ */
 public class SpaceView extends JInternalFrame {
 
     private ParkingLot parkingLot;

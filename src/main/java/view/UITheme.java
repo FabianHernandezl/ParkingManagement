@@ -16,8 +16,11 @@ import javax.swing.JTable;
 import javax.swing.border.Border;
 
 /**
+ * Centralized UI styling utility class.
  *
- * @author jimen
+ * Provides: - Color palette - Fonts - Borders - Button styling - Table styling
+ *
+ * Ensures consistent visual design across the application.
  */
 public class UITheme {
 
