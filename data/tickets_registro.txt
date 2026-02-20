@@ -435,18 +435,3 @@ Total a pagar: ₡0,00
 ==============================
 
 
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 18
-Parqueo: Park
-Placa: 30
-Tipo de vehículo: Automóvil
-Espacio asignado: 3
-Hora de ingreso: 20/02/2026 16:44:57
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-

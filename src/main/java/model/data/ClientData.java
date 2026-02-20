@@ -11,8 +11,17 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
 
+/**
+ * Data access class responsible for managing Client persistence.
+ *
+ * Responsibilities: - Store clients in JSON format - Generate a formatted TXT
+ * report - Perform CRUD operations
+ *
+ * Uses Gson for JSON serialization/deserialization.
+ */
 public class ClientData {
 
+    // File paths for JSON storage and TXT report
     private static final String FILE_PATH = "data/clients.json";
     private static final String TXT_FILE_PATH = "data/clients.txt";
 
@@ -42,7 +51,7 @@ public class ClientData {
     public ArrayList<Client> getAllClients() {
         return clients;
     }
-    
+
     public void refresh() {
         clients = loadClients();
     }
@@ -133,7 +142,7 @@ public class ClientData {
             printWriter.println("========================================");
 
         } catch (Exception e) {
-            System.out.println("Error saving TXT: " + e.getMessage());
+            System.out.println("Error  TXT: " + e.getMessage());
         }
     }
 }

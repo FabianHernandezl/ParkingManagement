@@ -205,10 +205,10 @@ Clientes:
 
 VEHÍCULO #19
 ----------------------------------------
-Placa:        30
-Marca:        l
-Modelo:       l
-Color:        l
+Placa:        8797
+Marca:        kjkgkjg
+Modelo:       kjhkh
+Color:        lkhk
 Tipo:         Automóvil
 Clientes:     
               - k (ID: 88)

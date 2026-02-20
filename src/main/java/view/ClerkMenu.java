@@ -18,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.WindowConstants;
+import model.entities.Clerk;
 
 /**
  *
@@ -30,11 +31,13 @@ public class ClerkMenu extends JFrame {
     private static File lockFile;
     private static FileChannel lockChannel;
     private static FileLock lock;
+    private Clerk loggedClerk;
 
-    public ClerkMenu(LoginWindow loginWindow) {
+    public ClerkMenu(LoginWindow loginWindow, Clerk clerk) {
 
         super("Menú Operario de Parqueos");
         this.loginWindow = loginWindow;
+        this.loggedClerk = clerk;
 
         desktop = new HomeDesktop(); // Call the HomeDesktop
         this.add(desktop);
@@ -105,7 +108,7 @@ public class ClerkMenu extends JFrame {
         ticketMenu.add(entryTicket);
 
         entryTicket.addActionListener(e -> {
-            openInternalFrame(new TicketViewInternal());
+            openInternalFrame(new TicketViewInternal(loggedClerk));
         });
 
         //--------------Sign Out----------

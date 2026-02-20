@@ -7,17 +7,33 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.RowFilter;
 import model.entities.Client;
 
+/**
+ * Internal window for managing clients.
+ *
+ * Provides functionality to: - Register new clients - Update existing clients -
+ * Delete clients - Display all clients in a table - Open TXT report file
+ *
+ * Uses ClientController to handle business logic.
+ */
 public class ClientViewInternal extends JInternalFrame {
 
     private final ClientController clientController = new ClientController();
+
     private JTextField txtId, txtPhone, txtName, txtEmail;
     private JCheckBox chkPreferential;
     private JTable table;
     private DefaultTableModel model;
+    private TableRowSorter<DefaultTableModel> sorter;
+    private JTextField txtSearch;
+
     private JButton btnSave, btnUpdate, btnDelete, btnClear, btnReport;
 
     public ClientViewInternal() {
@@ -45,7 +61,7 @@ public class ClientViewInternal extends JInternalFrame {
         title.setBounds(10, 10, 200, 25);
         formPanel.add(title);
 
-        JLabel lblId = new JLabel("ID:");
+        JLabel lblId = new JLabel("Cedula:");
         lblId.setFont(UITheme.LABEL_FONT);
         lblId.setBounds(10, 50, 80, 25);
         formPanel.add(lblId);
@@ -117,8 +133,18 @@ public class ClientViewInternal extends JInternalFrame {
     }
 
     private void initTable() {
+
+        JLabel lblSearch = new JLabel("Buscar:");
+        lblSearch.setFont(UITheme.LABEL_FONT);
+        lblSearch.setBounds(300, 5, 80, 20);
+        add(lblSearch);
+
+        txtSearch = new JTextField();
+        txtSearch.setBounds(360, 0, 200, 25);
+        add(txtSearch);
+
         model = new DefaultTableModel(
-                new String[]{"ID", "Nombre", "Teléfono", "Email", "Preferencial"}, 0) {
+                new String[]{"Cedula", "Nombre", "Teléfono", "Email", "Preferencial"}, 0) {
 
             @Override
             public boolean isCellEditable(int r, int c) {
@@ -128,8 +154,10 @@ public class ClientViewInternal extends JInternalFrame {
 
         table = new JTable(model);
         UITheme.styleTable(table);
-
         table.setRowHeight(28);
+
+        sorter = new TableRowSorter<>(model);
+        table.setRowSorter(sorter);
 
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
@@ -143,15 +171,14 @@ public class ClientViewInternal extends JInternalFrame {
                 cell.setOpaque(true);
                 cell.setForeground(Color.BLACK);
 
-                boolean pref = table.getValueAt(row, 4).toString().equals("Sí");
+                int modelRow = table.convertRowIndexToModel(row);
+                boolean pref = model.getValueAt(modelRow, 4).toString().equals("Sí");
 
                 if (isSelected) {
                     cell.setBackground(UITheme.PRIMARY);
                     cell.setForeground(Color.WHITE);
                 } else {
-                    cell.setBackground(pref
-                            ? new Color(220, 240, 220)
-                            : Color.WHITE);
+                    cell.setBackground(pref ? new Color(220, 240, 220) : Color.WHITE);
                 }
 
                 return cell;
@@ -159,12 +186,46 @@ public class ClientViewInternal extends JInternalFrame {
         });
 
         JScrollPane scroll = new JScrollPane(table);
-        scroll.setBounds(300, 20, 440, 480);
+        scroll.setBounds(300, 30, 440, 470);
         scroll.setBorder(UITheme.panelBorder());
         add(scroll);
+
+        setupSearch();
+    }
+
+    private void setupSearch() {
+
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void filter() {
+                String text = txtSearch.getText().trim();
+
+                if (text.isEmpty()) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 0, 1));
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filter();
+            }
+        });
     }
 
     private void setupEvents() {
+
         btnSave.addActionListener(e -> saveClient());
         btnUpdate.addActionListener(e -> updateClient());
         btnDelete.addActionListener(e -> deleteClient());
@@ -199,11 +260,13 @@ public class ClientViewInternal extends JInternalFrame {
             return;
         }
 
-        txtId.setText(model.getValueAt(row, 0).toString());
-        txtName.setText(model.getValueAt(row, 1).toString());
-        txtPhone.setText(model.getValueAt(row, 2).toString());
-        txtEmail.setText(model.getValueAt(row, 3).toString());
-        chkPreferential.setSelected(model.getValueAt(row, 4).equals("Sí"));
+        int modelRow = table.convertRowIndexToModel(row);
+
+        txtId.setText(model.getValueAt(modelRow, 0).toString());
+        txtName.setText(model.getValueAt(modelRow, 1).toString());
+        txtPhone.setText(model.getValueAt(modelRow, 2).toString());
+        txtEmail.setText(model.getValueAt(modelRow, 3).toString());
+        chkPreferential.setSelected(model.getValueAt(modelRow, 4).equals("Sí"));
     }
 
     private void clearForm() {
@@ -218,6 +281,7 @@ public class ClientViewInternal extends JInternalFrame {
     }
 
     private void saveClient() {
+
         if (txtId.getText().isEmpty() || txtName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Complete todos los campos");
             return;
@@ -228,18 +292,41 @@ public class ClientViewInternal extends JInternalFrame {
             return;
         }
 
-        JOptionPane.showMessageDialog(this,
-                clientController.registerClient(
-                        txtId.getText(),
-                        txtName.getText(),
-                        txtPhone.getText(),
-                        chkPreferential.isSelected(),
-                        txtEmail.getText()));
-        loadTable();
-        clearForm();
+        String response = clientController.registerClient(
+                txtId.getText(),
+                txtName.getText(),
+                txtPhone.getText(),
+                chkPreferential.isSelected(),
+                txtEmail.getText()
+        );
+
+        if (response.toLowerCase().contains("existe")) {
+
+            int option = JOptionPane.showOptionDialog(
+                    this,
+                    response + "\n¿Desea cancelar el registro?",
+                    "Cliente existente",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE,
+                    null,
+                    new String[]{"Aceptar", "Cancelar"},
+                    "Cancelar"
+            );
+
+            if (option == 0) {
+                clearForm();
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(this, response);
+            loadTable();
+            clearForm();
+        }
     }
 
     private void updateClient() {
+
         if (!txtEmail.getText().isEmpty() && !txtEmail.getText().contains("@")) {
             JOptionPane.showMessageDialog(this, "Email inválido. Debe contener '@'");
             return;
@@ -252,11 +339,13 @@ public class ClientViewInternal extends JInternalFrame {
                         txtPhone.getText(),
                         chkPreferential.isSelected(),
                         txtEmail.getText()));
+
         loadTable();
         clearForm();
     }
 
     private void deleteClient() {
+
         int option = JOptionPane.showConfirmDialog(
                 this,
                 "¿Está seguro de eliminar este cliente?\nEsta acción no se puede deshacer.",
@@ -266,14 +355,17 @@ public class ClientViewInternal extends JInternalFrame {
         );
 
         if (option == JOptionPane.YES_OPTION) {
+
             JOptionPane.showMessageDialog(this,
                     clientController.deleteClient(txtId.getText()));
+
             loadTable();
             clearForm();
         }
     }
 
     private void openReport() {
+
         try {
             File file = new File("data/clients.txt");
             if (file.exists()) {
