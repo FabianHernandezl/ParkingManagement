@@ -1,7 +1,7 @@
 ========================================
         REGISTRO DE EMPLEADOS
 ========================================
-Total de empleados: 5
+Total de empleados: 6
 ========================================
 
 EMPLEADO #1
@@ -65,6 +65,17 @@ Horario:        Jornada Nocturna
 Edad:           40
 Parqueos:       
                  - UCR ParkingLot (ID: 2)
+----------------------------------------
+
+EMPLEADO #6
+----------------------------------------
+ID:             CLK0006
+Nombre:         Luna
+Usuario:        Luna
+Código empleado:1006
+Horario:        Jornada Diurna
+Edad:           24
+Parqueos:       No tiene parqueos asignados
 ----------------------------------------
 
 ========================================

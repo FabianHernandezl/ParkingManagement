@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import model.entities.ParkingLot;
 import model.entities.Space;
 import model.entities.Vehicle;
+import model.dto.ParkingLotDTO;
+import model.dto.SpaceDTO;
+import model.converter.ParkingLotConverter;
 
 public class ParkingLotData {
 
@@ -28,13 +31,24 @@ public class ParkingLotData {
     }
 
     private ArrayList<ParkingLot> loadParkingLots() {
+        File file = new File(JSON_FILE_PATH);
+        if (!file.exists()) {
+            System.out.println("DEBUG: Archivo JSON no existe, iniciando con lista vacía");
+            return new ArrayList<>();
+        }
+
         try (FileReader reader = new FileReader(JSON_FILE_PATH)) {
-            Type listType = new TypeToken<ArrayList<ParkingLot>>() {
+            // Leer DTOs en lugar de entidades directamente
+            Type listType = new TypeToken<ArrayList<ParkingLotDTO>>() {
             }.getType();
-            ArrayList<ParkingLot> loadedParkingLots = gson.fromJson(reader, listType);
-            if (loadedParkingLots == null) {
-                loadedParkingLots = new ArrayList<>();
+            ArrayList<ParkingLotDTO> dtoList = gson.fromJson(reader, listType);
+
+            if (dtoList == null) {
+                return new ArrayList<>();
             }
+
+            // Convertir DTOs a entidades
+            ArrayList<ParkingLot> loadedParkingLots = new ArrayList<>(ParkingLotConverter.fromDTOList(dtoList));
 
             System.out.println("DEBUG: Cargando parking lots desde JSON");
             for (ParkingLot lot : loadedParkingLots) {
@@ -43,8 +57,10 @@ public class ParkingLotData {
             }
 
             return loadedParkingLots;
+
         } catch (Exception e) {
             System.out.println("DEBUG: Error al cargar parking lots: " + e.getMessage());
+            e.printStackTrace();
             return new ArrayList<>();
         }
     }
@@ -84,10 +100,13 @@ public class ParkingLotData {
 
     private void saveParkingLots() {
         try (FileWriter writer = new FileWriter(JSON_FILE_PATH)) {
-            gson.toJson(parkingLots, writer);
+            // Convertir entidades a DTOs antes de guardar
+            ArrayList<ParkingLotDTO> dtoList = new ArrayList<>(ParkingLotConverter.toDTOList(parkingLots));
+            gson.toJson(dtoList, writer);
             System.out.println("DEBUG: Guardado de parking lots exitoso. Total: " + parkingLots.size());
         } catch (Exception e) {
             System.out.println("DEBUG: Error al guardar parking lots JSON: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

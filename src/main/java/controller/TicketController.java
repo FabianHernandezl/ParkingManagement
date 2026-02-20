@@ -446,34 +446,85 @@ public class TicketController {
     }
 
     /**
-     * Calcula el total usando las tarifas del sistema.
+     * Calcula el total usando las tarifas del sistema con tiempo de cortesía
      */
     private double calculateTotal(Ticket ticket) {
-        if (ticket.getEntryTime() == null
-                || ticket.getExitTime() == null
-                || ticket.getSpace() == null
-                || ticket.getSpace().getParkingLot() == null
-                || ticket.getVehicle() == null
-                || ticket.getVehicle().getVehicleType() == null) {
+        System.out.println("--- calculateTotal ---");
+
+        // Validaciones básicas
+        if (ticket.getEntryTime() == null) {
+            System.out.println("  EntryTime es null");
+            return 0;
+        }
+        if (ticket.getExitTime() == null) {
+            System.out.println("  ExitTime es null");
+            return 0;
+        }
+        if (ticket.getSpace() == null) {
+            System.out.println("  Space es null");
+            return 0;
+        }
+        if (ticket.getSpace().getParkingLot() == null) {
+            System.out.println("  Space.ParkingLot es null");
+            return 0;
+        }
+        if (ticket.getVehicle() == null) {
+            System.out.println("  Vehicle es null");
+            return 0;
+        }
+        if (ticket.getVehicle().getVehicleType() == null) {
+            System.out.println("  VehicleType es null");
             return 0;
         }
 
+        // Calcular tiempo transcurrido
         long minutes = java.time.Duration
                 .between(ticket.getEntryTime(), ticket.getExitTime())
                 .toMinutes();
 
+        System.out.println("  Minutos transcurridos: " + minutes);
+
         if (minutes <= 0) {
+            System.out.println("  Minutos <= 0, no se cobra");
             return 0;
         }
 
-        double hours = Math.ceil(minutes / 60.0);
+        // TIEMPO DE CORTESÍA: 15 minutos (puedes ajustar este valor)
+        final int TIEMPO_CORTESIA = 15;
+
+        if (minutes <= TIEMPO_CORTESIA) {
+            System.out.println("  Tiempo de cortesía (" + TIEMPO_CORTESIA + " min) - No se cobra");
+            return 0;
+        }
+
+        // Restar el tiempo de cortesía para el cálculo
+        long minutosACobrar = minutes - TIEMPO_CORTESIA;
+        double horas = Math.ceil(minutosACobrar / 60.0);
+        System.out.println("  Minutos a cobrar: " + minutosACobrar);
+        System.out.println("  Horas a cobrar: " + horas);
 
         int parkingLotId = ticket.getSpace().getParkingLot().getId();
         String vehicleType = ticket.getVehicle().getVehicleType().getDescription();
 
+        System.out.println("  parkingLotId: " + parkingLotId);
+        System.out.println("  vehicleType: " + vehicleType);
+
+        // OBTENER TARIFA DEL SISTEMA (no valores quemados)
         ParkingRate rate = rateController
                 .getParkingRateByParkingLotAndType(parkingLotId, vehicleType);
 
-        return rate != null ? hours * rate.getHourPrice() : 0;
+        if (rate == null) {
+            System.out.println("  ❌ ERROR: No hay tarifa configurada para este parqueo y tipo de vehículo");
+            System.out.println("  Por favor, configure las tarifas en la sección de Tarifas");
+            return 0; // No se puede cobrar sin tarifas
+        }
+
+        double precioPorHora = rate.getHourPrice();
+        System.out.println("  Tarifa encontrada: ₡" + precioPorHora + " por hora");
+
+        double total = horas * precioPorHora;
+        System.out.println("  TOTAL CALCULADO: ₡" + total);
+
+        return total;
     }
 }

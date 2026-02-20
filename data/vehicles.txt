@@ -1,7 +1,7 @@
 ========================================
       REGISTRO DE VEHÍCULOS
 ========================================
-Total de vehículos: 20
+Total de vehículos: 19
 ========================================
 
 VEHÍCULO #1
@@ -173,17 +173,6 @@ Clientes:
 
 VEHÍCULO #16
 ----------------------------------------
-Placa:        dkfhsjh
-Marca:        sdfg
-Modelo:       sdfgd
-Color:        dfsg
-Tipo:         Motocicleta
-Clientes:     
-              - k (ID: 88)
-----------------------------------------
-
-VEHÍCULO #17
-----------------------------------------
 Placa:        WER-456
 Marca:        Toyota
 Modelo:       2022
@@ -193,7 +182,7 @@ Clientes:
               - Laura (ID: 09909)
 ----------------------------------------
 
-VEHÍCULO #18
+VEHÍCULO #17
 ----------------------------------------
 Placa:        a
 Marca:        a
@@ -203,7 +192,7 @@ Tipo:         Automóvil
 Clientes:     No hay clientes asociados
 ----------------------------------------
 
-VEHÍCULO #19
+VEHÍCULO #18
 ----------------------------------------
 Placa:        ABC-031
 Marca:        Ferrari
@@ -214,15 +203,15 @@ Clientes:
               - Camila Montoya (ID: 1289630)
 ----------------------------------------
 
-VEHÍCULO #20
+VEHÍCULO #19
 ----------------------------------------
-Placa:        d
-Marca:        d
-Modelo:       d
-Color:        d
-Tipo:         Camión
+Placa:        30
+Marca:        l
+Modelo:       l
+Color:        l
+Tipo:         Automóvil
 Clientes:     
-              - José Blanco (ID: 1563607)
+              - k (ID: 88)
 ----------------------------------------
 
 ========================================

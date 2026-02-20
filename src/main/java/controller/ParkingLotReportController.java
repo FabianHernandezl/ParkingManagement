@@ -71,18 +71,34 @@ public class ParkingLotReportController {
                         ? "Ocupado"
                         : "Disponible";
 
-                String vehicleType = space.isSpaceTaken()
-                        ? space.getVehicleType().getDescription()
-                        : "-";
+                // 🔥 Validación para vehicleType
+                String vehicleType = "-";
+                if (space.isSpaceTaken()) {
+                    if (space.getVehicleType() != null) {
+                        vehicleType = space.getVehicleType().getDescription();
+                    } else {
+                        vehicleType = "Sin tipo";
+                        System.out.println("DEBUG: Espacio " + space.getId()
+                                + " ocupado pero sin tipo de vehículo");
+                    }
+                }
 
-                String plate = space.isSpaceTaken()
-                        ? space.getVehicle().getPlate()
-                        : "-";
+                // 🔥 Validación para plate
+                String plate = "-";
+                if (space.isSpaceTaken()) {
+                    if (space.getVehicle() != null) {
+                        plate = space.getVehicle().getPlate();
+                    } else {
+                        plate = "Sin placa";
+                        System.out.println("DEBUG: Espacio " + space.getId()
+                                + " ocupado pero sin vehículo");
+                    }
+                }
 
                 ParkingLotReportRow row = new ParkingLotReportRow(
                         parkingLot.getName(),
                         space.getId(),
-                         status,
+                        status,
                         vehicleType,
                         plate
                 );
