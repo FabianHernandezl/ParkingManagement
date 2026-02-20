@@ -32,19 +32,10 @@ public class ParkingLotData {
             Type listType = new TypeToken<ArrayList<ParkingLot>>() {
             }.getType();
             ArrayList<ParkingLot> loadedParkingLots = gson.fromJson(reader, listType);
-            if (loadedParkingLots == null) {
-                loadedParkingLots = new ArrayList<>();
-            }
 
-            System.out.println("DEBUG: Cargando parking lots desde JSON");
-            for (ParkingLot lot : loadedParkingLots) {
-                int totalSpaces = (lot.getSpaces() != null) ? lot.getSpaces().length : 0;
-                System.out.println("DEBUG: Parking: " + lot.getName() + " | Espacios: " + totalSpaces);
-            }
+            return (loadedParkingLots != null) ? loadedParkingLots : new ArrayList<>();
 
-            return loadedParkingLots;
         } catch (Exception e) {
-            System.out.println("DEBUG: Error al cargar parking lots: " + e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -85,9 +76,8 @@ public class ParkingLotData {
     private void saveParkingLots() {
         try (FileWriter writer = new FileWriter(JSON_FILE_PATH)) {
             gson.toJson(parkingLots, writer);
-            System.out.println("DEBUG: Guardado de parking lots exitoso. Total: " + parkingLots.size());
         } catch (Exception e) {
-            System.out.println("DEBUG: Error al guardar parking lots JSON: " + e.getMessage());
+            // Silent fail or log if needed
         }
     }
 
@@ -95,11 +85,12 @@ public class ParkingLotData {
         try (PrintWriter writer = new PrintWriter(new File(TXT_FILE_PATH))) {
             for (ParkingLot lot : parkingLots) {
                 int totalSpaces = (lot.getSpaces() != null) ? lot.getSpaces().length : 0;
-                writer.println("ID: " + lot.getId() + " | Name: " + lot.getName() + " | Spaces: " + totalSpaces);
+                writer.println("ID: " + lot.getId()
+                        + " | Name: " + lot.getName()
+                        + " | Spaces: " + totalSpaces);
             }
-            System.out.println("DEBUG: Guardado de parking lots TXT exitoso");
         } catch (IOException e) {
-            System.out.println("DEBUG: Error al guardar parking lots TXT: " + e.getMessage());
+            // Silent fail or log if needed
         }
     }
 
@@ -133,6 +124,7 @@ public class ParkingLotData {
 
         parkingLot.setSpaces(spaces);
         parkingLot.setVehicles(vehiclesInParkingLot);
+
         saveParkingLots();
         saveParkingLotsAsTxt();
     }
@@ -143,18 +135,23 @@ public class ParkingLotData {
         if (updatedParkingLot != null && updatedParkingLot.getId() != 0) {
             ParkingLot existing = findParkingLotById(updatedParkingLot.getId());
             if (existing != null) {
+
                 if (updatedParkingLot.getName() != null) {
                     existing.setName(updatedParkingLot.getName());
                 }
+
                 if (updatedParkingLot.getNumberOfSpaces() != 0) {
                     existing.setNumberOfSpaces(updatedParkingLot.getNumberOfSpaces());
                 }
+
                 if (updatedParkingLot.getSpaces() != null) {
                     existing.setSpaces(updatedParkingLot.getSpaces());
                 }
+
                 if (updatedParkingLot.getVehicles() != null) {
                     existing.setVehicles(updatedParkingLot.getVehicles());
                 }
+
                 updated = true;
                 saveParkingLots();
                 saveParkingLotsAsTxt();
@@ -175,6 +172,7 @@ public class ParkingLotData {
                 saveParkingLots();
                 saveParkingLotsAsTxt();
             }
+            
         }
 
         return deleted;

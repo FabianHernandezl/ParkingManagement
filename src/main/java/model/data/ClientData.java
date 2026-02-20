@@ -142,7 +142,7 @@ public class ClientData {
             printWriter.println("========================================");
 
         } catch (Exception e) {
-            System.out.println("Error saving TXT: " + e.getMessage());
+            System.out.println("Error  TXT: " + e.getMessage());
         }
     }
 }
