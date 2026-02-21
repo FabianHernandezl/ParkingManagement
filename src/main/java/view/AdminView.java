@@ -10,6 +10,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableRowSorter;
 import model.data.AdministratorData;
 import model.data.ParkingLotData;
 import model.entities.Administrator;
@@ -32,16 +35,19 @@ public class AdminView extends JInternalFrame{
     private DefaultTableModel model;
     private JButton btnUpdate;
     private JButton btnDelete;
+    
+    private JTextField txtSearch;
+    private TableRowSorter<DefaultTableModel> sorter;
 
     public AdminView() {
         super("Gestión de Administradores", true, true, true, true);
 
-        setSize(900, 600);
-        setLayout(null);
-        setVisible(true);
+        setSize(1000, 700);
+        setLayout(null); 
         initComponents();
         loadTable(); 
         generateNextIds();
+        setVisible(true);
     }
         private void initComponents() {
         // Columna 1: Campos de entrada
@@ -187,6 +193,10 @@ public class AdminView extends JInternalFrame{
 
         // Cargar los parking lots en el JList
         loadParkingLots();
+        
+        //Search / filter by 1 and 2 column
+        initSearch();
+        setupSearch();
 
         // Tabla
         model = new DefaultTableModel(new String[]{
@@ -202,15 +212,19 @@ public class AdminView extends JInternalFrame{
         UITheme.styleTable(table);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setRowHeight(25);
+        
+        sorter = new TableRowSorter<>(model);
+        table.setRowSorter(sorter);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(100);   // ID
         table.getColumnModel().getColumn(1).setPreferredWidth(150);   // Nombre
         table.getColumnModel().getColumn(2).setPreferredWidth(120);   // Usuario
         table.getColumnModel().getColumn(3).setPreferredWidth(80);    // Número Admin
         table.getColumnModel().getColumn(4).setPreferredWidth(200);   // Parqueo/s
-
+        
+        //Panel for the table
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(450, 20, 450, 500);
+        scrollPane.setBounds(420, 80, 530, 520);
         add(scrollPane);
 
         // Cargar datos iniciales
@@ -276,6 +290,7 @@ public class AdminView extends JInternalFrame{
 
     private void loadTable() {
         model.setRowCount(0);
+        
         try {
             ArrayList<Administrator> administrators = administratorController.getAllAdministrators();
 
@@ -305,8 +320,60 @@ public class AdminView extends JInternalFrame{
         } catch (Exception e) {
             System.err.println("Error cargando tabla: " + e.getMessage());
         }
+        
+        
+        
     }
 
+    private void initSearch() {
+        //Panel for searcher
+        JPanel searchPanel = new JPanel(null);
+        searchPanel.setBounds(420, 20, 530, 50);
+        searchPanel.setBackground(UITheme.PANEL_BG);
+        searchPanel.setBorder(UITheme.panelBorder());
+        add(searchPanel);
+
+        JLabel lblSearchVehicle = new JLabel("Buscar:");
+        lblSearchVehicle.setBounds(10, 10, 150, 25);
+        lblSearchVehicle.setFont(UITheme.LABEL_FONT);
+        searchPanel.add(lblSearchVehicle);
+
+        txtSearch = new JTextField();
+        txtSearch.setBounds(130, 10, 335, 25);
+        searchPanel.add(txtSearch);
+
+    }
+
+    private void setupSearch() {
+
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void filter() {
+                String text = txtSearch.getText().trim();
+
+                if (text.isEmpty()) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 0, 1));
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filter();
+            }
+        });
+    }
     private void saveAdministrator() {
         try {
             if (!validateRequiredFields()) {

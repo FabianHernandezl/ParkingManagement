@@ -194,7 +194,7 @@ public class ClientViewInternal extends JInternalFrame {
     }
 
     private void setupSearch() {
-
+        //Filtra por la primera y segunda columna
         txtSearch.getDocument().addDocumentListener(new DocumentListener() {
 
             private void filter() {

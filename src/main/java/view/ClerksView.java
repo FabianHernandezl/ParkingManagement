@@ -9,6 +9,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableRowSorter;
 import model.data.ParkingLotData;
 import model.entities.Clerk;
 import model.entities.ParkingLot;
@@ -23,27 +26,36 @@ public class ClerksView extends JInternalFrame {
     private JTextField txtEmployeeCode;
     private JComboBox<String> cmbSchedule;
     private JTextField txtAge;
-    private JList<ParkingLot> lstParkingLots; 
+    private JTextField txtSearch;
+    private JList<ParkingLot> lstParkingLots;
     private DefaultListModel<ParkingLot> parkingLotModel; // Model for JList
     private JTable table;
     private DefaultTableModel model;
     private JButton btnUpdate;
     private JButton btnDelete;
 
+    private TableRowSorter<DefaultTableModel> sorter;
+
     public ClerksView() {
         super("Gestión de Operarios de Parqueos", true, true, true, true);
-
-        setSize(900, 650);
-        setLayout(null);
+        
+        setSize(1000, 700);
+        setLayout(null);  
+        initComponents();
+        loadTable();
+        loadTable();
         setVisible(true);
+    }
+
+    private void initComponents() {
 
         //for cute format
         JPanel panel = new JPanel(null);
-        panel.setBounds(30, 20, 350, 580);
+        panel.setBounds(30, 20, 380, 590);
         panel.setBackground(UITheme.PANEL_BG);
         panel.setBorder(UITheme.panelBorder());
         add(panel);
-        
+
         // Column 1: entry fields
         int x = 30;
         int y = 20;
@@ -138,25 +150,25 @@ public class ClerksView extends JInternalFrame {
         parkingLotModel = new DefaultListModel<>();
         lstParkingLots = new JList<>(parkingLotModel);
         lstParkingLots.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        
+
         // Configurar renderer para mostrar mejor los ParkingLot
         lstParkingLots.setCellRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value,
                     int index, boolean isSelected, boolean cellHasFocus) {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                
+
                 if (value instanceof ParkingLot) {
                     ParkingLot pl = (ParkingLot) value;
                     setText(pl.getName() + " - " + pl.getNumberOfSpaces());
                 } else if (value == null) {
                     setText("Sin asignar");
                 }
-                
+
                 return this;
             }
         });
-        
+
         // Crear JScrollPane para el JList con posición y tamaño definidos
         JScrollPane scrollPanePL = new JScrollPane(lstParkingLots);
         scrollPanePL.setBounds(x + labelWidth + 10, y, fieldWidth, 100); // ALTURA AUMENTADA
@@ -215,7 +227,10 @@ public class ClerksView extends JInternalFrame {
         table = new JTable(model);
         UITheme.styleTable(table);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.setRowHeight(30);
+        table.setRowHeight(28);
+
+        sorter = new TableRowSorter<>(model);
+        table.setRowSorter(sorter);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(80);   // ID
         table.getColumnModel().getColumn(1).setPreferredWidth(120);  // Nombre
@@ -225,8 +240,10 @@ public class ClerksView extends JInternalFrame {
         table.getColumnModel().getColumn(5).setPreferredWidth(50);   // Edad
         table.getColumnModel().getColumn(6).setPreferredWidth(150);  // Parqueo/s
 
+        //Panel for the table
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(400, 20, 450, 500);
+        scrollPane.setBounds(420, 80, 530, 520);
+        scrollPane.setBorder(UITheme.panelBorder());
         add(scrollPane);
 
         // Cargar datos iniciales
@@ -235,6 +252,10 @@ public class ClerksView extends JInternalFrame {
         // Generar IDs para nuevo registro
         generateNextIds();
 
+        //for the search
+        initSearch();
+        setupSearch();
+        
         // Listeners
         btnSave.addActionListener(e -> saveClerk());
         btnUpdate.addActionListener(e -> updateClerk());
@@ -275,10 +296,10 @@ public class ClerksView extends JInternalFrame {
     private void loadParkingLots() {
         try {
             parkingLotModel.clear();
-            
+
             // Agregar opción "Sin asignar" como primer elemento
             parkingLotModel.addElement(null);
-            
+
             ParkingLotData parkingLotData = new ParkingLotData();
             ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
 
@@ -313,13 +334,15 @@ public class ClerksView extends JInternalFrame {
     }
 
     private void loadTable() {
+
         model.setRowCount(0);
+
         try {
             ArrayList<Clerk> clerks = clerkController.getAllClerks();
 
             for (Clerk clerk : clerks) {
                 ArrayList<ParkingLot> parkingLots = clerk.getParkingLot();
-                
+
                 // Formatear nombres de parking lots para mostrar en tabla
                 String parkingLotNames;
                 if (parkingLots != null && !parkingLots.isEmpty()) {
@@ -345,6 +368,57 @@ public class ClerksView extends JInternalFrame {
         } catch (Exception e) {
             System.err.println("Error cargando tabla: " + e.getMessage());
         }
+
+    }
+
+    private void initSearch() {
+        JPanel searchPanel = new JPanel(null);
+        searchPanel.setBounds(420, 20, 530, 50);
+        searchPanel.setBackground(UITheme.PANEL_BG);
+        searchPanel.setBorder(UITheme.panelBorder());
+        add(searchPanel);
+
+        JLabel lblSearchVehicle = new JLabel("Buscar:");
+        lblSearchVehicle.setBounds(10, 10, 150, 25);
+        lblSearchVehicle.setFont(UITheme.LABEL_FONT);
+        searchPanel.add(lblSearchVehicle);
+
+        txtSearch = new JTextField();
+        txtSearch.setBounds(130, 10, 335, 25);
+        searchPanel.add(txtSearch);
+
+       
+    }
+
+    private void setupSearch() {
+        // filter by 1 and 2 column
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void filter() {
+                String text = txtSearch.getText().trim();
+
+                if (text.isEmpty()) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 0, 1));
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filter();
+            }
+        });
     }
 
     private void saveClerk() {
@@ -522,15 +596,15 @@ public class ClerksView extends JInternalFrame {
     private Clerk createClerkFromForm() throws NumberFormatException {
         int employeeCode = Integer.parseInt(txtEmployeeCode.getText().trim());
         int age = Integer.parseInt(txtAge.getText().trim());
-        
+
         // Obtener los parking lots seleccionados del JList
         ArrayList<ParkingLot> selectedParkingLots = new ArrayList<>(lstParkingLots.getSelectedValuesList());
-        
+
         // Si solo se seleccionó "Sin asignar" (null), lista vacía
         if (selectedParkingLots.size() == 1 && selectedParkingLots.get(0) == null) {
             selectedParkingLots.clear();
         }
-        
+
         String schedule = (String) cmbSchedule.getSelectedItem();
 
         return new Clerk(
@@ -628,7 +702,7 @@ public class ClerksView extends JInternalFrame {
                             }
                         }
                     }
-                    
+
                     // Convertir a array y seleccionar
                     if (!indices.isEmpty()) {
                         int[] indicesArray = new int[indices.size()];

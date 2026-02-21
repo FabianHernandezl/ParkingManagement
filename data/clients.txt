@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 18
+Total de clientes: 20
 ========================================
 
 CLIENTE #1
@@ -164,6 +164,24 @@ Nombre:        José Blanco
 Teléfono:      86563246
 Email:         joblan@gmail.com
 Preferencial:  Sí
+----------------------------------------
+
+CLIENTE #19
+----------------------------------------
+ID:            3120852
+Nombre:        Julián Bonilla
+Teléfono:      89865642
+Email:         julianboni@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #20
+----------------------------------------
+ID:            119457881
+Nombre:        Leonardo Montoya
+Teléfono:      84573246
+Email:         montoyaruiz@hotmail.com
+Preferencial:  No
 ----------------------------------------
 
 ========================================

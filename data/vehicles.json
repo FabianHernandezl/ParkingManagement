@@ -390,5 +390,26 @@
       "numberOfTires": 4,
       "fee": 5.0
     }
+  },
+  {
+    "plate": "WEE-423",
+    "color": "Rojo",
+    "brand": "Fiat",
+    "model": "2022",
+    "clients": [
+      {
+        "id": "3120852",
+        "name": "Julián Bonilla",
+        "phone": "89865642",
+        "isPreferential": false,
+        "email": "julianboni@gmail.com"
+      }
+    ],
+    "vehicleType": {
+      "id": 3,
+      "description": "Camión",
+      "numberOfTires": 4,
+      "fee": 8.0
+    }
   }
 ]
