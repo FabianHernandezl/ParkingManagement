@@ -69,13 +69,14 @@ public class ParkingLotController {
             int total,
             int preferential,
             int motorcycle,
-            int truck, int bicycle) {
+            int truck,
+            int bicycle) {
 
         Space[] spaces = new Space[total];
         int spaceId = 1;
         int index = 0;
 
-        // Preferenciales
+        // Preferenciales (Automóvil)
         for (int i = 0; i < preferential; i++) {
             spaces[index++] = new Space(spaceId++, true, false,
                     new VehicleType(1, "Automóvil", 4, 5.0f));
@@ -99,7 +100,7 @@ public class ParkingLotController {
                     new VehicleType(5, "Bicicleta", 2, 1.5f));
         }
 
-        // Lo que quede → Autos normales
+        // Lo restante → Autos normales
         while (index < total) {
             spaces[index++] = new Space(spaceId++, false, false,
                     new VehicleType(1, "Automóvil", 4, 5.0f));
@@ -108,32 +109,15 @@ public class ParkingLotController {
         return spaces;
     }
 
-    /**
-     * 🔥 VERSIÓN CORREGIDA - Guarda los cambios inmediatamente
-     */
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
-        System.out.println("--- registerVehicleInParkingLot ---");
-        System.out.println("Vehículo: " + (vehicle != null ? vehicle.getPlate() : "null"));
-        System.out.println("Parqueo: " + (parkingLot != null ? parkingLot.getName() : "null"));
-
         if (vehicle == null || parkingLot == null || parkingLot.getSpaces() == null) {
-            System.out.println("❌ Datos inválidos");
             return 0;
         }
 
         boolean hasDisability = vehicle.hasPreferentialClient();
         int vehicleTypeId = vehicle.getVehicleType().getId();
 
-        System.out.println("Buscando espacio disponible para tipo: " + vehicleTypeId);
-
         for (Space space : parkingLot.getSpaces()) {
-            if (space == null) {
-                continue;
-            }
-
-            System.out.println("  Evaluando espacio ID: " + space.getId()
-                    + ", Ocupado: " + space.isSpaceTaken());
-
             if (space.isSpaceTaken()) {
                 continue;
             }
@@ -144,29 +128,12 @@ public class ParkingLotController {
                 continue;
             }
 
-            System.out.println("✅ Espacio SELECCIONADO: " + space.getId());
-
-            // Marcar el espacio como ocupado
             space.setSpaceTaken(true);
             space.setVehicle(vehicle);
-            space.setVehicleType(vehicle.getVehicleType());
-
-            System.out.println("  Espacio marcado como ocupado: " + space.isSpaceTaken());
-
-            // 🔥 ACTUALIZAR EL PARQUEO EN LA BASE DE DATOS
-            boolean updated = parkingLotData.updateParkingLot(parkingLot);
-            System.out.println("  ParkingLot actualizado en memoria: " + updated);
-
-            // 🔥 FORZAR GUARDADO EN JSON
-            parkingLotData.saveParkingLots();
-            parkingLotData.saveParkingLotsAsTxt();
-
-            System.out.println("  ✅ Espacio " + space.getId() + " guardado permanentemente");
-
+            parkingLotData.updateParkingLot(parkingLot);
             return space.getId();
         }
 
-        System.out.println("❌ No se encontró espacio disponible");
         return 0;
     }
 

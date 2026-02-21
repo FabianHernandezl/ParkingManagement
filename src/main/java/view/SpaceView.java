@@ -17,7 +17,6 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.Timer;
 
 /**
  * Internal frame that displays and manages parking spaces of a selected
@@ -28,8 +27,7 @@ import javax.swing.Timer;
  */
 public class SpaceView extends JInternalFrame {
 
-    private int parkingLotId;
-    private String parkingLotName;
+    private ParkingLot parkingLot;
     private AdminMenu parent;
     private JPanel spacesContainer;
     private SpacePanel selectedPanel;
@@ -40,32 +38,15 @@ public class SpaceView extends JInternalFrame {
     private SpaceData sd = new SpaceData();
 
     public SpaceView(ParkingLot parkingLot, AdminMenu parent) {
-        this.parkingLotId = parkingLot.getId();
-        this.parkingLotName = parkingLot.getName();
+        this.parkingLot = parkingLot;
         this.parent = parent;
 
-        setTitle("Espacios - " + parkingLotName);
+        setTitle("Espacios - " + (parkingLot != null ? parkingLot.getName() : ""));
         setClosable(true);
         setSize(900, 600);
         setLayout(new BorderLayout(10, 10));
 
         initUI();
-
-        // Cargar espacios al abrir
-        loadSpaces();
-
-        // Timer para actualizar cada 3 segundos
-        Timer refreshTimer = new Timer(3000, e -> {
-            System.out.println("🔄 Auto-refrescando espacios...");
-            loadSpaces();
-        });
-        refreshTimer.start();
-    }
-
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        System.out.println("🪟 SpaceView visible - recargando datos");
         loadSpaces();
     }
 
@@ -78,7 +59,7 @@ public class SpaceView extends JInternalFrame {
         header.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
         JLabel lblTitle = new JLabel(
-                "Gestión de Espacios - " + parkingLotName);
+                "Gestión de Espacios - " + parkingLot.getName());
         lblTitle.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
@@ -127,43 +108,15 @@ public class SpaceView extends JInternalFrame {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    /**
-     * Método de depuración para ver el estado real de los espacios
-     */
-    private void debugEspacios() {
-        System.out.println("\n=== DEBUG ESPACIOS ===");
-
-        // Obtener datos directamente del controller
-        Space[] spaces = spaceController.getSpacesByParkingLot(parkingLotId);
-
-        System.out.println("Total espacios: " + spaces.length);
-        for (Space s : spaces) {
-            if (s != null) {
-                System.out.println("  Espacio " + s.getId()
-                        + " | Ocupado: " + s.isSpaceTaken()
-                        + " | Vehículo: " + (s.getVehicle() != null ? s.getVehicle().getPlate() : "ninguno")
-                        + " | Cliente: " + (s.getClient() != null ? s.getClient().getName() : "ninguno"));
-            }
-        }
-        System.out.println("=====================\n");
-    }
-
     private void loadSpaces() {
-        System.out.println("=== CARGANDO ESPACIOS ===");
-
-        // DEBUG: Ver qué hay en los datos
-        debugEspacios();
 
         spacesContainer.removeAll();
 
-        ParkingLot currentParkingLot = parkingLotController.findParkingLotById(parkingLotId);
-
-        if (currentParkingLot == null) {
-            System.out.println("❌ No se pudo cargar el parqueo");
+        if (parkingLot == null) {
             return;
         }
 
-        Space[] spaces = currentParkingLot.getSpaces();
+        Space[] spaces = spaceController.getSpacesByParkingLot(parkingLot.getId());
 
         for (Space space : spaces) {
             if (space == null) {
@@ -175,20 +128,41 @@ public class SpaceView extends JInternalFrame {
             panel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+
                     setSelectedPanel(panel);
+
                     if (e.getClickCount() == 2) {
+
                         Space sp = panel.getSpace();
+
                         if (!sp.isSpaceTaken()) {
-                            JOptionPane.showMessageDialog(SpaceView.this, "Este espacio está libre", "Información", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(
+                                    SpaceView.this,
+                                    "Este espacio está libre",
+                                    "Información",
+                                    JOptionPane.INFORMATION_MESSAGE
+                            );
                             return;
                         }
-                        Ticket ticket = ticketController.getActiveTickets().stream()
-                                .filter(t -> t.getSpace() != null && t.getSpace().getId() == sp.getId())
-                                .findFirst().orElse(null);
+
+                        Ticket ticket = ticketController
+                                .getActiveTickets()
+                                .stream()
+                                .filter(t -> t.getSpace() != null
+                                && t.getSpace().getId() == sp.getId())
+                                .findFirst()
+                                .orElse(null);
+
                         if (ticket == null) {
-                            JOptionPane.showMessageDialog(SpaceView.this, "No se encontró ticket activo", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(
+                                    SpaceView.this,
+                                    "No se encontró ticket activo",
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
                             return;
                         }
+
                         new VehicleInfoDialog(parent, ticket).setVisible(true);
                     }
                 }
@@ -216,25 +190,21 @@ public class SpaceView extends JInternalFrame {
     }
 
     private void animateExit(SpacePanel panel, Runnable onFinish) {
-        System.out.println("🎬 Iniciando animación para espacio " + panel.getSpace().getId());
 
         Timer timer = new Timer(150, null);
         final int[] count = {0};
 
         timer.addActionListener(e -> {
+
             if (count[0] % 2 == 0) {
                 panel.setBackground(new Color(46, 204, 113));
             } else {
                 panel.updateView();
             }
 
-            panel.revalidate();
-            panel.repaint();
-
             count[0]++;
 
             if (count[0] == 6) {
-                System.out.println("  Animación completa");
                 timer.stop();
                 onFinish.run();
             }
@@ -307,7 +277,7 @@ public class SpaceView extends JInternalFrame {
         }
 
         try {
-            // Registrar la salida en TicketController
+            // Registrar la salida en TicketController (esto genera el ticket de salida automáticamente)
             double totalPagado = ticketController.registerExit(ticket);
 
             // Liberar el espacio
@@ -323,28 +293,45 @@ public class SpaceView extends JInternalFrame {
                 return;
             }
 
-            // 🔥 ACTUALIZAR EL ESTADO DEL ESPACIO LOCALMENTE
+            // Actualizar el estado del espacio localmente
             space.setSpaceTaken(false);
             space.setVehicle(null);
-            space.setClient(null);
-            space.setEntryTime(null);
 
-            // 🔥 ACTUALIZAR EL PANEL INMEDIATAMENTE
-            selectedPanel.updateView();
-            selectedPanel.revalidate();
-            selectedPanel.repaint();
+            // Animar y actualizar la vista
+            animateExit(selectedPanel, () -> {
+                selectedPanel.updateView();
 
-            // 🔥 RECARGAR TODOS LOS ESPACIOS PARA ASEGURAR CONSISTENCIA
-            loadSpaces();
+                // Mostrar mensaje de éxito con el total pagado
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Salida registrada correctamente\n"
+                        + "Total pagado: ₡" + String.format("%.2f", totalPagado) + "\n"
+                        + "Ticket de salida generado en data/ticket_" + ticket.getId() + ".txt",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
 
-            // Mostrar mensaje de éxito
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Salida registrada correctamente\n"
-                    + "Total pagado: ₡" + String.format("%.2f", totalPagado),
-                    "Éxito",
-                    JOptionPane.INFORMATION_MESSAGE
-            );
+                // Opcional: abrir el ticket automáticamente
+                int abrirTicket = JOptionPane.showConfirmDialog(
+                        this,
+                        "¿Desea abrir el ticket de salida?",
+                        "Abrir ticket",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (abrirTicket == JOptionPane.YES_OPTION) {
+                    try {
+                        java.awt.Desktop.getDesktop().open(new java.io.File("data/ticket_" + ticket.getId() + ".txt"));
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "No se pudo abrir el ticket: " + ex.getMessage(),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                }
+            });
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(

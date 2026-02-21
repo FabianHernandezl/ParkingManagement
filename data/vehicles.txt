@@ -151,17 +151,6 @@ Clientes:
 
 VEHÍCULO #14
 ----------------------------------------
-Placa:        tyry
-Marca:        rtyry
-Modelo:       tryrt
-Color:        tyrt
-Tipo:         Moto
-Clientes:     
-              - Rosita (ID: 6773)
-----------------------------------------
-
-VEHÍCULO #15
-----------------------------------------
 Placa:        CCC666
 Marca:        nhfg
 Modelo:       tgjhgv
@@ -171,7 +160,7 @@ Clientes:
               - Ana Alfaro (ID: 303640676)
 ----------------------------------------
 
-VEHÍCULO #16
+VEHÍCULO #15
 ----------------------------------------
 Placa:        WER-456
 Marca:        Toyota
@@ -182,7 +171,7 @@ Clientes:
               - Laura (ID: 09909)
 ----------------------------------------
 
-VEHÍCULO #17
+VEHÍCULO #16
 ----------------------------------------
 Placa:        a
 Marca:        a
@@ -192,7 +181,7 @@ Tipo:         Automóvil
 Clientes:     No hay clientes asociados
 ----------------------------------------
 
-VEHÍCULO #18
+VEHÍCULO #17
 ----------------------------------------
 Placa:        ABC-031
 Marca:        Ferrari
@@ -203,18 +192,18 @@ Clientes:
               - Camila Montoya (ID: 1289630)
 ----------------------------------------
 
-VEHÍCULO #19
+VEHÍCULO #18
 ----------------------------------------
-Placa:        8797
-Marca:        kjkgkjg
-Modelo:       kjhkh
-Color:        lkhk
-Tipo:         Automóvil
+Placa:        6
+Marca:        l
+Modelo:       f
+Color:        r
+Tipo:         Carro
 Clientes:     
               - k (ID: 88)
 ----------------------------------------
 
-VEHÍCULO #20
+VEHÍCULO #19
 ----------------------------------------
 Placa:        WEE-423
 Marca:        Fiat
@@ -223,6 +212,17 @@ Color:        Rojo
 Tipo:         Camión
 Clientes:     
               - Julián Bonilla (ID: 3120852)
+----------------------------------------
+
+VEHÍCULO #20
+----------------------------------------
+Placa:        ter
+Marca:        retert
+Modelo:       fgdf
+Color:        fgdf
+Tipo:         Automóvil
+Clientes:     
+              - Rosita (ID: 6773)
 ----------------------------------------
 
 ========================================

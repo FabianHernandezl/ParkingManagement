@@ -14,8 +14,7 @@ public class Space {
     private VehicleType vehicleType;
     private Date entryTime;
     private boolean available;
-    private ParkingLot parkingLot;
-
+    private transient ParkingLot parkingLot;
     private Client client;
     private Vehicle vehicle;
 
