@@ -30,7 +30,43 @@ public class ParkingRateController {
     }
 
     public ParkingRate getParkingRateByParkingLotAndType(int parkingLotId, String vehicleType) {
-        return rateData.getParkingRateByParkingLotAndType(parkingLotId, vehicleType);
+        ArrayList<ParkingRate> rates = rateData.getAllParkingRates();
+
+        // Normalizar el tipo buscado
+        String tipoBuscado = normalizarTipo(vehicleType);
+
+        for (ParkingRate rate : rates) {
+            if (rate.getParkingLotId() == parkingLotId) {
+                String tipoRate = normalizarTipo(rate.getVehicleType());
+                if (tipoRate.equals(tipoBuscado)) {
+                    return rate;
+                }
+            }
+        }
+        return null;
+    }
+
+    private String normalizarTipo(String tipo) {
+        if (tipo == null) {
+            return "";
+        }
+
+        if (tipo.equalsIgnoreCase("Automóvil")
+                || tipo.equalsIgnoreCase("Auto")
+                || tipo.equalsIgnoreCase("Carro")) {
+            return "CARRO";
+        }
+        if (tipo.equalsIgnoreCase("Motocicleta")
+                || tipo.equalsIgnoreCase("Moto")) {
+            return "MOTO";
+        }
+        if (tipo.equalsIgnoreCase("Camión")
+                || tipo.equalsIgnoreCase("Camion")
+                || tipo.equalsIgnoreCase("Pesado")) {
+            return "CAMION";
+        }
+
+        return tipo.toUpperCase();
     }
 
     public String updateParkingRate(ParkingRate rate) {
@@ -62,7 +98,6 @@ public class ParkingRateController {
         return types;
     }
 
-    // En ParkingRateController.java
     public boolean parkingLotHasRates(int parkingLotId) {
         List<ParkingRate> rates = getAllParkingRates();
         for (ParkingRate rate : rates) {
@@ -84,5 +119,19 @@ public class ParkingRateController {
             }
         }
         return sb.toString();
+    }
+
+    // 🔥 Método de depuración
+    public void debugTarifas() {
+        System.out.println("=== DEBUG TARIFAS ===");
+        ArrayList<ParkingRate> todas = getAllParkingRates();
+        System.out.println("Total tarifas en sistema: " + todas.size());
+
+        for (ParkingRate rate : todas) {
+            System.out.println("Tarifa - Parqueo ID: " + rate.getParkingLotId()
+                    + ", Tipo: " + rate.getVehicleType()
+                    + ", Precio: " + rate.getHourPrice());
+        }
+        System.out.println("=====================");
     }
 }

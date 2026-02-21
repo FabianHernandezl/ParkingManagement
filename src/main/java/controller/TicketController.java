@@ -23,6 +23,9 @@ public class TicketController {
     private static int ticketIdCounter = 1;
     private static TicketController instance;
 
+    // Tiempo de cortesía en minutos (15 minutos = no se cobra)
+    private static final int TIEMPO_CORTESIA = 15;
+
     private TicketController() {
         this.rateController = new ParkingRateController();
         this.parkingLotController = new ParkingLotController();
@@ -44,15 +47,24 @@ public class TicketController {
      */
     private void cargarTicketsActivosAlIniciar() {
         List<Ticket> ticketsActivos = TxtTicketUtil.cargarTicketsActivos();
+        System.out.println("=== CARGANDO TICKETS ACTIVOS AL INICIAR ===");
+        System.out.println("Total encontrados: " + ticketsActivos.size());
+
         for (Ticket ticket : ticketsActivos) {
+            System.out.println("  Ticket ID: " + ticket.getId()
+                    + ", Placa: " + (ticket.getVehicle() != null ? ticket.getVehicle().getPlate() : "N/A")
+                    + ", ExitTime: " + ticket.getExitTime());
+
             Ticket existente = ticketData.findActiveTicketByVehicle(ticket.getVehicle());
             if (existente == null) {
-                // Al cargar, intentamos reparar las referencias
                 repararReferenciaTicket(ticket);
                 ticketData.insertTicket(ticket);
+                System.out.println("    → Insertado en memoria");
+            } else {
+                System.out.println("    → Ya existía en memoria");
             }
         }
-        System.out.println("Tickets activos cargados: " + ticketsActivos.size());
+        System.out.println("==========================================");
     }
 
     /**
@@ -82,10 +94,8 @@ public class TicketController {
      * @return El nombre del parqueo o "N/A" si no se encuentra
      */
     public String buscarNombreParqueoPorEspacio(int spaceId) {
-        // Obtener todos los parqueos
         ArrayList<ParkingLot> todosLosParqueos = parkingLotController.getAllParkingLots();
 
-        // Buscar el espacio en cada parqueo
         for (ParkingLot parqueo : todosLosParqueos) {
             for (Space espacio : parqueo.getSpaces()) {
                 if (espacio.getId() == spaceId) {
@@ -93,14 +103,11 @@ public class TicketController {
                 }
             }
         }
-
         return "N/A";
     }
 
     /**
      * Repara la referencia de un ticket buscando el parqueo correcto
-     *
-     * @param ticket El ticket a reparar
      */
     public void repararReferenciaTicket(Ticket ticket) {
         if (ticket == null || ticket.getSpace() == null) {
@@ -109,7 +116,6 @@ public class TicketController {
 
         int spaceId = ticket.getSpace().getId();
 
-        // Si el ticket ya tiene parkingLot, intentar buscar el espacio en ese parqueo
         if (ticket.getParkingLot() != null && ticket.getParkingLot().getId() > 0) {
             Space space = findSpaceByParkingLotAndSpaceId(ticket.getParkingLot().getId(), spaceId);
             if (space != null) {
@@ -119,19 +125,15 @@ public class TicketController {
             }
         }
 
-        // Si no, buscar en todos los parqueos
         String nombreParqueo = buscarNombreParqueoPorEspacio(spaceId);
 
         if (!"N/A".equals(nombreParqueo)) {
-            // Crear un objeto ParkingLot con al menos el nombre
             ParkingLot parkingLot = new ParkingLot();
             parkingLot.setName(nombreParqueo);
 
-            // Buscar también el ID si es posible
             for (ParkingLot pl : parkingLotController.getAllParkingLots()) {
                 if (pl.getName().equals(nombreParqueo)) {
                     parkingLot.setId(pl.getId());
-                    // Buscar el espacio específico en este parqueo
                     Space space = findSpaceByParkingLotAndSpaceId(pl.getId(), spaceId);
                     if (space != null) {
                         ticket.setSpace(space);
@@ -139,7 +141,6 @@ public class TicketController {
                     break;
                 }
             }
-
             ticket.setParkingLot(parkingLot);
         }
     }
@@ -152,7 +153,6 @@ public class TicketController {
             return "N/A";
         }
 
-        // Si ya tiene parkingLot, intentar validar que sea correcto
         if (ticket.getParkingLot() != null && ticket.getParkingLot().getId() > 0 && ticket.getSpace() != null) {
             Space space = findSpaceByParkingLotAndSpaceId(ticket.getParkingLot().getId(), ticket.getSpace().getId());
             if (space != null) {
@@ -160,7 +160,6 @@ public class TicketController {
             }
         }
 
-        // Si no, buscar por espacio
         if (ticket.getSpace() != null) {
             return buscarNombreParqueoPorEspacio(ticket.getSpace().getId());
         }
@@ -174,14 +173,12 @@ public class TicketController {
     public List<Ticket> getTodosLosTicketsConParqueo() {
         List<Ticket> todos = new ArrayList<>();
 
-        // Tickets activos
         List<Ticket> activos = getActiveTickets();
         for (Ticket t : activos) {
             repararReferenciaTicket(t);
             todos.add(t);
         }
 
-        // Tickets históricos
         List<Ticket> historicos = TxtTicketUtil.leerTicketsTXT();
         for (Ticket t : historicos) {
             repararReferenciaTicket(t);
@@ -216,13 +213,7 @@ public class TicketController {
     }
 
     /**
-     * Genera un ticket de entrada para un vehículo (VERSIÓN PRINCIPAL
-     * CORREGIDA)
-     *
-     * @param vehicle Vehículo que ingresa
-     * @param parkingLotId ID del parqueo
-     * @param spaceId ID del espacio
-     * @return Ticket generado o null si hay error
+     * Genera un ticket de entrada para un vehículo
      */
     public Ticket generateEntryTicket(Vehicle vehicle, int parkingLotId, int spaceId) {
 
@@ -231,7 +222,6 @@ public class TicketController {
             return null;
         }
 
-        // Buscar el espacio específico en el parqueo indicado
         Space space = findSpaceByParkingLotAndSpaceId(parkingLotId, spaceId);
 
         if (space == null) {
@@ -239,7 +229,6 @@ public class TicketController {
             return null;
         }
 
-        // Verificar si ya tiene ticket activo
         Ticket existing = ticketData.findActiveTicketByVehicle(vehicle);
         if (existing != null) {
             System.out.println("Ya existe ticket activo para este vehículo");
@@ -250,7 +239,7 @@ public class TicketController {
         ticket.setId(ticketIdCounter++);
         ticket.setVehicle(vehicle);
         ticket.setSpace(space);
-        ticket.setParkingLot(space.getParkingLot()); // Usar el parkingLot del espacio
+        ticket.setParkingLot(space.getParkingLot());
         ticket.setEntryTime(LocalDateTime.now());
         ticket.setExitTime(null);
         ticket.setTotal(0.0);
@@ -274,19 +263,17 @@ public class TicketController {
     }
 
     /**
-     * Versión anterior para compatibilidad (ahora usa la nueva)
+     * Versión anterior para compatibilidad
      */
     public Ticket generateEntryTicket(Vehicle vehicle, Space space) {
         if (vehicle == null || space == null) {
             return null;
         }
 
-        // Si el espacio tiene parkingLot, usarlo
         if (space.getParkingLot() != null) {
             return generateEntryTicket(vehicle, space.getParkingLot().getId(), space.getId());
         }
 
-        // Si no, buscar el espacio en todos los parqueos
         for (ParkingLot pl : parkingLotController.getAllParkingLots()) {
             for (Space s : pl.getSpaces()) {
                 if (s.getId() == space.getId()) {
@@ -316,56 +303,163 @@ public class TicketController {
             return 0;
         }
 
-        // Reparar referencia antes de procesar salida
+        System.out.println("=== INICIO REGISTER EXIT ===");
+        System.out.println("Ticket ID: " + ticket.getId());
+
         repararReferenciaTicket(ticket);
 
-        // Asignar hora de salida
         ticket.setExitTime(LocalDateTime.now());
+        System.out.println("Hora entrada: " + ticket.getEntryTime());
+        System.out.println("Hora salida: " + ticket.getExitTime());
+
+        // 🔥 DEBUG: Verificar tarifas antes de calcular
+        if (rateController instanceof ParkingRateController) {
+            ((ParkingRateController) rateController).debugTarifas();
+        }
 
         double total = calculateTotal(ticket);
 
         if (total <= 0) {
-            return 0;
+            System.out.println("Total calculado: 0 (no se cobra)");
+            ticket.setTotal(0);
+        } else {
+            ticket.setTotal(total);
+            System.out.println("Total calculado: ₡" + total);
         }
-
-        ticket.setTotal(total);
 
         boolean updated = ticketData.updateTicket(ticket);
         if (!updated) {
+            System.out.println("❌ Error al actualizar ticket en memoria");
             return 0;
         }
 
+        // 🔥 CRÍTICO: Eliminar de activos
+        System.out.println("Eliminando ticket " + ticket.getId() + " de activos");
         eliminarTicketActivo(ticket.getId());
+
         appendToRegistro(ticket, "SALIDA");
 
-        // Obtener nombre del parqueo de manera segura
-        String parkingName = getNombreParqueoForTicket(ticket);
-        String vehicleType = "Desconocido";
-        String plate = "N/A";
-        String spaceId = "N/A";
+        // Generar ticket individual SOLO si hay cobro
+        if (total > 0) {
+            String parkingName = getNombreParqueoForTicket(ticket);
+            String vehicleType = "Desconocido";
+            String plate = "N/A";
+            String spaceId = "N/A";
 
-        if (ticket.getSpace() != null) {
-            spaceId = String.valueOf(ticket.getSpace().getId());
+            if (ticket.getSpace() != null) {
+                spaceId = String.valueOf(ticket.getSpace().getId());
+            }
+
+            if (ticket.getVehicle() != null) {
+                plate = ticket.getVehicle().getPlate();
+                if (ticket.getVehicle().getVehicleType() != null) {
+                    vehicleType = ticket.getVehicle()
+                            .getVehicleType()
+                            .getDescription();
+                }
+            }
+
+            System.out.println("Generando ticket individual para ID " + ticket.getId());
+            TxtTicketUtil.generarTicketTXT(
+                    parkingName,
+                    vehicleType,
+                    plate,
+                    spaceId,
+                    total,
+                    ticket.getId()
+            );
+        } else {
+            System.out.println("Total 0 - No se genera ticket individual, pero se registró salida");
         }
 
-        if (ticket.getVehicle() != null) {
-            plate = ticket.getVehicle().getPlate();
+        System.out.println("=== FIN REGISTER EXIT ===\n");
+        return total;
+    }
 
-            if (ticket.getVehicle().getVehicleType() != null) {
-                vehicleType = ticket.getVehicle()
-                        .getVehicleType()
-                        .getDescription();
+    /**
+     * Calcula el total usando las tarifas del sistema con tiempo de cortesía
+     */
+    private double calculateTotal(Ticket ticket) {
+        System.out.println("--- calculateTotal ---");
+
+        if (ticket.getEntryTime() == null) {
+            System.out.println("  EntryTime es null");
+            return 0;
+        }
+        if (ticket.getExitTime() == null) {
+            System.out.println("  ExitTime es null");
+            return 0;
+        }
+        if (ticket.getSpace() == null) {
+            System.out.println("  Space es null");
+            return 0;
+        }
+        if (ticket.getSpace().getParkingLot() == null) {
+            System.out.println("  Space.ParkingLot es null");
+            return 0;
+        }
+        if (ticket.getVehicle() == null) {
+            System.out.println("  Vehicle es null");
+            return 0;
+        }
+        if (ticket.getVehicle().getVehicleType() == null) {
+            System.out.println("  VehicleType es null");
+            return 0;
+        }
+
+        long minutes = java.time.Duration
+                .between(ticket.getEntryTime(), ticket.getExitTime())
+                .toMinutes();
+
+        System.out.println("  Minutos transcurridos: " + minutes);
+
+        if (minutes <= 0) {
+            System.out.println("  Minutos <= 0, no se cobra");
+            return 0;
+        }
+
+        if (minutes <= TIEMPO_CORTESIA) {
+            System.out.println("  Tiempo de cortesía (" + TIEMPO_CORTESIA + " min) - No se cobra");
+            return 0;
+        }
+
+        long minutosACobrar = minutes - TIEMPO_CORTESIA;
+        double horas = Math.ceil(minutosACobrar / 60.0);
+        System.out.println("  Minutos a cobrar: " + minutosACobrar);
+        System.out.println("  Horas a cobrar: " + horas);
+
+        int parkingLotId = ticket.getSpace().getParkingLot().getId();
+        String vehicleType = ticket.getVehicle().getVehicleType().getDescription();
+
+        System.out.println("  parkingLotId: " + parkingLotId);
+        System.out.println("  vehicleType original: " + vehicleType);
+
+        ParkingRate rate = rateController
+                .getParkingRateByParkingLotAndType(parkingLotId, vehicleType);
+
+        // Si no encuentra, probar con variantes
+        if (rate == null) {
+            String[] variantes = {"Carro", "Automóvil", "Auto", "carro", "automóvil"};
+            for (String variante : variantes) {
+                rate = rateController
+                        .getParkingRateByParkingLotAndType(parkingLotId, variante);
+                if (rate != null) {
+                    System.out.println("  ✅ Tarifa encontrada con variante: '" + variante + "'");
+                    break;
+                }
             }
         }
 
-        TxtTicketUtil.generarTicketTXT(
-                parkingName,
-                vehicleType,
-                plate,
-                spaceId,
-                total,
-                ticket.getId()
-        );
+        if (rate == null) {
+            System.out.println("  ❌ ERROR: No hay tarifa configurada para este parqueo y tipo de vehículo");
+            return 0;
+        }
+
+        double precioPorHora = rate.getHourPrice();
+        System.out.println("  Tarifa encontrada: ₡" + precioPorHora + " por hora");
+
+        double total = horas * precioPorHora;
+        System.out.println("  TOTAL CALCULADO: ₡" + total);
 
         return total;
     }
@@ -422,7 +516,6 @@ public class TicketController {
             }
         }
 
-        // Reparar referencia si es necesario
         if (ticket != null) {
             repararReferenciaTicket(ticket);
         }
@@ -443,88 +536,5 @@ public class TicketController {
     public List<Ticket> getAllTicketsFromTxt() {
         List<Ticket> ticketsFromTxt = TxtTicketUtil.leerTicketsTXT();
         return ticketsFromTxt != null ? ticketsFromTxt : List.of();
-    }
-
-    /**
-     * Calcula el total usando las tarifas del sistema con tiempo de cortesía
-     */
-    private double calculateTotal(Ticket ticket) {
-        System.out.println("--- calculateTotal ---");
-
-        // Validaciones básicas
-        if (ticket.getEntryTime() == null) {
-            System.out.println("  EntryTime es null");
-            return 0;
-        }
-        if (ticket.getExitTime() == null) {
-            System.out.println("  ExitTime es null");
-            return 0;
-        }
-        if (ticket.getSpace() == null) {
-            System.out.println("  Space es null");
-            return 0;
-        }
-        if (ticket.getSpace().getParkingLot() == null) {
-            System.out.println("  Space.ParkingLot es null");
-            return 0;
-        }
-        if (ticket.getVehicle() == null) {
-            System.out.println("  Vehicle es null");
-            return 0;
-        }
-        if (ticket.getVehicle().getVehicleType() == null) {
-            System.out.println("  VehicleType es null");
-            return 0;
-        }
-
-        // Calcular tiempo transcurrido
-        long minutes = java.time.Duration
-                .between(ticket.getEntryTime(), ticket.getExitTime())
-                .toMinutes();
-
-        System.out.println("  Minutos transcurridos: " + minutes);
-
-        if (minutes <= 0) {
-            System.out.println("  Minutos <= 0, no se cobra");
-            return 0;
-        }
-
-        // TIEMPO DE CORTESÍA: 15 minutos (puedes ajustar este valor)
-        final int TIEMPO_CORTESIA = 15;
-
-        if (minutes <= TIEMPO_CORTESIA) {
-            System.out.println("  Tiempo de cortesía (" + TIEMPO_CORTESIA + " min) - No se cobra");
-            return 0;
-        }
-
-        // Restar el tiempo de cortesía para el cálculo
-        long minutosACobrar = minutes - TIEMPO_CORTESIA;
-        double horas = Math.ceil(minutosACobrar / 60.0);
-        System.out.println("  Minutos a cobrar: " + minutosACobrar);
-        System.out.println("  Horas a cobrar: " + horas);
-
-        int parkingLotId = ticket.getSpace().getParkingLot().getId();
-        String vehicleType = ticket.getVehicle().getVehicleType().getDescription();
-
-        System.out.println("  parkingLotId: " + parkingLotId);
-        System.out.println("  vehicleType: " + vehicleType);
-
-        // OBTENER TARIFA DEL SISTEMA (no valores quemados)
-        ParkingRate rate = rateController
-                .getParkingRateByParkingLotAndType(parkingLotId, vehicleType);
-
-        if (rate == null) {
-            System.out.println("  ❌ ERROR: No hay tarifa configurada para este parqueo y tipo de vehículo");
-            System.out.println("  Por favor, configure las tarifas en la sección de Tarifas");
-            return 0; // No se puede cobrar sin tarifas
-        }
-
-        double precioPorHora = rate.getHourPrice();
-        System.out.println("  Tarifa encontrada: ₡" + precioPorHora + " por hora");
-
-        double total = horas * precioPorHora;
-        System.out.println("  TOTAL CALCULADO: ₡" + total);
-
-        return total;
     }
 }

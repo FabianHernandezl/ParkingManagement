@@ -1,392 +1,210 @@
-TICKET ENTRADA
+===== TICKET ENTRADA =====
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Placa: 1
+Parqueo: Jime ParkingLot
+Placa: 5
 Tipo de vehículo: Carro
 Espacio asignado: 3
-Hora de ingreso: 10/02/2026 18:19:53
+Hora de ingreso: 20/02/2026 18:12:51
 Hora de salida: —
 Total a pagar: ₡0.00
 ==============================
 
 
-TICKET SALIDA
+===== TICKET SALIDA =====
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Placa: 1
+Parqueo: Jime ParkingLot
+Placa: 5
 Tipo de vehículo: Carro
 Espacio asignado: 3
-Hora de ingreso: 10/02/2026 18:19:53
-Hora de salida: 10/02/2026 18:21:10
-Total a pagar: ₡0.00
+Hora de ingreso: 20/02/2026 18:12:51
+Hora de salida: 20/02/2026 18:31:35
+Total a pagar: ₡1.00
 ==============================
 
 
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: h
-Tipo de vehículo: Carro
-Espacio asignado: 1
-Hora de ingreso: 10/02/2026 19:43:57
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: m
-Tipo de vehículo: Carro
-Espacio asignado: 2
-Hora de ingreso: 10/02/2026 19:57:33
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: sc
-Tipo de vehículo: Carro
-Espacio asignado: 2
-Hora de ingreso: 10/02/2026 20:16:03
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 1
-Tipo de vehículo: Carro
-Espacio asignado: 1
-Hora de ingreso: 10/02/2026 20:53:19
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET SALIDA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 1
-Tipo de vehículo: Carro
-Espacio asignado: 1
-Hora de ingreso: 10/02/2026 20:53:19
-Hora de salida: 10/02/2026 20:54:02
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: f
-Tipo de vehículo: Carro
-Espacio asignado: 1
-Hora de ingreso: 10/02/2026 21:17:25
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: d
-Tipo de vehículo: Carro
-Espacio asignado: 2
-Hora de ingreso: 10/02/2026 21:19:02
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: w
-Tipo de vehículo: Carro
-Espacio asignado: 3
-Hora de ingreso: 10/02/2026 21:22:09
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 2
-Tipo de vehículo: Carro
-Espacio asignado: 4
-Hora de ingreso: 10/02/2026 21:42:38
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: n
-Tipo de vehículo: Carro
-Espacio asignado: 5
-Hora de ingreso: 10/02/2026 21:47:23
-Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET SALIDA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: n
-Tipo de vehículo: Carro
-Espacio asignado: 5
-Hora de ingreso: 10/02/2026 21:47:23
-Hora de salida: 10/02/2026 21:47:47
-Total a pagar: ₡0.00
-==============================
-
-
-TICKET ENTRADA
+===== TICKET ENTRADA =====
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 2
-Placa: 123
+Parqueo: Jime ParkingLot
+Placa: 6
 Tipo de vehículo: Carro
-Espacio asignado: 6
-Hora de ingreso: 10/02/2026 21:48:58
+Espacio asignado: 1
+Hora de ingreso: 20/02/2026 18:32:56
 Hora de salida: —
 Total a pagar: ₡0.00
 ==============================
 
 
-TICKET SALIDA
+===== TICKET SALIDA =====
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 2
-Placa: 123
+Parqueo: Jime ParkingLot
+Placa: 6
 Tipo de vehículo: Carro
-Espacio asignado: 6
-Hora de ingreso: 10/02/2026 21:48:58
-Hora de salida: 10/02/2026 21:49:29
+Espacio asignado: 1
+Hora de ingreso: 20/02/2026 18:32:56
+Hora de salida: 20/02/2026 18:42:00
 Total a pagar: ₡0.00
 ==============================
 
 
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 3213
-Tipo de vehículo: Automóvil
-Espacio asignado: 1
-Hora de ingreso: 13/02/2026 09:38:30
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 3224
-Tipo de vehículo: Automóvil
-Espacio asignado: 31
-Hora de ingreso: 13/02/2026 09:42:40
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 21321
-Tipo de vehículo: Automóvil
-Espacio asignado: 32
-Hora de ingreso: 14/02/2026 10:35:34
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-TICKET SALIDA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 21321
-Tipo de vehículo: Automóvil
-Espacio asignado: 32
-Hora de ingreso: 14/02/2026 10:35:34
-Hora de salida: 14/02/2026 10:36:22
-Total a pagar: ₡5,00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 2321
-Tipo de vehículo: Automóvil
-Espacio asignado: 1
-Hora de ingreso: 14/02/2026 10:48:34
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-TICKET SALIDA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 2321
-Tipo de vehículo: Automóvil
-Espacio asignado: 1
-Hora de ingreso: 14/02/2026 10:48:34
-Hora de salida: 14/02/2026 10:50:10
-Total a pagar: ₡5,00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 34543
-Tipo de vehículo: Automóvil
-Espacio asignado: 32
-Hora de ingreso: 15/02/2026 15:38:18
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: 4565
-Tipo de vehículo: Automóvil
-Espacio asignado: 1
-Hora de ingreso: 15/02/2026 15:42:15
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: dkfhsjh
-Tipo de vehículo: Motocicleta
-Espacio asignado: 11
-Hora de ingreso: 15/02/2026 16:06:39
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Placa: WER-456
-Tipo de vehículo: Motocicleta
-Espacio asignado: 2
-Hora de ingreso: 17/02/2026 16:55:40
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-TICKET ENTRADA
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 2
-Placa: a
-Tipo de vehículo: Automóvil
-Espacio asignado: 3
-Hora de ingreso: 17/02/2026 16:59:36
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-TICKET ENTRADA
+===== TICKET ENTRADA =====
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 3
-Placa: ABC-031
-Tipo de vehículo: Automóvil
-Espacio asignado: 7
-Hora de ingreso: 17/02/2026 17:08:18
+Parqueo: Jime ParkingLot
+Placa: 3
+Tipo de vehículo: Carro
+Espacio asignado: 4
+Hora de ingreso: 20/02/2026 18:42:11
 Hora de salida: —
-Total a pagar: ₡0,00
+Total a pagar: ₡0.00
 ==============================
 
 
-TICKET ENTRADA
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Jime ParkingLot
+Placa: 3
+Tipo de vehículo: Carro
+Espacio asignado: 4
+Hora de ingreso: 20/02/2026 18:42:11
+Hora de salida: 20/02/2026 18:46:24
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
 ==============================
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 4
-Placa: d
-Tipo de vehículo: Camión
-Espacio asignado: 1
-Hora de ingreso: 17/02/2026 17:12:50
+Parqueo: Jime ParkingLot
+Placa: 5
+Tipo de vehículo: Carro
+Espacio asignado: 5
+Hora de ingreso: 20/02/2026 18:46:51
 Hora de salida: —
-Total a pagar: ₡0,00
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 4
+Parqueo: Jime ParkingLot
+Placa: 5
+Tipo de vehículo: Carro
+Espacio asignado: 5
+Hora de ingreso: 20/02/2026 18:46:51
+Hora de salida: 20/02/2026 18:50:42
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 5
+Parqueo: Park
+Placa: 6
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 18:50:58
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Park
+Placa: 8
+Tipo de vehículo: Carro
+Espacio asignado: 3
+Hora de ingreso: 20/02/2026 18:59:44
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Park
+Placa: 8
+Tipo de vehículo: Carro
+Espacio asignado: 3
+Hora de ingreso: 20/02/2026 18:59:44
+Hora de salida: 20/02/2026 19:05:22
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 7
+Parqueo: Park
+Placa: 9
+Tipo de vehículo: Carro
+Espacio asignado: 4
+Hora de ingreso: 20/02/2026 19:06:24
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 7
+Parqueo: Park
+Placa: 9
+Tipo de vehículo: Carro
+Espacio asignado: 4
+Hora de ingreso: 20/02/2026 19:06:24
+Hora de salida: 20/02/2026 19:12:37
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 5
+Parqueo: Park
+Placa: 6
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 18:50:58
+Hora de salida: 20/02/2026 19:13:00
+Total a pagar: ₡1.00
 ==============================
 
 
@@ -396,42 +214,72 @@ Total a pagar: ₡0,00
 ==============================
 Tiquete #: 1
 Parqueo: Jime ParkingLot
-Placa: 4365
-Tipo de vehículo: Automóvil
-Espacio asignado: 4
-Hora de ingreso: 19/02/2026 10:12:56
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 2
-Parqueo: Jime ParkingLot
-Placa: fghfg
-Tipo de vehículo: Automóvil
-Espacio asignado: 5
-Hora de ingreso: 19/02/2026 10:16:18
-Hora de salida: —
-Total a pagar: ₡0,00
-==============================
-
-
-===== TICKET ENTRADA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 3
-Parqueo: Park
-Placa: 8797
-Tipo de vehículo: Automóvil
+Placa: 2
+Tipo de vehículo: Carro
 Espacio asignado: 2
-Hora de ingreso: 19/02/2026 10:22:42
+Hora de ingreso: 20/02/2026 19:22:08
 Hora de salida: —
-Total a pagar: ₡0,00
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 2
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 19:22:08
+Hora de salida: 20/02/2026 19:23:09
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 160
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 20:31:18
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 160
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 20:31:18
+Hora de salida: 20/02/2026 20:36:20
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Jime ParkingLot
+Placa: 161
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 20:36:56
+Hora de salida: —
+Total a pagar: ₡0.00
 ==============================
 
 

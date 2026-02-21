@@ -32,9 +32,20 @@ public class ParkingLotController {
                 truckSpaces, bicycleSpaces
         );
 
+        // Asignar la referencia del parqueo a cada espacio
+        for (Space space : spaces) {
+            space.setParkingLot(parkingLot);
+        }
+
         parkingLot.setSpaces(spaces);
 
-        return parkingLotData.addParkingLot(parkingLot);
+        ParkingLot saved = parkingLotData.addParkingLot(parkingLot);
+
+        // 🔥 GUARDAR INMEDIATAMENTE
+        parkingLotData.saveParkingLots();
+        parkingLotData.saveParkingLotsAsTxt();
+
+        return saved;
     }
 
     public ParkingLot registerParkingLot(String name,
@@ -81,6 +92,7 @@ public class ParkingLotController {
             spaces[index++] = new Space(spaceId++, false, false,
                     new VehicleType(4, "Camión", 6, 8.0f));
         }
+
         // Bicicletas
         for (int i = 0; i < bicycle; i++) {
             spaces[index++] = new Space(spaceId++, false, false,
@@ -96,15 +108,32 @@ public class ParkingLotController {
         return spaces;
     }
 
+    /**
+     * 🔥 VERSIÓN CORREGIDA - Guarda los cambios inmediatamente
+     */
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
+        System.out.println("--- registerVehicleInParkingLot ---");
+        System.out.println("Vehículo: " + (vehicle != null ? vehicle.getPlate() : "null"));
+        System.out.println("Parqueo: " + (parkingLot != null ? parkingLot.getName() : "null"));
+
         if (vehicle == null || parkingLot == null || parkingLot.getSpaces() == null) {
+            System.out.println("❌ Datos inválidos");
             return 0;
         }
 
         boolean hasDisability = vehicle.hasPreferentialClient();
         int vehicleTypeId = vehicle.getVehicleType().getId();
 
+        System.out.println("Buscando espacio disponible para tipo: " + vehicleTypeId);
+
         for (Space space : parkingLot.getSpaces()) {
+            if (space == null) {
+                continue;
+            }
+
+            System.out.println("  Evaluando espacio ID: " + space.getId()
+                    + ", Ocupado: " + space.isSpaceTaken());
+
             if (space.isSpaceTaken()) {
                 continue;
             }
@@ -115,17 +144,42 @@ public class ParkingLotController {
                 continue;
             }
 
+            System.out.println("✅ Espacio SELECCIONADO: " + space.getId());
+
+            // Marcar el espacio como ocupado
             space.setSpaceTaken(true);
             space.setVehicle(vehicle);
-            parkingLotData.updateParkingLot(parkingLot);
+            space.setVehicleType(vehicle.getVehicleType());
+
+            System.out.println("  Espacio marcado como ocupado: " + space.isSpaceTaken());
+
+            // 🔥 ACTUALIZAR EL PARQUEO EN LA BASE DE DATOS
+            boolean updated = parkingLotData.updateParkingLot(parkingLot);
+            System.out.println("  ParkingLot actualizado en memoria: " + updated);
+
+            // 🔥 FORZAR GUARDADO EN JSON
+            parkingLotData.saveParkingLots();
+            parkingLotData.saveParkingLotsAsTxt();
+
+            System.out.println("  ✅ Espacio " + space.getId() + " guardado permanentemente");
+
             return space.getId();
         }
 
+        System.out.println("❌ No se encontró espacio disponible");
         return 0;
     }
 
     public void removeVehicleFromParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
+        System.out.println("--- removeVehicleFromParkingLot ---");
+        System.out.println("Vehículo: " + (vehicle != null ? vehicle.getPlate() : "null"));
+        System.out.println("Parqueo: " + (parkingLot != null ? parkingLot.getName() : "null"));
+
         parkingLotData.removeVehicleFromParkingLot(vehicle, parkingLot);
+
+        // 🔥 FORZAR GUARDADO DESPUÉS DE REMOVER
+        parkingLotData.saveParkingLots();
+        parkingLotData.saveParkingLotsAsTxt();
     }
 
     public ParkingLot findParkingLotById(int id) {
@@ -143,6 +197,11 @@ public class ParkingLotController {
     public String updateParkingLot(int id, ParkingLot newParkingLot) {
         if (parkingLotData.findParkingLotById(id) != null) {
             parkingLotData.updateParkingLot(newParkingLot);
+
+            // 🔥 FORZAR GUARDADO DESPUÉS DE ACTUALIZAR
+            parkingLotData.saveParkingLots();
+            parkingLotData.saveParkingLotsAsTxt();
+
             return "El parqueo fue actualizado correctamente";
         } else {
             return "El parqueo no se actualizó porque no se encontró en la base de datos.";
@@ -153,10 +212,74 @@ public class ParkingLotController {
         ParkingLot lot = parkingLotData.findParkingLotById(id);
         if (lot != null) {
             parkingLotData.deleteParkingLot(lot);
+
+            // 🔥 FORZAR GUARDADO DESPUÉS DE ELIMINAR
+            parkingLotData.saveParkingLots();
+            parkingLotData.saveParkingLotsAsTxt();
+
             return "El parqueo se eliminó correctamente";
         } else {
             return "El parqueo no se eliminó porque no se encontró en la base de datos.";
         }
     }
 
+    // ========== MÉTODOS DE BÚSQUEDA DE ESPACIOS ==========
+    /**
+     * Busca un espacio por su ID en todos los parqueos
+     */
+    public Space findSpaceById(int spaceId) {
+        ArrayList<ParkingLot> allParkingLots = getAllParkingLots();
+        for (ParkingLot parkingLot : allParkingLots) {
+            for (Space space : parkingLot.getSpaces()) {
+                if (space.getId() == spaceId) {
+                    space.setParkingLot(parkingLot);
+                    return space;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Busca un espacio por su número en un parqueo específico
+     */
+    public Space findSpaceByNumber(int parkingLotId, int spaceNumber) {
+        ParkingLot parkingLot = findParkingLotById(parkingLotId);
+        if (parkingLot != null) {
+            for (Space space : parkingLot.getSpaces()) {
+                if (space.getId() == spaceNumber) {
+                    space.setParkingLot(parkingLot);
+                    return space;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Busca un espacio por su ID y el ID del parqueo
+     */
+    public Space findSpaceByParkingLotAndSpaceId(int parkingLotId, int spaceId) {
+        ParkingLot parkingLot = findParkingLotById(parkingLotId);
+        if (parkingLot != null) {
+            for (Space space : parkingLot.getSpaces()) {
+                if (space.getId() == spaceId) {
+                    space.setParkingLot(parkingLot);
+                    return space;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Obtiene el nombre del parqueo para un espacio específico
+     */
+    public String getParkingLotNameBySpaceId(int spaceId) {
+        Space space = findSpaceById(spaceId);
+        if (space != null && space.getParkingLot() != null) {
+            return space.getParkingLot().getName();
+        }
+        return "N/A";
+    }
 }
