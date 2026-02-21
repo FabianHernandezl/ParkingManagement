@@ -461,6 +461,10 @@ public class ParkingLotViewInternal extends JInternalFrame {
         btnDelete.setEnabled(false);
         btnUpdate.setEnabled(false);
         btnViewDetails.setEnabled(false);
+        txtMotorcycle.setText("");
+        txtTruck.setText("");
+        txtPreferential.setText("");
+        txtBicycle.setText("");
     }
 
     private void fillFormFromTable() {

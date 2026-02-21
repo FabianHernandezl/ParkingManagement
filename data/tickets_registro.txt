@@ -283,3 +283,18 @@ Total a pagar: ₡0.00
 ==============================
 
 
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: WEE-423
+Tipo de vehículo: Camión
+Espacio asignado: 1
+Hora de ingreso: 20/02/2026 16:58:37
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+

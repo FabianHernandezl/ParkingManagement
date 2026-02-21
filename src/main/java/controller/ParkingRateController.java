@@ -95,6 +95,7 @@ public class ParkingRateController {
         types.add("Carro");
         types.add("Moto");
         types.add("Camión");
+        types.add("Bicicleta");
         return types;
     }
 

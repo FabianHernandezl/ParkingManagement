@@ -1,7 +1,7 @@
 ========================================
       REGISTRO DE VEHÍCULOS
 ========================================
-Total de vehículos: 19
+Total de vehículos: 20
 ========================================
 
 VEHÍCULO #1
@@ -151,6 +151,17 @@ Clientes:
 
 VEHÍCULO #14
 ----------------------------------------
+Placa:        tyry
+Marca:        rtyry
+Modelo:       tryrt
+Color:        tyrt
+Tipo:         Moto
+Clientes:     
+              - Rosita (ID: 6773)
+----------------------------------------
+
+VEHÍCULO #15
+----------------------------------------
 Placa:        CCC666
 Marca:        nhfg
 Modelo:       tgjhgv
@@ -160,7 +171,7 @@ Clientes:
               - Ana Alfaro (ID: 303640676)
 ----------------------------------------
 
-VEHÍCULO #15
+VEHÍCULO #16
 ----------------------------------------
 Placa:        WER-456
 Marca:        Toyota
@@ -171,7 +182,7 @@ Clientes:
               - Laura (ID: 09909)
 ----------------------------------------
 
-VEHÍCULO #16
+VEHÍCULO #17
 ----------------------------------------
 Placa:        a
 Marca:        a
@@ -181,7 +192,7 @@ Tipo:         Automóvil
 Clientes:     No hay clientes asociados
 ----------------------------------------
 
-VEHÍCULO #17
+VEHÍCULO #18
 ----------------------------------------
 Placa:        ABC-031
 Marca:        Ferrari
@@ -192,26 +203,26 @@ Clientes:
               - Camila Montoya (ID: 1289630)
 ----------------------------------------
 
-VEHÍCULO #18
+VEHÍCULO #19
 ----------------------------------------
-Placa:        6
-Marca:        l
-Modelo:       f
-Color:        r
-Tipo:         Carro
+Placa:        8797
+Marca:        kjkgkjg
+Modelo:       kjhkh
+Color:        lkhk
+Tipo:         Automóvil
 Clientes:     
               - k (ID: 88)
 ----------------------------------------
 
-VEHÍCULO #19
+VEHÍCULO #20
 ----------------------------------------
-Placa:        161
-Marca:        fa
-Modelo:       fa
-Color:        fa
-Tipo:         Carro
+Placa:        WEE-423
+Marca:        Fiat
+Modelo:       2022
+Color:        Rojo
+Tipo:         Camión
 Clientes:     
-              - Rosita (ID: 6773)
+              - Julián Bonilla (ID: 3120852)
 ----------------------------------------
 
 ========================================
