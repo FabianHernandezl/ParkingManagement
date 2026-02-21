@@ -602,10 +602,7 @@ public class VehicleViewInternal extends JInternalFrame {
         }
     }
 
-    /**
-     * Construye el vehículo con los datos del formulario 🔥 SOLUCIÓN 1: Cambiar
-     * "Automóvil" por "Carro" para que coincida con las tarifas
-     */
+    
     private Vehicle build() {
 
         Vehicle v = new Vehicle();
@@ -615,21 +612,28 @@ public class VehicleViewInternal extends JInternalFrame {
         v.setColor(txtColor.getText());
 
         String selected = cmbType.getSelectedItem().toString();
+
         VehicleType t;
 
         switch (selected) {
             case "Carro":
-                // 🔥 IMPORTANTE: Usar "Carro" en lugar de "Automóvil" para que coincida con las tarifas
-                t = new VehicleType(1, "Carro", 4, 5.0f);
+                t = new VehicleType(1, "Automóvil", 4, 5.0f);
                 break;
-            case "Moto":
+
+            case "Motocicleta":
                 t = new VehicleType(2, "Motocicleta", 2, 2.5f);
                 break;
+
             case "Camión":
-                t = new VehicleType(3, "Camión", 4, 5.0f);
+                t = new VehicleType(3, "Camión", 4, 8.0f);
                 break;
+
+            case "Bicicleta":
+                t = new VehicleType(4, "Bicicleta", 2, 1.5f);
+                break;
+
             default:
-                t = new VehicleType(1, "Carro", 4, 5.0f);
+                t = new VehicleType(1, "Automóvil", 4, 5.0f);
         }
 
         v.setVehicleType(t);
@@ -662,6 +666,6 @@ public class VehicleViewInternal extends JInternalFrame {
 
     public void refreshTable() {
         loadTable();
-        loadParkings(); // También refrescar la lista de parqueos
+        loadParkings(); 
     }
 }

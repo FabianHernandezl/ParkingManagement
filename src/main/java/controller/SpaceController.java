@@ -94,7 +94,6 @@ public class SpaceController {
         available.setSpaceTaken(true);
         available.setClient(client);
         available.setVehicle(vehicle);
-        available.setVehicleType(vehicle.getVehicleType());
         available.setEntryTime(new Date());
 
         boolean updated = updateSpaceInParkingLot(available);
@@ -180,16 +179,7 @@ public class SpaceController {
                     spaces[i].setVehicleType(updatedSpace.getVehicleType());
                     spaces[i].setParkingLot(updatedSpace.getParkingLot());
 
-                    // 🔥 GUARDAR CAMBIOS EN JSON
-                    boolean result = parkingLotData.updateParkingLot(parkingLot);
-
-                    // También guardar en el archivo TXT
-                    // parkingLotData.saveParkingLotsAsTxt(); // Si existe este método
-                    System.out.println("Espacio " + updatedSpace.getId()
-                            + " actualizado en parqueo " + parkingLot.getName()
-                            + " - Resultado: " + result);
-
-                    return result;
+                    return parkingLotData.updateParkingLot(parkingLot);
                 }
             }
         }
@@ -197,41 +187,21 @@ public class SpaceController {
     }
 
     public boolean releaseSpace(int id) {
-        System.out.println("=== SpaceController.releaseSpace ===");
-        System.out.println("Liberando espacio ID: " + id);
-
-        ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
-
-        for (ParkingLot lot : parkingLots) {
+        for (ParkingLot lot : parkingLotData.getAllParkingLots()) {
             if (lot.getSpaces() == null) {
                 continue;
             }
 
             for (Space s : lot.getSpaces()) {
                 if (s != null && s.getId() == id && s.isSpaceTaken()) {
-
-                    // Liberar el espacio
                     s.setSpaceTaken(false);
                     s.setClient(null);
                     s.setVehicle(null);
                     s.setEntryTime(null);
-
-                    System.out.println("Espacio liberado en memoria: " + id);
-
-                    // 🔥 ACTUALIZAR EN EL PARQUEO Y GUARDAR
-                    boolean updated = updateSpaceInParkingLot(s);
-                    System.out.println("Resultado de guardar en JSON: " + updated);
-
-                    // 🔥 GUARDAR EXPLÍCITAMENTE
-                    parkingLotData.saveParkingLots();
-                    parkingLotData.saveParkingLotsAsTxt();
-
-                    return updated;
+                    return updateSpaceInParkingLot(s);
                 }
             }
         }
-
-        System.out.println("No se encontró espacio ocupado con ID: " + id);
         return false;
     }
 

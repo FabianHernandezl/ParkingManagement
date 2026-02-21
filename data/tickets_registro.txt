@@ -313,3 +313,138 @@ Total a pagar: ₡0.00
 ==============================
 
 
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 903908
+Tipo de vehículo: Carro
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 16:21:44
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 903908
+Tipo de vehículo: Carro
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 16:21:44
+Hora de salida: 21/02/2026 16:22:33
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 81232
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 21/02/2026 16:38:49
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 81232
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 21/02/2026 16:38:49
+Hora de salida: 21/02/2026 16:52:19
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 32432
+Tipo de vehículo: Automóvil
+Espacio asignado: 3
+Hora de ingreso: 21/02/2026 17:08:22
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 32432
+Tipo de vehículo: Automóvil
+Espacio asignado: 3
+Hora de ingreso: 21/02/2026 17:08:22
+Hora de salida: 21/02/2026 17:08:44
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 56546
+Tipo de vehículo: Automóvil
+Espacio asignado: 4
+Hora de ingreso: 21/02/2026 17:32:08
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 56546
+Tipo de vehículo: Automóvil
+Espacio asignado: 4
+Hora de ingreso: 21/02/2026 17:32:08
+Hora de salida: 21/02/2026 17:32:17
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Parking Central
+Placa: ter
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 17:32:32
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+

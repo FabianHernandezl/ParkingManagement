@@ -371,27 +371,6 @@
     }
   },
   {
-    "plate": "161",
-    "color": "fa",
-    "brand": "fa",
-    "model": "fa",
-    "clients": [
-      {
-        "id": "6773",
-        "name": "Rosita",
-        "phone": "8989902",
-        "isPreferential": false,
-        "email": "ljsadjkjads"
-      }
-    ],
-    "vehicleType": {
-      "id": 1,
-      "description": "Carro",
-      "numberOfTires": 4,
-      "fee": 5.0
-    }
-  },
-  {
     "plate": "WEE-423",
     "color": "Rojo",
     "brand": "Fiat",
@@ -410,6 +389,27 @@
       "description": "Camión",
       "numberOfTires": 4,
       "fee": 8.0
+    }
+  },
+  {
+    "plate": "ter",
+    "color": "fgdf",
+    "brand": "retert",
+    "model": "fgdf",
+    "clients": [
+      {
+        "id": "6773",
+        "name": "Rosita",
+        "phone": "8989902",
+        "isPreferential": false,
+        "email": "ljsadjkjads"
+      }
+    ],
+    "vehicleType": {
+      "id": 1,
+      "description": "Automóvil",
+      "numberOfTires": 4,
+      "fee": 5.0
     }
   }
 ]
