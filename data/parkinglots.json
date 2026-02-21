@@ -15,10 +15,9 @@
       {
         "id": 2,
         "disabilityAdaptation": true,
-        "spaceTaken": true,
+        "spaceTaken": false,
         "available": false,
         "parkingLotId": 3,
-        "vehiclePlate": "161",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Carro"
       },

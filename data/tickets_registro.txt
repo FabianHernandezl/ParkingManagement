@@ -298,3 +298,18 @@ Total a pagar: ₡0,00
 ==============================
 
 
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Jime ParkingLot
+Placa: 161
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 20:36:56
+Hora de salida: 20/02/2026 20:51:58
+Total a pagar: ₡0.00
+==============================
+
+

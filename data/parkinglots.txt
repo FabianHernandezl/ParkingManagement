@@ -8,8 +8,8 @@ PARQUEO #3
 ----------------------------------------
 Nombre: Jime ParkingLot
 Espacios totales: 5
-Espacios ocupados: 4
-Espacios disponibles: 1
+Espacios ocupados: 3
+Espacios disponibles: 2
 ----------------------------------------
 
 PARQUEO #4
