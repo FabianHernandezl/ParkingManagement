@@ -7,15 +7,27 @@ import controller.VehicleController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Desktop;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import model.entities.Client;
 import model.entities.Vehicle;
 import model.entities.VehicleType;
 import model.entities.ParkingLot;
-
-import java.awt.Cursor;
-import java.awt.Font;
-import java.util.ArrayList;
+import model.entities.Ticket;
+import model.entities.ParkingLotReportRow;
+import model.entities.IngresoReportRow;
+import model.entities.TipoVehiculoReportRow;
 
 public class VehicleViewInternal extends JInternalFrame {
 
@@ -66,7 +78,7 @@ public class VehicleViewInternal extends JInternalFrame {
         panel.setBorder(UITheme.panelBorder());
         add(panel);
 
-        JLabel title = new JLabel("Vehículo");
+        JLabel title = new JLabel("🚗 Vehículo");
         title.setFont(UITheme.TITLE_FONT);
         title.setBounds(10, 10, 200, 25);
         panel.add(title);
@@ -90,7 +102,7 @@ public class VehicleViewInternal extends JInternalFrame {
 
         y += 35;
         panel.add(label("Tipo:", y));
-        cmbType = new JComboBox<>(new String[]{"Carro", "Motocicleta", "Camión", "Bicicleta"});
+        cmbType = new JComboBox<>(new String[]{"Carro", "Moto", "Camión"});
         cmbType.setBounds(100, y, 200, 25);
         panel.add(cmbType);
 
@@ -155,7 +167,7 @@ public class VehicleViewInternal extends JInternalFrame {
         searchPanel.setBorder(UITheme.panelBorder());
         add(searchPanel);
 
-        JLabel lblSearchVehicle = new JLabel("Buscar vehículo:");
+        JLabel lblSearchVehicle = new JLabel("🔍 Buscar vehículo:");
         lblSearchVehicle.setBounds(10, 10, 150, 25);
         lblSearchVehicle.setFont(UITheme.LABEL_FONT);
         searchPanel.add(lblSearchVehicle);
@@ -590,6 +602,10 @@ public class VehicleViewInternal extends JInternalFrame {
         }
     }
 
+    /**
+     * Construye el vehículo con los datos del formulario 🔥 SOLUCIÓN 1: Cambiar
+     * "Automóvil" por "Carro" para que coincida con las tarifas
+     */
     private Vehicle build() {
 
         Vehicle v = new Vehicle();
@@ -599,28 +615,21 @@ public class VehicleViewInternal extends JInternalFrame {
         v.setColor(txtColor.getText());
 
         String selected = cmbType.getSelectedItem().toString();
-
         VehicleType t;
 
         switch (selected) {
             case "Carro":
-                t = new VehicleType(1, "Automóvil", 4, 5.0f);
+                // 🔥 IMPORTANTE: Usar "Carro" en lugar de "Automóvil" para que coincida con las tarifas
+                t = new VehicleType(1, "Carro", 4, 5.0f);
                 break;
-
-            case "Motocicleta":
+            case "Moto":
                 t = new VehicleType(2, "Motocicleta", 2, 2.5f);
                 break;
-
             case "Camión":
-                t = new VehicleType(3, "Camión", 4, 8.0f);
+                t = new VehicleType(3, "Camión", 4, 5.0f);
                 break;
-
-            case "Bicicleta":
-                t = new VehicleType(4, "Bicicleta", 2, 1.5f);
-                break;
-
             default:
-                t = new VehicleType(1, "Automóvil", 4, 5.0f);
+                t = new VehicleType(1, "Carro", 4, 5.0f);
         }
 
         v.setVehicleType(t);

@@ -32,23 +32,41 @@ public class TxtTicketUtil {
 
         String ruta = "data/ticket_" + ticketId + ".txt";
 
-        try (FileWriter writer = new FileWriter(ruta)) {
+        System.out.println("🔥 DEBUG: Intentando generar ticket en: " + ruta);
+        System.out.println("  Datos recibidos:");
+        System.out.println("    parkingName: '" + parkingName + "'");
+        System.out.println("    vehicleType: '" + vehicleType + "'");
+        System.out.println("    plate: '" + plate + "'");
+        System.out.println("    spaceId: '" + spaceId + "'");
+        System.out.println("    total: " + total);
+        System.out.println("    ticketId: " + ticketId);
 
-            writer.write("==============================\n");
-            writer.write("      TIQUETE DE PARQUEO\n");
-            writer.write("==============================\n");
-            writer.write("Tiquete #: " + ticketId + "\n");
-            writer.write("Parqueo: " + parkingName + "\n");
-            writer.write("Placa: " + plate + "\n");
-            writer.write("Tipo de vehículo: " + vehicleType + "\n");
-            writer.write("Espacio asignado: " + spaceId + "\n");
-            writer.write("Fecha de salida: "
-                    + LocalDateTime.now().format(DATE_FORMAT) + "\n");
-            writer.write("Total a pagar: ₡"
-                    + String.format("%.2f", total) + "\n");
-            writer.write("==============================\n");
+        try {
+            File file = new File(ruta);
+            System.out.println("  Ruta absoluta: " + file.getAbsolutePath());
+
+            try (FileWriter writer = new FileWriter(ruta)) {
+                writer.write("==============================\n");
+                writer.write("        TICKET DE PARQUEO\n");
+                writer.write("==============================\n");
+                writer.write("Ticket #: " + ticketId + "\n");
+                writer.write("Parqueo: " + parkingName + "\n");
+                writer.write("Vehículo: " + vehicleType + "\n");
+                writer.write("Placa: " + plate + "\n");
+                writer.write("Espacio: " + spaceId + "\n");
+                writer.write("Fecha de salida: " + LocalDateTime.now().format(DATE_FORMAT) + "\n");
+                writer.write("Monto a pagar: ₡" + String.format("%.2f", total) + "\n");
+                writer.write("==============================\n");
+            }
+
+            if (file.exists()) {
+                System.out.println("✅ Ticket generado exitosamente. Tamaño: " + file.length() + " bytes");
+            } else {
+                System.out.println("❌ El archivo no se creó después de escribir");
+            }
 
         } catch (IOException e) {
+            System.out.println("❌ Error al generar ticket: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -68,13 +86,11 @@ public class TxtTicketUtil {
                         writer.write("===== INICIO TICKET ACTIVO =====\n");
                         writer.write("ID:" + ticket.getId() + "\n");
 
-                        // Guardar información del parqueo
                         if (ticket.getParkingLot() != null) {
                             writer.write("PARKING_ID:" + ticket.getParkingLot().getId() + "\n");
                             writer.write("PARKING_NOMBRE:" + ticket.getParkingLot().getName() + "\n");
                         }
 
-                        // Guardar información del vehículo
                         if (ticket.getVehicle() != null) {
                             writer.write("VEHICULO_PLACA:" + ticket.getVehicle().getPlate() + "\n");
                             if (ticket.getVehicle().getVehicleType() != null) {
@@ -83,12 +99,10 @@ public class TxtTicketUtil {
                             }
                         }
 
-                        // Guardar información del espacio
                         if (ticket.getSpace() != null) {
                             writer.write("ESPACIO_ID:" + ticket.getSpace().getId() + "\n");
                         }
 
-                        // Guardar hora de entrada
                         if (ticket.getEntryTime() != null) {
                             writer.write("HORA_ENTRADA:"
                                     + ticket.getEntryTime().format(DATE_FORMAT) + "\n");
@@ -177,8 +191,16 @@ public class TxtTicketUtil {
      * Elimina un ticket de los activos (cuando se cierra)
      */
     public static void eliminarTicketActivo(int ticketId) {
+        System.out.println("eliminarTicketActivo: Eliminando ticket " + ticketId);
         List<Ticket> activos = cargarTicketsActivos();
-        activos.removeIf(t -> t.getId() == ticketId);
+
+        int tamañoOriginal = activos.size();
+        boolean removed = activos.removeIf(t -> t.getId() == ticketId);
+
+        System.out.println("  Tickets activos antes: " + tamañoOriginal
+                + ", después: " + activos.size()
+                + ", removido: " + removed);
+
         guardarTicketsActivos(activos);
     }
 
@@ -204,54 +226,88 @@ public class TxtTicketUtil {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 Ticket ticket = new Ticket();
                 String line;
+                boolean esFormatoAntiguo = false;
 
                 while ((line = br.readLine()) != null) {
                     line = line.trim();
-
-                    if (line.startsWith("Tiquete #:")) {
-                        ticket.setId(Integer.parseInt(line.split(":")[1].trim()));
-
-                    } else if (line.startsWith("Placa:")) {
-                        if (ticket.getVehicle() == null) {
-                            ticket.setVehicle(new Vehicle());
-                        }
-                        ticket.getVehicle().setPlate(line.split(":")[1].trim());
-
-                    } else if (line.startsWith("Parqueo:")) {
-                        if (ticket.getParkingLot() == null) {
-                            ticket.setParkingLot(new ParkingLot());
-                        }
-                        ticket.getParkingLot().setName(line.split(":")[1].trim());
-
-                    } else if (line.startsWith("Espacio asignado:")) {
-                        if (ticket.getSpace() == null) {
-                            ticket.setSpace(new Space());
-                        }
-                        ticket.getSpace().setId(
-                                Integer.parseInt(line.split(":")[1].trim())
-                        );
-
-                    } else if (line.startsWith("Tipo de vehículo:")) {
-                        if (ticket.getVehicle() != null && ticket.getVehicle().getVehicleType() == null) {
-                            VehicleType tipo = new VehicleType();
-                            tipo.setDescription(line.split(":")[1].trim());
-                            ticket.getVehicle().setVehicleType(tipo);
-                        }
-
-                    } else if (line.startsWith("Total a pagar:")) {
-                        String totalStr = line.split("₡")[1].trim();
-                        ticket.setTotal(Double.parseDouble(totalStr));
-
-                    } else if (line.startsWith("Fecha de salida:")) {
-                        String fechaStr = line.split(":")[1].trim() + ":"
-                                + line.split(":")[2].trim() + ":"
-                                + line.split(":")[3].trim();
-                        ticket.setExitTime(LocalDateTime.parse(fechaStr, DATE_FORMAT));
+                    if (line.isEmpty()) {
+                        continue;
                     }
+
+                    if (line.contains("Ticket #:") || line.contains("Tiquete #:")) {
+                        String[] parts = line.split(":");
+                        if (parts.length > 1) {
+                            ticket.setId(Integer.parseInt(parts[1].trim()));
+                        }
+                    } else if (line.startsWith("Cliente:")) {
+                        esFormatoAntiguo = true;
+                    } else if (line.startsWith("Vehículo:") || line.startsWith("Tipo de vehículo:")) {
+                        String[] parts = line.split(":");
+                        if (parts.length > 1) {
+                            String tipo = parts[1].trim();
+                            if (ticket.getVehicle() == null) {
+                                ticket.setVehicle(new Vehicle());
+                            }
+                            if (ticket.getVehicle().getVehicleType() == null) {
+                                VehicleType vt = new VehicleType();
+                                vt.setDescription(tipo);
+                                ticket.getVehicle().setVehicleType(vt);
+                            }
+                        }
+                    } else if (line.startsWith("Placa:")) {
+                        String[] parts = line.split(":");
+                        if (parts.length > 1) {
+                            if (ticket.getVehicle() == null) {
+                                ticket.setVehicle(new Vehicle());
+                            }
+                            ticket.getVehicle().setPlate(parts[1].trim());
+                        }
+                    } else if (line.startsWith("Espacio:") || line.startsWith("Espacio asignado:")) {
+                        String[] parts = line.split(":");
+                        if (parts.length > 1) {
+                            if (ticket.getSpace() == null) {
+                                ticket.setSpace(new Space());
+                            }
+                            ticket.getSpace().setId(Integer.parseInt(parts[1].trim()));
+                        }
+                    } else if (line.startsWith("Monto a pagar:") || line.startsWith("Total a pagar:")) {
+                        String totalStr = line.replace("Monto a pagar:", "")
+                                .replace("Total a pagar:", "")
+                                .replace("₡", "")
+                                .replace(",", ".")
+                                .trim();
+                        try {
+                            ticket.setTotal(Double.parseDouble(totalStr));
+                        } catch (NumberFormatException e) {
+                            System.out.println("Error parseando total: " + totalStr);
+                        }
+                    } else if (line.startsWith("Parqueo:")) {
+                        String[] parts = line.split(":");
+                        if (parts.length > 1) {
+                            if (ticket.getParkingLot() == null) {
+                                ticket.setParkingLot(new ParkingLot());
+                            }
+                            ticket.getParkingLot().setName(parts[1].trim());
+                        }
+                    } else if (line.startsWith("Fecha de salida:")) {
+                        try {
+                            String fechaStr = line.substring(16).trim();
+                            ticket.setExitTime(LocalDateTime.parse(fechaStr, DATE_FORMAT));
+                        } catch (Exception e) {
+                            ticket.setExitTime(LocalDateTime.now());
+                        }
+                    }
+                }
+
+                if (esFormatoAntiguo && ticket.getExitTime() == null) {
+                    ticket.setExitTime(LocalDateTime.now());
                 }
 
                 if (ticket.getId() > 0) {
                     tickets.add(ticket);
+                    System.out.println("DEBUG: Ticket cargado - ID: " + ticket.getId()
+                            + ", Total: " + ticket.getTotal()
+                            + ", Placa: " + (ticket.getVehicle() != null ? ticket.getVehicle().getPlate() : "N/A"));
                 }
 
             } catch (IOException e) {
@@ -259,6 +315,7 @@ public class TxtTicketUtil {
             }
         }
 
+        System.out.println("DEBUG: Total tickets históricos cargados: " + tickets.size());
         return tickets;
     }
 }
