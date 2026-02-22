@@ -62,6 +62,31 @@
                 </configuration>
             </plugin>
             
+            <!-- Plugin para copiar la carpeta data/ a target/ automáticamente -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-data-folder</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/data</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>data</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
             <!-- Plugin para incluir las dependencias (como Gson) en el JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
