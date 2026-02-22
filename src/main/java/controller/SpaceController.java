@@ -70,7 +70,7 @@ public class SpaceController {
         if (existingClient == null) {
             clientData.addClient(client);
         } else {
-            client = existingClient; // 🔥 ahora usamos el correcto
+            client = existingClient;
         }
 
         // 🔥 BUSCAR ESPACIO DESPUÉS de tener cliente correcto
@@ -104,7 +104,6 @@ public class SpaceController {
 
     // ================= BUSCAR ESPACIO DISPONIBLE =================
     private Space findAvailableSpace(Client client, Vehicle vehicle) {
-
 
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
 
@@ -183,11 +182,13 @@ public class SpaceController {
                     spaces[i].setVehicleType(updatedSpace.getVehicleType());
                     spaces[i].setParkingLot(updatedSpace.getParkingLot());
 
+                    // 🔥 updateParkingLot ya guarda internamente
                     boolean updated = parkingLotData.updateParkingLot(parkingLot);
 
                     if (updated) {
-                        parkingLotData.saveParkingLots();        // 🔥 FALTA ESTO
-                        parkingLotData.saveParkingLotsAsTxt();   // 🔥 Y ESTO
+                        // Guardado adicional por si acaso (no está mal)
+                        parkingLotData.saveParkingLots();
+                        parkingLotData.saveParkingLotsAsTxt();
                     }
 
                     return updated;
@@ -198,7 +199,13 @@ public class SpaceController {
         return false;
     }
 
+    /**
+     * 🔥 VERSIÓN CORREGIDA - Libera espacio y guarda
+     */
     public boolean releaseSpace(int id) {
+        System.out.println("=== SpaceController.releaseSpace ===");
+        System.out.println("Liberando espacio ID: " + id);
+
         for (ParkingLot lot : parkingLotData.getAllParkingLots()) {
             if (lot.getSpaces() == null) {
                 continue;
@@ -206,14 +213,26 @@ public class SpaceController {
 
             for (Space s : lot.getSpaces()) {
                 if (s != null && s.getId() == id && s.isSpaceTaken()) {
+
                     s.setSpaceTaken(false);
                     s.setClient(null);
                     s.setVehicle(null);
                     s.setEntryTime(null);
-                    return updateSpaceInParkingLot(s);
+
+                    boolean updated = updateSpaceInParkingLot(s);
+
+                    if (updated) {
+                        System.out.println("✅ Espacio " + id + " liberado permanentemente");
+                        return true;
+                    } else {
+                        System.out.println("❌ Error al guardar liberación del espacio " + id);
+                        return false;
+                    }
                 }
             }
         }
+
+        System.out.println("No se encontró espacio ocupado con ID: " + id);
         return false;
     }
 

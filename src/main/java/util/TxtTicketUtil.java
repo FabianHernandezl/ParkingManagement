@@ -10,6 +10,7 @@ import model.entities.ParkingLot;
 import model.entities.Space;
 import model.entities.Vehicle;
 import model.entities.VehicleType;
+import controller.ParkingLotController;
 
 public class TxtTicketUtil {
 
@@ -17,6 +18,9 @@ public class TxtTicketUtil {
             = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     private static final String ACTIVE_TICKETS_FILE = "data/tickets_activos.txt";
+
+    // 🔥 Agregar controller para buscar parqueos
+    private static final ParkingLotController parkingLotController = new ParkingLotController();
 
     /**
      * Genera un ticket individual en TXT (para tickets cerrados)
@@ -205,7 +209,7 @@ public class TxtTicketUtil {
     }
 
     /**
-     * Lee todos los tickets históricos desde los archivos TXT
+     * 🔥 VERSIÓN CORREGIDA - Lee todos los tickets históricos
      */
     public static ArrayList<Ticket> leerTicketsTXT() {
         ArrayList<Ticket> tickets = new ArrayList<>();
@@ -226,6 +230,7 @@ public class TxtTicketUtil {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 Ticket ticket = new Ticket();
                 String line;
+                String parkingName = null;
                 boolean esFormatoAntiguo = false;
 
                 while ((line = br.readLine()) != null) {
@@ -284,10 +289,11 @@ public class TxtTicketUtil {
                     } else if (line.startsWith("Parqueo:")) {
                         String[] parts = line.split(":");
                         if (parts.length > 1) {
+                            parkingName = parts[1].trim();
                             if (ticket.getParkingLot() == null) {
                                 ticket.setParkingLot(new ParkingLot());
                             }
-                            ticket.getParkingLot().setName(parts[1].trim());
+                            ticket.getParkingLot().setName(parkingName);
                         }
                     } else if (line.startsWith("Fecha de salida:")) {
                         try {
@@ -299,6 +305,14 @@ public class TxtTicketUtil {
                     }
                 }
 
+                // 🔥 Buscar el ID del parqueo por su nombre
+                if (parkingName != null && ticket.getParkingLot() != null) {
+                    ParkingLot pl = parkingLotController.findParkingLotByName(parkingName);
+                    if (pl != null) {
+                        ticket.getParkingLot().setId(pl.getId());
+                    }
+                }
+
                 if (esFormatoAntiguo && ticket.getExitTime() == null) {
                     ticket.setExitTime(LocalDateTime.now());
                 }
@@ -307,6 +321,7 @@ public class TxtTicketUtil {
                     tickets.add(ticket);
                     System.out.println("DEBUG: Ticket cargado - ID: " + ticket.getId()
                             + ", Total: " + ticket.getTotal()
+                            + ", Parqueo: " + (ticket.getParkingLot() != null ? ticket.getParkingLot().getName() : "null")
                             + ", Placa: " + (ticket.getVehicle() != null ? ticket.getVehicle().getPlate() : "N/A"));
                 }
 

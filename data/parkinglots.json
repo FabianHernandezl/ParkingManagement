@@ -18,7 +18,8 @@
         "spaceTaken": false,
         "available": false,
         "parkingLotId": 3,
-        "vehicleTypeId": 0
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
       },
       {
         "id": 3,
