@@ -247,7 +247,8 @@
         "disabilityAdaptation": false,
         "spaceTaken": false,
         "available": false,
-        "parkingLotId": 9,
+        "parkingLotId": 5,
+        "vehiclePlate": "DESCONOCIDO",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       },
@@ -1591,6 +1592,7 @@
         "spaceTaken": false,
         "available": false,
         "parkingLotId": 9,
+        "vehiclePlate": "DESCONOCIDO",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       },
@@ -1701,6 +1703,113 @@
         "available": false,
         "parkingLotId": 9,
         "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Centro",
+    "numberOfSpaces": 10,
+    "spaces": [
+      {
+        "id": 1,
+        "disabilityAdaptation": true,
+        "spaceTaken": true,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "8888",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 2,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 3,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 4,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 2,
+        "vehicleTypeDescription": "Motocicleta"
+      },
+      {
+        "id": 5,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 2,
+        "vehicleTypeDescription": "Motocicleta"
+      },
+      {
+        "id": 6,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 3,
+        "vehicleTypeDescription": "Camión"
+      },
+      {
+        "id": 7,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 3,
+        "vehicleTypeDescription": "Camión"
+      },
+      {
+        "id": 8,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 4,
+        "vehicleTypeDescription": "Bicicleta"
+      },
+      {
+        "id": 9,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 4,
+        "vehicleTypeDescription": "Bicicleta"
+      },
+      {
+        "id": 10,
+        "disabilityAdaptation": false,
+        "spaceTaken": true,
+        "available": false,
+        "parkingLotId": 10,
+        "vehiclePlate": "89879",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       }

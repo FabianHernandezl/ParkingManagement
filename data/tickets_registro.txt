@@ -613,3 +613,33 @@ Total a pagar: ₡0,00
 ==============================
 
 
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Centro
+Placa: 89879
+Tipo de vehículo: Automóvil
+Espacio asignado: 10
+Hora de ingreso: 21/02/2026 19:33:33
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Centro
+Placa: 8888
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 19:34:32
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+

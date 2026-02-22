@@ -172,26 +172,6 @@
     }
   },
   {
-    "plate": "22",
-    "color": "2",
-    "brand": "2",
-    "model": "2",
-    "clients": [
-      {
-        "id": "119360128",
-        "name": "Mariana Blanco",
-        "phone": "86621670",
-        "isPreferential": true
-      }
-    ],
-    "vehicleType": {
-      "id": 0,
-      "description": "Moto",
-      "numberOfTires": 0,
-      "fee": 0.0
-    }
-  },
-  {
     "plate": "7",
     "color": "0",
     "brand": "9",
@@ -392,10 +372,10 @@
     }
   },
   {
-    "plate": "78989",
-    "color": "morado",
+    "plate": "89879",
+    "color": "azul",
     "brand": "fiat",
-    "model": "2019",
+    "model": "2001",
     "clients": [
       {
         "id": "6773",
@@ -403,6 +383,26 @@
         "phone": "8989902",
         "isPreferential": false,
         "email": "ljsadjkjads"
+      }
+    ],
+    "vehicleType": {
+      "id": 1,
+      "description": "Automóvil",
+      "numberOfTires": 4,
+      "fee": 5.0
+    }
+  },
+  {
+    "plate": "8888",
+    "color": "asdf",
+    "brand": "adfd",
+    "model": "asdfasd",
+    "clients": [
+      {
+        "id": "119360128",
+        "name": "Mariana Blanco",
+        "phone": "86621670",
+        "isPreferential": true
       }
     ],
     "vehicleType": {
