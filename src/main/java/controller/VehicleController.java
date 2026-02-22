@@ -64,6 +64,11 @@ public class VehicleController {
 
     public ParkingAssignment registerVehicleInParking(Vehicle vehicle, ParkingLot parkingLot) {
 
+        for (Client c : vehicle.getClients()) {
+            System.out.println("Cliente: " + c.getName()
+                    + " | Preferencial: " + c.isIsPreferential());
+        }
+
         if (vehicle == null || parkingLot == null) {
             return null;
         }

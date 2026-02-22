@@ -247,8 +247,9 @@
         "disabilityAdaptation": false,
         "spaceTaken": false,
         "available": false,
-        "parkingLotId": 5,
-        "vehicleTypeId": 0
+        "parkingLotId": 9,
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
       },
       {
         "id": 15,
@@ -1467,40 +1468,40 @@
       {
         "id": 2,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "available": false,
         "parkingLotId": 9,
-        "vehiclePlate": "DESCONOCIDO",
+        "vehiclePlate": "7888998",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       },
       {
         "id": 3,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "available": false,
         "parkingLotId": 9,
-        "vehiclePlate": "DESCONOCIDO",
+        "vehiclePlate": "7889888",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       },
       {
         "id": 4,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "available": false,
         "parkingLotId": 9,
-        "vehiclePlate": "DESCONOCIDO",
+        "vehiclePlate": "8987987",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       },
       {
         "id": 5,
         "disabilityAdaptation": true,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "available": false,
         "parkingLotId": 9,
-        "vehiclePlate": "DESCONOCIDO",
+        "vehiclePlate": "8797979",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       },
@@ -1590,7 +1591,6 @@
         "spaceTaken": false,
         "available": false,
         "parkingLotId": 9,
-        "vehiclePlate": "DESCONOCIDO",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       },

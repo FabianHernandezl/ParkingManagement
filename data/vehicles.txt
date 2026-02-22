@@ -216,10 +216,10 @@ Clientes:
 
 VEHÍCULO #20
 ----------------------------------------
-Placa:        ter
-Marca:        retert
-Modelo:       fgdf
-Color:        fgdf
+Placa:        78989
+Marca:        fiat
+Modelo:       2019
+Color:        morado
 Tipo:         Automóvil
 Clientes:     
               - Rosita (ID: 6773)

@@ -448,3 +448,168 @@ Total a pagar: ₡0,00
 ==============================
 
 
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Parking Central
+Placa: ter
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 17:32:32
+Hora de salida: 21/02/2026 18:11:22
+Total a pagar: ₡1000,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Parking Central
+Placa: 7888998
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 21/02/2026 18:12:16
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Parking Central
+Placa: 7888998
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 21/02/2026 18:12:16
+Hora de salida: 21/02/2026 18:21:28
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 4
+Parqueo: Parking Central
+Placa: 7889888
+Tipo de vehículo: Automóvil
+Espacio asignado: 3
+Hora de ingreso: 21/02/2026 18:22:27
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 4
+Parqueo: Parking Central
+Placa: 7889888
+Tipo de vehículo: Automóvil
+Espacio asignado: 3
+Hora de ingreso: 21/02/2026 18:22:27
+Hora de salida: 21/02/2026 18:25:44
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 5
+Parqueo: Parking Central
+Placa: 8987987
+Tipo de vehículo: Automóvil
+Espacio asignado: 4
+Hora de ingreso: 21/02/2026 18:26:11
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 5
+Parqueo: Parking Central
+Placa: 8987987
+Tipo de vehículo: Automóvil
+Espacio asignado: 4
+Hora de ingreso: 21/02/2026 18:26:11
+Hora de salida: 21/02/2026 18:31:35
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Parking Central
+Placa: 8797979
+Tipo de vehículo: Automóvil
+Espacio asignado: 5
+Hora de ingreso: 21/02/2026 18:32:04
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Parking Central
+Placa: 8797979
+Tipo de vehículo: Automóvil
+Espacio asignado: 5
+Hora de ingreso: 21/02/2026 18:32:04
+Hora de salida: 21/02/2026 18:38:41
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 7
+Parqueo: Parking Central
+Placa: 78989
+Tipo de vehículo: Automóvil
+Espacio asignado: 14
+Hora de ingreso: 21/02/2026 18:39:06
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 7
+Parqueo: Parking Central
+Placa: 78989
+Tipo de vehículo: Automóvil
+Espacio asignado: 14
+Hora de ingreso: 21/02/2026 18:39:06
+Hora de salida: 21/02/2026 18:46:05
+Total a pagar: ₡0,00
+==============================
+
+

@@ -602,7 +602,6 @@ public class VehicleViewInternal extends JInternalFrame {
         }
     }
 
-    
     private Vehicle build() {
 
         Vehicle v = new Vehicle();
@@ -620,7 +619,7 @@ public class VehicleViewInternal extends JInternalFrame {
                 t = new VehicleType(1, "Automóvil", 4, 5.0f);
                 break;
 
-            case "Motocicleta":
+            case "Moto":
                 t = new VehicleType(2, "Motocicleta", 2, 2.5f);
                 break;
 
@@ -666,6 +665,6 @@ public class VehicleViewInternal extends JInternalFrame {
 
     public void refreshTable() {
         loadTable();
-        loadParkings(); 
+        loadParkings();
     }
 }
