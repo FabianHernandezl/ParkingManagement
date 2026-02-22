@@ -1,10 +1,20 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import model.data.ClientData;
 import model.data.VehicleData;
 import model.entities.Client;
 
+/**
+ * Controller class responsible for handling business logic related to Client
+ * operations.
+ *
+ * Acts as an intermediary between: - The View (UI layer) - The Data layer
+ * (ClientData, VehicleData)
+ *
+ * Ensures validation and application rules are enforced before interacting with
+ * the data layer.
+ */
 public class ClientController {
 
     private ClientData clientData;

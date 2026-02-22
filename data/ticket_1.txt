@@ -1,0 +1,11 @@
+==============================
+        TICKET DE PARQUEO
+==============================
+Ticket #: 1
+Parqueo: Jime ParkingLot
+Vehículo: Carro
+Placa: 5
+Espacio: 3
+Fecha de salida: 20/02/2026 18:31:35
+Monto a pagar: ₡1.00
+==============================

@@ -1,88 +1,93 @@
 package model.data;
 
 import java.util.ArrayList;
+import java.util.List;
 import model.entities.Ticket;
 import model.entities.Vehicle;
 
 /**
- * Simula la base de datos de tickets
+ * Simula la base de datos de tickets en memoria.
  */
 public class TicketData {
 
-    private static ArrayList<Ticket> tickets = new ArrayList<>();
+    // Simulación de base de datos en memoria
+    private static final List<Ticket> tickets = new ArrayList<>();
 
-    public void insertTicket(Ticket ticket) {
+    /**
+     * Inserta un nuevo ticket en el sistema.
+     */
+    public boolean insertTicket(Ticket ticket) {
         if (ticket == null) {
-            System.out.println("ERROR: Intento de insertar ticket nulo");
-            return;
+            return false;
         }
-        
-        System.out.println("=== INSERTANDO TICKET ===");
-        System.out.println("ID: " + ticket.getId());
-        System.out.println("Placa: " + (ticket.getVehicle() != null ? ticket.getVehicle().getPlate() : "null"));
-        System.out.println("Espacio: " + (ticket.getSpace() != null ? ticket.getSpace().getId() : "null"));
-        
+
         tickets.add(ticket);
-        System.out.println("✅ Ticket insertado. Total tickets: " + tickets.size());
+        return true;
     }
 
-    public ArrayList<Ticket> getAllTickets() {
-        return tickets;
+    /**
+     * Retorna todos los tickets (copia para evitar modificación externa).
+     */
+    public List<Ticket> getAllTickets() {
+        return new ArrayList<>(tickets);
     }
 
+    /**
+     * Busca un ticket activo (sin hora de salida) por vehículo.
+     */
     public Ticket findActiveTicketByVehicle(Vehicle vehicle) {
         if (vehicle == null || vehicle.getPlate() == null) {
-            System.out.println("ERROR: Vehículo o placa nula en findActiveTicketByVehicle");
             return null;
         }
 
-        System.out.println("Buscando ticket activo para placa: " + vehicle.getPlate());
-        
         for (Ticket ticket : tickets) {
-            Vehicle v = ticket.getVehicle();
-            if (v != null
-                && v.getPlate() != null
-                && v.getPlate().equalsIgnoreCase(vehicle.getPlate())
-                && ticket.getExitTime() == null) {
-                System.out.println("  ✅ Encontrado ticket #" + ticket.getId());
+            if (ticket.getVehicle() != null
+                    && ticket.getVehicle().getPlate() != null
+                    && ticket.getVehicle().getPlate().equalsIgnoreCase(vehicle.getPlate())
+                    && ticket.getExitTime() == null) {
                 return ticket;
             }
         }
-        System.out.println("  ❌ No se encontró ticket activo para placa: " + vehicle.getPlate());
         return null;
     }
 
-    public ArrayList<Ticket> getActiveTickets() {
-        ArrayList<Ticket> active = new ArrayList<>();
+    /**
+     * Obtiene todos los tickets activos (sin hora de salida).
+     */
+    public List<Ticket> getActiveTickets() {
+        List<Ticket> activeTickets = new ArrayList<>();
 
-        System.out.println("=== Buscando tickets activos ===");
-        System.out.println("Total tickets en sistema: " + tickets.size());
-        
         for (Ticket ticket : tickets) {
-            System.out.println("  Revisando ticket #" + ticket.getId() + 
-                             " - Placa: " + (ticket.getVehicle() != null ? ticket.getVehicle().getPlate() : "null") +
-                             " - ExitTime: " + ticket.getExitTime());
-            
             if (ticket.getExitTime() == null) {
-                active.add(ticket);
-                System.out.println("    ✅ Ticket activo");
+                activeTickets.add(ticket);
             }
         }
 
-        System.out.println("Tickets activos encontrados: " + active.size());
-        return active;
+        return activeTickets;
     }
-    
-    // Método adicional para actualizar un ticket
+
+    /**
+     * Actualiza un ticket existente.
+     */
     public boolean updateTicket(Ticket updatedTicket) {
+        if (updatedTicket == null) {
+            return false;
+        }
+
         for (int i = 0; i < tickets.size(); i++) {
             if (tickets.get(i).getId() == updatedTicket.getId()) {
                 tickets.set(i, updatedTicket);
-                System.out.println("✅ Ticket #" + updatedTicket.getId() + " actualizado");
                 return true;
             }
         }
-        System.out.println("❌ No se encontró ticket #" + updatedTicket.getId() + " para actualizar");
+
         return false;
+    }
+
+    /**
+     * Elimina todos los tickets (útil para pruebas).
+     */
+    public void clearAll() {
+        tickets.clear();
     }
 }

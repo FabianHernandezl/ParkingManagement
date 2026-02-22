@@ -1,8 +1,8 @@
 package view;
 
-import Controller.ParkingLotController;
-import Controller.SpaceController;
-import Controller.TicketController;
+import controller.ParkingLotController;
+import controller.SpaceController;
+import controller.TicketController;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -18,6 +18,13 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Internal frame that displays and manages parking spaces of a selected
+ * ParkingLot.
+ *
+ * Allows: - Viewing all spaces in grid format - Selecting a space - Viewing
+ * vehicle information (double click) - Registering vehicle exit
+ */
 public class SpaceView extends JInternalFrame {
 
     private ParkingLot parkingLot;
@@ -27,6 +34,7 @@ public class SpaceView extends JInternalFrame {
 
     private ParkingLotController parkingLotController = new ParkingLotController();
     private SpaceController spaceController = new SpaceController();
+    private TicketController ticketController = TicketController.getInstance();
     private SpaceData sd = new SpaceData();
 
     public SpaceView(ParkingLot parkingLot, AdminMenu parent) {
@@ -137,8 +145,6 @@ public class SpaceView extends JInternalFrame {
                             return;
                         }
 
-                        TicketController ticketController = TicketController.getInstance();
-
                         Ticket ticket = ticketController
                                 .getActiveTickets()
                                 .stream()
@@ -207,8 +213,12 @@ public class SpaceView extends JInternalFrame {
         timer.start();
     }
 
+    /**
+     * Maneja el evento de registro de salida del vehículo seleccionado
+     */
     private void handleRegisterExit() {
 
+        // Validar que haya un espacio seleccionado
         if (selectedPanel == null) {
             JOptionPane.showMessageDialog(
                     this,
@@ -221,6 +231,7 @@ public class SpaceView extends JInternalFrame {
 
         Space space = selectedPanel.getSpace();
 
+        // Validar que el espacio esté ocupado
         if (!space.isSpaceTaken()) {
             JOptionPane.showMessageDialog(
                     this,
@@ -231,8 +242,7 @@ public class SpaceView extends JInternalFrame {
             return;
         }
 
-        TicketController ticketController = TicketController.getInstance();
-
+        // Buscar el ticket activo para este espacio
         Ticket ticket = ticketController
                 .getActiveTickets()
                 .stream()
@@ -244,28 +254,33 @@ public class SpaceView extends JInternalFrame {
         if (ticket == null) {
             JOptionPane.showMessageDialog(
                     this,
-                    "No se encontró ticket activo",
+                    "No se encontró ticket activo para este espacio",
                     "Error",
                     JOptionPane.ERROR_MESSAGE
             );
             return;
         }
 
-        new VehicleInfoDialog(parent, ticket).setVisible(true);
-
-        int confirm = JOptionPane.showConfirmDialog(
+        // Mostrar información del vehículo antes de confirmar
+        int option = JOptionPane.showConfirmDialog(
                 this,
-                "¿Está seguro que desea registrar la salida del vehículo?",
+                "Vehículo: " + ticket.getVehicle().getPlate() + "\n"
+                + "Hora de ingreso: " + ticket.getEntryTime() + "\n\n"
+                + "¿Desea registrar la salida de este vehículo?",
                 "Confirmar salida",
-                JOptionPane.YES_NO_OPTION
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
         );
 
-        if (confirm != JOptionPane.YES_OPTION) {
+        if (option != JOptionPane.YES_OPTION) {
             return;
         }
 
-        animateExit(selectedPanel, () -> {
+        try {
+            // Registrar la salida en TicketController (esto genera el ticket de salida automáticamente)
+            double totalPagado = ticketController.registerExit(ticket);
 
+            // Liberar el espacio
             boolean released = spaceController.releaseSpace(space.getId());
 
             if (!released) {
@@ -278,20 +293,55 @@ public class SpaceView extends JInternalFrame {
                 return;
             }
 
-            // 🔥 Actualizamos solo el modelo local
+            // Actualizar el estado del espacio localmente
             space.setSpaceTaken(false);
             space.setVehicle(null);
 
-            // 🔥 Actualizamos solo el panel
-            selectedPanel.updateView();
+            // Animar y actualizar la vista
+            animateExit(selectedPanel, () -> {
+                selectedPanel.updateView();
 
+                // Mostrar mensaje de éxito con el total pagado
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Salida registrada correctamente\n"
+                        + "Total pagado: ₡" + String.format("%.2f", totalPagado) + "\n"
+                        + "Ticket de salida generado en data/ticket_" + ticket.getId() + ".txt",
+                        "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
+                // Opcional: abrir el ticket automáticamente
+                int abrirTicket = JOptionPane.showConfirmDialog(
+                        this,
+                        "¿Desea abrir el ticket de salida?",
+                        "Abrir ticket",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (abrirTicket == JOptionPane.YES_OPTION) {
+                    try {
+                        java.awt.Desktop.getDesktop().open(new java.io.File("data/ticket_" + ticket.getId() + ".txt"));
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(
+                                this,
+                                "No se pudo abrir el ticket: " + ex.getMessage(),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                }
+            });
+
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(
                     this,
-                    "Salida registrada correctamente",
-                    "Éxito",
-                    JOptionPane.INFORMATION_MESSAGE
+                    "Error al registrar la salida: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
-        });
+            ex.printStackTrace();
+        }
     }
 
     private JButton createModernButton(String text, Color color) {

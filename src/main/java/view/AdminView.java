@@ -5,11 +5,14 @@
 package view;
 
 import javax.swing.JInternalFrame;
-import Controller.AdministratorController;
+import controller.AdministratorController;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableRowSorter;
 import model.data.AdministratorData;
 import model.data.ParkingLotData;
 import model.entities.Administrator;
@@ -32,84 +35,95 @@ public class AdminView extends JInternalFrame{
     private DefaultTableModel model;
     private JButton btnUpdate;
     private JButton btnDelete;
-
     
+    private JTextField txtSearch;
+    private TableRowSorter<DefaultTableModel> sorter;
 
     public AdminView() {
         super("Gestión de Administradores", true, true, true, true);
 
-
-        setSize(900, 600);
-        setLayout(null);
+        setSize(1000, 700);
+        setLayout(null); 
+        initComponents();
+        loadTable(); 
+        generateNextIds();
         setVisible(true);
-
+    }
+        private void initComponents() {
         // Columna 1: Campos de entrada
         int x = 30;
         int y = 20;
         int labelWidth = 140;
         int fieldWidth = 200;
         int verticalSpacing = 30;
+        
+
+        JPanel panel = new JPanel(null);
+        panel.setBounds(x, 20, 380, 590);
+        panel.setBackground(UITheme.PANEL_BG);
+        panel.setBorder(UITheme.panelBorder());
+        add(panel);
 
         // ID (Generado automáticamente)
         JLabel lblId = new JLabel("ID Administrador:");
         lblId.setBounds(x, y, labelWidth, 25);
         lblId.setForeground(Color.BLUE);
-        add(lblId);
+        panel.add(lblId);
 
         txtId = new JTextField();
         txtId.setBounds(x + labelWidth, y, fieldWidth, 25);
         txtId.setEditable(false);
         txtId.setBackground(new Color(240, 240, 240));
-        add(txtId);
+        panel.add(txtId);
         y += verticalSpacing;
 
         // Número de Administrador (Generado automáticamente)
-        JLabel lblAdminNumber = new JLabel("Número Administrador:");
+        JLabel lblAdminNumber = new JLabel("Código Empleado:");
         lblAdminNumber.setBounds(x, y, labelWidth, 25);
         lblAdminNumber.setForeground(Color.BLUE);
-        add(lblAdminNumber);
+        panel.add(lblAdminNumber);
 
         txtAdminNumber = new JTextField();
         txtAdminNumber.setBounds(x + labelWidth, y, fieldWidth, 25);
         txtAdminNumber.setEditable(false);
         txtAdminNumber.setBackground(new Color(240, 240, 240));
-        add(txtAdminNumber);
+        panel.add(txtAdminNumber);
         y += verticalSpacing;
 
         // Nombre
         JLabel lblName = new JLabel("Nombre Completo:");
         lblName.setBounds(x, y, labelWidth, 25);
-        add(lblName);
+        panel.add(lblName);
 
         txtName = new JTextField();
         txtName.setBounds(x + labelWidth, y, fieldWidth, 25);
-        add(txtName);
+        panel.add(txtName);
         y += verticalSpacing;
 
         // Username
         JLabel lblUsername = new JLabel("Usuario:");
         lblUsername.setBounds(x, y, labelWidth, 25);
-        add(lblUsername);
+        panel.add(lblUsername);
 
         txtUsername = new JTextField();
         txtUsername.setBounds(x + labelWidth, y, fieldWidth, 25);
-        add(txtUsername);
+        panel.add(txtUsername);
         y += verticalSpacing;
 
         // Password
         JLabel lblPassword = new JLabel("Contraseña:");
         lblPassword.setBounds(x, y, labelWidth, 25);
-        add(lblPassword);
+        panel.add(lblPassword);
 
         txtPassword = new JPasswordField();
         txtPassword.setBounds(x + labelWidth, y, fieldWidth, 25);
-        add(txtPassword);
+        panel.add(txtPassword);
         y += verticalSpacing;
 
         // Parqueo/s Asignado/s
         JLabel lblParkingLot = new JLabel("Parqueo/s Asignado/s:");
         lblParkingLot.setBounds(x, y, labelWidth, 25);
-        add(lblParkingLot);
+        panel.add(lblParkingLot);
         y += 25;
 
         // Inicializar el JList con DefaultListModel
@@ -138,7 +152,7 @@ public class AdminView extends JInternalFrame{
         // Crear JScrollPane para el JList
         JScrollPane scrollPanePL = new JScrollPane(lstParkingLots);
         scrollPanePL.setBounds(x + labelWidth, y, fieldWidth, 80);
-        add(scrollPanePL);
+        panel.add(scrollPanePL);
         y += 90;
 
         // Etiqueta informativa
@@ -146,7 +160,7 @@ public class AdminView extends JInternalFrame{
         lblInfo.setBounds(x + labelWidth, y, fieldWidth, 20);
         lblInfo.setFont(new Font("Arial", Font.ITALIC, 10));
         lblInfo.setForeground(Color.GRAY);
-        add(lblInfo);
+        panel.add(lblInfo);
         y += 25;
 
         // Botones
@@ -154,13 +168,13 @@ public class AdminView extends JInternalFrame{
         btnSave.setBounds(x, y, 140, 30);
         btnSave.setBackground(new Color(76, 175, 80));
         btnSave.setForeground(Color.WHITE);
-        add(btnSave);
+        panel.add(btnSave);
 
         JButton btnClear = new JButton("Limpiar");
         btnClear.setBounds(x + 150, y, 90, 30);
         btnClear.setBackground(new Color(158, 158, 158));
         btnClear.setForeground(Color.WHITE);
-        add(btnClear);
+        panel.add(btnClear);
         y += 40;
 
         btnUpdate = new JButton("Actualizar");
@@ -168,21 +182,25 @@ public class AdminView extends JInternalFrame{
         btnUpdate.setBackground(new Color(33, 150, 243));
         btnUpdate.setForeground(Color.WHITE);
         btnUpdate.setEnabled(false);
-        add(btnUpdate);
+        panel.add(btnUpdate);
 
         btnDelete = new JButton("Eliminar");
         btnDelete.setBounds(x + 150, y, 90, 30);
         btnDelete.setBackground(new Color(244, 67, 54));
         btnDelete.setForeground(Color.WHITE);
         btnDelete.setEnabled(false);
-        add(btnDelete);
+        panel.add(btnDelete);
 
         // Cargar los parking lots en el JList
         loadParkingLots();
+        
+        //Search / filter by 1 and 2 column
+        initSearch();
+        setupSearch();
 
         // Tabla
         model = new DefaultTableModel(new String[]{
-            "ID", "Nombre", "Usuario", "Número Admin", "Parqueo/s"
+            "ID", "Nombre", "Usuario", "Código", "Parqueo/s"
         }, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -191,17 +209,22 @@ public class AdminView extends JInternalFrame{
         };
 
         table = new JTable(model);
+        UITheme.styleTable(table);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setRowHeight(25);
+        
+        sorter = new TableRowSorter<>(model);
+        table.setRowSorter(sorter);
 
         table.getColumnModel().getColumn(0).setPreferredWidth(100);   // ID
         table.getColumnModel().getColumn(1).setPreferredWidth(150);   // Nombre
         table.getColumnModel().getColumn(2).setPreferredWidth(120);   // Usuario
         table.getColumnModel().getColumn(3).setPreferredWidth(80);    // Número Admin
         table.getColumnModel().getColumn(4).setPreferredWidth(200);   // Parqueo/s
-
+        
+        //Panel for the table
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(400, 20, 450, 500);
+        scrollPane.setBounds(420, 80, 530, 520);
         add(scrollPane);
 
         // Cargar datos iniciales
@@ -267,6 +290,7 @@ public class AdminView extends JInternalFrame{
 
     private void loadTable() {
         model.setRowCount(0);
+        
         try {
             ArrayList<Administrator> administrators = administratorController.getAllAdministrators();
 
@@ -296,8 +320,60 @@ public class AdminView extends JInternalFrame{
         } catch (Exception e) {
             System.err.println("Error cargando tabla: " + e.getMessage());
         }
+        
+        
+        
     }
 
+    private void initSearch() {
+        //Panel for searcher
+        JPanel searchPanel = new JPanel(null);
+        searchPanel.setBounds(420, 20, 530, 50);
+        searchPanel.setBackground(UITheme.PANEL_BG);
+        searchPanel.setBorder(UITheme.panelBorder());
+        add(searchPanel);
+
+        JLabel lblSearchVehicle = new JLabel("Buscar:");
+        lblSearchVehicle.setBounds(10, 10, 150, 25);
+        lblSearchVehicle.setFont(UITheme.LABEL_FONT);
+        searchPanel.add(lblSearchVehicle);
+
+        txtSearch = new JTextField();
+        txtSearch.setBounds(130, 10, 335, 25);
+        searchPanel.add(txtSearch);
+
+    }
+
+    private void setupSearch() {
+
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void filter() {
+                String text = txtSearch.getText().trim();
+
+                if (text.isEmpty()) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 0, 1));
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filter();
+            }
+        });
+    }
     private void saveAdministrator() {
         try {
             if (!validateRequiredFields()) {

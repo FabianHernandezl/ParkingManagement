@@ -1,7 +1,7 @@
 package view;
 
-import Controller.ParkingLotController;
-import Controller.ParkingRateController;
+import controller.ParkingLotController;
+import controller.ParkingRateController;
 import model.entities.ParkingLot;
 import model.entities.ParkingRate;
 

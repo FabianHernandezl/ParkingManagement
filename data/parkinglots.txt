@@ -1,0 +1,57 @@
+========================================
+      REGISTRO DE PARQUEOS
+========================================
+Total de parqueos: 6
+========================================
+
+PARQUEO #3
+----------------------------------------
+Nombre: Jime ParkingLot
+Espacios totales: 5
+Espacios ocupados: 3
+Espacios disponibles: 2
+----------------------------------------
+
+PARQUEO #4
+----------------------------------------
+Nombre: Parqueo Central
+Espacios totales: 10
+Espacios ocupados: 1
+Espacios disponibles: 9
+----------------------------------------
+
+PARQUEO #5
+----------------------------------------
+Nombre: Parking Lot
+Espacios totales: 25
+Espacios ocupados: 1
+Espacios disponibles: 24
+----------------------------------------
+
+PARQUEO #6
+----------------------------------------
+Nombre: Parking
+Espacios totales: 100
+Espacios ocupados: 2
+Espacios disponibles: 98
+----------------------------------------
+
+PARQUEO #7
+----------------------------------------
+Nombre: Luna Parking
+Espacios totales: 25
+Espacios ocupados: 0
+Espacios disponibles: 25
+----------------------------------------
+
+PARQUEO #8
+----------------------------------------
+Nombre: Park
+Espacios totales: 10
+Espacios ocupados: 4
+Espacios disponibles: 6
+----------------------------------------
+
+========================================
+Fin del registro
+========================================

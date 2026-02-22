@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +12,10 @@ import model.entities.Vehicle;
 import model.entities.VehicleType;
 import model.entities.ParkingLot;
 
+/**
+ * Handles the business logic related to parking spaces. Manages assignment,
+ * release, and fee calculation.
+ */
 public class SpaceController {
 
     private SpaceData spaceData;
@@ -60,19 +64,20 @@ public class SpaceController {
             return "Error: Cliente o vehículo inválido.";
         }
 
-        Space available = findAvailableSpace(client, vehicle);
-
-        if (available == null) {
-            return "Error: No hay espacios disponibles para este vehículo/cliente";
-        }
-
         ClientData clientData = new ClientData();
         Client existingClient = clientData.findClientById(client.getId());
 
         if (existingClient == null) {
             clientData.addClient(client);
         } else {
-            client = existingClient;
+            client = existingClient; // 🔥 ahora usamos el correcto
+        }
+
+        // 🔥 BUSCAR ESPACIO DESPUÉS de tener cliente correcto
+        Space available = findAvailableSpace(client, vehicle);
+
+        if (available == null) {
+            return "Error: No hay espacios disponibles para este vehículo/cliente";
         }
 
         VehicleData vehicleData = new VehicleData();
@@ -100,6 +105,7 @@ public class SpaceController {
     // ================= BUSCAR ESPACIO DISPONIBLE =================
     private Space findAvailableSpace(Client client, Vehicle vehicle) {
 
+
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
 
         String vehicleType = vehicle.getVehicleType()
@@ -122,17 +128,14 @@ public class SpaceController {
                 // ================= CLIENTE PREFERENCIAL =================
                 if (client.isIsPreferential()) {
 
-                    // Si el espacio es preferencial y está libre → lo toma sin validar tipo
                     if (s.isDisabilityAdaptation()) {
                         return s;
                     }
 
-                    // Si no es preferencial, sigue buscando
                     continue;
                 }
 
                 // ================= CLIENTE NORMAL =================
-                // No puede usar espacios preferenciales
                 if (s.isDisabilityAdaptation()) {
                     continue;
                 }
@@ -146,7 +149,6 @@ public class SpaceController {
                         .toLowerCase()
                         .trim();
 
-                // Validación estricta por tipo
                 if (spaceType.equals(vehicleType)) {
                     return s;
                 }
@@ -158,9 +160,11 @@ public class SpaceController {
 
     // ================= ACTUALIZAR ESPACIO EN PARQUEO =================
     private boolean updateSpaceInParkingLot(Space updatedSpace) {
+
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
 
         for (ParkingLot parkingLot : parkingLots) {
+
             if (parkingLot.getSpaces() == null) {
                 continue;
             }
@@ -168,6 +172,7 @@ public class SpaceController {
             Space[] spaces = parkingLot.getSpaces();
 
             for (int i = 0; i < spaces.length; i++) {
+
                 if (spaces[i] != null && spaces[i].getId() == updatedSpace.getId()) {
 
                     spaces[i].setSpaceTaken(updatedSpace.isSpaceTaken());
@@ -178,10 +183,18 @@ public class SpaceController {
                     spaces[i].setVehicleType(updatedSpace.getVehicleType());
                     spaces[i].setParkingLot(updatedSpace.getParkingLot());
 
-                    return parkingLotData.updateParkingLot(parkingLot);
+                    boolean updated = parkingLotData.updateParkingLot(parkingLot);
+
+                    if (updated) {
+                        parkingLotData.saveParkingLots();        // 🔥 FALTA ESTO
+                        parkingLotData.saveParkingLotsAsTxt();   // 🔥 Y ESTO
+                    }
+
+                    return updated;
                 }
             }
         }
+
         return false;
     }
 
@@ -225,7 +238,7 @@ public class SpaceController {
                 return lot.getSpaces();
             }
         }
-        return new Space[0]; // arreglo vacío si no encuentra
+        return new Space[0];
     }
 
 }

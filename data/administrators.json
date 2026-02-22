@@ -1,0 +1,3808 @@
+[
+  {
+    "adminNumber": 1001,
+    "parkingLot": [
+      {
+        "id": 1,
+        "name": "Cami´s Parkinglot",
+        "numberOfSpaces": 10,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:28:07 AM",
+            "available": false,
+            "client": {
+              "id": "C-001",
+              "name": "Cliente Prueba",
+              "phone": "8888-8888",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "ABC123",
+              "color": "Rojo",
+              "brand": "Toyota",
+              "model": "Corolla",
+              "clients": [
+                {
+                  "id": "C-001",
+                  "name": "Cliente Prueba",
+                  "phone": "8888-8888",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 2,
+                "description": "Motocicleta",
+                "numberOfTires": 2,
+                "fee": 2.5
+              }
+            }
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:42:38 AM",
+            "available": false,
+            "client": {
+              "id": "305620529",
+              "name": "Zailyn Tencio",
+              "phone": "84379367",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "BKQ748",
+              "color": "Gris",
+              "brand": "Mitsubishi",
+              "model": "Lancer",
+              "clients": [
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                },
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "UCR ParkingLot",
+        "numberOfSpaces": 20,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 11,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 12,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 13,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 14,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 15,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 16,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 17,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 18,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 19,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 20,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Jime ParkingLot",
+        "numberOfSpaces": 5,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Parqueo Central",
+        "numberOfSpaces": 10,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      }
+    ],
+    "id": "ID-FAB",
+    "name": "Fabián",
+    "username": "admin_fabian",
+    "password": "fabian123"
+  },
+  {
+    "adminNumber": 1002,
+    "parkingLot": [
+      {
+        "id": 1,
+        "name": "Cami´s Parkinglot",
+        "numberOfSpaces": 10,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:28:07 AM",
+            "available": false,
+            "client": {
+              "id": "C-001",
+              "name": "Cliente Prueba",
+              "phone": "8888-8888",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "ABC123",
+              "color": "Rojo",
+              "brand": "Toyota",
+              "model": "Corolla",
+              "clients": [
+                {
+                  "id": "C-001",
+                  "name": "Cliente Prueba",
+                  "phone": "8888-8888",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 2,
+                "description": "Motocicleta",
+                "numberOfTires": 2,
+                "fee": 2.5
+              }
+            }
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:42:38 AM",
+            "available": false,
+            "client": {
+              "id": "305620529",
+              "name": "Zailyn Tencio",
+              "phone": "84379367",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "BKQ748",
+              "color": "Gris",
+              "brand": "Mitsubishi",
+              "model": "Lancer",
+              "clients": [
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                },
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "UCR ParkingLot",
+        "numberOfSpaces": 20,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 11,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 12,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 13,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 14,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 15,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 16,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 17,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 18,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 19,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 20,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Jime ParkingLot",
+        "numberOfSpaces": 5,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Parqueo Central",
+        "numberOfSpaces": 10,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      }
+    ],
+    "id": "ID-ZAY",
+    "name": "Zaylin",
+    "username": "admin_zailyn",
+    "password": "zailyn456"
+  },
+  {
+    "adminNumber": 1003,
+    "parkingLot": [
+      {
+        "id": 1,
+        "name": "Cami´s Parkinglot",
+        "numberOfSpaces": 10,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "j",
+              "color": "p",
+              "brand": "c",
+              "model": "u",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "1",
+              "color": "n",
+              "brand": "n",
+              "model": "n",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "8",
+              "color": "t",
+              "brand": "o",
+              "model": "i",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:28:07 AM",
+            "available": false,
+            "client": {
+              "id": "C-001",
+              "name": "Cliente Prueba",
+              "phone": "8888-8888",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "ABC123",
+              "color": "Rojo",
+              "brand": "Toyota",
+              "model": "Corolla",
+              "clients": [
+                {
+                  "id": "C-001",
+                  "name": "Cliente Prueba",
+                  "phone": "8888-8888",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 2,
+                "description": "Motocicleta",
+                "numberOfTires": 2,
+                "fee": 2.5
+              }
+            }
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:42:38 AM",
+            "available": false,
+            "client": {
+              "id": "305620529",
+              "name": "Zailyn Tencio",
+              "phone": "84379367",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "BKQ748",
+              "color": "Gris",
+              "brand": "Mitsubishi",
+              "model": "Lancer",
+              "clients": [
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                },
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "UCR ParkingLot",
+        "numberOfSpaces": 20,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 11,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 12,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 13,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 14,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 15,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 16,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 17,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 18,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 19,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 20,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Jime ParkingLot",
+        "numberOfSpaces": 5,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Parqueo Central",
+        "numberOfSpaces": 10,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      }
+    ],
+    "id": "ID-JIM",
+    "name": "Jimena Calvo",
+    "username": "admin_jimena",
+    "password": "jimena789"
+  },
+  {
+    "adminNumber": 1004,
+    "parkingLot": [
+      {
+        "id": 1,
+        "name": "Cami´s Parkinglot",
+        "numberOfSpaces": 10,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "j",
+              "color": "p",
+              "brand": "c",
+              "model": "u",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "1",
+              "color": "n",
+              "brand": "n",
+              "model": "n",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "8",
+              "color": "t",
+              "brand": "o",
+              "model": "i",
+              "clients": [
+                {
+                  "id": "j",
+                  "name": "k",
+                  "phone": "0",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:28:07 AM",
+            "available": false,
+            "client": {
+              "id": "C-001",
+              "name": "Cliente Prueba",
+              "phone": "8888-8888",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "ABC123",
+              "color": "Rojo",
+              "brand": "Toyota",
+              "model": "Corolla",
+              "clients": [
+                {
+                  "id": "C-001",
+                  "name": "Cliente Prueba",
+                  "phone": "8888-8888",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 2,
+                "description": "Motocicleta",
+                "numberOfTires": 2,
+                "fee": 2.5
+              }
+            }
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "entryTime": "Jan 30, 2026, 9:42:38 AM",
+            "available": false,
+            "client": {
+              "id": "305620529",
+              "name": "Zailyn Tencio",
+              "phone": "84379367",
+              "isPreferential": false
+            },
+            "vehicle": {
+              "plate": "BKQ748",
+              "color": "Gris",
+              "brand": "Mitsubishi",
+              "model": "Lancer",
+              "clients": [
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                },
+                {
+                  "id": "305620529",
+                  "name": "Zailyn Tencio",
+                  "phone": "84379367",
+                  "isPreferential": false
+                }
+              ],
+              "vehicleType": {
+                "id": 0,
+                "description": "Carro",
+                "numberOfTires": 0,
+                "fee": 0.0
+              }
+            }
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      }
+    ],
+    "id": "ADM1004",
+    "name": "Juan",
+    "username": "juan1",
+    "password": "1234"
+  },
+  {
+    "adminNumber": 1005,
+    "parkingLot": [
+      {
+        "id": 6,
+        "name": "Parking",
+        "numberOfSpaces": 100,
+        "vehicles": [],
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Camión",
+              "numberOfTires": 4,
+              "fee": 6.5
+            },
+            "available": false
+          },
+          {
+            "id": 11,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 12,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 13,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 14,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 15,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 16,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 17,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 18,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 19,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 20,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 21,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 22,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 23,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 24,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 25,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 26,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 27,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 28,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 29,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 30,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 31,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "3224",
+              "color": "sdfds",
+              "brand": "dsfds",
+              "model": "dsfsd",
+              "clients": [
+                {
+                  "id": "88",
+                  "name": "k",
+                  "phone": "l",
+                  "isPreferential": false,
+                  "email": "l"
+                }
+              ],
+              "vehicleType": {
+                "id": 1,
+                "description": "Automóvil",
+                "numberOfTires": 4,
+                "fee": 5.0
+              }
+            }
+          },
+          {
+            "id": 32,
+            "disabilityAdaptation": false,
+            "spaceTaken": true,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false,
+            "vehicle": {
+              "plate": "34543",
+              "color": "43543",
+              "brand": "34535",
+              "model": "34543",
+              "clients": [
+                {
+                  "id": "88",
+                  "name": "k",
+                  "phone": "l",
+                  "isPreferential": false,
+                  "email": "l"
+                }
+              ],
+              "vehicleType": {
+                "id": 1,
+                "description": "Automóvil",
+                "numberOfTires": 4,
+                "fee": 5.0
+              }
+            }
+          },
+          {
+            "id": 33,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 34,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 35,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 36,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 37,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 38,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 39,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 40,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 41,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 42,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 43,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 44,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 45,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 46,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 47,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 48,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 49,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 50,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 51,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 52,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 53,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 54,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 55,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 56,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 57,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 58,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 59,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 60,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 61,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 62,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 63,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 64,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 65,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 66,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 67,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 68,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 69,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 70,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 71,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 72,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 73,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 74,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 75,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 76,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 77,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 78,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 79,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 80,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 81,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 82,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 83,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 84,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 85,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 86,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 87,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 88,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 89,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 90,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 91,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 92,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 93,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 94,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 95,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 96,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 97,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 98,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 99,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 100,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Luna Parking",
+        "numberOfSpaces": 25,
+        "spaces": [
+          {
+            "id": 1,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 2,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 3,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 4,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 5,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 3,
+              "description": "Discapacitado",
+              "numberOfTires": 4,
+              "fee": 0.0
+            },
+            "available": false
+          },
+          {
+            "id": 6,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 7,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 8,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 9,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 10,
+            "disabilityAdaptation": true,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 11,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 12,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 13,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 14,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 15,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 2,
+              "description": "Motocicleta",
+              "numberOfTires": 2,
+              "fee": 2.5
+            },
+            "available": false
+          },
+          {
+            "id": 16,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 4,
+              "description": "Camión",
+              "numberOfTires": 6,
+              "fee": 8.0
+            },
+            "available": false
+          },
+          {
+            "id": 17,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 4,
+              "description": "Camión",
+              "numberOfTires": 6,
+              "fee": 8.0
+            },
+            "available": false
+          },
+          {
+            "id": 18,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 4,
+              "description": "Camión",
+              "numberOfTires": 6,
+              "fee": 8.0
+            },
+            "available": false
+          },
+          {
+            "id": 19,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 4,
+              "description": "Camión",
+              "numberOfTires": 6,
+              "fee": 8.0
+            },
+            "available": false
+          },
+          {
+            "id": 20,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 4,
+              "description": "Camión",
+              "numberOfTires": 6,
+              "fee": 8.0
+            },
+            "available": false
+          },
+          {
+            "id": 21,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 22,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 23,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 24,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          },
+          {
+            "id": 25,
+            "disabilityAdaptation": false,
+            "spaceTaken": false,
+            "vehicleType": {
+              "id": 1,
+              "description": "Automóvil",
+              "numberOfTires": 4,
+              "fee": 5.0
+            },
+            "available": false
+          }
+        ]
+      }
+    ],
+    "id": "ADM1005",
+    "name": "Camila Mariana",
+    "username": "admin_camila",
+    "password": "asd123"
+  }
+]

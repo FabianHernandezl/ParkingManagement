@@ -158,7 +158,7 @@ public class ClerkData {
         }
     }
 
-    public int findLastIdNumberOfClerk() {
+    public int findLastIdNumberOfClerk() { 
         int maxId = 0;
         for (Clerk clerk : clerks) {
             String id = clerk.getId();

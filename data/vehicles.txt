@@ -1,0 +1,230 @@
+========================================
+      REGISTRO DE VEHÍCULOS
+========================================
+Total de vehículos: 20
+========================================
+
+VEHÍCULO #1
+----------------------------------------
+Placa:        KKK777
+Marca:        HYUNDAI
+Modelo:       ACCER
+Color:        MORADO
+Tipo:         Moto
+Clientes:     
+              - JDKJCK (ID: 36373772)
+----------------------------------------
+
+VEHÍCULO #2
+----------------------------------------
+Placa:        13513
+Marca:        Suzuki
+Modelo:       2022
+Color:        Negro
+Tipo:         Carro
+Clientes:     
+              - jgfhg (ID: 23212)
+----------------------------------------
+
+VEHÍCULO #3
+----------------------------------------
+Placa:        BKQ748
+Marca:        Mitsubishi
+Modelo:       Lancer
+Color:        Gris
+Tipo:         Carro
+Clientes:     
+              - Zailyn Tencio (ID: 305620529)
+              - Zailyn Tencio (ID: 305620529)
+----------------------------------------
+
+VEHÍCULO #4
+----------------------------------------
+Placa:        460220
+Marca:        Fiat
+Modelo:       2015
+Color:        N/A
+Tipo:         Automóvil
+Clientes:     
+              - Jimena Calvo Soto (ID: 119520051)
+----------------------------------------
+
+VEHÍCULO #5
+----------------------------------------
+Placa:        nhy678
+Marca:        Honda
+Modelo:       Civic
+Color:        Blanco
+Tipo:         Carro
+Clientes:     
+              - Yoyo (ID: 0987654321)
+----------------------------------------
+
+VEHÍCULO #6
+----------------------------------------
+Placa:        GTR762
+Marca:        HYKIOL
+Modelo:       VFRTH
+Color:        BHKS
+Tipo:         Carro
+Clientes:     
+              - Gaby (ID: 98712346)
+----------------------------------------
+
+VEHÍCULO #7
+----------------------------------------
+Placa:        hhy678
+Marca:        Tesla
+Modelo:       2025
+Color:        Negro
+Tipo:         Carro
+Clientes:     
+              - Arón (ID: 65798732)
+              - Luis (ID: 787587558)
+----------------------------------------
+
+VEHÍCULO #8
+----------------------------------------
+Placa:        ABC123
+Marca:        Toyota
+Modelo:       Corolla
+Color:        Rojo
+Tipo:         Carro
+Clientes:     
+              - Cliente Prueba (ID: C-001)
+----------------------------------------
+
+VEHÍCULO #9
+----------------------------------------
+Placa:        7
+Marca:        9
+Modelo:       0
+Color:        0
+Tipo:         Carro
+Clientes:     
+              - Ana Brenes (ID: 3032900)
+----------------------------------------
+
+VEHÍCULO #10
+----------------------------------------
+Placa:        33
+Marca:        33
+Modelo:       33
+Color:        33
+Tipo:         Carro
+Clientes:     
+              - j (ID: 11)
+----------------------------------------
+
+VEHÍCULO #11
+----------------------------------------
+Placa:        462607
+Marca:        Fiat
+Modelo:       2001
+Color:        Vino
+Tipo:         Carro
+Clientes:     
+              - Shirley (ID: 33260704)
+----------------------------------------
+
+VEHÍCULO #12
+----------------------------------------
+Placa:        555
+Marca:        hyundai
+Modelo:       acer
+Color:        azul
+Tipo:         Carro
+Clientes:     
+              - Cliente (ID: C-002)
+----------------------------------------
+
+VEHÍCULO #13
+----------------------------------------
+Placa:        CCC666
+Marca:        nhfg
+Modelo:       tgjhgv
+Color:        gvhv
+Tipo:         Carro
+Clientes:     
+              - Ana Alfaro (ID: 303640676)
+----------------------------------------
+
+VEHÍCULO #14
+----------------------------------------
+Placa:        WER-456
+Marca:        Toyota
+Modelo:       2022
+Color:        Negro
+Tipo:         Motocicleta
+Clientes:     
+              - Laura (ID: 09909)
+----------------------------------------
+
+VEHÍCULO #15
+----------------------------------------
+Placa:        a
+Marca:        a
+Modelo:       a
+Color:        a
+Tipo:         Automóvil
+Clientes:     No hay clientes asociados
+----------------------------------------
+
+VEHÍCULO #16
+----------------------------------------
+Placa:        ABC-031
+Marca:        Ferrari
+Modelo:       2026
+Color:        Rosado
+Tipo:         Automóvil
+Clientes:     
+              - Camila Montoya (ID: 1289630)
+----------------------------------------
+
+VEHÍCULO #17
+----------------------------------------
+Placa:        6
+Marca:        l
+Modelo:       f
+Color:        r
+Tipo:         Carro
+Clientes:     
+              - k (ID: 88)
+----------------------------------------
+
+VEHÍCULO #18
+----------------------------------------
+Placa:        WEE-423
+Marca:        Fiat
+Modelo:       2022
+Color:        Rojo
+Tipo:         Camión
+Clientes:     
+              - Julián Bonilla (ID: 3120852)
+----------------------------------------
+
+VEHÍCULO #19
+----------------------------------------
+Placa:        89879
+Marca:        fiat
+Modelo:       2001
+Color:        azul
+Tipo:         Automóvil
+Clientes:     
+              - Rosita (ID: 6773)
+----------------------------------------
+
+VEHÍCULO #20
+----------------------------------------
+Placa:        8888
+Marca:        adfd
+Modelo:       asdfasd
+Color:        asdf
+Tipo:         Automóvil
+Clientes:     
+              - Mariana Blanco (ID: 119360128)
+----------------------------------------
+
+========================================
+Fin del registro
+========================================

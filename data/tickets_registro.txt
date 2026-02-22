@@ -1,0 +1,645 @@
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 5
+Tipo de vehículo: Carro
+Espacio asignado: 3
+Hora de ingreso: 20/02/2026 18:12:51
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 5
+Tipo de vehículo: Carro
+Espacio asignado: 3
+Hora de ingreso: 20/02/2026 18:12:51
+Hora de salida: 20/02/2026 18:31:35
+Total a pagar: ₡1.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Jime ParkingLot
+Placa: 6
+Tipo de vehículo: Carro
+Espacio asignado: 1
+Hora de ingreso: 20/02/2026 18:32:56
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Jime ParkingLot
+Placa: 6
+Tipo de vehículo: Carro
+Espacio asignado: 1
+Hora de ingreso: 20/02/2026 18:32:56
+Hora de salida: 20/02/2026 18:42:00
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Jime ParkingLot
+Placa: 3
+Tipo de vehículo: Carro
+Espacio asignado: 4
+Hora de ingreso: 20/02/2026 18:42:11
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Jime ParkingLot
+Placa: 3
+Tipo de vehículo: Carro
+Espacio asignado: 4
+Hora de ingreso: 20/02/2026 18:42:11
+Hora de salida: 20/02/2026 18:46:24
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 4
+Parqueo: Jime ParkingLot
+Placa: 5
+Tipo de vehículo: Carro
+Espacio asignado: 5
+Hora de ingreso: 20/02/2026 18:46:51
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 4
+Parqueo: Jime ParkingLot
+Placa: 5
+Tipo de vehículo: Carro
+Espacio asignado: 5
+Hora de ingreso: 20/02/2026 18:46:51
+Hora de salida: 20/02/2026 18:50:42
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 5
+Parqueo: Park
+Placa: 6
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 18:50:58
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Park
+Placa: 8
+Tipo de vehículo: Carro
+Espacio asignado: 3
+Hora de ingreso: 20/02/2026 18:59:44
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Park
+Placa: 8
+Tipo de vehículo: Carro
+Espacio asignado: 3
+Hora de ingreso: 20/02/2026 18:59:44
+Hora de salida: 20/02/2026 19:05:22
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 7
+Parqueo: Park
+Placa: 9
+Tipo de vehículo: Carro
+Espacio asignado: 4
+Hora de ingreso: 20/02/2026 19:06:24
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 7
+Parqueo: Park
+Placa: 9
+Tipo de vehículo: Carro
+Espacio asignado: 4
+Hora de ingreso: 20/02/2026 19:06:24
+Hora de salida: 20/02/2026 19:12:37
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 5
+Parqueo: Park
+Placa: 6
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 18:50:58
+Hora de salida: 20/02/2026 19:13:00
+Total a pagar: ₡1.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 2
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 19:22:08
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 2
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 19:22:08
+Hora de salida: 20/02/2026 19:23:09
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 160
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 20:31:18
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 160
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 20:31:18
+Hora de salida: 20/02/2026 20:36:20
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Jime ParkingLot
+Placa: 161
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 20:36:56
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: WEE-423
+Tipo de vehículo: Camión
+Espacio asignado: 1
+Hora de ingreso: 20/02/2026 16:58:37
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Jime ParkingLot
+Placa: 161
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 20/02/2026 20:36:56
+Hora de salida: 20/02/2026 20:51:58
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 903908
+Tipo de vehículo: Carro
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 16:21:44
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 903908
+Tipo de vehículo: Carro
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 16:21:44
+Hora de salida: 21/02/2026 16:22:33
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 81232
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 21/02/2026 16:38:49
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 81232
+Tipo de vehículo: Carro
+Espacio asignado: 2
+Hora de ingreso: 21/02/2026 16:38:49
+Hora de salida: 21/02/2026 16:52:19
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 32432
+Tipo de vehículo: Automóvil
+Espacio asignado: 3
+Hora de ingreso: 21/02/2026 17:08:22
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 32432
+Tipo de vehículo: Automóvil
+Espacio asignado: 3
+Hora de ingreso: 21/02/2026 17:08:22
+Hora de salida: 21/02/2026 17:08:44
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 56546
+Tipo de vehículo: Automóvil
+Espacio asignado: 4
+Hora de ingreso: 21/02/2026 17:32:08
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Luna Parking
+Placa: 56546
+Tipo de vehículo: Automóvil
+Espacio asignado: 4
+Hora de ingreso: 21/02/2026 17:32:08
+Hora de salida: 21/02/2026 17:32:17
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Parking Central
+Placa: ter
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 17:32:32
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Parking Central
+Placa: ter
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 17:32:32
+Hora de salida: 21/02/2026 18:11:22
+Total a pagar: ₡1000,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Parking Central
+Placa: 7888998
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 21/02/2026 18:12:16
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Parking Central
+Placa: 7888998
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 21/02/2026 18:12:16
+Hora de salida: 21/02/2026 18:21:28
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 4
+Parqueo: Parking Central
+Placa: 7889888
+Tipo de vehículo: Automóvil
+Espacio asignado: 3
+Hora de ingreso: 21/02/2026 18:22:27
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 4
+Parqueo: Parking Central
+Placa: 7889888
+Tipo de vehículo: Automóvil
+Espacio asignado: 3
+Hora de ingreso: 21/02/2026 18:22:27
+Hora de salida: 21/02/2026 18:25:44
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 5
+Parqueo: Parking Central
+Placa: 8987987
+Tipo de vehículo: Automóvil
+Espacio asignado: 4
+Hora de ingreso: 21/02/2026 18:26:11
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 5
+Parqueo: Parking Central
+Placa: 8987987
+Tipo de vehículo: Automóvil
+Espacio asignado: 4
+Hora de ingreso: 21/02/2026 18:26:11
+Hora de salida: 21/02/2026 18:31:35
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Parking Central
+Placa: 8797979
+Tipo de vehículo: Automóvil
+Espacio asignado: 5
+Hora de ingreso: 21/02/2026 18:32:04
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 6
+Parqueo: Parking Central
+Placa: 8797979
+Tipo de vehículo: Automóvil
+Espacio asignado: 5
+Hora de ingreso: 21/02/2026 18:32:04
+Hora de salida: 21/02/2026 18:38:41
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 7
+Parqueo: Parking Central
+Placa: 78989
+Tipo de vehículo: Automóvil
+Espacio asignado: 14
+Hora de ingreso: 21/02/2026 18:39:06
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 7
+Parqueo: Parking Central
+Placa: 78989
+Tipo de vehículo: Automóvil
+Espacio asignado: 14
+Hora de ingreso: 21/02/2026 18:39:06
+Hora de salida: 21/02/2026 18:46:05
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Centro
+Placa: 89879
+Tipo de vehículo: Automóvil
+Espacio asignado: 10
+Hora de ingreso: 21/02/2026 19:33:33
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Centro
+Placa: 8888
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 21/02/2026 19:34:32
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+

@@ -4,7 +4,7 @@
  */
 package view;
 
-import Controller.ParkingLotController;
+import controller.ParkingLotController;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -136,7 +136,18 @@ public class AdminMenu extends JFrame {
             openInternalFrame(new SelectParkingLotView(this));
         });
 
-        // ---------- OPERARIOS - users ----------
+        //--------------TARIFAS ----------
+        JMenu feeMenu = new JMenu("Tarifas");
+        menuBar.add(feeMenu);
+
+        JMenuItem fees = new JMenuItem("Gestionar Tarifas");
+        feeMenu.add(fees);
+
+        fees.addActionListener(e -> {
+            openInternalFrame(new ParkingRateViewInternal());
+        });
+
+         // ---------- OPERARIOS - users ----------
         JMenu clerksMenu = new JMenu("Operarios");
         menuBar.add(clerksMenu);
 
@@ -146,18 +157,6 @@ public class AdminMenu extends JFrame {
         manageClerks.addActionListener(e -> {
             openInternalFrame(new ClerksView()); //crud de clerks
         });
-
-        //--------------TARIFAS ----------
-        JMenu feeMenu = new JMenu("Tarifas");
-        menuBar.add(feeMenu);
-
-        JMenuItem fees = new JMenuItem("Gestionar Tarifas");
-        feeMenu.add(fees);
-
-        fees.addActionListener(e -> {
-            openInternalFrame(new ParkingRateViewInternal());//TO DO crud de Tarifas
-        });
-
         //--------------Administrador ----------
         JMenu adminMenu = new JMenu("Administradores");
         menuBar.add(adminMenu);

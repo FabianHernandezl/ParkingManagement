@@ -9,6 +9,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * Custom visual component representing a single parking space.
+ *
+ * Displays: - Space ID - Status (Available / Occupied / Preferential) - Vehicle
+ * icon (if occupied)
+ *
+ * Includes: - Rounded card design - Hover effect - Selection highlight -
+ * Entry/exit animations
+ */
 public class SpacePanel extends JPanel {
 
     private Space space;
@@ -27,7 +36,7 @@ public class SpacePanel extends JPanel {
 
         setPreferredSize(new Dimension(150, 100));
         setLayout(new BorderLayout(5, 5));
-        setOpaque(false); // 🔥 IMPORTANTE para bordes redondeados
+        setOpaque(false);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         lblTitle = new JLabel("Espacio " + space.getId(), SwingConstants.CENTER);
@@ -48,7 +57,6 @@ public class SpacePanel extends JPanel {
 
         updateView();
 
-        // Click
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -69,7 +77,6 @@ public class SpacePanel extends JPanel {
         });
     }
 
-    // 🎨 DIBUJO PERSONALIZADO (Tarjeta con curvas y sombra)
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -79,21 +86,17 @@ public class SpacePanel extends JPanel {
 
         int arc = 25;
 
-        // 🔥 Sombra
         g2.setColor(new Color(0, 0, 0, 40));
         g2.fillRoundRect(6, 6, getWidth() - 12, getHeight() - 12, arc, arc);
 
-        // 🔥 Color principal
         g2.setColor(getBackground());
         g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, arc, arc);
 
-        // 🔥 Hover efecto
         if (hover) {
             g2.setColor(new Color(255, 255, 255, 40));
             g2.fillRoundRect(0, 0, getWidth() - 6, getHeight() - 6, arc, arc);
         }
 
-        // 🔥 Selección borde elegante
         if (selected) {
             g2.setStroke(new BasicStroke(3));
             g2.setColor(new Color(255, 215, 0));

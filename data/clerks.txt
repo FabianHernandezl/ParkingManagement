@@ -1,0 +1,83 @@
+========================================
+        REGISTRO DE EMPLEADOS
+========================================
+Total de empleados: 6
+========================================
+
+EMPLEADO #1
+----------------------------------------
+ID:             CLK0001
+Nombre:         Camila Montoya
+Usuario:        op_camila
+Código empleado:1001
+Horario:        Jornada Diurna
+Edad:           20
+Parqueos:       
+                 - UCR ParkingLot (ID: 2)
+----------------------------------------
+
+EMPLEADO #2
+----------------------------------------
+ID:             CLK0002
+Nombre:         Jimena Calvo
+Usuario:        op_jime
+Código empleado:1002
+Horario:        Jornada Nocturna
+Edad:           21
+Parqueos:       
+                 - Cami´s Parkinglot (ID: 1)
+                 - UCR ParkingLot (ID: 2)
+----------------------------------------
+
+EMPLEADO #3
+----------------------------------------
+ID:             CLK0003
+Nombre:         Fabian Hernandez
+Usuario:        fabi
+Código empleado:1003
+Horario:        Medio Tiempo(Tarde)
+Edad:           21
+Parqueos:       
+                 - Parqueo Central (ID: 4)
+                 - Parking Lot (ID: 5)
+----------------------------------------
+
+EMPLEADO #4
+----------------------------------------
+ID:             CLK0004
+Nombre:         Zaylin Tencio
+Usuario:        op_zay12
+Código empleado:1004
+Horario:        Jornada Nocturna
+Edad:           20
+Parqueos:       
+                 - Parqueo Central (ID: 4)
+                 - Parking Lot (ID: 5)
+----------------------------------------
+
+EMPLEADO #5
+----------------------------------------
+ID:             CLK0005
+Nombre:         Juan
+Usuario:        op_juan
+Código empleado:1005
+Horario:        Jornada Nocturna
+Edad:           40
+Parqueos:       
+                 - UCR ParkingLot (ID: 2)
+----------------------------------------
+
+EMPLEADO #6
+----------------------------------------
+ID:             CLK0006
+Nombre:         Luna
+Usuario:        Luna
+Código empleado:1006
+Horario:        Jornada Diurna
+Edad:           24
+Parqueos:       No tiene parqueos asignados
+----------------------------------------
+
+========================================
+Fin del registro
+========================================

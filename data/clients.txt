@@ -1,0 +1,189 @@
+========================================
+          REGISTRO DE CLIENTES          
+========================================
+Total de clientes: 20
+========================================
+
+CLIENTE #1
+----------------------------------------
+ID:            119520051
+Nombre:        Jimena Calvo Soto
+Teléfono:      71133584
+Email:         No registrado
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #2
+----------------------------------------
+ID:            3032900
+Nombre:        Ana Brenes
+Teléfono:      88889999
+Email:         No registrado
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #3
+----------------------------------------
+ID:            119360128
+Nombre:        Mariana Blanco
+Teléfono:      86621670
+Email:         No registrado
+Preferencial:  Sí
+----------------------------------------
+
+CLIENTE #4
+----------------------------------------
+ID:            09909
+Nombre:        Laura
+Teléfono:      999999
+Email:         No registrado
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #5
+----------------------------------------
+ID:            C-001
+Nombre:        Cliente Prueba
+Teléfono:      8888-8888
+Email:         No registrado
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #6
+----------------------------------------
+ID:            305620529
+Nombre:        Zailyn Tencio
+Teléfono:      84379367
+Email:         No registrado
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #7
+----------------------------------------
+ID:            j
+Nombre:        k
+Teléfono:      0
+Email:         No registrado
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #8
+----------------------------------------
+ID:            11
+Nombre:        Maria
+Teléfono:      89562356
+Email:         mari@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #9
+----------------------------------------
+ID:            33260704
+Nombre:        Shirley
+Teléfono:      71133588
+Email:         calvo.shirley@yahoo. es
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #10
+----------------------------------------
+ID:            C-002
+Nombre:        Cliente
+Teléfono:      8888888
+Email:         cliente
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #11
+----------------------------------------
+ID:            88
+Nombre:        k
+Teléfono:      l
+Email:         l
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #12
+----------------------------------------
+ID:            6773
+Nombre:        Rosita
+Teléfono:      8989902
+Email:         ljsadjkjads
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #13
+----------------------------------------
+ID:            222332
+Nombre:        Karla
+Teléfono:      9889982
+Email:         aksljdljas
+Preferencial:  Sí
+----------------------------------------
+
+CLIENTE #14
+----------------------------------------
+ID:            303640676
+Nombre:        Ana Alfaro
+Teléfono:      44556677
+Email:         zagdb@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #15
+----------------------------------------
+ID:            119230725
+Nombre:        Juan
+Teléfono:      86621950
+Email:         juan@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #16
+----------------------------------------
+ID:            4560920
+Nombre:        Kiko Jimenez
+Teléfono:      8596 5263
+Email:         kiko12@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #17
+----------------------------------------
+ID:            1289630
+Nombre:        Camila Montoya
+Teléfono:      86621670
+Email:         montoyacami@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #18
+----------------------------------------
+ID:            1563607
+Nombre:        José Blanco
+Teléfono:      86563246
+Email:         joblan@gmail.com
+Preferencial:  Sí
+----------------------------------------
+
+CLIENTE #19
+----------------------------------------
+ID:            3120852
+Nombre:        Julián Bonilla
+Teléfono:      89865642
+Email:         julianboni@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #20
+----------------------------------------
+ID:            119457881
+Nombre:        Leonardo Montoya
+Teléfono:      84573246
+Email:         montoyaruiz@hotmail.com
+Preferencial:  No
+----------------------------------------
+
+========================================
+            Fin del registro            
+========================================
