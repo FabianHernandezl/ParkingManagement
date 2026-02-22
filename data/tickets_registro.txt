@@ -643,3 +643,153 @@ Total a pagar: ₡0,00
 ==============================
 
 
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 76
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:03:38
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 76
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:03:38
+Hora de salida: 22/02/2026 13:09:50
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 78
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:12:34
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 78
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:12:34
+Hora de salida: 22/02/2026 13:13:35
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 79
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:17:45
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 79
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:17:45
+Hora de salida: 22/02/2026 13:18:46
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 79
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:28:34
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 79
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:28:34
+Hora de salida: 22/02/2026 13:30:04
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 80
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:35:43
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 80
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:35:43
+Hora de salida: 22/02/2026 13:36:39
+Total a pagar: ₡0.00
+==============================
+
+
