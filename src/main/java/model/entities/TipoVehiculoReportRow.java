@@ -37,6 +37,14 @@ public class TipoVehiculoReportRow {
         this.fechaFin = fechaFin != null ? fechaFin.format(formatter) : "N/A";
     }
 
+    public TipoVehiculoReportRow(String tipoVehiculo,
+            int cantidad,
+            double porcentaje) {
+        this.tipoVehiculo = tipoVehiculo;
+        this.cantidad = cantidad;
+        this.porcentaje = porcentaje;
+    }
+
     public String getTipoVehiculo() {
         return tipoVehiculo;
     }

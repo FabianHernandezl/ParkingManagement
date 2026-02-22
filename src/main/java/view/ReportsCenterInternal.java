@@ -132,13 +132,7 @@ public class ReportsCenterInternal extends JInternalFrame {
 
         JButton generateExcelBtn = new JButton("Generar Excel");
         UITheme.styleButton(generateExcelBtn, UITheme.SUCCESS);
-        generateExcelBtn.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this,
-                    "Funcionalidad en desarrollo",
-                    "Información",
-                    JOptionPane.INFORMATION_MESSAGE);
-        });
-
+        generateExcelBtn.addActionListener(e -> generateExcel());
         buttonsPanel.add(refreshBtn);
         buttonsPanel.add(generatePdfBtn);
         buttonsPanel.add(generateExcelBtn);
@@ -540,5 +534,62 @@ public class ReportsCenterInternal extends JInternalFrame {
                 return c;
             }
         });
+    }
+
+    // ================== GENERAR EXCEL ==================
+    private void generateExcel() {
+
+        String selectedReport = reportTypeFilter.getSelectedItem().toString();
+        LocalDateTime inicio = getStartDateTime();
+        LocalDateTime fin = getEndDateTime();
+
+        String filePath = null;
+
+        switch (selectedReport) {
+
+            case "Ocupación por Parqueo":
+                controller.generateGeneralExcelReport();
+                filePath = "reports/reporte_general_parqueos.xlsx";
+                break;
+
+            case "Ingresos por Parqueo":
+                controller.generarExcelIngresos(inicio, fin);
+                filePath = "reports/reporte_ingresos.xlsx";
+                break;
+
+            case "Tipo de Vehículo":
+                controller.generarExcelTipoVehiculo(inicio, fin);
+                filePath = "reports/reporte_tipo_vehiculo.xlsx";
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(this,
+                        "❌ Reporte no disponible en Excel",
+                        "Información",
+                        JOptionPane.INFORMATION_MESSAGE);
+                return;
+        }
+
+        JOptionPane.showMessageDialog(this,
+                "✅ Reporte Excel generado correctamente",
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
+
+        // Intentar abrir archivo directamente
+        try {
+            File file = new File(filePath);
+
+            if (file.exists()) {
+                Desktop.getDesktop().open(file);
+            } else {
+                Desktop.getDesktop().open(new File("reports"));
+            }
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "No se pudo abrir el archivo automáticamente",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

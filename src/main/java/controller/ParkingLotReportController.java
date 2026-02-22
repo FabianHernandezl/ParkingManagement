@@ -1,16 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.data.IngresoReportExcel;
 import model.data.ParkingLotReportPDF;
 import model.entities.ParkingLot;
 import model.entities.Space;
 import model.entities.ParkingLotReportRow;
+import model.data.ParkingLotReportExcelAll;
+import model.data.TipoVehiculoReportExcel;
+import model.entities.IngresoReportRow;
+import model.entities.TipoVehiculoReportRow;
 
 public class ParkingLotReportController {
 
@@ -71,27 +74,21 @@ public class ParkingLotReportController {
                         ? "Ocupado"
                         : "Disponible";
 
-                // 🔥 Validación para vehicleType
                 String vehicleType = "-";
                 if (space.isSpaceTaken()) {
                     if (space.getVehicleType() != null) {
                         vehicleType = space.getVehicleType().getDescription();
                     } else {
                         vehicleType = "Sin tipo";
-                        System.out.println("DEBUG: Espacio " + space.getId()
-                                + " ocupado pero sin tipo de vehículo");
                     }
                 }
 
-                // 🔥 Validación para plate
                 String plate = "-";
                 if (space.isSpaceTaken()) {
                     if (space.getVehicle() != null) {
                         plate = space.getVehicle().getPlate();
                     } else {
                         plate = "Sin placa";
-                        System.out.println("DEBUG: Espacio " + space.getId()
-                                + " ocupado pero sin vehículo");
                     }
                 }
 
@@ -108,5 +105,166 @@ public class ParkingLotReportController {
         }
 
         return rows;
+    }
+
+    public void generateGeneralExcelReport() {
+
+        ArrayList<ParkingLot> parkingLots
+                = parkingLotController.getAllParkingLots();
+
+        if (parkingLots.isEmpty()) {
+            System.out.println("No hay parqueos registrados");
+            return;
+        }
+
+        ParkingLotReportExcelAll.generate(parkingLots);
+    }
+
+    public void generarExcelIngresos(LocalDateTime inicio, LocalDateTime fin) {
+
+        List<IngresoReportRow> data = obtenerDatosIngresos(inicio, fin);
+
+        IngresoReportExcel.generate(data, inicio, fin);
+    }
+
+    public void generarExcelTipoVehiculo(LocalDateTime inicio, LocalDateTime fin) {
+
+        List<TipoVehiculoReportRow> data = obtenerDatosTipoVehiculo(inicio, fin);
+
+        int total = data.stream()
+                .mapToInt(TipoVehiculoReportRow::getCantidad)
+                .sum();
+
+        TipoVehiculoReportExcel.generate(data, inicio, fin, total);
+    }
+
+  
+    private List<IngresoReportRow> obtenerDatosIngresos(
+            LocalDateTime inicio, LocalDateTime fin) {
+
+        List<IngresoReportRow> lista = new ArrayList<>();
+
+        ArrayList<ParkingLot> parkingLots
+                = parkingLotController.getAllParkingLots();
+
+        for (ParkingLot lot : parkingLots) {
+
+            int cantidad = 0;
+            double total = 0;
+
+            for (Space space : lot.getSpaces()) {
+
+                if (space.isSpaceTaken()
+                        && space.getEntryTime() != null) {
+
+                    LocalDateTime entry = space.getEntryTime()
+                            .toInstant()
+                            .atZone(ZoneId.systemDefault())
+                            .toLocalDateTime();
+
+                    if (entry.isAfter(inicio)
+                            && entry.isBefore(fin)) {
+
+                        cantidad++;
+
+                        if (space.getVehicleType() != null) {
+                            total += space.getVehicleType().getFee();
+                        }
+                    }
+                }
+            }
+
+            if (cantidad > 0) {
+                lista.add(new IngresoReportRow(
+                        lot.getName(),
+                        cantidad,
+                        total,
+                        inicio,
+                        fin
+                ));
+            }
+        }
+
+        return lista;
+    }
+
+    private List<TipoVehiculoReportRow> obtenerDatosTipoVehiculo(
+            LocalDateTime inicio, LocalDateTime fin) {
+
+        List<TipoVehiculoReportRow> lista = new ArrayList<>();
+
+        int autos = 0;
+        int motos = 0;
+        int bicicletas = 0;
+        int pesados = 0;
+
+        ArrayList<ParkingLot> parkingLots
+                = parkingLotController.getAllParkingLots();
+
+        for (ParkingLot lot : parkingLots) {
+            for (Space space : lot.getSpaces()) {
+
+                if (space.isSpaceTaken()
+                        && space.getEntryTime() != null
+                        && space.getVehicleType() != null) {
+
+                    LocalDateTime entry = space.getEntryTime()
+                            .toInstant()
+                            .atZone(ZoneId.systemDefault())
+                            .toLocalDateTime();
+
+                    if (entry.isAfter(inicio)
+                            && entry.isBefore(fin)) {
+
+                        String tipo = space.getVehicleType()
+                                .getDescription()
+                                .toLowerCase();
+
+                        if (tipo.contains("auto")) {
+                            autos++;
+                        } else if (tipo.contains("moto")) {
+                            motos++;
+                        } else if (tipo.contains("bici")) {
+                            bicicletas++;
+                        } else {
+                            pesados++;
+                        }
+                    }
+                }
+            }
+        }
+
+        int total = autos + motos + bicicletas + pesados;
+
+        if (total > 0) {
+            lista.add(new TipoVehiculoReportRow("Autos", autos,
+                    autos * 100.0 / total));
+            lista.add(new TipoVehiculoReportRow("Motos", motos,
+                    motos * 100.0 / total));
+            lista.add(new TipoVehiculoReportRow("Bicicletas", bicicletas,
+                    bicicletas * 100.0 / total));
+            lista.add(new TipoVehiculoReportRow("Pesados", pesados,
+                    pesados * 100.0 / total));
+        }
+
+        return lista;
+    }
+
+    // =========================
+// 🔹 DEVOLVER DATOS INGRESOS 
+// =========================
+    public List<IngresoReportRow> generarReporteIngresos(
+            LocalDateTime inicio, LocalDateTime fin) {
+
+        return obtenerDatosIngresos(inicio, fin);
+    }
+
+// =========================
+// 🔹 DEVOLVER DATOS TIPO VEHICULO 
+// =========================
+    public List<TipoVehiculoReportRow> generarReporteTipoVehiculo(
+            LocalDateTime inicio, LocalDateTime fin) {
+
+        return obtenerDatosTipoVehiculo(inicio, fin);
     }
 }
