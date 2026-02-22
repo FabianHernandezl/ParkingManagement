@@ -64,19 +64,20 @@ public class SpaceController {
             return "Error: Cliente o vehículo inválido.";
         }
 
-        Space available = findAvailableSpace(client, vehicle);
-
-        if (available == null) {
-            return "Error: No hay espacios disponibles para este vehículo/cliente";
-        }
-
         ClientData clientData = new ClientData();
         Client existingClient = clientData.findClientById(client.getId());
 
         if (existingClient == null) {
             clientData.addClient(client);
         } else {
-            client = existingClient;
+            client = existingClient; // 🔥 ahora usamos el correcto
+        }
+
+        // 🔥 BUSCAR ESPACIO DESPUÉS de tener cliente correcto
+        Space available = findAvailableSpace(client, vehicle);
+
+        if (available == null) {
+            return "Error: No hay espacios disponibles para este vehículo/cliente";
         }
 
         VehicleData vehicleData = new VehicleData();
@@ -103,6 +104,8 @@ public class SpaceController {
 
     // ================= BUSCAR ESPACIO DISPONIBLE =================
     private Space findAvailableSpace(Client client, Vehicle vehicle) {
+
+        System.out.println("Preferencial FINAL: " + client.isIsPreferential());
 
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
 
@@ -159,9 +162,11 @@ public class SpaceController {
 
     // ================= ACTUALIZAR ESPACIO EN PARQUEO =================
     private boolean updateSpaceInParkingLot(Space updatedSpace) {
+
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
 
         for (ParkingLot parkingLot : parkingLots) {
+
             if (parkingLot.getSpaces() == null) {
                 continue;
             }
@@ -169,6 +174,7 @@ public class SpaceController {
             Space[] spaces = parkingLot.getSpaces();
 
             for (int i = 0; i < spaces.length; i++) {
+
                 if (spaces[i] != null && spaces[i].getId() == updatedSpace.getId()) {
 
                     spaces[i].setSpaceTaken(updatedSpace.isSpaceTaken());
@@ -179,10 +185,18 @@ public class SpaceController {
                     spaces[i].setVehicleType(updatedSpace.getVehicleType());
                     spaces[i].setParkingLot(updatedSpace.getParkingLot());
 
-                    return parkingLotData.updateParkingLot(parkingLot);
+                    boolean updated = parkingLotData.updateParkingLot(parkingLot);
+
+                    if (updated) {
+                        parkingLotData.saveParkingLots();        // 🔥 FALTA ESTO
+                        parkingLotData.saveParkingLotsAsTxt();   // 🔥 Y ESTO
+                    }
+
+                    return updated;
                 }
             }
         }
+
         return false;
     }
 

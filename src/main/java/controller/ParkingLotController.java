@@ -87,17 +87,16 @@ public class ParkingLotController {
             spaces[index++] = new Space(spaceId++, false, false,
                     new VehicleType(2, "Motocicleta", 2, 2.5f));
         }
-
         // Camiones
         for (int i = 0; i < truck; i++) {
             spaces[index++] = new Space(spaceId++, false, false,
-                    new VehicleType(4, "Camión", 6, 8.0f));
+                    new VehicleType(3, "Camión", 4, 8.0f));
         }
 
         // Bicicletas
         for (int i = 0; i < bicycle; i++) {
             spaces[index++] = new Space(spaceId++, false, false,
-                    new VehicleType(5, "Bicicleta", 2, 1.5f));
+                    new VehicleType(4, "Bicicleta", 2, 1.5f));
         }
 
         // Lo restante → Autos normales
@@ -110,6 +109,7 @@ public class ParkingLotController {
     }
 
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
+
         if (vehicle == null || parkingLot == null || parkingLot.getSpaces() == null) {
             return 0;
         }
@@ -118,19 +118,31 @@ public class ParkingLotController {
         int vehicleTypeId = vehicle.getVehicleType().getId();
 
         for (Space space : parkingLot.getSpaces()) {
+
             if (space.isSpaceTaken()) {
                 continue;
             }
+
+            // 🔥 Si NO es preferencial → NO puede usar espacio adaptado
+            if (!hasDisability && space.isDisabilityAdaptation()) {
+                continue;
+            }
+
+            // 🔥 Si SÍ es preferencial → SOLO puede usar adaptado
             if (hasDisability && !space.isDisabilityAdaptation()) {
                 continue;
             }
-            if (space.getVehicleType() != null && space.getVehicleType().getId() != vehicleTypeId) {
+
+            // Validar tipo de vehículo
+            if (space.getVehicleType() != null
+                    && space.getVehicleType().getId() != vehicleTypeId) {
                 continue;
             }
 
             space.setSpaceTaken(true);
             space.setVehicle(vehicle);
             parkingLotData.updateParkingLot(parkingLot);
+
             return space.getId();
         }
 
