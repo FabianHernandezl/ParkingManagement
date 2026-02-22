@@ -66,8 +66,7 @@ public class ReportsCenterInternal extends JInternalFrame {
         reportTypeFilter.addItem("Ocupación por Parqueo");
         reportTypeFilter.addItem("Ingresos por Parqueo");
         reportTypeFilter.addItem("Tipo de Vehículo");
-        reportTypeFilter.addItem("Tarifas");
-        reportTypeFilter.addItem("Vehículos Estacionados");
+
         reportTypeFilter.addActionListener(e -> {
             loadTableData(); // Esto carga los datos y actualiza el filtro
             updateTableColumns();

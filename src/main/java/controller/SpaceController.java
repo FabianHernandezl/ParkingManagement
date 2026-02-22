@@ -105,7 +105,6 @@ public class SpaceController {
     // ================= BUSCAR ESPACIO DISPONIBLE =================
     private Space findAvailableSpace(Client client, Vehicle vehicle) {
 
-        System.out.println("Preferencial FINAL: " + client.isIsPreferential());
 
         ArrayList<ParkingLot> parkingLots = parkingLotData.getAllParkingLots();
 
@@ -150,7 +149,6 @@ public class SpaceController {
                         .toLowerCase()
                         .trim();
 
-                // Validación estricta por tipo
                 if (spaceType.equals(vehicleType)) {
                     return s;
                 }

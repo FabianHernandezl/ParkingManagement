@@ -96,17 +96,6 @@ Clientes:
 
 VEHÍCULO #9
 ----------------------------------------
-Placa:        22
-Marca:        2
-Modelo:       2
-Color:        2
-Tipo:         Moto
-Clientes:     
-              - Mariana Blanco (ID: 119360128)
-----------------------------------------
-
-VEHÍCULO #10
-----------------------------------------
 Placa:        7
 Marca:        9
 Modelo:       0
@@ -116,7 +105,7 @@ Clientes:
               - Ana Brenes (ID: 3032900)
 ----------------------------------------
 
-VEHÍCULO #11
+VEHÍCULO #10
 ----------------------------------------
 Placa:        33
 Marca:        33
@@ -127,7 +116,7 @@ Clientes:
               - j (ID: 11)
 ----------------------------------------
 
-VEHÍCULO #12
+VEHÍCULO #11
 ----------------------------------------
 Placa:        462607
 Marca:        Fiat
@@ -138,7 +127,7 @@ Clientes:
               - Shirley (ID: 33260704)
 ----------------------------------------
 
-VEHÍCULO #13
+VEHÍCULO #12
 ----------------------------------------
 Placa:        555
 Marca:        hyundai
@@ -149,7 +138,7 @@ Clientes:
               - Cliente (ID: C-002)
 ----------------------------------------
 
-VEHÍCULO #14
+VEHÍCULO #13
 ----------------------------------------
 Placa:        CCC666
 Marca:        nhfg
@@ -160,7 +149,7 @@ Clientes:
               - Ana Alfaro (ID: 303640676)
 ----------------------------------------
 
-VEHÍCULO #15
+VEHÍCULO #14
 ----------------------------------------
 Placa:        WER-456
 Marca:        Toyota
@@ -171,7 +160,7 @@ Clientes:
               - Laura (ID: 09909)
 ----------------------------------------
 
-VEHÍCULO #16
+VEHÍCULO #15
 ----------------------------------------
 Placa:        a
 Marca:        a
@@ -181,7 +170,7 @@ Tipo:         Automóvil
 Clientes:     No hay clientes asociados
 ----------------------------------------
 
-VEHÍCULO #17
+VEHÍCULO #16
 ----------------------------------------
 Placa:        ABC-031
 Marca:        Ferrari
@@ -192,7 +181,7 @@ Clientes:
               - Camila Montoya (ID: 1289630)
 ----------------------------------------
 
-VEHÍCULO #18
+VEHÍCULO #17
 ----------------------------------------
 Placa:        6
 Marca:        l
@@ -203,7 +192,7 @@ Clientes:
               - k (ID: 88)
 ----------------------------------------
 
-VEHÍCULO #19
+VEHÍCULO #18
 ----------------------------------------
 Placa:        WEE-423
 Marca:        Fiat
@@ -214,15 +203,26 @@ Clientes:
               - Julián Bonilla (ID: 3120852)
 ----------------------------------------
 
-VEHÍCULO #20
+VEHÍCULO #19
 ----------------------------------------
-Placa:        78989
+Placa:        89879
 Marca:        fiat
-Modelo:       2019
-Color:        morado
+Modelo:       2001
+Color:        azul
 Tipo:         Automóvil
 Clientes:     
               - Rosita (ID: 6773)
+----------------------------------------
+
+VEHÍCULO #20
+----------------------------------------
+Placa:        8888
+Marca:        adfd
+Modelo:       asdfasd
+Color:        asdf
+Tipo:         Automóvil
+Clientes:     
+              - Mariana Blanco (ID: 119360128)
 ----------------------------------------
 
 ========================================
