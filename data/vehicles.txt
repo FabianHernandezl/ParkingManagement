@@ -1,7 +1,7 @@
 ========================================
       REGISTRO DE VEHÍCULOS
 ========================================
-Total de vehículos: 22
+Total de vehículos: 20
 ========================================
 
 VEHÍCULO #1
@@ -203,7 +203,7 @@ Clientes:
               - Mariana Blanco (ID: 119360128)
 ----------------------------------------
 
-VEHÍCULO #21
+VEHÍCULO #19
 ----------------------------------------
 Placa:        bkb
 Marca:        kbk
@@ -214,12 +214,12 @@ Clientes:
               - Sol Lopéz  (ID: 306780987)
 ----------------------------------------
 
-VEHÍCULO #22
+VEHÍCULO #20
 ----------------------------------------
-Placa:        Prueba Car
-Marca:        SSSS
-Modelo:       sds
-Color:        rrrrr
+Placa:        30
+Marca:        a
+Modelo:       a
+Color:        a
 Tipo:         Automóvil
 Clientes:     
               - Gus (ID: 8686969)

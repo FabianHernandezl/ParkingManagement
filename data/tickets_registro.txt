@@ -778,3 +778,93 @@ Total a pagar: ₡0,00
 ==============================
 
 
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 50
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 24/02/2026 08:29:04
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 50
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 24/02/2026 08:29:04
+Hora de salida: 24/02/2026 08:30:30
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 20
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 24/02/2026 08:35:08
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 20
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 24/02/2026 08:35:08
+Hora de salida: 24/02/2026 08:35:45
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Jime ParkingLot
+Placa: 30
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 24/02/2026 08:40:36
+Hora de salida: —
+Total a pagar: ₡0.00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 2
+Parqueo: Jime ParkingLot
+Placa: 30
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 24/02/2026 08:40:36
+Hora de salida: 24/02/2026 08:41:28
+Total a pagar: ₡0.00
+==============================
+
+
