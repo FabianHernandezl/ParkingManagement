@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import model.data.ParkingLotData;
 import model.entities.Administrator;
 import model.entities.Clerk;
@@ -8,6 +9,8 @@ import model.entities.ParkingLot;
 import model.entities.Vehicle;
 import model.entities.Space;
 import model.entities.VehicleType;
+import model.entities.Ticket;
+import controller.TicketController;
 
 public class ParkingLotController {
 
@@ -110,9 +113,16 @@ public class ParkingLotController {
         return spaces;
     }
 
+    /**
+     * 🔥 VERSIÓN CORREGIDA - Asigna toda la información del vehículo
+     */
     public int registerVehicleInParkingLot(Vehicle vehicle, ParkingLot parkingLot) {
+        System.out.println("--- registerVehicleInParkingLot ---");
+        System.out.println("Vehículo: " + (vehicle != null ? vehicle.getPlate() : "null"));
+        System.out.println("Parqueo: " + (parkingLot != null ? parkingLot.getName() : "null"));
 
         if (vehicle == null || parkingLot == null || parkingLot.getSpaces() == null) {
+            System.out.println("❌ Datos inválidos");
             return 0;
         }
 
@@ -141,14 +151,85 @@ public class ParkingLotController {
                 continue;
             }
 
+            System.out.println("✅ Espacio SELECCIONADO: " + space.getId());
+
+            // 🔥 ASIGNAR TODA LA INFORMACIÓN
             space.setSpaceTaken(true);
             space.setVehicle(vehicle);
+            space.setVehicleType(vehicle.getVehicleType()); // ¡Línea CRUCIAL!
+
+            System.out.println("  Vehículo asignado: " + vehicle.getPlate());
+            System.out.println("  Tipo asignado: " + vehicle.getVehicleType().getDescription());
+
             parkingLotData.updateParkingLot(parkingLot);
+            parkingLotData.saveParkingLots();
+            parkingLotData.saveParkingLotsAsTxt();
 
             return space.getId();
         }
 
+        System.out.println("❌ No se encontró espacio disponible");
         return 0;
+    }
+
+    /**
+     * 🔥 NUEVO MÉTODO - Repara espacios ocupados desde tickets activos
+     */
+    public void repararEspaciosDesdeTickets() {
+        System.out.println("\n=== REPARANDO ESPACIOS DESDE TICKETS ===");
+        TicketController ticketController = TicketController.getInstance();
+
+        // Obtener tickets activos
+        List<Ticket> ticketsActivos = ticketController.getActiveTickets();
+        System.out.println("Tickets activos encontrados: " + ticketsActivos.size());
+
+        int reparados = 0;
+
+        for (Ticket ticket : ticketsActivos) {
+            if (ticket.getSpace() == null || ticket.getVehicle() == null) {
+                continue;
+            }
+
+            int spaceId = ticket.getSpace().getId();
+
+            // Buscar el espacio en todos los parqueos
+            for (ParkingLot lot : getAllParkingLots()) {
+                boolean encontrado = false;
+                for (Space space : lot.getSpaces()) {
+                    if (space.getId() == spaceId && space.isSpaceTaken()) {
+                        // Reparar el espacio con información del ticket
+                        if (space.getVehicle() == null) {
+                            space.setVehicle(ticket.getVehicle());
+                            reparados++;
+                        }
+                        if (space.getVehicleType() == null && ticket.getVehicle().getVehicleType() != null) {
+                            space.setVehicleType(ticket.getVehicle().getVehicleType());
+                            reparados++;
+                        }
+
+                        System.out.println("  Reparado espacio " + spaceId
+                                + " en parqueo " + lot.getName()
+                                + " - Vehículo: " + ticket.getVehicle().getPlate()
+                                + " - Tipo: " + ticket.getVehicle().getVehicleType().getDescription());
+
+                        parkingLotData.updateParkingLot(lot);
+                        encontrado = true;
+                        break;
+                    }
+                }
+                if (encontrado) {
+                    break;
+                }
+            }
+        }
+
+        if (reparados > 0) {
+            parkingLotData.saveParkingLots();
+            System.out.println("✅ Reparación completada: " + reparados + " espacios reparados");
+        } else {
+            System.out.println("✅ No fue necesario reparar espacios");
+        }
+        System.out.println("========================================\n");
     }
 
     public void removeVehicleFromParkingLot(Vehicle vehicle, ParkingLot parkingLot) {

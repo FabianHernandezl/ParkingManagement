@@ -183,17 +183,6 @@ Clientes:
 
 VEHÍCULO #17
 ----------------------------------------
-Placa:        6
-Marca:        l
-Modelo:       f
-Color:        r
-Tipo:         Carro
-Clientes:     
-              - k (ID: 88)
-----------------------------------------
-
-VEHÍCULO #18
-----------------------------------------
 Placa:        WEE-423
 Marca:        Fiat
 Modelo:       2022
@@ -203,18 +192,7 @@ Clientes:
               - Julián Bonilla (ID: 3120852)
 ----------------------------------------
 
-VEHÍCULO #19
-----------------------------------------
-Placa:        89879
-Marca:        fiat
-Modelo:       2001
-Color:        azul
-Tipo:         Automóvil
-Clientes:     
-              - Rosita (ID: 6773)
-----------------------------------------
-
-VEHÍCULO #20
+VEHÍCULO #18
 ----------------------------------------
 Placa:        8888
 Marca:        adfd

@@ -648,13 +648,13 @@ Total a pagar: ₡0,00
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Parqueo: Parking Central
-Placa: QYV725
+Parqueo: Jime ParkingLot
+Placa: 76
 Tipo de vehículo: Automóvil
-Espacio asignado: 14
-Hora de ingreso: 23/02/2026 01:58:01
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:03:38
 Hora de salida: —
-Total a pagar: ₡0,00
+Total a pagar: ₡0.00
 ==============================
 
 
@@ -663,13 +663,13 @@ Total a pagar: ₡0,00
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Parqueo: Parking Central
-Placa: QYV725
+Parqueo: Jime ParkingLot
+Placa: 76
 Tipo de vehículo: Automóvil
-Espacio asignado: 14
-Hora de ingreso: 23/02/2026 01:58:01
-Hora de salida: 23/02/2026 09:42:12
-Total a pagar: ₡80,00
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:03:38
+Hora de salida: 22/02/2026 13:09:50
+Total a pagar: ₡0.00
 ==============================
 
 
@@ -678,13 +678,13 @@ Total a pagar: ₡80,00
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Parqueo: Yanyan
-Placa: kn
-Tipo de vehículo: Motocicleta
-Espacio asignado: 11
-Hora de ingreso: 23/02/2026 10:01:08
+Parqueo: Jime ParkingLot
+Placa: 78
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:12:34
 Hora de salida: —
-Total a pagar: ₡0,00
+Total a pagar: ₡0.00
 ==============================
 
 
@@ -693,13 +693,13 @@ Total a pagar: ₡0,00
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Parqueo: Yanyan
-Placa: kn
-Tipo de vehículo: Motocicleta
-Espacio asignado: 11
-Hora de ingreso: 23/02/2026 10:01:08
-Hora de salida: 23/02/2026 10:02:12
-Total a pagar: ₡0,00
+Parqueo: Jime ParkingLot
+Placa: 78
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:12:34
+Hora de salida: 22/02/2026 13:13:35
+Total a pagar: ₡0.00
 ==============================
 
 
@@ -737,14 +737,14 @@ Total a pagar: ₡60,00
 ==============================
       TIQUETE DE PARQUEO
 ==============================
-Tiquete #: 3
-Parqueo: Centro
-Placa: bkb
-Tipo de vehículo: Motocicleta
-Espacio asignado: 4
-Hora de ingreso: 23/02/2026 11:03:57
+Tiquete #: 1
+Parqueo: Jime ParkingLot
+Placa: 79
+Tipo de vehículo: Automóvil
+Espacio asignado: 2
+Hora de ingreso: 22/02/2026 13:28:34
 Hora de salida: —
-Total a pagar: ₡0,00
+Total a pagar: ₡0.00
 ==============================
 
 

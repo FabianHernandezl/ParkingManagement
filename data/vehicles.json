@@ -330,27 +330,6 @@
     }
   },
   {
-    "plate": "6",
-    "color": "r",
-    "brand": "l",
-    "model": "f",
-    "clients": [
-      {
-        "id": "88",
-        "name": "k",
-        "phone": "l",
-        "isPreferential": false,
-        "email": "l"
-      }
-    ],
-    "vehicleType": {
-      "id": 1,
-      "description": "Carro",
-      "numberOfTires": 4,
-      "fee": 5.0
-    }
-  },
-  {
     "plate": "WEE-423",
     "color": "Rojo",
     "brand": "Fiat",
@@ -372,27 +351,6 @@
     }
   },
   {
-    "plate": "89879",
-    "color": "azul",
-    "brand": "fiat",
-    "model": "2001",
-    "clients": [
-      {
-        "id": "6773",
-        "name": "Rosita",
-        "phone": "8989902",
-        "isPreferential": false,
-        "email": "ljsadjkjads"
-      }
-    ],
-    "vehicleType": {
-      "id": 1,
-      "description": "Automóvil",
-      "numberOfTires": 4,
-      "fee": 5.0
-    }
-  },
-  {
     "plate": "8888",
     "color": "asdf",
     "brand": "adfd",
@@ -403,6 +361,27 @@
         "name": "Mariana Blanco",
         "phone": "86621670",
         "isPreferential": true
+      }
+    ],
+    "vehicleType": {
+      "id": 1,
+      "description": "Automóvil",
+      "numberOfTires": 4,
+      "fee": 5.0
+    }
+  },
+  {
+    "plate": "80",
+    "color": "e",
+    "brand": "e",
+    "model": "e",
+    "clients": [
+      {
+        "id": "88",
+        "name": "k",
+        "phone": "l",
+        "isPreferential": false,
+        "email": "l"
       }
     ],
     "vehicleType": {

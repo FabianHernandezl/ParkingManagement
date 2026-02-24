@@ -339,41 +339,64 @@ public class TicketController {
 
         appendToRegistro(ticket, "SALIDA");
 
-        // Generar ticket individual SOLO si hay cobro
-        if (total > 0) {
-            String parkingName = getNombreParqueoForTicket(ticket);
-            String vehicleType = "Desconocido";
-            String plate = "N/A";
-            String spaceId = "N/A";
+        // 🔥 GENERAR TICKET INDIVIDUAL SIEMPRE (incluso con total 0)
+        String parkingName = getNombreParqueoForTicket(ticket);
+        String vehicleType = "Desconocido";
+        String plate = "N/A";
+        String spaceId = "N/A";
 
-            if (ticket.getSpace() != null) {
-                spaceId = String.valueOf(ticket.getSpace().getId());
-            }
-
-            if (ticket.getVehicle() != null) {
-                plate = ticket.getVehicle().getPlate();
-                if (ticket.getVehicle().getVehicleType() != null) {
-                    vehicleType = ticket.getVehicle()
-                            .getVehicleType()
-                            .getDescription();
-                }
-            }
-
-            System.out.println("Generando ticket individual para ID " + ticket.getId());
-            TxtTicketUtil.generarTicketTXT(
-                    parkingName,
-                    vehicleType,
-                    plate,
-                    spaceId,
-                    total,
-                    ticket.getId()
-            );
-        } else {
-            System.out.println("Total 0 - No se genera ticket individual, pero se registró salida");
+        if (ticket.getSpace() != null) {
+            spaceId = String.valueOf(ticket.getSpace().getId());
         }
+
+        if (ticket.getVehicle() != null) {
+            plate = ticket.getVehicle().getPlate();
+            if (ticket.getVehicle().getVehicleType() != null) {
+                vehicleType = ticket.getVehicle()
+                        .getVehicleType()
+                        .getDescription();
+            }
+        }
+
+        System.out.println("Generando ticket individual para ID " + ticket.getId()
+                + " (Total: ₡" + total + ")");
+        TxtTicketUtil.generarTicketTXT(
+                parkingName,
+                vehicleType,
+                plate,
+                spaceId,
+                total,
+                ticket.getId()
+        );
 
         System.out.println("=== FIN REGISTER EXIT ===\n");
         return total;
+    }
+
+    /**
+     * 🔥 Normaliza el tipo de vehículo para buscar tarifas
+     */
+    private String normalizarTipoVehiculo(String tipo) {
+        if (tipo == null) {
+            return "";
+        }
+
+        String t = tipo.toLowerCase().trim();
+
+        if (t.contains("auto") || t.contains("automóvil") || t.contains("carro")) {
+            return "Carro";
+        }
+        if (t.contains("moto") || t.contains("motocicleta")) {
+            return "Moto";
+        }
+        if (t.contains("camión") || t.contains("camion") || t.contains("pesado")) {
+            return "Camión";
+        }
+        if (t.contains("bici") || t.contains("bicicleta")) {
+            return "Bicicleta";
+        }
+
+        return tipo;
     }
 
     /**
@@ -434,12 +457,17 @@ public class TicketController {
         System.out.println("  parkingLotId: " + parkingLotId);
         System.out.println("  vehicleType original: " + vehicleType);
 
+        // 🔥 Normalizar el tipo de vehículo
+        String tipoNormalizado = normalizarTipoVehiculo(vehicleType);
+        System.out.println("  vehicleType normalizado: " + tipoNormalizado);
+
         ParkingRate rate = rateController
-                .getParkingRateByParkingLotAndType(parkingLotId, vehicleType);
+                .getParkingRateByParkingLotAndType(parkingLotId, tipoNormalizado);
 
         // Si no encuentra, probar con variantes
         if (rate == null) {
-            String[] variantes = {"Carro", "Automóvil", "Auto", "carro", "automóvil"};
+            String[] variantes = {"Carro", "Automóvil", "Auto", "carro", "automóvil",
+                "Moto", "Motocicleta", "Camión", "Bicicleta"};
             for (String variante : variantes) {
                 rate = rateController
                         .getParkingRateByParkingLotAndType(parkingLotId, variante);
@@ -462,6 +490,26 @@ public class TicketController {
         System.out.println("  TOTAL CALCULADO: ₡" + total);
 
         return total;
+    }
+
+    /**
+     * 🔥 MÉTODO DE DEPURACIÓN: Muestra el estado de los tickets activos
+     */
+    public void debugTicketsActivos() {
+        System.out.println("\n=== TICKETS ACTIVOS ===");
+        List<Ticket> activos = getActiveTickets();
+        System.out.println("Total: " + activos.size());
+
+        for (Ticket t : activos) {
+            System.out.println("Ticket ID: " + t.getId());
+            System.out.println("  Espacio: " + (t.getSpace() != null ? t.getSpace().getId() : "null"));
+            System.out.println("  Parqueo: " + (t.getParkingLot() != null ? t.getParkingLot().getName() : "null"));
+            System.out.println("  Vehículo: " + (t.getVehicle() != null ? t.getVehicle().getPlate() : "null"));
+            System.out.println("  Tipo: " + (t.getVehicle() != null && t.getVehicle().getVehicleType() != null
+                    ? t.getVehicle().getVehicleType().getDescription() : "null"));
+            System.out.println("  ---");
+        }
+        System.out.println("======================\n");
     }
 
     /**

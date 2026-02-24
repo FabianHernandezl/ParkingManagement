@@ -2,10 +2,10 @@
         TICKET DE PARQUEO
 ==============================
 Ticket #: 1
-Parqueo: Yanyan
-Vehículo: Motocicleta
-Placa: u
-Espacio: 11
-Fecha de salida: 23/02/2026 11:02:26
-Monto a pagar: ₡60,00
+Parqueo: Jime ParkingLot
+Vehículo: Automóvil
+Placa: 80
+Espacio: 2
+Fecha de salida: 22/02/2026 13:36:39
+Monto a pagar: ₡0.00
 ==============================
