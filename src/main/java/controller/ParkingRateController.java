@@ -46,6 +46,14 @@ public class ParkingRateController {
         return null;
     }
 
+    public void reload() {
+        rateData.reload();
+    }
+
+    public void deleteAllRatesByParkingLot(int parkingLotId) {
+        rateData.deleteAllRatesByParkingLot(parkingLotId);
+    }
+
     private String normalizarTipo(String tipo) {
         if (tipo == null) {
             return "";

@@ -1,7 +1,7 @@
 ========================================
           REGISTRO DE CLIENTES          
 ========================================
-Total de clientes: 20
+Total de clientes: 22
 ========================================
 
 CLIENTE #1
@@ -182,6 +182,24 @@ Nombre:        Leonardo Montoya
 Teléfono:      84573246
 Email:         montoyaruiz@hotmail.com
 Preferencial:  No
+----------------------------------------
+
+CLIENTE #21
+----------------------------------------
+ID:            306780987
+Nombre:        Sol Lopéz 
+Teléfono:      98567412
+Email:         sol@gmail.com
+Preferencial:  No
+----------------------------------------
+
+CLIENTE #22
+----------------------------------------
+ID:            8686969
+Nombre:        Gus
+Teléfono:      868668
+Email:         yjhjvh@
+Preferencial:  Sí
 ----------------------------------------
 
 ========================================

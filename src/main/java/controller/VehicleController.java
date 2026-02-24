@@ -9,6 +9,7 @@ import model.entities.ParkingLot;
 import controller.ParkingLotController;
 import controller.TicketController;
 import model.entities.ParkingAssignment;
+import model.entities.ParkingRate;
 import model.entities.Space;
 import model.entities.Ticket;
 
@@ -18,6 +19,7 @@ public class VehicleController {
     private ParkingLotController parkingLotController = new ParkingLotController();
     private ParkingLot parkingLot = new ParkingLot(); // parqueo único
     private TicketController ticketController = TicketController.getInstance();
+    private final ParkingRateController rateController = new ParkingRateController();
 
     VehicleData vehicleData = new VehicleData();
 
@@ -31,6 +33,19 @@ public class VehicleController {
         for (Client c : vehicle.getClients()) {
             if (vehicleData.findVehicle(c) != null) {
                 return "No se insertó el vehículo, el cliente ya tiene un vehículo registrado";
+            }
+        }
+
+        if (vehicle.getVehicleType() != null) {
+            ParkingRate rate = rateController.getParkingRateByParkingLotAndType(
+                    selectedParkingLot.getId(),
+                    vehicle.getVehicleType().getDescription()
+            );
+
+            if (rate == null) {
+                return "❌ No existe tarifa configurada para "
+                        + vehicle.getVehicleType().getDescription()
+                        + " en el parqueo " + selectedParkingLot.getName();
             }
         }
 

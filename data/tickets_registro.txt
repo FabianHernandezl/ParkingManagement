@@ -708,13 +708,13 @@ Total a pagar: ₡0.00
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Parqueo: Jime ParkingLot
-Placa: 79
-Tipo de vehículo: Automóvil
-Espacio asignado: 2
-Hora de ingreso: 22/02/2026 13:17:45
+Parqueo: Yanyan
+Placa: u
+Tipo de vehículo: Motocicleta
+Espacio asignado: 11
+Hora de ingreso: 23/02/2026 10:11:10
 Hora de salida: —
-Total a pagar: ₡0.00
+Total a pagar: ₡0,00
 ==============================
 
 
@@ -723,13 +723,13 @@ Total a pagar: ₡0.00
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Parqueo: Jime ParkingLot
-Placa: 79
-Tipo de vehículo: Automóvil
-Espacio asignado: 2
-Hora de ingreso: 22/02/2026 13:17:45
-Hora de salida: 22/02/2026 13:18:46
-Total a pagar: ₡0.00
+Parqueo: Yanyan
+Placa: u
+Tipo de vehículo: Motocicleta
+Espacio asignado: 11
+Hora de ingreso: 23/02/2026 10:11:10
+Hora de salida: 23/02/2026 11:02:26
+Total a pagar: ₡60,00
 ==============================
 
 
@@ -752,14 +752,14 @@ Total a pagar: ₡0.00
 ==============================
       TIQUETE DE PARQUEO
 ==============================
-Tiquete #: 1
-Parqueo: Jime ParkingLot
-Placa: 79
-Tipo de vehículo: Automóvil
-Espacio asignado: 2
-Hora de ingreso: 22/02/2026 13:28:34
-Hora de salida: 22/02/2026 13:30:04
-Total a pagar: ₡0.00
+Tiquete #: 3
+Parqueo: Centro
+Placa: bkb
+Tipo de vehículo: Motocicleta
+Espacio asignado: 4
+Hora de ingreso: 23/02/2026 11:03:57
+Hora de salida: 23/02/2026 11:05:53
+Total a pagar: ₡0,00
 ==============================
 
 
@@ -768,28 +768,13 @@ Total a pagar: ₡0.00
       TIQUETE DE PARQUEO
 ==============================
 Tiquete #: 1
-Parqueo: Jime ParkingLot
-Placa: 80
+Parqueo: Yanyan
+Placa: Prueba Car
 Tipo de vehículo: Automóvil
-Espacio asignado: 2
-Hora de ingreso: 22/02/2026 13:35:43
+Espacio asignado: 1
+Hora de ingreso: 23/02/2026 22:52:18
 Hora de salida: —
-Total a pagar: ₡0.00
-==============================
-
-
-===== TICKET SALIDA =====
-==============================
-      TIQUETE DE PARQUEO
-==============================
-Tiquete #: 1
-Parqueo: Jime ParkingLot
-Placa: 80
-Tipo de vehículo: Automóvil
-Espacio asignado: 2
-Hora de ingreso: 22/02/2026 13:35:43
-Hora de salida: 22/02/2026 13:36:39
-Total a pagar: ₡0.00
+Total a pagar: ₡0,00
 ==============================
 
 

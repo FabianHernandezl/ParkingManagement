@@ -1,7 +1,7 @@
 ========================================
      REGISTRO DE ADMINISTRADORES
 ========================================
-Total de administradores: 5
+Total de administradores: 6
 ========================================
 
 ADMINISTRADOR #1
@@ -11,8 +11,6 @@ Nombre:        Fabián
 Usuario:       admin_fabian
 Número Admin:  1001
 Parqueos:      
-                - Cami´s Parkinglot
-                - UCR ParkingLot
                 - Jime ParkingLot
                 - Parqueo Central
 ----------------------------------------
@@ -20,14 +18,12 @@ Parqueos:
 ADMINISTRADOR #2
 ----------------------------------------
 ID:            ID-ZAY
-Nombre:        Zaylin
+Nombre:        Zailyn Tencio
 Usuario:       admin_zailyn
 Número Admin:  1002
 Parqueos:      
-                - Cami´s Parkinglot
-                - UCR ParkingLot
-                - Jime ParkingLot
-                - Parqueo Central
+                - Parking Lot
+                - Luna Parking
 ----------------------------------------
 
 ADMINISTRADOR #3
@@ -37,10 +33,8 @@ Nombre:        Jimena Calvo
 Usuario:       admin_jimena
 Número Admin:  1003
 Parqueos:      
-                - Cami´s Parkinglot
-                - UCR ParkingLot
-                - Jime ParkingLot
-                - Parqueo Central
+                - Parking Lot
+                - Parking
 ----------------------------------------
 
 ADMINISTRADOR #4
@@ -50,7 +44,7 @@ Nombre:        Juan
 Usuario:       juan1
 Número Admin:  1004
 Parqueos:      
-                - Cami´s Parkinglot
+                - Park
 ----------------------------------------
 
 ADMINISTRADOR #5
@@ -60,8 +54,18 @@ Nombre:        Camila Mariana
 Usuario:       admin_camila
 Número Admin:  1005
 Parqueos:      
-                - Parking
-                - Luna Parking
+                - Parking Central
+                - Centro
+----------------------------------------
+
+ADMINISTRADOR #6
+----------------------------------------
+ID:            ADM1006
+Nombre:        Prueba
+Usuario:       prueba_admin
+Número Admin:  1006
+Parqueos:      
+                - Yanyan
 ----------------------------------------
 
 ========================================

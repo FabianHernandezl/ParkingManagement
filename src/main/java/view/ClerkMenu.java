@@ -4,16 +4,20 @@
  */
 package view;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -32,6 +36,10 @@ public class ClerkMenu extends JFrame {
     private static FileChannel lockChannel;
     private static FileLock lock;
     private Clerk loggedClerk;
+
+    public Clerk getLoggedClerk() {
+        return loggedClerk;
+    }
 
     public ClerkMenu(LoginWindow loginWindow, Clerk clerk) {
 
@@ -89,6 +97,7 @@ public class ClerkMenu extends JFrame {
         manageClients.addActionListener((ActionEvent e) -> {
             openInternalFrame(new ClientViewInternal());
         });
+
         // ---------- Vehículos ----------
         JMenu vehicleMenu = new JMenu("Vehículos");
         menuBar.add(vehicleMenu);
@@ -97,10 +106,10 @@ public class ClerkMenu extends JFrame {
         vehicleMenu.add(manageVehicles);
 
         manageVehicles.addActionListener(e -> {
-            openInternalFrame(new VehicleViewInternal());
+            openInternalFrame(new VehicleViewInternal(loggedClerk));
         });
 
-        //-------------------Tiquete----------
+        // ---------- Tiquetes ----------
         JMenu ticketMenu = new JMenu("Tiquetes");
         menuBar.add(ticketMenu);
 
@@ -111,30 +120,55 @@ public class ClerkMenu extends JFrame {
             openInternalFrame(new TicketViewInternal(loggedClerk));
         });
 
-        //--------------Sign Out----------
+        // ---------- Espacios ----------
+        JMenu spacesMenu = new JMenu("Espacios");
+        menuBar.add(spacesMenu);
+
+        JMenuItem manageSpaces = new JMenuItem("Ver espacios");
+        spacesMenu.add(manageSpaces);
+
+        manageSpaces.addActionListener(e -> {
+            openInternalFrame(new SelectParkingLotViewClerk(this, loggedClerk));
+        });
+
+        // ---------- Salir ----------
         JButton comebackMenu = new JButton("Salir");
         menuBar.add(comebackMenu);
 
         comebackMenu.addActionListener(e -> {
-
             int option = javax.swing.JOptionPane.showConfirmDialog(
                     this,
                     "¿Desea cerrar sesión y volver al login?",
                     "Cerrar sesión",
                     javax.swing.JOptionPane.YES_NO_OPTION
             );
-
             if (option == javax.swing.JOptionPane.YES_OPTION) {
-                this.dispose();              // cerramos AdminMenu
-                loginWindow.setVisible(true); // volvemos al login original
+                this.dispose();
+                loginWindow.setVisible(true);
             }
         });
 
-        menuBar.updateUI();
+        // ---------- Etiqueta de bienvenida ----------
+        String parqueosAsignados = "Ninguno";
+        if (loggedClerk.getParkingLot() != null
+                && !loggedClerk.getParkingLot().isEmpty()) {
+            parqueosAsignados = loggedClerk.getParkingLot()
+                    .stream()
+                    .map(p -> p.getName())
+                    .collect(java.util.stream.Collectors.joining(", "));
+        }
 
+        JLabel lblWelcome = new JLabel(loggedClerk.getName()
+                + " | Operario | " + parqueosAsignados + " ");
+        lblWelcome.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblWelcome.setForeground(Color.DARK_GRAY);
+        menuBar.add(Box.createHorizontalGlue());
+        menuBar.add(lblWelcome);
+
+        menuBar.updateUI();
     }
 
-    private void openInternalFrame(JInternalFrame frame) {
+    public void openInternalFrame(JInternalFrame frame) {
         desktop.add(frame);
         frame.setVisible(true);
     }

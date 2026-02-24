@@ -282,13 +282,23 @@ public class ClientViewInternal extends JInternalFrame {
 
     private void saveClient() {
 
-        if (txtId.getText().isEmpty() || txtName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Complete todos los campos");
+        // 1. Campos obligatorios
+        if (txtId.getText().trim().isEmpty()
+                || txtName.getText().trim().isEmpty()
+                || txtPhone.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Cédula, nombre y teléfono son obligatorios.",
+                    "Campos incompletos",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        // 2. Formato de email
         if (!txtEmail.getText().isEmpty() && !txtEmail.getText().contains("@")) {
-            JOptionPane.showMessageDialog(this, "Email inválido. Debe contener '@'");
+            JOptionPane.showMessageDialog(this,
+                    "Email inválido. Debe contener '@'.",
+                    "Email inválido",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 

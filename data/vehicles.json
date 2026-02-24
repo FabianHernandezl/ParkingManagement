@@ -390,5 +390,47 @@
       "numberOfTires": 4,
       "fee": 5.0
     }
+  },
+  {
+    "plate": "bkb",
+    "color": "bk",
+    "brand": "kbk",
+    "model": "jbk",
+    "clients": [
+      {
+        "id": "306780987",
+        "name": "Sol Lopéz ",
+        "phone": "98567412",
+        "isPreferential": false,
+        "email": "sol@gmail.com"
+      }
+    ],
+    "vehicleType": {
+      "id": 2,
+      "description": "Motocicleta",
+      "numberOfTires": 2,
+      "fee": 2.5
+    }
+  },
+  {
+    "plate": "Prueba Car",
+    "color": "rrrrr",
+    "brand": "SSSS",
+    "model": "sds",
+    "clients": [
+      {
+        "id": "8686969",
+        "name": "Gus",
+        "phone": "868668",
+        "isPreferential": true,
+        "email": "yjhjvh@"
+      }
+    ],
+    "vehicleType": {
+      "id": 1,
+      "description": "Automóvil",
+      "numberOfTires": 4,
+      "fee": 5.0
+    }
   }
 ]

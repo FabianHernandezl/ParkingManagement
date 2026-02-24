@@ -1,7 +1,7 @@
 ========================================
         REGISTRO DE EMPLEADOS
 ========================================
-Total de empleados: 6
+Total de empleados: 7
 ========================================
 
 EMPLEADO #1
@@ -13,7 +13,7 @@ Código empleado:1001
 Horario:        Jornada Diurna
 Edad:           20
 Parqueos:       
-                 - UCR ParkingLot (ID: 2)
+                 - Jime ParkingLot (ID: 3)
 ----------------------------------------
 
 EMPLEADO #2
@@ -25,8 +25,8 @@ Código empleado:1002
 Horario:        Jornada Nocturna
 Edad:           21
 Parqueos:       
-                 - Cami´s Parkinglot (ID: 1)
-                 - UCR ParkingLot (ID: 2)
+                 - Parqueo Central (ID: 4)
+                 - Parking (ID: 6)
 ----------------------------------------
 
 EMPLEADO #3
@@ -45,14 +45,13 @@ Parqueos:
 EMPLEADO #4
 ----------------------------------------
 ID:             CLK0004
-Nombre:         Zaylin Tencio
-Usuario:        op_zay12
+Nombre:         Zailyn Tencio
+Usuario:        op_zai29
 Código empleado:1004
 Horario:        Jornada Nocturna
 Edad:           20
 Parqueos:       
-                 - Parqueo Central (ID: 4)
-                 - Parking Lot (ID: 5)
+                 - Parking Central (ID: 9)
 ----------------------------------------
 
 EMPLEADO #5
@@ -75,7 +74,20 @@ Usuario:        Luna
 Código empleado:1006
 Horario:        Jornada Diurna
 Edad:           24
-Parqueos:       No tiene parqueos asignados
+Parqueos:       
+                 - Luna Parking (ID: 7)
+----------------------------------------
+
+EMPLEADO #7
+----------------------------------------
+ID:             CLK0007
+Nombre:         Prueba
+Usuario:        op_prueba
+Código empleado:1007
+Horario:        Medio Tiempo(Mañana)
+Edad:           39
+Parqueos:       
+                 - Yanyan (ID: 11)
 ----------------------------------------
 
 ========================================

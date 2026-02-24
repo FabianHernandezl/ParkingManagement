@@ -22,7 +22,7 @@ public class TicketViewInternal extends JInternalFrame {
 
     private final TicketController ticketController = TicketController.getInstance();
     private final ParkingLotController parkingLotController = new ParkingLotController();
-    private Clerk loggedClerk; // 🔥 NUEVO
+    private Clerk loggedClerk;
 
     private JTable table;
     private DefaultTableModel tableModel;
@@ -44,7 +44,7 @@ public class TicketViewInternal extends JInternalFrame {
 
         super("Monitoreo de Tickets", true, true, true, true);
 
-        this.loggedClerk = clerk; // 🔥 NUEVO
+        this.loggedClerk = clerk;
 
         setSize(900, 500);
         setLayout(new BorderLayout());
@@ -147,20 +147,27 @@ public class TicketViewInternal extends JInternalFrame {
 
             String nombreParqueo = obtenerNombreParqueo(ticket);
 
-// 🔥 FILTRO PARA CLERK CON LISTA DE PARQUEOS
             if (loggedClerk != null && loggedClerk.getParkingLot() != null) {
 
                 boolean perteneceAlClerk = false;
+                int parkingLotId = ticket.getParkingLot() != null
+                        ? ticket.getParkingLot().getId() : 0;
+                String parkingLotName = obtenerNombreParqueo(ticket);
 
                 for (ParkingLot pl : loggedClerk.getParkingLot()) {
-                    if (pl.getName().equals(nombreParqueo)) {
+                    // Comparar por ID primero, si no está disponible comparar por nombre
+                    boolean matchById = parkingLotId > 0 && pl.getId() == parkingLotId;
+                    boolean matchByName = pl.getName() != null
+                            && pl.getName().equalsIgnoreCase(parkingLotName);
+
+                    if (matchById || matchByName) {
                         perteneceAlClerk = true;
                         break;
                     }
                 }
 
                 if (!perteneceAlClerk) {
-                    continue; // No pertenece a ninguno de sus parqueos
+                    continue;
                 }
             }
 

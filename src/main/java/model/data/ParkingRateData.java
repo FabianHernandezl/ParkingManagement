@@ -112,6 +112,16 @@ public class ParkingRateData {
         return deleted;
     }
 
+    public void reload() {
+        rateDB = loadFromFile();
+    }
+
+    public void deleteAllRatesByParkingLot(int parkingLotId) {
+        rateDB.removeIf(rate -> rate.getParkingLotId() == parkingLotId);
+        saveToFile();
+        saveToTxt();
+    }
+
     // ===================== JSON =====================
     private void saveToFile() {
         try (Writer writer = new FileWriter(FILE_PATH_JSON)) {

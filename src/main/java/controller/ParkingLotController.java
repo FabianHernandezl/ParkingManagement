@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import model.data.ParkingLotData;
+import model.entities.Administrator;
+import model.entities.Clerk;
 import model.entities.ParkingLot;
 import model.entities.Vehicle;
 import model.entities.Space;
@@ -237,7 +239,6 @@ public class ParkingLotController {
 
         parkingLotData.removeVehicleFromParkingLot(vehicle, parkingLot);
 
-        // 🔥 FORZAR GUARDADO DESPUÉS DE REMOVER
         parkingLotData.saveParkingLots();
         parkingLotData.saveParkingLotsAsTxt();
     }
@@ -269,18 +270,59 @@ public class ParkingLotController {
     }
 
     public String removeParkingLot(int id) {
+
         ParkingLot lot = parkingLotData.findParkingLotById(id);
-        if (lot != null) {
-            parkingLotData.deleteParkingLot(lot);
 
-            // 🔥 FORZAR GUARDADO DESPUÉS DE ELIMINAR
-            parkingLotData.saveParkingLots();
-            parkingLotData.saveParkingLotsAsTxt();
-
-            return "El parqueo se eliminó correctamente";
-        } else {
-            return "El parqueo no se eliminó porque no se encontró en la base de datos.";
+        if (lot == null) {
+            return "El parqueo no se encontró en la base de datos.";
         }
+
+        // 1. Verificar si hay vehículos actualmente estacionados
+        if (lot.getSpaces() != null) {
+            for (Space space : lot.getSpaces()) {
+                if (space.isSpaceTaken()) {
+                    return "❌ No se puede eliminar el parqueo \"" + lot.getName() + "\".\n"
+                            + "Aún hay vehículos estacionados en él.\n"
+                            + "Primero registre la salida de todos los vehículos.";
+                }
+            }
+        }
+
+        // 2. Eliminar tarifas asociadas
+        ParkingRateController rateController = new ParkingRateController();
+        rateController.deleteAllRatesByParkingLot(id);
+
+        // 3. Desasignar el parqueo de operarios
+        ClerkController clerkController = new ClerkController();
+        for (Clerk clerk : clerkController.getAllClerks()) {
+            if (clerk.getParkingLot() != null) {
+                boolean modified = clerk.getParkingLot()
+                        .removeIf(p -> p.getId() == id);
+                if (modified) {
+                    clerkController.updateClerk(clerk);
+                }
+            }
+        }
+
+        // 4. Desasignar el parqueo de administradores
+        AdministratorController adminController = new AdministratorController();
+        for (Administrator admin : adminController.getAllAdministrators()) {
+            if (admin.getParkingLot() != null) {
+                boolean modified = admin.getParkingLot()
+                        .removeIf(p -> p.getId() == id);
+                if (modified) {
+                    adminController.updateAdministrator(admin);
+                }
+            }
+        }
+
+        // 5. Eliminar el parqueo
+        parkingLotData.deleteParkingLot(lot);
+        parkingLotData.saveParkingLots();
+        parkingLotData.saveParkingLotsAsTxt();
+
+        return "✅ Parqueo \"" + lot.getName() + "\" eliminado correctamente.\n"
+                + "Se eliminaron sus tarifas y se desasignó de operarios y administradores.";
     }
 
     // ========== MÉTODOS DE BÚSQUEDA DE ESPACIOS ==========
