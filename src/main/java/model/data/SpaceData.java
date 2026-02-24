@@ -17,7 +17,7 @@ import model.entities.Space;
 public class SpaceData {
 
     // Path to the JSON file that stores parking lot data
-    private static final String PARKING_FILE = "data/parkings.json";
+    private static final String PARKING_FILE = "data/parkinglots.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public SpaceData() {
