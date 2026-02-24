@@ -4,8 +4,8 @@
 Ticket #: 1
 Parqueo: Jime ParkingLot
 Vehículo: Automóvil
-Placa: 80
-Espacio: 2
-Fecha de salida: 22/02/2026 13:36:39
+Placa: 20
+Espacio: 1
+Fecha de salida: 24/02/2026 08:35:45
 Monto a pagar: ₡0.00
 ==============================
