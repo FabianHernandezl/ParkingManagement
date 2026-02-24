@@ -28,7 +28,7 @@ import java.awt.event.MouseEvent;
 public class SpaceView extends JInternalFrame {
 
     private ParkingLot parkingLot;
-    private AdminMenu parent;
+    private JFrame parent;
     private JPanel spacesContainer;
     private SpacePanel selectedPanel;
 
@@ -37,7 +37,7 @@ public class SpaceView extends JInternalFrame {
     private TicketController ticketController = TicketController.getInstance();
     private SpaceData sd = new SpaceData();
 
-    public SpaceView(ParkingLot parkingLot, AdminMenu parent) {
+    public SpaceView(ParkingLot parkingLot, JFrame parent) {
         this.parkingLot = parkingLot;
         this.parent = parent;
 
@@ -83,7 +83,12 @@ public class SpaceView extends JInternalFrame {
         btnRefresh.addActionListener(e -> loadSpaces());
 
         btnChangeParking.addActionListener(e -> {
-            parent.openInternalFrame(new SelectParkingLotView(parent));
+            if (parent instanceof AdminMenu) {
+                ((AdminMenu) parent).openInternalFrame(new SelectParkingLotView((AdminMenu) parent));
+            } else if (parent instanceof ClerkMenu) {
+                ClerkMenu clerkMenu = (ClerkMenu) parent;
+                clerkMenu.openInternalFrame(new SelectParkingLotViewClerk(clerkMenu, clerkMenu.getLoggedClerk()));
+            }
             dispose();
         });
 
@@ -163,7 +168,7 @@ public class SpaceView extends JInternalFrame {
                             return;
                         }
 
-                        new VehicleInfoDialog(parent, ticket).setVisible(true);
+                        new VehicleInfoDialog((JFrame) parent, ticket).setVisible(true);
                     }
                 }
             });

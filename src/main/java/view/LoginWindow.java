@@ -357,7 +357,7 @@ public class LoginWindow extends JFrame implements ActionListener {
 
             Administrator admin = administratorController.findAdminByUsername(username);
             if (admin != null && verificarPassword(admin.getPassword(), password)) {
-                new AdminMenu(this);
+                new AdminMenu(this, admin);
                 setVisible(false);
                 autenticado = true;
             }

@@ -3,6 +3,7 @@ package view;
 import controller.ClientController;
 import controller.ParkingLotController;
 import controller.ParkingRateController;
+import controller.TicketController;
 import controller.VehicleController;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import model.entities.Clerk;
 
 import model.entities.Client;
 import model.entities.Vehicle;
@@ -57,8 +59,15 @@ public class VehicleViewInternal extends JInternalFrame {
     private JPopupMenu popupVehicles;
     private JList<Vehicle> listVehicleSuggestions;
 
+    private Clerk loggedClerk;
+
     public VehicleViewInternal() {
+        this(null);
+    }
+
+    public VehicleViewInternal(Clerk clerk) {
         super("Gestión de Vehículos", true, true, true, true);
+        this.loggedClerk = clerk;
         setSize(920, 640);
         setLayout(null);
         getContentPane().setBackground(UITheme.BACKGROUND);
@@ -102,7 +111,7 @@ public class VehicleViewInternal extends JInternalFrame {
 
         y += 35;
         panel.add(label("Tipo:", y));
-        cmbType = new JComboBox<>(new String[]{"Carro", "Moto", "Camión"});
+        cmbType = new JComboBox<>(new String[]{"Carro", "Moto", "Camión", "Bicicleta"});
         cmbType.setBounds(100, y, 200, 25);
         panel.add(cmbType);
 
@@ -393,11 +402,64 @@ public class VehicleViewInternal extends JInternalFrame {
                 }
             }
         });
+
+        txtPlate.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                // Solo mostrar si hay un vehículo seleccionado (placa bloqueada)
+                if (!txtPlate.isEnabled()) {
+                    JOptionPane.showMessageDialog(
+                            VehicleViewInternal.this,
+                            "La placa no puede modificarse directamente.\n"
+                            + "Si desea corregirla, elimine el vehículo y regístrelo nuevamente.",
+                            "Campo no editable",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+            }
+        });
     }
 
     private void loadTable() {
         model.setRowCount(0);
+
+        // Obtener tickets activos para filtrar por parqueo si es operario
+        List<Ticket> activeTickets = null;
+        if (loggedClerk != null && loggedClerk.getParkingLot() != null
+                && !loggedClerk.getParkingLot().isEmpty()) {
+            activeTickets = TicketController.getInstance().getActiveTickets();
+        }
+
         for (Vehicle v : controller.getAllVehicles()) {
+
+            // Si es operario, mostrar solo vehículos en sus parqueos asignados
+            if (activeTickets != null) {
+                boolean estaEnParqueo = false;
+
+                for (Ticket ticket : activeTickets) {
+                    if (ticket.getVehicle() != null
+                            && v.getPlate().equalsIgnoreCase(ticket.getVehicle().getPlate())
+                            && ticket.getParkingLot() != null) {
+
+                        for (ParkingLot pl : loggedClerk.getParkingLot()) {
+                            if (pl.getId() == ticket.getParkingLot().getId()
+                                    || pl.getName().equalsIgnoreCase(
+                                            ticket.getParkingLot().getName())) {
+                                estaEnParqueo = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (estaEnParqueo) {
+                        break;
+                    }
+                }
+
+                if (!estaEnParqueo) {
+                    continue;
+                }
+            }
+
             model.addRow(new Object[]{
                 v.getPlate(),
                 v.getBrand(),
@@ -415,36 +477,47 @@ public class VehicleViewInternal extends JInternalFrame {
     private void loadParkings() {
         cmbParking.removeAllItems();
 
+        List<ParkingLot> available = parkingController.getAllParkingLots();
+
+        // Si es operario, filtrar solo sus parqueos asignados
+        if (loggedClerk != null
+                && loggedClerk.getParkingLot() != null
+                && !loggedClerk.getParkingLot().isEmpty()) {
+
+            available = available.stream()
+                    .filter(p -> loggedClerk.getParkingLot()
+                    .stream()
+                    .anyMatch(assigned -> assigned.getId() == p.getId()
+                    || (assigned.getName() != null
+                    && assigned.getName().equalsIgnoreCase(p.getName()))))
+                    .collect(java.util.stream.Collectors.toList());
+        }
+
         int countWithRates = 0;
 
-        for (ParkingLot p : parkingController.getAllParkingLots()) {
-            // Verificar si el parqueo tiene tarifas
+        for (ParkingLot p : available) {
             if (rateController.parkingLotHasRates(p.getId())) {
                 cmbParking.addItem(p);
                 countWithRates++;
-            } else {
-                System.out.println("Parqueo " + p.getName() + " (ID: " + p.getId()
-                        + ") no tiene tarifas - omitido del combo");
             }
         }
 
         if (cmbParking.getItemCount() == 0) {
+            String mensaje = loggedClerk != null
+                    ? "⚠️ Su parqueo asignado no tiene tarifas configuradas.\n\n"
+                    + "Contacte al administrador para configurar las tarifas."
+                    : "⚠️ No hay parqueos con tarifas disponibles.\n\n"
+                    + "Configure tarifas en la sección correspondiente.";
+
             JOptionPane.showMessageDialog(this,
-                    "⚠️ No hay parqueos con tarifas configuradas.\n\n"
-                    + "Para poder estacionar vehículos, debe:\n"
-                    + "1. Ir a la sección de Tarifas\n"
-                    + "2. Configurar al menos una tarifa para algún parqueo\n"
-                    + "3. Los parqueos sin tarifas no están disponibles para estacionar",
+                    mensaje,
                     "Parqueos no disponibles",
                     JOptionPane.WARNING_MESSAGE);
-
-            // Deshabilitar botón de guardar si no hay parqueos disponibles
             btnSave.setEnabled(false);
-            btnSave.setToolTipText("No hay parqueos con tarifas disponibles");
+            btnSave.setToolTipText("No hay parqueos disponibles");
         } else {
             btnSave.setEnabled(true);
             btnSave.setToolTipText("Guardar vehículo");
-            System.out.println("Parqueos con tarifas cargados: " + countWithRates);
         }
     }
 
@@ -464,6 +537,7 @@ public class VehicleViewInternal extends JInternalFrame {
         cmbType.setSelectedItem(model.getValueAt(r, 4));
 
         loadClientsForVehicle(plate);
+        selectParkingForVehicle(plate);
     }
 
     private void loadClientsForVehicle(String plate) {
@@ -477,6 +551,38 @@ public class VehicleViewInternal extends JInternalFrame {
                 selectedClients.add(client);
                 clientListModel.addElement(client.toString());
             }
+        }
+    }
+
+    private void selectParkingForVehicle(String plate) {
+        // Buscar ticket activo del vehículo
+        TicketController ticketController = TicketController.getInstance();
+        Ticket activeTicket = null;
+
+        for (Ticket ticket : ticketController.getActiveTickets()) {
+            if (ticket.getVehicle() != null
+                    && plate.equalsIgnoreCase(ticket.getVehicle().getPlate())) {
+                activeTicket = ticket;
+                break;
+            }
+        }
+
+        if (activeTicket != null && activeTicket.getParkingLot() != null) {
+            int parkingId = activeTicket.getParkingLot().getId();
+
+            // Buscar ese parqueo en el combo y seleccionarlo
+            for (int i = 0; i < cmbParking.getItemCount(); i++) {
+                ParkingLot item = cmbParking.getItemAt(i);
+                if (item != null && item.getId() == parkingId) {
+                    cmbParking.setSelectedIndex(i);
+                    return;
+                }
+            }
+        }
+
+        // Si no tiene ticket activo, no seleccionar ninguno
+        if (cmbParking.getItemCount() > 0) {
+            cmbParking.setSelectedIndex(0);
         }
     }
 
@@ -500,7 +606,28 @@ public class VehicleViewInternal extends JInternalFrame {
 
     private void save() {
 
-        // Verificar que haya parqueos disponibles
+        // 1. Verificar campos obligatorios
+        if (txtPlate.getText().trim().isEmpty()
+                || txtBrand.getText().trim().isEmpty()
+                || txtModel.getText().trim().isEmpty()
+                || txtColor.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Todos los campos del vehículo son obligatorios.",
+                    "Campos incompletos",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 2. Verificar al menos un cliente
+        if (selectedClients.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Debe asociar al menos un cliente al vehículo.",
+                    "Cliente requerido",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 3. Verificar que haya parqueos disponibles
         if (cmbParking.getItemCount() == 0) {
             JOptionPane.showMessageDialog(this,
                     "No hay parqueos con tarifas disponibles.\n"
@@ -513,28 +640,31 @@ public class VehicleViewInternal extends JInternalFrame {
         Vehicle v = build();
         ParkingLot parking = (ParkingLot) cmbParking.getSelectedItem();
 
+        // 4. Verificar parqueo seleccionado
         if (parking == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un parqueo");
+            JOptionPane.showMessageDialog(this,
+                    "Debe seleccionar un parqueo.",
+                    "Parqueo requerido",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Validación adicional: verificar que el parqueo seleccionado tenga tarifas
+        // 5. Verificar tarifas del parqueo seleccionado
         if (!rateController.parkingLotHasRates(parking.getId())) {
             JOptionPane.showMessageDialog(this,
-                    "El parqueo seleccionado ya no tiene tarifas configuradas.\n"
+                    "El parqueo seleccionado no tiene tarifas configuradas.\n"
                     + "Por favor, seleccione otro parqueo o configure las tarifas.",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
-
-            // Recargar la lista de parqueos para actualizar
             loadParkings();
             return;
         }
 
         String resultado = controller.insertVehicle(v, parking);
 
-        // Verificar si el resultado contiene algún mensaje de error específico
-        if (resultado.contains("❌") || resultado.contains("No hay espacios")) {
+        if (resultado.contains("ya tiene un vehículo")) {
+            JOptionPane.showMessageDialog(this, resultado, "Cliente duplicado", JOptionPane.WARNING_MESSAGE);
+        } else if (resultado.contains("❌") || resultado.contains("No hay espacios")) {
             JOptionPane.showMessageDialog(this, resultado, "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, resultado, "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -542,14 +672,37 @@ public class VehicleViewInternal extends JInternalFrame {
 
         loadTable();
         clear();
-
-        // Refrescar lista de parqueos en el combo (por si cambió algo)
         loadParkings();
     }
 
     private void update() {
+
+        // 1. Verificar campos obligatorios
+        if (txtPlate.getText().trim().isEmpty()
+                || txtBrand.getText().trim().isEmpty()
+                || txtModel.getText().trim().isEmpty()
+                || txtColor.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Todos los campos del vehículo son obligatorios.",
+                    "Campos incompletos",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 2. Verificar al menos un cliente
+        if (selectedClients.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Debe asociar al menos un cliente al vehículo.",
+                    "Cliente requerido",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Vehicle v = build();
-        JOptionPane.showMessageDialog(this, controller.updateVehicle(v));
+        JOptionPane.showMessageDialog(this,
+                controller.updateVehicle(v),
+                "Actualización",
+                JOptionPane.INFORMATION_MESSAGE);
         loadTable();
         clear();
     }
@@ -664,6 +817,7 @@ public class VehicleViewInternal extends JInternalFrame {
     }
 
     public void refreshTable() {
+        rateController.reload();
         loadTable();
         loadParkings();
     }

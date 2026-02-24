@@ -31,7 +31,7 @@
       {
         "id": 4,
         "disabilityAdaptation": false,
-        "spaceTaken": true,
+        "spaceTaken": false,
         "available": false,
         "parkingLotId": 3,
         "vehicleTypeId": 0
@@ -224,7 +224,9 @@
         "spaceTaken": false,
         "available": false,
         "parkingLotId": 5,
-        "vehicleTypeId": 0
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 2,
+        "vehicleTypeDescription": "Motocicleta"
       },
       {
         "id": 12,
@@ -1589,10 +1591,10 @@
       {
         "id": 14,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "available": false,
         "parkingLotId": 9,
-        "vehiclePlate": "DESCONOCIDO",
+        "vehiclePlate": "QYV725",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       },
@@ -1746,10 +1748,10 @@
       {
         "id": 4,
         "disabilityAdaptation": false,
-        "spaceTaken": false,
+        "spaceTaken": true,
         "available": false,
         "parkingLotId": 10,
-        "vehiclePlate": "DESCONOCIDO",
+        "vehiclePlate": "bkb",
         "vehicleTypeId": 2,
         "vehicleTypeDescription": "Motocicleta"
       },
@@ -1810,6 +1812,313 @@
         "available": false,
         "parkingLotId": 10,
         "vehiclePlate": "89879",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Yanyan",
+    "numberOfSpaces": 30,
+    "spaces": [
+      {
+        "id": 1,
+        "disabilityAdaptation": true,
+        "spaceTaken": true,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "Prueba Car",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 2,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 3,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 4,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 5,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 6,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 7,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 8,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 9,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 10,
+        "disabilityAdaptation": true,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 11,
+        "disabilityAdaptation": false,
+        "spaceTaken": true,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "u",
+        "vehicleTypeId": 2,
+        "vehicleTypeDescription": "Motocicleta"
+      },
+      {
+        "id": 12,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 2,
+        "vehicleTypeDescription": "Motocicleta"
+      },
+      {
+        "id": 13,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 2,
+        "vehicleTypeDescription": "Motocicleta"
+      },
+      {
+        "id": 14,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 2,
+        "vehicleTypeDescription": "Motocicleta"
+      },
+      {
+        "id": 15,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 2,
+        "vehicleTypeDescription": "Motocicleta"
+      },
+      {
+        "id": 16,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 3,
+        "vehicleTypeDescription": "Camión"
+      },
+      {
+        "id": 17,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 3,
+        "vehicleTypeDescription": "Camión"
+      },
+      {
+        "id": 18,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 3,
+        "vehicleTypeDescription": "Camión"
+      },
+      {
+        "id": 19,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 3,
+        "vehicleTypeDescription": "Camión"
+      },
+      {
+        "id": 20,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 3,
+        "vehicleTypeDescription": "Camión"
+      },
+      {
+        "id": 21,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 4,
+        "vehicleTypeDescription": "Bicicleta"
+      },
+      {
+        "id": 22,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 4,
+        "vehicleTypeDescription": "Bicicleta"
+      },
+      {
+        "id": 23,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 4,
+        "vehicleTypeDescription": "Bicicleta"
+      },
+      {
+        "id": 24,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 4,
+        "vehicleTypeDescription": "Bicicleta"
+      },
+      {
+        "id": 25,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 4,
+        "vehicleTypeDescription": "Bicicleta"
+      },
+      {
+        "id": 26,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 27,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 28,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 29,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
+        "vehicleTypeId": 1,
+        "vehicleTypeDescription": "Automóvil"
+      },
+      {
+        "id": 30,
+        "disabilityAdaptation": false,
+        "spaceTaken": false,
+        "available": false,
+        "parkingLotId": 11,
+        "vehiclePlate": "DESCONOCIDO",
         "vehicleTypeId": 1,
         "vehicleTypeDescription": "Automóvil"
       }

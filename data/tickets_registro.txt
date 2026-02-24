@@ -643,3 +643,138 @@ Total a pagar: ₡0,00
 ==============================
 
 
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Parking Central
+Placa: QYV725
+Tipo de vehículo: Automóvil
+Espacio asignado: 14
+Hora de ingreso: 23/02/2026 01:58:01
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Parking Central
+Placa: QYV725
+Tipo de vehículo: Automóvil
+Espacio asignado: 14
+Hora de ingreso: 23/02/2026 01:58:01
+Hora de salida: 23/02/2026 09:42:12
+Total a pagar: ₡80,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Yanyan
+Placa: kn
+Tipo de vehículo: Motocicleta
+Espacio asignado: 11
+Hora de ingreso: 23/02/2026 10:01:08
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Yanyan
+Placa: kn
+Tipo de vehículo: Motocicleta
+Espacio asignado: 11
+Hora de ingreso: 23/02/2026 10:01:08
+Hora de salida: 23/02/2026 10:02:12
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Yanyan
+Placa: u
+Tipo de vehículo: Motocicleta
+Espacio asignado: 11
+Hora de ingreso: 23/02/2026 10:11:10
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Yanyan
+Placa: u
+Tipo de vehículo: Motocicleta
+Espacio asignado: 11
+Hora de ingreso: 23/02/2026 10:11:10
+Hora de salida: 23/02/2026 11:02:26
+Total a pagar: ₡60,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Centro
+Placa: bkb
+Tipo de vehículo: Motocicleta
+Espacio asignado: 4
+Hora de ingreso: 23/02/2026 11:03:57
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET SALIDA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 3
+Parqueo: Centro
+Placa: bkb
+Tipo de vehículo: Motocicleta
+Espacio asignado: 4
+Hora de ingreso: 23/02/2026 11:03:57
+Hora de salida: 23/02/2026 11:05:53
+Total a pagar: ₡0,00
+==============================
+
+
+===== TICKET ENTRADA =====
+==============================
+      TIQUETE DE PARQUEO
+==============================
+Tiquete #: 1
+Parqueo: Yanyan
+Placa: Prueba Car
+Tipo de vehículo: Automóvil
+Espacio asignado: 1
+Hora de ingreso: 23/02/2026 22:52:18
+Hora de salida: —
+Total a pagar: ₡0,00
+==============================
+
+

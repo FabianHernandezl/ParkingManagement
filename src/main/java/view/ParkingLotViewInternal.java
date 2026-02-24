@@ -14,6 +14,8 @@ public class ParkingLotViewInternal extends JInternalFrame {
 
     private final ParkingLotController parkingLotController = new ParkingLotController();
 
+    private AdminMenu adminMenu;
+
     private JTextField txtId, txtName, txtNumberOfSpaces;
     private JTable table;
     private DefaultTableModel model;
@@ -25,7 +27,12 @@ public class ParkingLotViewInternal extends JInternalFrame {
     private JButton btnSave, btnUpdate, btnDelete, btnClear, btnViewDetails;
 
     public ParkingLotViewInternal() {
+        this(null);
+    }
+
+    public ParkingLotViewInternal(AdminMenu adminMenu) {
         super("Gestión de Parqueos", true, true, true, true);
+        this.adminMenu = adminMenu;
         setSize(920, 640);
         setLayout(null);
         getContentPane().setBackground(UITheme.BACKGROUND);
@@ -279,6 +286,10 @@ public class ParkingLotViewInternal extends JInternalFrame {
             JOptionPane.showMessageDialog(this,
                     "Error: Verifique los datos ingresados");
         }
+
+        if (adminMenu != null) {
+            adminMenu.refreshParkingCombos();
+        }
     }
 
     /**
@@ -333,6 +344,10 @@ public class ParkingLotViewInternal extends JInternalFrame {
         loadTable();
         clearForm();
         generateNextId();
+
+        if (adminMenu != null) {
+            adminMenu.refreshParkingCombos();
+        }
     }
 
     private void deleteParkingLot() {

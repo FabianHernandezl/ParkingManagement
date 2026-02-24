@@ -184,7 +184,7 @@ public class ParkingRateViewInternal extends JInternalFrame {
         });
     }
 
-    private void loadParkingLots() {
+    public void loadParkingLots() {
         cmbParkingLot.removeAllItems();
         for (ParkingLot p : parkingController.getAllParkingLots()) {
             cmbParkingLot.addItem(p);

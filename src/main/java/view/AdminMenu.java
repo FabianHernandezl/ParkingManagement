@@ -19,6 +19,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.WindowConstants;
+import model.entities.Administrator;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.Box;
+import javax.swing.JLabel;
 
 /**
  *
@@ -32,11 +37,13 @@ public class AdminMenu extends JFrame {
     private static File lockFile;
     private static FileChannel lockChannel;
     private static FileLock lock;
+    private Administrator loggedAdmin;
 
-    public AdminMenu(LoginWindow loginWindow) {
+    public AdminMenu(LoginWindow loginWindow, Administrator admin) {
 
         super("Menú Administrador de Parqueos");
         this.loginWindow = loginWindow;
+        this.loggedAdmin = admin;
 
         desktop = new HomeDesktop();
         this.add(desktop);
@@ -120,7 +127,7 @@ public class AdminMenu extends JFrame {
         parkingMenu.add(manageParkingLots);
 
         manageParkingLots.addActionListener(e -> {
-            openInternalFrame(new ParkingLotViewInternal());
+            openInternalFrame(new ParkingLotViewInternal(this));
         });
 
         menuBar.updateUI();
@@ -147,7 +154,7 @@ public class AdminMenu extends JFrame {
             openInternalFrame(new ParkingRateViewInternal());
         });
 
-         // ---------- OPERARIOS - users ----------
+        // ---------- OPERARIOS - users ----------
         JMenu clerksMenu = new JMenu("Operarios");
         menuBar.add(clerksMenu);
 
@@ -197,6 +204,24 @@ public class AdminMenu extends JFrame {
             }
         });
 
+        // ---------- Etiqueta de bienvenida ----------
+        String parqueosAsignados = "Todos los parqueos";
+        if (loggedAdmin.getParkingLot() != null
+                && !loggedAdmin.getParkingLot().isEmpty()) {
+            parqueosAsignados = loggedAdmin.getParkingLot()
+                    .stream()
+                    .map(p -> p.getName())
+                    .collect(java.util.stream.Collectors.joining(", "));
+        }
+
+        JLabel lblWelcome = new JLabel(loggedAdmin.getName()
+                + " | Administrador | " + parqueosAsignados + " ");
+        lblWelcome.setFont(new Font("Arial", Font.PLAIN, 12));
+        lblWelcome.setForeground(Color.DARK_GRAY);
+        menuBar.add(Box.createHorizontalGlue());
+        menuBar.add(lblWelcome);
+
+        menuBar.updateUI();
     }
 
     void openInternalFrame(JInternalFrame frame) {
@@ -210,4 +235,14 @@ public class AdminMenu extends JFrame {
         loginWindow.setVisible(true);
     }
 
+    public void refreshParkingCombos() {
+        for (JInternalFrame frame : desktop.getAllFrames()) {
+            if (frame instanceof VehicleViewInternal) {
+                ((VehicleViewInternal) frame).refreshTable();
+            }
+            if (frame instanceof ParkingRateViewInternal) {
+                ((ParkingRateViewInternal) frame).loadParkingLots();
+            }
+        }
+    }
 }
